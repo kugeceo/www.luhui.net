@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鲁虺搜索引擎群聚合搜索 - 万能搜索助手</title>
+    <meta name="description" content="鲁虺聚合搜索集成多个搜索引擎，一站式获取信息，提升搜索效率">
+    <meta name="keywords" content="聚合搜索,多引擎搜索,搜索引擎,万能搜索">
+    
+    <!-- 优化Tailwind CSS引入，确保样式加载 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 简化Tailwind配置，提高稳定性 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: {
+                            100: '#4E5969',
+                            200: '#333F51',
+                            300: '#1D2129',
+                        },
+                        light: {
+                            100: '#FFFFFF',
+                            200: '#F7F8FA',
+                            300: '#F2F3F5',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 4px 12px rgba(0, 0, 0, 0.08)',
+                        'hover': '0 8px 24px rgba(0, 0, 0, 0.12)',
+                    }
+                },
+            }
+        }
+    </script>
+    
+    <!-- 内联关键工具类，确保基础样式可用 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scrollbar-hide {
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .search-engine-item {
+                @apply px-3 py-2 rounded-full text-sm transition-all duration-200 cursor-pointer;
+            }
+            .search-engine-item:hover {
+                @apply bg-primary/10 text-primary;
+            }
+            .search-engine-item.active {
+                @apply bg-primary text-white;
+            }
+            .category-tab {
+                @apply px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer;
+            }
+            .category-tab:hover {
+                @apply text-primary;
+            }
+            .category-tab.active {
+                @apply text-primary border-b-2 border-primary;
+            }
+        }
+    </style>
+    
+    <!-- 基础样式保障，防止CDN加载失败 -->
+    <style>
+        /* 基础样式回退 */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .space-x-2 > * {
+            margin-right: 8px;
+        }
+        .space-x-2 > *:last-child {
+            margin-right: 0;
+        }
+        .p-4 {
+            padding: 16px;
+        }
+        .rounded-lg {
+            border-radius: 8px;
+        }
+        input, button {
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body class="bg-light-300 text-dark-300 min-h-screen flex flex-col transition-colors duration-500" id="app-body">
+    <!-- 主背景容器 -->
+    <div id="background-container" class="fixed inset-0 z-0 transition-all duration-1000"></div>
+    
+    <!-- 内容覆盖层 -->
+    <div class="bg-white/92 dark:bg-dark-300/92 fixed inset-0 z-10 transition-all duration-500"></div>
+
+    <!-- 导航栏 -->
+    <header class="bg-white/80 dark:bg-dark-300/80 backdrop-blur-sm shadow-sm sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-search text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">聚合搜索</h1>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors">首页</a>
+                <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors" id="settings-link">设置</a>
+                <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors">关于</a>
+                
+                <!-- 快速设置链接 -->
+                <div class="relative group">
+                    <button class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors flex items-center">
+                        <i class="fa fa-cog mr-1"></i> 快速设置
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-300 shadow-lg rounded-lg py-2 hidden group-hover:block z-50">
+                        <a href="#" class="block px-4 py-2 text-sm text-dark-100 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-200" id="quick-theme">主题设置</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-dark-100 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-200" id="quick-background">背景设置</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-dark-100 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-200" id="quick-engines">搜索引擎</a>
+                    </div>
+                </div>
+                
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-light-300 dark:hover:bg-dark-200 transition-colors">
+                    <i class="fa fa-moon-o dark:hidden text-dark-100"></i>
+                    <i class="fa fa-sun-o hidden dark:block text-light-100"></i>
+                </button>
+            </nav>
+            
+            <div class="flex items-center space-x-3">
+                <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-light-300 dark:hover:bg-dark-200 transition-colors md:hidden">
+                    <i class="fa fa-moon-o dark:hidden text-dark-100"></i>
+                    <i class="fa fa-sun-o hidden dark:block text-light-100"></i>
+                </button>
+                <button class="md:hidden text-dark-100 dark:text-light-100 text-xl" id="mobile-menu-button">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white dark:bg-dark-300 border-t dark:border-dark-100" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#" class="py-2 text-dark-100 dark:text-light-100 hover:text-primary transition-colors">首页</a>
+                <a href="#" class="py-2 text-dark-100 dark:text-light-100 hover:text-primary transition-colors" id="mobile-settings-link">设置</a>
+                <a href="#" class="py-2 text-dark-100 dark:text-light-100 hover:text-primary transition-colors">关于</a>
+                <div class="border-t dark:border-dark-100 pt-2">
+                    <p class="text-xs text-dark-100 dark:text-light-100 px-2 mb-1">快速设置</p>
+                    <a href="#" class="py-1 px-2 text-sm text-dark-100 dark:text-light-100 hover:text-primary transition-colors block" id="mobile-quick-theme">主题设置</a>
+                    <a href="#" class="py-1 px-2 text-sm text-dark-100 dark:text-light-100 hover:text-primary transition-colors block" id="mobile-quick-background">背景设置</a>
+                    <a href="#" class="py-1 px-2 text-sm text-dark-100 dark:text-light-100 hover:text-primary transition-colors block" id="mobile-quick-engines">搜索引擎</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-6 relative z-20">
+        <!-- 热门新闻区域 -->
+        <section class="max-w-5xl mx-auto mb-8 bg-white dark:bg-dark-200 rounded-lg shadow-card overflow-hidden">
+            <div class="p-4 border-b dark:border-dark-100">
+                <h2 class="font-bold text-lg dark:text-light-100 flex items-center">
+                    <i class="fa fa-fire text-accent mr-2"></i> 实时热门新闻
+                </h2>
+            </div>
+            <!-- 热门新闻容器 - 第三方JS调用 -->
+            <div id="news-container" class="max-h-64 overflow-y-auto scrollbar-hide">
+                <div class="flex justify-center items-center h-48">
+                    <div class="text-center text-dark-100 dark:text-light-100">
+                        <i class="fa fa-circle-o-notch fa-spin text-2xl mb-2 text-primary"></i>
+                        <p>加载热门新闻中...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 bg-light-300/50 dark:bg-dark-300 text-center text-sm">
+                <a href="https://newsnow.luhui.net" target="_blank" class="text-primary hover:underline" rel="noopener noreferrer">查看更多新闻</a>
+            </div>
+        </section>
+
+        <!-- 搜索框区域 -->
+        <section class="max-w-4xl mx-auto mb-8">
+            <form id="search-form" class="flex flex-col space-y-4">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="输入搜索关键词..." class="w-full px-5 py-4 rounded-full border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm text-lg dark:text-light-100">
+                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full transition-all shadow-md hover:shadow-lg">
+                        <i class="fa fa-search mr-2"></i>搜索
+                    </button>
+                </div>
+                
+                <!-- 搜索历史记录 -->
+                <div id="search-history-container" class="bg-white dark:bg-dark-200 p-4 rounded-lg shadow-card hidden">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-sm font-medium text-dark-100 dark:text-light-100">搜索历史</h3>
+                        <button id="clear-history" class="text-xs text-primary hover:text-primary/80">清除历史</button>
+                    </div>
+                    <div id="search-history-list" class="space-y-1 max-h-40 overflow-y-auto scrollbar-hide">
+                        <!-- 搜索历史将通过JS动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 分类标签 -->
+                <div class="overflow-x-auto scrollbar-hide -mx-2 px-2">
+                    <div class="flex space-x-1 min-w-max" id="category-tabs">
+                        <div class="category-tab active" data-category="all">全部</div>
+                        <div class="category-tab" data-category="news">新闻</div>
+                        <div class="category-tab" data-category="image">图片</div>
+                        <div class="category-tab" data-category="video">视频</div>
+                        <div class="category-tab" data-category="music">音乐</div>
+                        <div class="category-tab" data-category="business">商务</div>
+                        <div class="category-tab" data-category="knowledge">知识</div>
+                        <div class="category-tab" data-category="code">代码</div>
+                        <div class="category-tab" data-category="social">社交</div>
+                    </div>
+                </div>
+                
+                <!-- 搜索引擎选择 -->
+                <div class="bg-white dark:bg-dark-200 p-3 rounded-lg shadow-card">
+                    <h3 class="text-sm font-medium text-dark-100 dark:text-light-100 mb-2">选择搜索引擎：</h3>
+                    <div class="overflow-x-auto scrollbar-hide -mx-2 px-2">
+                        <div class="flex flex-wrap gap-2 min-w-max" id="search-engines-container">
+                            <!-- 搜索引擎选项将通过JS动态生成 -->
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <button type="button" id="select-all" class="text-xs text-primary hover:text-primary/80">全选</button>
+                        <button type="button" id="deselect-all" class="text-xs text-dark-100 dark:text-light-100 hover:text-dark-300 dark:hover:text-light-300">取消全选</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+        
+        <!-- 搜索结果区域 -->
+        <section class="max-w-5xl mx-auto" id="results-section">
+            <!-- 结果统计和切换 -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                <div id="results-stats" class="text-dark-100 dark:text-light-100 text-sm mb-3 sm:mb-0">
+                    请输入关键词并点击搜索
+                </div>
+                <div class="flex space-x-2">
+                    <button id="result-view-list" class="p-2 bg-white dark:bg-dark-200 rounded shadow-sm text-primary">
+                        <i class="fa fa-list"></i>
+                    </button>
+                    <button id="result-view-grid" class="p-2 bg-white dark:bg-dark-200 rounded shadow-sm text-dark-100 dark:text-light-100 hover:text-primary transition-colors">
+                        <i class="fa fa-th-large"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 结果容器 -->
+            <div id="results-container" class="space-y-4 mb-8">
+                <!-- 搜索结果将通过JS动态生成 -->
+                <div class="flex justify-center items-center h-64 bg-white dark:bg-dark-200 rounded-lg shadow-card">
+                    <div class="text-center text-dark-100 dark:text-light-100">
+                        <i class="fa fa-search text-4xl mb-4 text-gray-400 dark:text-dark-100"></i>
+                        <p>输入关键词开始搜索</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 分页控件 -->
+            <div id="pagination-container" class="flex justify-center items-center space-x-2 my-8 hidden">
+                <button id="prev-page" class="px-4 py-2 rounded border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 hover:bg-light-300 dark:hover:bg-dark-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+                <div id="page-numbers" class="flex space-x-1">
+                    <!-- 页码将通过JS动态生成 -->
+                </div>
+                <button id="next-page" class="px-4 py-2 rounded border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 hover:bg-light-300 dark:hover:bg-dark-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white/80 dark:bg-dark-300/80 backdrop-blur-sm border-t dark:border-dark-100 mt-12 relative z-20">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-dark-100 dark:text-light-100 text-sm">© 2023 鲁虺聚合搜索. 保留所有权利.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors text-sm">隐私政策</a>
+                    <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors text-sm">使用条款</a>
+                    <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors text-sm">反馈建议</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 设置模态框 -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-dark-300 rounded-lg shadow-modal w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b dark:border-dark-100 flex justify-between items-center">
+                <h2 class="text-lg font-bold dark:text-light-100" id="settings-modal-title">设置</h2>
+                <button id="close-settings" class="p-2 hover:bg-light-300 dark:hover:bg-dark-200 rounded-full transition-colors">
+                    <i class="fa fa-times text-dark-100 dark:text-light-100"></i>
+                </button>
+            </div>
+            
+            <div class="overflow-y-auto flex-grow p-4">
+                <!-- 主题设置 -->
+                <div class="mb-6" id="theme-settings-section">
+                    <h3 class="text-md font-medium mb-3 dark:text-light-100">主题设置</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-light-300 dark:bg-dark-200 rounded-lg">
+                            <div>
+                                <p class="font-medium dark:text-light-100">跟随系统</p>
+                                <p class="text-sm text-dark-100 dark:text-light-100">根据系统设置自动切换深色/浅色模式</p>
+                            </div>
+                            <button id="theme-system" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-dark-100 flex items-center justify-center theme-option">
+                                <i class="fa fa-check text-primary hidden"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-light-300 dark:bg-dark-200 rounded-lg">
+                            <div>
+                                <p class="font-medium dark:text-light-100">浅色模式</p>
+                                <p class="text-sm text-dark-100 dark:text-light-100">始终使用浅色模式</p>
+                            </div>
+                            <button id="theme-light" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-dark-100 flex items-center justify-center theme-option">
+                                <i class="fa fa-check text-primary hidden"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-light-300 dark:bg-dark-200 rounded-lg">
+                            <div>
+                                <p class="font-medium dark:text-light-100">深色模式</p>
+                                <p class="text-sm text-dark-100 dark:text-light-100">始终使用深色模式</p>
+                            </div>
+                            <button id="theme-dark" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-dark-100 flex items-center justify-center theme-option">
+                                <i class="fa fa-check text-primary hidden"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 背景设置 -->
+                <div class="mb-6" id="background-settings-section">
+                    <h3 class="text-md font-medium mb-3 dark:text-light-100">背景设置</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-light-300 dark:bg-dark-200 rounded-lg">
+                            <p class="font-medium dark:text-light-100 mb-3">选择背景样式</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="background-option relative cursor-pointer overflow-hidden rounded-md border-2 border-transparent hover:border-primary transition-all" data-background="solid">
+                                    <div class="aspect-square bg-light-300 dark:bg-dark-300"></div>
+                                    <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center hidden">
+                                        <i class="fa fa-check text-white text-xs"></i>
+                                    </span>
+                                    <p class="text-xs text-center mt-1 dark:text-light-100">默认纯色</p>
+                                </div>
+                                
+                                <div class="background-option relative cursor-pointer overflow-hidden rounded-md border-2 border-transparent hover:border-primary transition-all" data-background="https://picsum.photos/id/1015/800/600">
+                                    <img src="https://picsum.photos/id/1015/200/200" alt="山脉风景背景" class="w-full aspect-square object-cover">
+                                    <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center hidden">
+                                        <i class="fa fa-check text-white text-xs"></i>
+                                    </span>
+                                    <p class="text-xs text-center mt-1 dark:text-light-100">山脉风景</p>
+                                </div>
+                                
+                                <div class="background-option relative cursor-pointer overflow-hidden rounded-md border-2 border-transparent hover:border-primary transition-all" data-background="https://picsum.photos/id/1018/800/600">
+                                    <img src="https://picsum.photos/id/1018/200/200" alt="云雾风景背景" class="w-full aspect-square object-cover">
+                                    <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center hidden">
+                                        <i class="fa fa-check text-white text-xs"></i>
+                                    </span>
+                                    <p class="text-xs text-center mt-1 dark:text-light-100">云雾风景</p>
+                                </div>
+                                
+                                <div class="background-option relative cursor-pointer overflow-hidden rounded-md border-2 border-transparent hover:border-primary transition-all" data-background="https://picsum.photos/id/1048/800/600">
+                                    <img src="https://picsum.photos/id/1048/200/200" alt="海滩风景背景" class="w-full aspect-square object-cover">
+                                    <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center hidden">
+                                        <i class="fa fa-check text-white text-xs"></i>
+                                    </span>
+                                    <p class="text-xs text-center mt-1 dark:text-light-100">海滩风景</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自定义搜索引擎 -->
+                <div id="engine-settings-section">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-md font-medium dark:text-light-100">自定义搜索引擎</h3>
+                        <button id="add-custom-engine" class="text-sm bg-primary text-white px-3 py-1 rounded-full hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus mr-1"></i>添加
+                        </button>
+                    </div>
+                    
+                    <div id="custom-engines-list" class="space-y-1 max-h-60 overflow-y-auto scrollbar-hide">
+                        <!-- 自定义搜索引擎将通过JS动态生成 -->
+                        <div class="text-center py-6 text-dark-100 dark:text-light-100 text-sm" id="no-custom-engines">
+                            暂无自定义搜索引擎，点击"添加"按钮创建
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 加载动画 -->
+    <div id="loading-overlay" class="fixed inset-0 bg-black/10 dark:bg-black/40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-dark-300 p-6 rounded-lg shadow-lg flex items-center space-x-3">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <p class="dark:text-light-100">正在搜索中...</p>
+        </div>
+    </div>
+
+    <script>
+        // 第三方热门新闻API调用
+        (function() {
+            // 加载热门新闻
+            window.loadHotNews = function() {
+                // 实际环境中替换为真实API地址
+                const script = document.createElement('script');
+                script.src = 'https://newsnow.luhui.net/api/hot?callback=renderHotNews';
+                script.async = true;
+                document.body.appendChild(script);
+                
+                // 超时处理
+                setTimeout(() => {
+                    const newsContainer = document.getElementById('news-container');
+                    if (newsContainer.innerHTML.includes('加载热门新闻中...')) {
+                        // 备用数据
+                        const fallbackNews = [
+                            { title: "AI技术新突破：大型语言模型能力再提升", source: "科技日报", time: "2小时前" },
+                            { title: "全球气候变化会议达成新协议", source: "环球时报", time: "5小时前" },
+                            { title: "研究表明：规律运动可改善心理健康", source: "健康周刊", time: "8小时前" }
+                        ];
+                        renderHotNews({ success: true, data: fallbackNews });
+                    }
+                }, 5000);
+            };
+            
+            // 渲染新闻回调函数
+            window.renderHotNews = function(response) {
+                const container = document.getElementById('news-container');
+                if (!response || !response.success || !response.data) {
+                    container.innerHTML = `
+                        <div class="p-4 text-center text-dark-100">
+                            <i class="fa fa-exclamation-circle text-accent mr-1"></i>
+                            无法加载新闻
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = '';
+                response.data.forEach((news, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'p-3 border-b border-gray-100 dark:border-dark-100 hover:bg-gray-50 dark:hover:bg-dark-200/50';
+                    item.innerHTML = `
+                        <div class="flex">
+                            <span class="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center mr-2 mt-0.5">${i+1}</span>
+                            <div>
+                                <h3 class="text-sm font-medium dark:text-light-100 hover:text-primary">
+                                    <a href="https://newsnow.luhui.net" target="_blank" rel="noopener">${news.title}</a>
+                                </h3>
+                                <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                    ${news.source} · ${news.time}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+            };
+            
+            // 页面加载完成后执行
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', window.loadHotNews);
+            } else {
+                window.loadHotNews();
+            }
+        })();
+
+        // 搜索引擎数据
+        const builtInSearchEngines = [
+            { name: "Google", url: "https://www.google.com/search?q={q}", categories: ["all", "news", "image", "video"] },
+            { name: "百度", url: "https://www.baidu.com/s?wd={q}", categories: ["all", "news", "image", "video"] },
+            { name: "Bing", url: "https://www.bing.com/search?q={q}", categories: ["all", "news", "image", "video"] },
+            { name: "搜狗", url: "https://www.sogou.com/web?query={q}", categories: ["all", "news", "music"] },
+            { name: "GitHub", url: "https://github.com/search?q={q}", categories: ["code"] },
+            { name: "知乎", url: "https://www.zhihu.com/search?q={q}", categories: ["knowledge", "social"] },
+            { name: "淘宝", url: "https://ai.taobao.com/search/index.htm?key={q}", categories: ["business"] },
+            { name: "抖音", url: "https://www.douyin.com/search/{q}", categories: ["video", "social"] }
+        ];
+
+        // 应用状态
+        const appState = {
+            searchQuery: '',
+            currentCategory: 'all',
+            selectedEngines: [],
+            currentPage: 1,
+            searchHistory: [],
+            customEngines: [],
+            themeMode: 'system',
+            background: 'solid'
+        };
+
+        // DOM元素
+        const elements = {
+            searchForm: document.getElementById('search-form'),
+            searchInput: document.getElementById('search-input'),
+            categoryTabs: document.querySelectorAll('.category-tab'),
+            searchEnginesContainer: document.getElementById('search-engines-container'),
+            resultsContainer: document.getElementById('results-container'),
+            paginationContainer: document.getElementById('pagination-container'),
+            prevPageBtn: document.getElementById('prev-page'),
+            nextPageBtn: document.getElementById('next-page'),
+            pageNumbers: document.getElementById('page-numbers'),
+            resultViewList: document.getElementById('result-view-list'),
+            resultViewGrid: document.getElementById('result-view-grid'),
+            loadingOverlay: document.getElementById('loading-overlay'),
+            themeToggle: document.getElementById('theme-toggle'),
+            mobileMenuButton: document.getElementById('mobile-menu-button'),
+            mobileMenu: document.getElementById('mobile-menu'),
+            settingsLink: document.getElementById('settings-link'),
+            mobileSettingsLink: document.getElementById('mobile-settings-link'),
+            settingsModal: document.getElementById('settings-modal'),
+            closeSettings: document.getElementById('close-settings'),
+            searchHistoryContainer: document.getElementById('search-history-container'),
+            searchHistoryList: document.getElementById('search-history-list'),
+            clearHistoryBtn: document.getElementById('clear-history'),
+            themeSystem: document.getElementById('theme-system'),
+            themeLight: document.getElementById('theme-light'),
+            themeDark: document.getElementById('theme-dark'),
+            backgroundOptions: document.querySelectorAll('.background-option'),
+            backgroundContainer: document.getElementById('background-container')
+        };
+
+        // 初始化
+        function init() {
+            // 加载本地数据
+            loadLocalData();
+            
+            // 渲染UI
+            renderSearchEngines();
+            renderSearchHistory();
+            applyTheme();
+            updateBackground();
+            
+            // 解析URL参数
+            parseUrlParams();
+            
+            // 绑定事件
+            bindEvents();
+        }
+
+        // 渲染搜索引擎
+        function renderSearchEngines() {
+            elements.searchEnginesContainer.innerHTML = '';
+            
+            const allEngines = [...builtInSearchEngines, ...appState.customEngines];
+            const filteredEngines = allEngines.filter(engine => 
+                appState.currentCategory === 'all' || engine.categories.includes(appState.currentCategory)
+            );
+            
+            filteredEngines.forEach(engine => {
+                const engineEl = document.createElement('div');
+                engineEl.className = `search-engine-item ${appState.selectedEngines.includes(engine.name) ? 'active' : ''}`;
+                engineEl.textContent = engine.name;
+                engineEl.dataset.name = engine.name;
+                
+                engineEl.addEventListener('click', () => {
+                    toggleEngineSelection(engine.name);
+                });
+                
+                elements.searchEnginesContainer.appendChild(engineEl);
+            });
+        }
+
+        // 切换引擎选择
+        function toggleEngineSelection(engineName) {
+            const index = appState.selectedEngines.indexOf(engineName);
+            if (index > -1) {
+                appState.selectedEngines.splice(index, 1);
+            } else {
+                appState.selectedEngines.push(engineName);
+            }
+            renderSearchEngines();
+        }
+
+        // 执行搜索
+        function performSearch() {
+            const query = elements.searchInput.value.trim();
+            if (!query) return;
+            
+            appState.searchQuery = query;
+            appState.currentPage = 1;
+            
+            // 显示加载状态
+            elements.loadingOverlay.classList.remove('hidden');
+            
+            // 添加到历史记录
+            addToSearchHistory(query);
+            
+            // 更新URL
+            updateUrlParams();
+            
+            // 模拟搜索请求
+            setTimeout(() => {
+                renderResults();
+                elements.loadingOverlay.classList.add('hidden');
+            }, 1500);
+        }
+
+        // 渲染搜索结果
+        function renderResults() {
+            elements.resultsContainer.innerHTML = '';
+            
+            const allEngines = [...builtInSearchEngines, ...appState.customEngines];
+            const selectedEngines = allEngines.filter(engine => 
+                appState.selectedEngines.includes(engine.name)
+            );
+            
+            // 生成模拟结果
+            const results = [];
+            selectedEngines.forEach(engine => {
+                for (let i = 1; i <= 3; i++) {
+                    const url = engine.url.replace('{q}', encodeURIComponent(appState.searchQuery));
+                    results.push({
+                        engine: engine.name,
+                        title: `${appState.searchQuery} - ${engine.name}搜索结果 ${i}`,
+                        url: url,
+                        description: `这是${engine.name}中关于"${appState.searchQuery}"的第${i}条搜索结果描述...`,
+                        date: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toLocaleDateString()
+                    });
+                }
+            });
+            
+            // 渲染结果
+            if (results.length === 0) {
+                elements.resultsContainer.innerHTML = `
+                    <div class="text-center p-8 bg-white dark:bg-dark-200 rounded-lg">
+                        <i class="fa fa-search text-4xl text-gray-300 mb-3"></i>
+                        <p class="text-dark-100">未找到搜索结果</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 列表视图渲染
+            results.forEach(result => {
+                const resultEl = document.createElement('div');
+                resultEl.className = 'bg-white dark:bg-dark-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow';
+                resultEl.innerHTML = `
+                    <div class="mb-2">
+                        <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs rounded-full mr-2">${result.engine}</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400">${result.date}</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2 hover:text-primary transition-colors">
+                        <a href="${result.url}" target="_blank" rel="noopener">${result.title}</a>
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">${result.description}</p>
+                    <a href="${result.url}" target="_blank" rel="noopener" class="text-primary text-sm hover:underline">${result.url}</a>
+                `;
+                elements.resultsContainer.appendChild(resultEl);
+            });
+            
+            // 显示分页
+            elements.paginationContainer.classList.remove('hidden');
+        }
+
+        // 搜索历史管理
+        function loadLocalData() {
+            try {
+                const history = localStorage.getItem('searchHistory');
+                const customEngines = localStorage.getItem('customEngines');
+                const theme = localStorage.getItem('themeMode');
+                const background = localStorage.getItem('background');
+                
+                if (history) appState.searchHistory = JSON.parse(history);
+                if (customEngines) appState.customEngines = JSON.parse(customEngines);
+                if (theme) appState.themeMode = theme;
+                if (background) appState.background = background;
+            } catch (e) {
+                console.error('加载本地数据失败:', e);
+            }
+        }
+
+        function addToSearchHistory(query) {
+            // 去重
+            appState.searchHistory = appState.searchHistory.filter(item => item !== query);
+            // 添加到头部
+            appState.searchHistory.unshift(query);
+            // 限制数量
+            if (appState.searchHistory.length > 10) {
+                appState.searchHistory = appState.searchHistory.slice(0, 10);
+            }
+            // 保存
+            localStorage.setItem('searchHistory', JSON.stringify(appState.searchHistory));
+            // 重新渲染
+            renderSearchHistory();
+        }
+
+        function renderSearchHistory() {
+            elements.searchHistoryList.innerHTML = '';
+            
+            if (appState.searchHistory.length === 0) {
+                elements.searchHistoryList.innerHTML = `
+                    <div class="text-center py-3 text-gray-500 text-sm">
+                        暂无搜索历史
+                    </div>
+                `;
+                return;
+            }
+            
+            appState.searchHistory.forEach(query => {
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between p-2 hover:bg-gray-100 dark:hover:bg-dark-100 rounded';
+                item.innerHTML = `
+                    <div class="flex items-center text-sm">
+                        <i class="fa fa-history text-gray-400 mr-2"></i>
+                        <span>${query}</span>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-500 delete-history" data-query="${query}">
+                        <i class="fa fa-times"></i>
+                    </button>
+                `;
+                
+                // 点击历史项进行搜索
+                item.addEventListener('click', (e) => {
+                    if (!e.target.closest('.delete-history')) {
+                        elements.searchInput.value = query;
+                        performSearch();
+                    }
+                });
+                
+                // 删除历史项
+                item.querySelector('.delete-history').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    appState.searchHistory = appState.searchHistory.filter(item => item !== query);
+                    localStorage.setItem('searchHistory', JSON.stringify(appState.searchHistory));
+                    renderSearchHistory();
+                });
+                
+                elements.searchHistoryList.appendChild(item);
+            });
+        }
+
+        // 主题切换
+        function applyTheme() {
+            const html = document.documentElement;
+            
+            // 移除所有主题类
+            html.classList.remove('dark');
+            
+            // 应用主题
+            if (appState.themeMode === 'dark' || 
+                (appState.themeMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+            }
+            
+            // 更新主题按钮状态
+            document.querySelectorAll('.theme-option i').forEach(icon => icon.classList.add('hidden'));
+            if (appState.themeMode === 'system') {
+                elements.themeSystem.querySelector('i').classList.remove('hidden');
+            } else if (appState.themeMode === 'light') {
+                elements.themeLight.querySelector('i').classList.remove('hidden');
+            } else {
+                elements.themeDark.querySelector('i').classList.remove('hidden');
+            }
+        }
+
+        // 背景设置
+        function updateBackground() {
+            const container = elements.backgroundContainer;
+            
+            if (appState.background === 'solid') {
+                container.style.background = 'none';
+            } else {
+                container.style.backgroundImage = `url(${appState.background})`;
+                container.style.backgroundSize = 'cover';
+                container.style.backgroundPosition = 'center';
+            }
+            
+            // 更新选中状态
+            elements.backgroundOptions.forEach(option => {
+                const isActive = option.dataset.background === appState.background;
+                option.querySelector('span').classList.toggle('hidden', !isActive);
+                option.classList.toggle('border-primary', isActive);
+            });
+        }
+
+        // URL参数处理
+        function parseUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const query = params.get('q');
+            const category = params.get('dir') || 'all';
+            const engine = params.get('name');
+            const page = params.get('page');
+            
+            if (query) {
+                elements.searchInput.value = query;
+                appState.searchQuery = query;
+            }
+            
+            if (category) {
+                appState.currentCategory = category;
+                elements.categoryTabs.forEach(tab => {
+                    if (tab.dataset.category === category) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+            }
+            
+            if (engine) {
+                appState.selectedEngines = [engine];
+            } else {
+                // 默认选择前3个引擎
+                const allEngines = [...builtInSearchEngines, ...appState.customEngines];
+                appState.selectedEngines = allEngines.slice(0, 3).map(engine => engine.name);
+            }
+            
+            if (page) {
+                appState.currentPage = parseInt(page);
+            }
+        }
+
+        function updateUrlParams() {
+            const params = new URLSearchParams();
+            
+            if (appState.searchQuery) params.set('q', appState.searchQuery);
+            if (appState.currentCategory !== 'all') params.set('dir', appState.currentCategory);
+            if (appState.selectedEngines.length === 1) params.set('name', appState.selectedEngines[0]);
+            if (appState.currentPage > 1) params.set('page', appState.currentPage);
+            
+            const newUrl = window.location.pathname + (params.toString() ? `?${params.toString()}` : '');
+            window.history.pushState({}, '', newUrl);
+        }
+
+        // 事件绑定
+        function bindEvents() {
+            // 搜索表单提交
+            elements.searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                performSearch();
+            });
+            
+            // 分类标签切换
+            elements.categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    appState.currentCategory = tab.dataset.category;
+                    appState.currentCategory = tab.dataset.category;
+                    elements.categoryTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderSearchEngines();
+                    updateUrlParams();
+                });
+            });
+            
+            // 主题切换
+            elements.themeToggle.addEventListener('click', () => {
+                appState.themeMode = appState.themeMode === 'light' ? 'dark' : 
+                                    appState.themeMode === 'dark' ? 'system' : 'light';
+                localStorage.setItem('themeMode', appState.themeMode);
+                applyTheme();
+            });
+            
+            // 主题设置选项
+            elements.themeSystem.addEventListener('click', () => {
+                appState.themeMode = 'system';
+                localStorage.setItem('themeMode', appState.themeMode);
+                applyTheme();
+            });
+            
+            elements.themeLight.addEventListener('click', () => {
+                appState.themeMode = 'light';
+                localStorage.setItem('themeMode', appState.themeMode);
+                applyTheme();
+            });
+            
+            elements.themeDark.addEventListener('click', () => {
+                appState.themeMode = 'dark';
+                localStorage.setItem('themeMode', appState.themeMode);
+                applyTheme();
+            });
+            
+            // 背景设置
+            elements.backgroundOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    appState.background = option.dataset.background;
+                    localStorage.setItem('background', appState.background);
+                    updateBackground();
+                });
+            });
+            
+            // 移动端菜单
+            elements.mobileMenuButton.addEventListener('click', () => {
+                elements.mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 设置模态框
+            elements.settingsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                elements.settingsModal.classList.remove('hidden');
+            });
+            
+            elements.mobileSettingsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                elements.mobileMenu.classList.add('hidden');
+                elements.settingsModal.classList.remove('hidden');
+            });
+            
+            elements.closeSettings.addEventListener('click', () => {
+                elements.settingsModal.classList.add('hidden');
+            });
+            
+            // 搜索历史显示/隐藏
+            elements.searchInput.addEventListener('focus', () => {
+                if (appState.searchHistory.length > 0) {
+                    elements.searchHistoryContainer.classList.remove('hidden');
+                }
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!elements.searchForm.contains(e.target)) {
+                    elements.searchHistoryContainer.classList.add('hidden');
+                }
+            });
+            
+            // 清除所有历史
+            elements.clearHistoryBtn.addEventListener('click', () => {
+                if (confirm('确定要清除所有搜索历史吗？')) {
+                    appState.searchHistory = [];
+                    localStorage.setItem('searchHistory', JSON.stringify(appState.searchHistory));
+                    renderSearchHistory();
+                }
+            });
+            
+            // 视图切换
+            elements.resultViewList.addEventListener('click', () => {
+                elements.resultViewList.classList.add('text-primary');
+                elements.resultViewGrid.classList.remove('text-primary');
+                renderResults();
+            });
+            
+            elements.resultViewGrid.addEventListener('click', () => {
+                elements.resultViewGrid.classList.add('text-primary');
+                elements.resultViewList.classList.remove('text-primary');
+                // 实际项目中实现网格视图渲染
+                renderResults();
+            });
+        }
+
+        // 初始化应用
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
+    

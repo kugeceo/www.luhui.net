@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鲁虺搜索引擎群聚合搜索 - 万能搜索助手</title>
+    <meta name="description" content="鲁虺聚合搜索集成多个搜索引擎，一站式获取信息，提升搜索效率">
+    <meta name="keywords" content="聚合搜索,多引擎搜索,搜索引擎,万能搜索">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: {
+                            100: '#4E5969',
+                            200: '#333F51',
+                            300: '#1D2129',
+                        },
+                        light: {
+                            100: '#FFFFFF',
+                            200: '#F7F8FA',
+                            300: '#F2F3F5',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 4px 12px rgba(0, 0, 0, 0.08)',
+                        'hover': '0 8px 24px rgba(0, 0, 0, 0.12)',
+                        'dark-card': '0 4px 12px rgba(0, 0, 0, 0.3)',
+                        'dark-hover': '0 8px 24px rgba(0, 0, 0, 0.4)',
+                    }
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scrollbar-hide {
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .search-engine-item {
+                @apply px-3 py-2 rounded-full text-sm transition-all duration-200 cursor-pointer;
+            }
+            .search-engine-item:hover {
+                @apply bg-primary/10 text-primary dark:bg-primary/20;
+            }
+            .search-engine-item.active {
+                @apply bg-primary text-white;
+            }
+            .category-tab {
+                @apply px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer;
+            }
+            .category-tab:hover {
+                @apply text-primary;
+            }
+            .category-tab.active {
+                @apply text-primary border-b-2 border-primary;
+            }
+            .history-item {
+                @apply flex items-center justify-between p-3 hover:bg-light-300 dark:hover:bg-dark-200 rounded-lg transition-colors cursor-pointer;
+            }
+            .custom-engine-item {
+                @apply flex items-center justify-between p-3 border-b border-light-300 dark:border-dark-200 last:border-0;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-light-300 text-dark-300 min-h-screen flex flex-col transition-colors duration-300">
+    <!-- 导航栏 -->
+    <header class="bg-white dark:bg-dark-300 shadow-sm sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-search text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">聚合搜索</h1>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors">首页</a>
+                <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors" id="settings-link">设置</a>
+                <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors">关于</a>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-light-300 dark:hover:bg-dark-200 transition-colors relative overflow-hidden group">
+                    <i class="fa fa-moon-o dark:hidden text-dark-100 transition-opacity duration-300"></i>
+                    <i class="fa fa-sun-o hidden dark:block text-light-100 transition-opacity duration-300"></i>
+                    <span class="absolute inset-0 bg-primary/10 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full"></span>
+                </button>
+            </nav>
+            
+            <div class="flex items-center space-x-3">
+                <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-light-300 dark:hover:bg-dark-200 transition-colors md:hidden">
+                    <i class="fa fa-moon-o dark:hidden text-dark-100"></i>
+                    <i class="fa fa-sun-o hidden dark:block text-light-100"></i>
+                </button>
+                <button class="md:hidden text-dark-100 dark:text-light-100 text-xl" id="mobile-menu-button">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white dark:bg-dark-300 border-t dark:border-dark-100" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#" class="py-2 text-dark-100 dark:text-light-100 hover:text-primary transition-colors">首页</a>
+                <a href="#" class="py-2 text-dark-100 dark:text-light-100 hover:text-primary transition-colors" id="mobile-settings-link">设置</a>
+                <a href="#" class="py-2 text-dark-100 dark:text-light-100 hover:text-primary transition-colors">关于</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-10">
+        <!-- 搜索框区域 -->
+        <section class="max-w-4xl mx-auto mb-8 transform transition-all duration-500 hover:scale-[1.01]">
+            <form id="search-form" class="flex flex-col space-y-4">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="输入搜索关键词..." class="w-full px-5 py-4 rounded-full border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm text-lg dark:text-light-100">
+                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full transition-all shadow-md hover:shadow-lg">
+                        <i class="fa fa-search mr-2"></i>搜索
+                    </button>
+                </div>
+                
+                <!-- 搜索历史记录 -->
+                <div id="search-history-container" class="bg-white dark:bg-dark-200 p-4 rounded-lg shadow-card dark:shadow-dark-card hidden">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-sm font-medium text-dark-100 dark:text-light-100">搜索历史</h3>
+                        <button id="clear-history" class="text-xs text-primary hover:text-primary/80">清除历史</button>
+                    </div>
+                    <div id="search-history-list" class="space-y-1 max-h-40 overflow-y-auto scrollbar-hide">
+                        <!-- 搜索历史将通过JS动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 分类标签 -->
+                <div class="overflow-x-auto scrollbar-hide -mx-2 px-2">
+                    <div class="flex space-x-1 min-w-max" id="category-tabs">
+                        <div class="category-tab active" data-category="all">全部</div>
+                        <div class="category-tab" data-category="news">新闻</div>
+                        <div class="category-tab" data-category="image">图片</div>
+                        <div class="category-tab" data-category="video">视频</div>
+                        <div class="category-tab" data-category="music">音乐</div>
+                        <div class="category-tab" data-category="business">商务</div>
+                        <div class="category-tab" data-category="knowledge">知识</div>
+                        <div class="category-tab" data-category="code">代码</div>
+                        <div class="category-tab" data-category="social">社交</div>
+                    </div>
+                </div>
+                
+                <!-- 搜索引擎选择 -->
+                <div class="bg-white dark:bg-dark-200 p-3 rounded-lg shadow-card dark:shadow-dark-card">
+                    <h3 class="text-sm font-medium text-dark-100 dark:text-light-100 mb-2">选择搜索引擎：</h3>
+                    <div class="overflow-x-auto scrollbar-hide -mx-2 px-2">
+                        <div class="flex flex-wrap gap-2 min-w-max" id="search-engines-container">
+                            <!-- 搜索引擎选项将通过JS动态生成 -->
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <button type="button" id="select-all" class="text-xs text-primary hover:text-primary/80">全选</button>
+                        <button type="button" id="deselect-all" class="text-xs text-dark-100 dark:text-light-100 hover:text-dark-300 dark:hover:text-light-300">取消全选</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+        
+        <!-- 搜索结果区域 -->
+        <section class="max-w-5xl mx-auto" id="results-section">
+            <!-- 结果统计和切换 -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                <div id="results-stats" class="text-dark-100 dark:text-light-100 text-sm mb-3 sm:mb-0">
+                    请输入关键词并点击搜索
+                </div>
+                <div class="flex space-x-2">
+                    <button id="result-view-list" class="p-2 bg-white dark:bg-dark-200 rounded shadow-sm text-primary">
+                        <i class="fa fa-list"></i>
+                    </button>
+                    <button id="result-view-grid" class="p-2 bg-white dark:bg-dark-200 rounded shadow-sm text-dark-100 dark:text-light-100 hover:text-primary transition-colors">
+                        <i class="fa fa-th-large"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 结果容器 -->
+            <div id="results-container" class="space-y-4 mb-8">
+                <!-- 搜索结果将通过JS动态生成 -->
+                <div class="flex justify-center items-center h-64 bg-white dark:bg-dark-200 rounded-lg shadow-card dark:shadow-dark-card">
+                    <div class="text-center text-dark-100 dark:text-light-100">
+                        <i class="fa fa-search text-4xl mb-4 text-gray-400 dark:text-dark-100"></i>
+                        <p>输入关键词开始搜索</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 分页控件 -->
+            <div id="pagination-container" class="flex justify-center items-center space-x-2 my-8 hidden">
+                <button id="prev-page" class="px-4 py-2 rounded border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 hover:bg-light-300 dark:hover:bg-dark-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+                <div id="page-numbers" class="flex space-x-1">
+                    <!-- 页码将通过JS动态生成 -->
+                </div>
+                <button id="next-page" class="px-4 py-2 rounded border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 hover:bg-light-300 dark:hover:bg-dark-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white dark:bg-dark-300 border-t dark:border-dark-100 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-dark-100 dark:text-light-100 text-sm">© 2023 鲁虺聚合搜索. 保留所有权利.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors text-sm">隐私政策</a>
+                    <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors text-sm">使用条款</a>
+                    <a href="#" class="text-dark-100 dark:text-light-100 hover:text-primary transition-colors text-sm">反馈建议</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 设置模态框 -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-dark-300 rounded-lg shadow-modal w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b dark:border-dark-100 flex justify-between items-center">
+                <h2 class="text-lg font-bold dark:text-light-100">设置</h2>
+                <button id="close-settings" class="p-2 hover:bg-light-300 dark:hover:bg-dark-200 rounded-full transition-colors">
+                    <i class="fa fa-times text-dark-100 dark:text-light-100"></i>
+                </button>
+            </div>
+            
+            <div class="overflow-y-auto flex-grow p-4">
+                <!-- 主题设置 -->
+                <div class="mb-6">
+                    <h3 class="text-md font-medium mb-3 dark:text-light-100">主题设置</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-light-300 dark:bg-dark-200 rounded-lg">
+                            <div>
+                                <p class="font-medium dark:text-light-100">跟随系统</p>
+                                <p class="text-sm text-dark-100 dark:text-light-100">根据系统设置自动切换深色/浅色模式</p>
+                            </div>
+                            <button id="theme-system" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-dark-100 flex items-center justify-center theme-option">
+                                <i class="fa fa-check text-primary hidden"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-light-300 dark:bg-dark-200 rounded-lg">
+                            <div>
+                                <p class="font-medium dark:text-light-100">浅色模式</p>
+                                <p class="text-sm text-dark-100 dark:text-light-100">始终使用浅色模式</p>
+                            </div>
+                            <button id="theme-light" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-dark-100 flex items-center justify-center theme-option">
+                                <i class="fa fa-check text-primary hidden"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-light-300 dark:bg-dark-200 rounded-lg">
+                            <div>
+                                <p class="font-medium dark:text-light-100">深色模式</p>
+                                <p class="text-sm text-dark-100 dark:text-light-100">始终使用深色模式</p>
+                            </div>
+                            <button id="theme-dark" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-dark-100 flex items-center justify-center theme-option">
+                                <i class="fa fa-check text-primary hidden"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自定义搜索引擎 -->
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-md font-medium dark:text-light-100">自定义搜索引擎</h3>
+                        <button id="add-custom-engine" class="text-sm bg-primary text-white px-3 py-1 rounded-full hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus mr-1"></i>添加
+                        </button>
+                    </div>
+                    
+                    <div id="custom-engines-list" class="space-y-1 max-h-60 overflow-y-auto scrollbar-hide">
+                        <!-- 自定义搜索引擎将通过JS动态生成 -->
+                        <div class="text-center py-6 text-dark-100 dark:text-light-100 text-sm" id="no-custom-engines">
+                            暂无自定义搜索引擎，点击"添加"按钮创建
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 添加自定义搜索引擎模态框 -->
+    <div id="add-engine-modal" class="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-dark-300 rounded-lg shadow-modal w-full max-w-md p-5">
+            <div class="mb-4">
+                <h2 class="text-lg font-bold dark:text-light-100">添加自定义搜索引擎</h2>
+                <p class="text-sm text-dark-100 dark:text-light-100 mt-1">添加您常用的搜索引擎，方便快速访问</p>
+            </div>
+            
+            <form id="add-engine-form" class="space-y-4">
+                <div>
+                    <label for="engine-name" class="block text-sm font-medium mb-1 dark:text-light-100">搜索引擎名称</label>
+                    <input type="text" id="engine-name" required
+                        class="w-full px-3 py-2 rounded border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all dark:text-light-100"
+                        placeholder="例如：必应">
+                </div>
+                
+                <div>
+                    <label for="engine-url" class="block text-sm font-medium mb-1 dark:text-light-100">搜索URL</label>
+                    <div class="relative">
+                        <input type="url" id="engine-url" required
+                            class="w-full px-3 py-2 rounded border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all dark:text-light-100"
+                            placeholder="例如：https://www.bing.com/search?q={q}">
+                        <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-dark-100 dark:text-light-100 text-xs">
+                            需包含 {q} 作为搜索关键词占位符
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="engine-categories" class="block text-sm font-medium mb-1 dark:text-light-100">适用分类（可多选）</label>
+                    <select id="engine-categories" multiple
+                        class="w-full px-3 py-2 rounded border border-gray-300 dark:border-dark-100 bg-white dark:bg-dark-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all dark:text-light-100 h-32">
+                        <option value="all">全部</option>
+                        <option value="news">新闻</option>
+                        <option value="image">图片</option>
+                        <option value="video">视频</option>
+                        <option value="music">音乐</option>
+                        <option value="business">商务</option>
+                        <option value="knowledge">知识</option>
+                        <option value="code">代码</option>
+                        <option value="social">社交</option>
+                    </select>
+                </div>
+                
+                <div class="flex space-x-3 pt-2">
+                    <button type="button" id="cancel-add-engine" class="flex-1 px-4 py-2 border border-gray-300 dark:border-dark-100 rounded hover:bg-light-300 dark:hover:bg-dark-200 transition-colors dark:text-light-100">
+                        取消
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors">
+                        保存
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div id="loading-overlay" class="fixed inset-0 bg-black/10 dark:bg-black/40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-dark-300 p-6 rounded-lg shadow-lg dark:shadow-dark-card flex items-center space-x-3">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <p class="dark:text-light-100">正在搜索中...</p>
+        </div>
+    </div>
+
+    <script>
+        // 内置搜索引擎数据及分类
+        const builtInSearchEngines = [
+            { name: "Google", url: "https://www.google.com/search?q={q}", categories: ["all", "news", "image", "video", "knowledge"], isCustom: false },
+            { name: "Bing", url: "https://www.bing.com/search?q={q}", categories: ["all", "news", "image", "video", "music", "knowledge"], isCustom: false },
+            { name: "百度", url: "https://www.baidu.com/s?wd={q}", categories: ["all", "news", "image", "video", "music", "business", "knowledge"], isCustom: false },
+            { name: "Yahoo", url: "https://search.yahoo.com/search?p={q}", categories: ["all", "news", "image", "video", "music"], isCustom: false },
+            { name: "DuckDuckGo", url: "https://duckduckgo.com/?q={q}", categories: ["all", "news", "image", "video"], isCustom: false },
+            { name: "搜狗", url: "https://www.sogou.com/web?query={q}", categories: ["all", "news", "image", "video", "music", "social"], isCustom: false },
+            { name: "360搜索", url: "https://www.so.com/s?q={q}", categories: ["all", "news", "image", "video"], isCustom: false },
+            { name: "GitHub 搜索", url: "https://github.com/search?q={q}", categories: ["all", "code"], isCustom: false },
+            { name: "YouTube 搜索", url: "https://www.youtube.com/results?search_query={q}", categories: ["all", "video", "music"], isCustom: false },
+            { name: "知乎搜索", url: "https://www.zhihu.com/search?q={q}", categories: ["all", "knowledge", "social"], isCustom: false },
+            { name: "小红书搜索", url: "https://www.xiaohongshu.com/search_result?keyword={q}", categories: ["all", "social", "business"], isCustom: false },
+            { name: "淘宝搜索", url: "https://ai.taobao.com/search/index.htm?key={q}", categories: ["all", "business"], isCustom: false },
+            { name: "抖音搜索", url: "https://www.douyin.com/search/{q}", categories: ["all", "video", "music", "social"], isCustom: false },
+            { name: "哔哩哔哩搜索", url: "https://search.bilibili.com/all?keyword={q}", categories: ["all", "video", "music", "social"], isCustom: false },
+            { name: "百度学术", url: "https://xueshu.baidu.com/s?wd={q}", categories: ["all", "knowledge"], isCustom: false },
+            { name: "微博搜索", url: "https://s.weibo.com/weibo?q={q}", categories: ["all", "news", "social"], isCustom: false },
+            { name: "Wolfram Alpha", url: "https://www.wolframalpha.com/input?i={q}", categories: ["all", "knowledge"], isCustom: false },
+            { name: "NPM 搜索引擎", url: "https://npm.io/search/?q={q}", categories: ["all", "code"], isCustom: false },
+            { name: "豆瓣搜索", url: "https://www.douban.com/search?q={q}", categories: ["all", "knowledge", "social"], isCustom: false }
+        ];
+
+        // 页面状态管理
+        const appState = {
+            searchQuery: '',
+            currentCategory: 'all',
+            selectedEngines: [],
+            currentPage: 1,
+            resultsPerPage: 10,
+            allResults: [],
+            filteredResults: [],
+            isLoading: false,
+            searchHistory: [],
+            maxHistoryItems: 20,
+            customSearchEngines: [],
+            themeMode: 'system' // system, light, dark
+        };
+
+        // DOM元素
+        const elements = {
+            // 主要元素
+            searchForm: document.getElementById('search-form'),
+            searchInput: document.getElementById('search-input'),
+            categoryTabs: document.getElementById('category-tabs').querySelectorAll('.category-tab'),
+            searchEnginesContainer: document.getElementById('search-engines-container'),
+            selectAllBtn: document.getElementById('select-all'),
+            deselectAllBtn: document.getElementById('deselect-all'),
+            resultsContainer: document.getElementById('results-container'),
+            resultsStats: document.getElementById('results-stats'),
+            paginationContainer: document.getElementById('pagination-container'),
+            pageNumbers: document.getElementById('page-numbers'),
+            prevPageBtn: document.getElementById('prev-page'),
+            nextPageBtn: document.getElementById('next-page'),
+            resultViewList: document.getElementById('result-view-list'),
+            resultViewGrid: document.getElementById('result-view-grid'),
+            loadingOverlay: document.getElementById('loading-overlay'),
+            mobileMenuButton: document.getElementById('mobile-menu-button'),
+            mobileMenu: document.getElementById('mobile-menu'),
+            navbar: document.getElementById('navbar'),
+            
+            // 主题切换
+            themeToggle: document.getElementById('theme-toggle'),
+            mobileThemeToggle: document.getElementById('mobile-theme-toggle'),
+            themeSystem: document.getElementById('theme-system'),
+            themeLight: document.getElementById('theme-light'),
+            themeDark: document.getElementById('theme-dark'),
+            
+            // 搜索历史
+            searchHistoryContainer: document.getElementById('search-history-container'),
+            searchHistoryList: document.getElementById('search-history-list'),
+            clearHistoryBtn: document.getElementById('clear-history'),
+            
+            // 设置模态框
+            settingsLink: document.getElementById('settings-link'),
+            mobileSettingsLink: document.getElementById('mobile-settings-link'),
+            settingsModal: document.getElementById('settings-modal'),
+            closeSettings: document.getElementById('close-settings'),
+            
+            // 自定义搜索引擎
+            addCustomEngine: document.getElementById('add-custom-engine'),
+            addEngineModal: document.getElementById('add-engine-modal'),
+            addEngineForm: document.getElementById('add-engine-form'),
+            cancelAddEngine: document.getElementById('cancel-add-engine'),
+            customEnginesList: document.getElementById('custom-engines-list'),
+            noCustomEngines: document.getElementById('no-custom-engines')
+        };
+
+        // 初始化函数
+        function init() {
+            // 加载数据
+            loadSearchHistory();
+            loadCustomSearchEngines();
+            loadThemeSettings();
+            
+            // 渲染UI
+            renderSearchHistory();
+            renderCustomSearchEngines();
+            renderSearchEngines();
+            updateThemeUI();
+            
+            // 解析URL参数
+            parseUrlParams();
+            
+            // 事件监听
+            setupEventListeners();
+            
+            // 如果URL中有搜索参数，自动执行搜索
+            if (appState.searchQuery) {
+                elements.searchInput.value = appState.searchQuery;
+                performSearch();
+            } else {
+                // 显示搜索历史
+                toggleSearchHistoryVisibility(true);
+            }
+        }
+
+        // 获取所有搜索引擎（内置+自定义）
+        function getAllSearchEngines() {
+            return [...builtInSearchEngines, ...appState.customSearchEngines];
+        }
+
+        // 渲染搜索引擎选项
+        function renderSearchEngines() {
+            elements.searchEnginesContainer.innerHTML = '';
+            
+            getAllSearchEngines().forEach(engine => {
+                // 只显示当前分类下的搜索引擎
+                if (appState.currentCategory !== 'all' && !engine.categories.includes(appState.currentCategory)) {
+                    return;
+                }
+                
+                const engineElement = document.createElement('div');
+                engineElement.className = `search-engine-item ${appState.selectedEngines.includes(engine.name) ? 'active' : ''}`;
+                engineElement.textContent = engine.name;
+                engineElement.dataset.engine = engine.name;
+                
+                // 为自定义搜索引擎添加标识
+                if (engine.isCustom) {
+                    engineElement.innerHTML += `<span class="ml-1 text-xs opacity-70">★</span>`;
+                }
+                
+                engineElement.addEventListener('click', () => {
+                    toggleEngineSelection(engine.name);
+                });
+                
+                elements.searchEnginesContainer.appendChild(engineElement);
+            });
+        }
+
+        // 切换搜索引擎选择状态
+        function toggleEngineSelection(engineName) {
+            const index = appState.selectedEngines.indexOf(engineName);
+            
+            if (index === -1) {
+                appState.selectedEngines.push(engineName);
+            } else {
+                appState.selectedEngines.splice(index, 1);
+            }
+            
+            renderSearchEngines();
+        }
+
+        // 全选搜索引擎
+        function selectAllEngines() {
+            appState.selectedEngines = getAllSearchEngines()
+                .filter(engine => engine.categories.includes(appState.currentCategory) || appState.currentCategory === 'all')
+                .map(engine => engine.name);
+            
+            renderSearchEngines();
+        }
+
+        // 取消全选搜索引擎
+        function deselectAllEngines() {
+            appState.selectedEngines = [];
+            renderSearchEngines();
+        }
+
+        // 切换分类
+        function changeCategory(category) {
+            appState.currentCategory = category;
+            appState.currentPage = 1;
+            
+            // 更新活跃标签样式
+            elements.categoryTabs.forEach(tab => {
+                if (tab.dataset.category === category) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // 过滤搜索引擎选项
+            const enginesInCategory = getAllSearchEngines().filter(engine => 
+                engine.categories.includes(category) || category === 'all'
+            ).map(engine => engine.name);
+            
+            // 更新选中的搜索引擎，只保留当前分类下的
+            appState.selectedEngines = appState.selectedEngines.filter(engine => 
+                enginesInCategory.includes(engine)
+            );
+            
+            renderSearchEngines();
+            
+            // 如果有搜索词，重新搜索
+            if (appState.searchQuery) {
+                performSearch();
+            }
+            
+            // 更新URL
+            updateUrlParams();
+        }
+
+        // 解析URL参数
+        function parseUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            
+            appState.searchQuery = params.get('q') || '';
+            
+            const category = params.get('dir') || 'all';
+            if (['all', 'news', 'image', 'video', 'music', 'business', 'knowledge', 'code', 'social'].includes(category)) {
+                appState.currentCategory = category;
+                
+                // 更新分类标签样式
+                elements.categoryTabs.forEach(tab => {
+                    if (tab.dataset.category === category) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+            }
+            
+            const engine = params.get('name');
+            if (engine) {
+                appState.selectedEngines = [engine];
+            } else {
+                // 默认选中当前分类下的前5个搜索引擎
+                const enginesInCategory = getAllSearchEngines().filter(engine => 
+                    engine.categories.includes(appState.currentCategory) || appState.currentCategory === 'all'
+                ).map(engine => engine.name);
+                
+                appState.selectedEngines = enginesInCategory.slice(0, 5);
+            }
+        }
+
+        // 更新URL参数
+        function updateUrlParams() {
+            const params = new URLSearchParams();
+            
+            if (appState.searchQuery) {
+                params.set('q', appState.searchQuery);
+            }
+            
+            if (appState.currentCategory !== 'all') {
+                params.set('dir', appState.currentCategory);
+            }
+            
+            if (appState.selectedEngines.length === 1) {
+                params.set('name', appState.selectedEngines[0]);
+            }
+            
+            if (appState.currentPage > 1) {
+                params.set('page', appState.currentPage);
+            }
+            
+            const newUrl = window.location.pathname + (params.toString() ? `?${params.toString()}` : '');
+            window.history.pushState({}, '', newUrl);
+        }
+
+        // 执行搜索
+        async function performSearch() {
+            // 验证输入
+            if (!appState.searchQuery.trim()) {
+                alert('请输入搜索关键词');
+                return;
+            }
+            
+            // 验证选择了搜索引擎
+            if (appState.selectedEngines.length === 0) {
+                alert('请至少选择一个搜索引擎');
+                return;
+            }
+            
+            // 添加到搜索历史
+            addToSearchHistory(appState.searchQuery);
+            
+            // 隐藏搜索历史
+            toggleSearchHistoryVisibility(false);
+            
+            // 显示加载状态
+            appState.isLoading = true;
+            elements.loadingOverlay.classList.remove('hidden');
+            
+            try {
+                // 获取搜索结果
+                appState.allResults = await fetchSearchResults();
+                appState.filteredResults = [...appState.allResults];
+                
+                renderResults();
+                renderPagination();
+                updateResultsStats();
+                updateUrlParams();
+            } catch (error) {
+                console.error('搜索出错:', error);
+                elements.resultsContainer.innerHTML = `
+                    <div class="flex justify-center items-center h-64 bg-white dark:bg-dark-200 rounded-lg shadow-card dark:shadow-dark-card">
+                        <div class="text-center text-dark-100 dark:text-light-100">
+                            <i class="fa fa-exclamation-triangle text-4xl mb-4 text-accent"></i>
+                            <p>搜索过程中出现错误，请稍后重试</p>
+                        </div>
+                    </div>
+                `;
+            } finally {
+                // 隐藏加载状态
+                appState.isLoading = false;
+                elements.loadingOverlay.classList.add('hidden');
+            }
+        }
+
+        // 获取搜索结果（模拟）
+        async function fetchSearchResults() {
+            return new Promise((resolve) => {
+                // 模拟网络延迟
+                setTimeout(() => {
+                    const results = [];
+                    const allEngines = getAllSearchEngines();
+                    
+                    appState.selectedEngines.forEach(engineName => {
+                        const engine = allEngines.find(e => e.name === engineName);
+                        if (!engine) return;
+                        
+                        // 为每个搜索引擎生成3-6个结果
+                        const resultCount = Math.floor(Math.random() * 4) + 3;
+                        
+                        for (let i = 0; i < resultCount; i++) {
+                            // 不同搜索引擎的结果模板
+                            let title, description;
+                            
+                            if (engine.name.includes('GitHub') || engine.name.includes('代码')) {
+                                title = `${appState.searchQuery} 相关代码仓库 - ${i+1}`;
+                                description = `发现与 ${appState.searchQuery} 相关的开源项目和代码仓库，包含示例代码和文档。`;
+                            } else if (engine.name.includes('淘宝') || engine.name.includes('商务')) {
+                                title = `${appState.searchQuery} 最新商品 - 价格优惠${i+1}`;
+                                description = `${appState.searchQuery} 相关商品，限时折扣，品质保证，快来选购！`;
+                            } else if (engine.name.includes('知乎') || engine.name.includes('豆瓣') || engine.name.includes('知识')) {
+                                title = `如何评价 ${appState.searchQuery}？ - 热门讨论${i+1}`;
+                                description = `关于 ${appState.searchQuery} 的详细讨论和用户评价，包含专业分析和个人经验分享。`;
+                            } else if (engine.name.includes('视频') || engine.name.includes('YouTube') || engine.name.includes('抖音') || engine.name.includes('哔哩哔哩')) {
+                                title = `${appState.searchQuery} 相关视频 - 高清观看${i+1}`;
+                                description = `精选 ${appState.searchQuery} 相关视频，内容丰富，更新及时，立即观看。`;
+                            } else {
+                                title = `${appState.searchQuery} 最新资讯和信息 - ${i+1}`;
+                                description = `全面了解 ${appState.searchQuery} 的最新动态、相关知识和详细介绍。`;
+                            }
+                            
+                            // 构建搜索URL
+                            const searchUrl = engine.url.replace('{q}', encodeURIComponent(appState.searchQuery));
+                            
+                            results.push({
+                                engine: engineName,
+                                title: title,
+                                url: searchUrl,
+                                description: description,
+                                date: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000).toLocaleDateString(),
+                                relevance: Math.floor(Math.random() * 5) + 1, // 1-5的相关性评分
+                                type: getResultTypeByCategory(appState.currentCategory)
+                            });
+                        }
+                    });
+                    
+                    // 按相关性排序
+                    resolve(results.sort((a, b) => b.relevance - a.relevance));
+                }, 1500);
+            });
+        }
+
+        // 根据分类获取结果类型
+        function getResultTypeByCategory(category) {
+            const types = {
+                news: ['新闻'],
+                image: ['图片'],
+                video: ['视频'],
+                music: ['音乐'],
+                business: ['商品', '服务'],
+                knowledge: ['文章', '问答', '研究'],
+                code: ['代码', '仓库', '文档'],
+                social: ['帖子', '评论', '动态']
+            };
+            
+            if (types[category]) {
+                return types[category][Math.floor(Math.random() * types[category].length)];
+            }
+            
+            // 随机类型
+            const allTypes = ['网页', '新闻', '图片', '视频', '文章', '问答', '商品'];
+            return allTypes[Math.floor(Math.random() * allTypes.length)];
+        }
+
+        // 渲染搜索结果（列表视图）
+        function renderResults() {
+            elements.resultsContainer.innerHTML = '';
+            
+            if (appState.filteredResults.length === 0) {
+                elements.resultsContainer.innerHTML = `
+                    <div class="flex justify-center items-center h-64 bg-white dark:bg-dark-200 rounded-lg shadow-card dark:shadow-dark-card">
+                        <div class="text-center text-dark-100 dark:text-light-100">
+                            <i class="fa fa-search text-4xl mb-4 text-gray-400 dark:text-dark-100"></i>
+                            <p>未找到搜索结果</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 计算当前页的结果
+            const startIndex = (appState.currentPage - 1) * appState.resultsPerPage;
+            const endIndex = startIndex + appState.resultsPerPage;
+            const currentResults = appState.filteredResults.slice(startIndex, endIndex);
+            
+            currentResults.forEach(result => {
+                const resultElement = document.createElement('div');
+                resultElement.className = 'bg-white dark:bg-dark-200 rounded-lg shadow-card dark:shadow-dark-card p-5 hover:shadow-hover dark:hover:shadow-dark-hover transition-all duration-300 transform hover:-translate-y-1';
+                
+                // 生成星级评分HTML
+                let ratingHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    ratingHtml += `<i class="fa fa-star ${i <= result.relevance ? 'text-accent' : 'text-gray-400 dark:text-dark-100'} text-xs"></i>`;
+                }
+                
+                resultElement.innerHTML = `
+                    <div class="flex items-start justify-between mb-2">
+                        <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">${result.engine}</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-dark-100 dark:text-light-100 text-xs">${result.type}</span>
+                            <div class="flex">${ratingHtml}</div>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2 hover:text-primary transition-colors">
+                        <a href="${result.url}" target="_blank" rel="noopener noreferrer" class="dark:text-light-100">${result.title}</a>
+                    </h3>
+                    <p class="text-dark-100 dark:text-light-100 text-sm mb-3 line-clamp-2">${result.description}</p>
+                    <div class="flex justify-between items-center">
+                        <a href="${result.url}" target="_blank" rel="noopener noreferrer" class="text-xs text-primary hover:underline truncate max-w-[60%]">${result.url}</a>
+                        <span class="text-dark-100 dark:text-light-100 text-xs">${result.date}</span>
+                    </div>
+                `;
+                
+                elements.resultsContainer.appendChild(resultElement);
+            });
+        }
+
+        // 渲染网格视图结果
+        function renderGridResults() {
+            elements.resultsContainer.innerHTML = '';
+            
+            if (appState.filteredResults.length === 0) {
+                elements.resultsContainer.innerHTML = `
+                    <div class="flex justify-center items-center h-64 bg-white dark:bg-dark-200 rounded-lg shadow-card dark:shadow-dark-card">
+                        <div class="text-center text-dark-100 dark:text-light-100">
+                            <i class="fa fa-search text-4xl mb-4 text-gray-400 dark:text-dark-100"></i>
+                            <p>未找到搜索结果</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 计算当前页的结果
+            const startIndex = (appState.currentPage - 1) * appState.resultsPerPage;
+            const endIndex = startIndex + appState.resultsPerPage;
+            const currentResults = appState.filteredResults.slice(startIndex, endIndex);
+            
+            // 创建网格容器
+            const gridContainer = document.createElement('div');
+            gridContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+            
+            currentResults.forEach(result => {
+                const resultElement = document.createElement('div');
+                resultElement.className = 'bg-white dark:bg-dark-200 rounded-lg shadow-card dark:shadow-dark-card p-4 hover:shadow-hover dark:hover:shadow-dark-hover transition-all duration-300 flex flex-col h-full transform hover:-translate-y-1';
+                
+                // 生成星级评分HTML
+                let ratingHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    ratingHtml += `<i class="fa fa-star ${i <= result.relevance ? 'text-accent' : 'text-gray-400 dark:text-dark-100'} text-xs"></i>`;
+                }
+                
+                // 根据结果类型选择合适的图片
+                let imageCategory = 'search';
+                if (result.type === '图片') imageCategory = 'nature';
+                else if (result.type === '视频') imageCategory = 'film';
+                else if (result.type === '商品') imageCategory = 'shopping';
+                else if (result.type === '新闻') imageCategory = 'news';
+                
+                // 随机图片ID
+                const imageId = Math.floor(Math.random() * 1000);
+                
+                resultElement.innerHTML = `
+                    <div class="flex items-start justify-between mb-2">
+                        <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">${result.engine}</span>
+                        <span class="text-dark-100 dark:text-light-100 text-xs">${result.date}</span>
+                    </div>
+                    <div class="mb-3 bg-gray-100 dark:bg-dark-100 rounded overflow-hidden h-32 flex items-center justify-center">
+                        <img src="https://picsum.photos/seed/${imageId}/400/200?category=${imageCategory}" alt="${result.title}的相关图片" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-base font-medium mb-2 hover:text-primary transition-colors flex-grow dark:text-light-100">
+                        <a href="${result.url}" target="_blank" rel="noopener noreferrer">${result.title}</a>
+                    </h3>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-xs text-dark-100 dark:text-light-100">${result.type}</span>
+                        <div class="flex">${ratingHtml}</div>
+                    </div>
+                `;
+                
+                gridContainer.appendChild(resultElement);
+            });
+            
+            elements.resultsContainer.appendChild(gridContainer);
+        }
+
+        // 更新结果统计信息
+        function updateResultsStats() {
+            const totalResults = appState.filteredResults.length;
+            const startIndex = totalResults > 0 ? (appState.currentPage - 1) * appState.resultsPerPage + 1 : 0;
+            const endIndex = Math.min(startIndex + appState.resultsPerPage - 1, totalResults);
+            
+            elements.resultsStats.textContent = 
+                `找到约 ${totalResults} 条结果，显示 ${startIndex} - ${endIndex}（搜索词："${appState.searchQuery}"，分类：${getCategoryName(appState.currentCategory)}）`;
+        }
+
+        // 获取分类的中文名称
+        function getCategoryName(category) {
+            const categoryNames = {
+                'all': '全部',
+                'news': '新闻',
+                'image': '图片',
+                'video': '视频',
+                'music': '音乐',
+                'business': '商务',
+                'knowledge': '知识',
+                'code': '代码',
+                'social': '社交'
+            };
+            
+            return categoryNames[category] || '全部';
+        }
+
+        // 渲染分页控件
+        function renderPagination() {
+            const totalPages = Math.ceil(appState.filteredResults.length / appState.resultsPerPage);
+            
+            // 如果结果不足一页，隐藏分页控件
+            if (totalPages <= 1) {
+                elements.paginationContainer.classList.add('hidden');
+                return;
+            }
+            
+            elements.paginationContainer.classList.remove('hidden');
+            elements.pageNumbers.innerHTML = '';
+            
+            // 更新上一页/下一页按钮状态
+            elements.prevPageBtn.disabled = appState.currentPage === 1;
+            elements.nextPageBtn.disabled = appState.currentPage === totalPages;
+            
+            // 生成页码按钮
+            let startPage = Math.max(1, appState.currentPage - 2);
+            let endPage = Math.min(totalPages, startPage + 4);
+            
+            // 如果接近末尾，调整起始页
+            if (endPage - startPage < 4 && startPage > 1) {
+                startPage = Math.max(1, endPage - 4);
+            }
+            
+            // 添加第一页按钮（如果当前范围不包含第一页）
+            if (startPage > 1) {
+                addPageButton(1);
+                if (startPage > 2) {
+                    addEllipsis();
+                }
+            }
+            
+            // 添加当前范围内的页码
+            for (let i = startPage; i <= endPage; i++) {
+                addPageButton(i);
+            }
+            
+            // 添加最后一页按钮（如果当前范围不包含最后一页）
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    addEllipsis();
+                }
+                addPageButton(totalPages);
+            }
+        }
+
+        // 添加页码按钮
+        function addPageButton(pageNumber) {
+            const button = document.createElement('button');
+            button.className = `px-3 py-1 rounded ${appState.currentPage === pageNumber ? 'bg-primary text-white' : 'bg-white dark:bg-dark-200 border border-gray-300 dark:border-dark-100 hover:bg-light-300 dark:hover:bg-dark-100'}`;
+            button.textContent = pageNumber;
+            
+            button.addEventListener('click', () => {
+                goToPage(pageNumber);
+            });
+            
+            elements.pageNumbers.appendChild(button);
+        }
+
+        // 添加省略号
+        function addEllipsis() {
+            const ellipsis = document.createElement('span');
+            ellipsis.className = 'px-2 text-dark-100 dark:text-light-100';
+            ellipsis.textContent = '...';
+            elements.pageNumbers.appendChild(ellipsis);
+        }
+
+        // 跳转到指定页
+        function goToPage(pageNumber) {
+            appState.currentPage = pageNumber;
+            
+            // 根据当前视图模式渲染结果
+            if (elements.resultViewList.classList.contains('text-primary')) {
+                renderResults();
+            } else {
+                renderGridResults();
+            }
+            
+            renderPagination();
+            updateResultsStats();
+            updateUrlParams();
+            
+            // 滚动到结果顶部
+            elements.resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 搜索历史相关函数
+        function loadSearchHistory() {
+            try {
+                const savedHistory = localStorage.getItem('searchHistory');
+                if (savedHistory) {
+                    appState.searchHistory = JSON.parse(savedHistory);
+                }
+            } catch (error) {
+                console.error('加载搜索历史失败:', error);
+                appState.searchHistory = [];
+            }
+        }
+
+        function saveSearchHistory() {
+            try {
+                localStorage.setItem('searchHistory', JSON.stringify(appState.searchHistory));
+            } catch (error) {
+                console.error('保存搜索历史失败:', error);
+            }
+        }
+
+        function addToSearchHistory(query) {
+            // 去重
+            appState.searchHistory = appState.searchHistory.filter(item => item.query !== query);
+            
+            // 添加新记录
+            appState.searchHistory.unshift({
+                query: query,
+                timestamp: new Date().toISOString(),
+                category: appState.currentCategory
+            });
+            
+            // 限制数量
+            if (appState.searchHistory.length > appState.maxHistoryItems) {
+                appState.searchHistory = appState.searchHistory.slice(0, appState.maxHistoryItems);
+            }
+            
+            // 保存并渲染
+            saveSearchHistory();
+            renderSearchHistory();
+        }
+
+        function renderSearchHistory() {
+            elements.searchHistoryList.innerHTML = '';
+            
+            if (appState.searchHistory.length === 0) {
+                elements.searchHistoryList.innerHTML = `
+                    <div class="text-center py-4 text-dark-100 dark:text-light-100 text-sm">
+                        暂无搜索历史
+                    </div>
+                `;
+                return;
+            }
+            
+            appState.searchHistory.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                // 格式化日期
+                const date = new Date(item.timestamp);
+                const formattedDate = date.toLocaleString();
+                
+                historyItem.innerHTML = `
+                    <div>
+                        <div class="font-medium text-sm">${item.query}</div>
+                        <div class="text-xs text-dark-100 dark:text-light-100">${getCategoryName(item.category)} · ${formattedDate}</div>
+                    </div>
+                    <button class="delete-history-item p-1 text-dark-100 dark:text-light-100 hover:text-accent" data-query="${item.query}">
+                        <i class="fa fa-times"></i>
+                    </button>
+                `;
+                
+                // 点击历史项重新搜索
+                historyItem.addEventListener('click', (e) => {
+                    if (!e.target.closest('.delete-history-item')) {
+                        elements.searchInput.value = item.query;
+                        appState.searchQuery = item.query;
+                        appState.currentCategory = item.category;
+                        
+                        // 更新分类标签
+                        elements.categoryTabs.forEach(tab => {
+                            if (tab.dataset.category === item.category) {
+                                tab.click();
+                            }
+                        });
+                        
+                        performSearch();
+                    }
+                });
+                
+                elements.searchHistoryList.appendChild(historyItem);
+            });
+            
+            // 添加删除单个历史项的事件监听
+            document.querySelectorAll('.delete-history-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const query = e.currentTarget.dataset.query;
+                    deleteHistoryItem(query);
+                });
+            });
+        }
+
+        function deleteHistoryItem(query) {
+            appState.searchHistory = appState.searchHistory.filter(item => item.query !== query);
+            saveSearchHistory();
+            renderSearchHistory();
+        }
+
+        function clearSearchHistory() {
+            if (confirm('确定要清除所有搜索历史吗？')) {
+                appState.searchHistory = [];
+                saveSearchHistory();
+                renderSearchHistory();
+            }
+        }
+
+        function toggleSearchHistoryVisibility(show) {
+            if (show && appState.searchHistory.length > 0) {
+                elements.searchHistoryContainer.classList.remove('hidden');
+            } else {
+                elements.searchHistoryContainer.classList.add('hidden');
+            }
+        }
+
+        // 自定义搜索引擎相关函数
+        function loadCustomSearchEngines() {
+            try {
+                const savedEngines = localStorage.getItem('customSearchEngines');
+                if (savedEngines) {
+                    appState.customSearchEngines = JSON.parse(savedEngines).map(engine => ({
+                        ...engine,
+                        isCustom: true
+                    }));
+                }
+            } catch (error) {
+                console.error('加载自定义搜索引擎失败:', error);
+                appState.customSearchEngines = [];
+            }
+        }
+
+        function saveCustomSearchEngines() {
+            try {
+                localStorage.setItem('customSearchEngines', JSON.stringify(appState.customSearchEngines));
+            } catch (error) {
+                console.error('保存自定义搜索引擎失败:', error);
+            }
+        }
+
+        function renderCustomSearchEngines() {
+            elements.customEnginesList.innerHTML = '';
+            
+            if (appState.customSearchEngines.length === 0) {
+                elements.customEnginesList.appendChild(elements.noCustomEngines);
+                return;
+            }
+            
+            // 隐藏"暂无"提示
+            elements.noCustomEngines.remove();
+            
+            appState.customSearchEngines.forEach((engine, index) => {
+                const engineElement = document.createElement('div');
+                engineElement.className = 'custom-engine-item';
+                
+                // 格式化分类显示
+                const categoriesText = engine.categories.map(getCategoryName).join('、');
+                
+                engineElement.innerHTML = `
+                    <div>
+                        <p class="font-medium dark:text-light-100">${engine.name}</p>
+                        <p class="text-xs text-dark-100 dark:text-light-100 truncate max-w-[70%]">${engine.url}</p>
+                        <p class="text-xs text-dark-100 dark:text-light-100 mt-1">适用分类: ${categoriesText}</p>
+                    </div>
+                    <button class="delete-custom-engine p-2 text-dark-100 dark:text-light-100 hover:text-danger transition-colors" data-index="${index}">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                `;
+                
+                elements.customEnginesList.appendChild(engineElement);
+            });
+            
+            // 添加删除事件监听
+            document.querySelectorAll('.delete-custom-engine').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.currentTarget.dataset.index);
+                    deleteCustomEngine(index);
+                });
+            });
+        }
+
+        function addCustomEngine(name, url, categories) {
+            // 确保URL包含搜索关键词占位符
+            const processedUrl = url.includes('{q}') ? url : `${url}{q}`;
+            
+            appState.customSearchEngines.push({
+                name,
+                url: processedUrl,
+                categories,
+                isCustom: true
+            });
+            
+            saveCustomSearchEngines();
+            renderCustomSearchEngines();
+            renderSearchEngines();
+        }
+
+        function deleteCustomEngine(index) {
+            if (confirm(`确定要删除搜索引擎"${appState.customSearchEngines[index].name}"吗？`)) {
+                appState.customSearchEngines.splice(index, 1);
+                
+                // 移除已选中的删除引擎
+                const engineName = appState.customSearchEngines[index]?.name;
+                if (engineName) {
+                    appState.selectedEngines = appState.selectedEngines.filter(name => name !== engineName);
+                }
+                
+                saveCustomSearchEngines();
+                renderCustomSearchEngines();
+                renderSearchEngines();
+            }
+        }
+
+        // 主题设置相关函数
+        function loadThemeSettings() {
+            try {
+                const savedTheme = localStorage.getItem('themeMode');
+                if (savedTheme && ['system', 'light', 'dark'].includes(savedTheme)) {
+                    appState.themeMode = savedTheme;
+                }
+            } catch (error) {
+                console.error('加载主题设置失败:', error);
+                appState.themeMode = 'system';
+            }
+            
+            applyTheme();
+        }
+
+        function saveThemeSettings() {
+            try {
+                localStorage.setItem('themeMode', appState.themeMode);
+            } catch (error) {
+                console.error('保存主题设置失败:', error);
+            }
+        }
+
+        function updateThemeUI() {
+            // 重置所有主题选项
+            document.querySelectorAll('.theme-option i').forEach(icon => {
+                icon.classList.add('hidden');
+            });
+            
+            // 激活当前主题选项
+            if (appState.themeMode === 'system') {
+                elements.themeSystem.querySelector('i').classList.remove('hidden');
+            } else if (appState.themeMode === 'light') {
+                elements.themeLight.querySelector('i').classList.remove('hidden');
+            } else if (appState.themeMode === 'dark') {
+                elements.themeDark.querySelector('i').classList.remove('hidden');
+            }
+        }
+
+        function applyTheme() {
+            const html = document.documentElement;
+            
+            if (appState.themeMode === 'system') {
+                // 跟随系统设置
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    html.classList.add('dark');
+                } else {
+                    html.classList.remove('dark');
+                }
+            } else if (appState.themeMode === 'light') {
+                // 强制浅色模式
+                html.classList.remove('dark');
+            } else if (appState.themeMode === 'dark') {
+                // 强制深色模式
+                html.classList.add('dark');
+            }
+        }
+
+        function setThemeMode(mode) {
+            if (!['system', 'light', 'dark'].includes(mode)) return;
+            
+            appState.themeMode = mode;
+            saveThemeSettings();
+            updateThemeUI();
+            applyTheme();
+        }
+
+        // 模态框控制
+        function openSettingsModal() {
+            elements.settingsModal.classList.remove('hidden');
+            // 阻止背景滚动
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSettingsModal() {
+            elements.settingsModal.classList.add('hidden');
+            // 恢复背景滚动
+            document.body.style.overflow = '';
+        }
+
+        function openAddEngineModal() {
+            elements.addEngineModal.classList.remove('hidden');
+            // 清空表单
+            elements.addEngineForm.reset();
+            // 默认选择"全部"分类
+            document.querySelector('#engine-categories option[value="all"]').selected = true;
+            // 阻止背景滚动
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddEngineModal() {
+            elements.addEngineModal.classList.add('hidden');
+            // 恢复背景滚动
+            document.body.style.overflow = '';
+        }
+
+        // 设置事件监听
+        function setupEventListeners() {
+            // 搜索表单提交
+            elements.searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                appState.searchQuery = elements.searchInput.value.trim();
+                appState.currentPage = 1; // 重置到第一页
+                performSearch();
+            });
+            
+            // 搜索框聚焦/失焦时显示/隐藏搜索历史
+            elements.searchInput.addEventListener('focus', () => {
+                if (!appState.searchQuery && appState.searchHistory.length > 0) {
+                    toggleSearchHistoryVisibility(true);
+                }
+            });
+            
+            elements.searchInput.addEventListener('input', () => {
+                const value = elements.searchInput.value.trim();
+                if (!value && appState.searchHistory.length > 0) {
+                    toggleSearchHistoryVisibility(true);
+                } else {
+                    toggleSearchHistoryVisibility(false);
+                }
+            });
+            
+            // 点击页面其他地方隐藏搜索历史
+            document.addEventListener('click', (e) => {
+                if (!elements.searchForm.contains(e.target)) {
+                    toggleSearchHistoryVisibility(false);
+                }
+            });
+            
+            // 分类标签点击
+            elements.categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    changeCategory(tab.dataset.category);
+                });
+            });
+            
+            // 全选/取消全选按钮
+            elements.selectAllBtn.addEventListener('click', selectAllEngines);
+            elements.deselectAllBtn.addEventListener('click', deselectAllEngines);
+            
+            // 分页按钮
+            elements.prevPageBtn.addEventListener('click', () => {
+                if (appState.currentPage > 1) {
+                    goToPage(appState.currentPage - 1);
+                }
+            });
+            
+            elements.nextPageBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(appState.filteredResults.length / appState.resultsPerPage);
+                if (appState.currentPage < totalPages) {
+                    goToPage(appState.currentPage + 1);
+                }
+            });
+            
+            // 视图切换
+            elements.resultViewList.addEventListener('click', () => {
+                elements.resultViewList.classList.add('text-primary');
+                elements.resultViewList.classList.remove('text-dark-100', 'dark:text-light-100');
+                elements.resultViewGrid.classList.add('text-dark-100', 'dark:text-light-100');
+                elements.resultViewGrid.classList.remove('text-primary');
+                renderResults();
+            });
+            
+            elements.resultViewGrid.addEventListener('click', () => {
+                elements.resultViewGrid.classList.add('text-primary');
+                elements.resultViewGrid.classList.remove('text-dark-100', 'dark:text-light-100');
+                elements.resultViewList.classList.add('text-dark-100', 'dark:text-light-100');
+                elements.resultViewList.classList.remove('text-primary');
+                renderGridResults();
+            });
+            
+            // 移动端菜单
+            elements.mobileMenuButton.addEventListener('click', () => {
+                elements.mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 搜索历史操作
+            elements.clearHistoryBtn.addEventListener('click', clearSearchHistory);
+            
+            // 主题切换
+            elements.themeToggle.addEventListener('click', () => {
+                // 循环切换主题
+                if (appState.themeMode === 'system') {
+                    setThemeMode('light');
+                } else if (appState.themeMode === 'light') {
+                    setThemeMode('dark');
+                } else {
+                    setThemeMode('system');
+                }
+            });
+            
+            elements.mobileThemeToggle.addEventListener('click', () => {
+                // 循环切换主题
+                if (appState.themeMode === 'system') {
+                    setThemeMode('light');
+                } else if (appState.themeMode === 'light') {
+                    setThemeMode('dark');
+                } else {
+                    setThemeMode('system');
+                }
+            });
+            
+            // 设置页面主题选项
+            elements.themeSystem.addEventListener('click', () => setThemeMode('system'));
+            elements.themeLight.addEventListener('click', () => setThemeMode('light'));
+            elements.themeDark.addEventListener('click', () => setThemeMode('dark'));
+            
+            // 系统主题变化时自动更新
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (appState.themeMode === 'system') {
+                    applyTheme();
+                }
+            });
+            
+            // 设置模态框
+            elements.settingsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openSettingsModal();
+            });
+            
+            elements.mobileSettingsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                elements.mobileMenu.classList.add('hidden');
+                openSettingsModal();
+            });
+            
+            elements.closeSettings.addEventListener('click', closeSettingsModal);
+            
+            // 点击模态框背景关闭
+            elements.settingsModal.addEventListener('click', (e) => {
+                if (e.target === elements.settingsModal) {
+                    closeSettingsModal();
+                }
+            });
+            
+            // 自定义搜索引擎
+            elements.addCustomEngine.addEventListener('click', openAddEngineModal);
+            elements.cancelAddEngine.addEventListener('click', closeAddEngineModal);
+            
+            // 点击添加引擎模态框背景关闭
+            elements.addEngineModal.addEventListener('click', (e) => {
+                if (e.target === elements.addEngineModal) {
+                    closeAddEngineModal();
+                }
+            });
+            
+            // 添加引擎表单提交
+            elements.addEngineForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('engine-name').value.trim();
+                const url = document.getElementById('engine-url').value.trim();
+                
+                // 获取选中的分类
+                const categories = Array.from(
+                    document.getElementById('engine-categories').selectedOptions
+                ).map(option => option.value);
+                
+                // 验证
+                if (!name) {
+                    alert('请输入搜索引擎名称');
+                    return;
+                }
+                
+                if (!url) {
+                    alert('请输入搜索URL');
+                    return;
+                }
+                
+                if (!url.includes('{q}')) {
+                    alert('搜索URL必须包含 {q} 作为搜索关键词占位符');
+                    return;
+                }
+                
+                if (!categories.length) {
+                    alert('请至少选择一个适用分类');
+                    return;
+                }
+                
+                // 添加搜索引擎
+                addCustomEngine(name, url, categories);
+                closeAddEngineModal();
+            });
+            
+            // 滚动时导航栏效果
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    elements.navbar.classList.add('py-2', 'shadow');
+                    elements.navbar.classList.remove('py-3');
+                } else {
+                    elements.navbar.classList.add('py-3');
+                    elements.navbar.classList.remove('py-2', 'shadow');
+                }
+            });
+        }
+
+        // 初始化应用
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
+    

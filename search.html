@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鲁虺文化网 - 万能搜索助手 |鲁虺搜索引擎群 一站式多引擎搜索工具</title>
+    <meta name="description" content="鲁虺文化网是您的万能搜索助手，集成多个搜索引擎，包括淘宝、Ababtools、Google和百度等。轻松切换搜索引擎，高效获取信息，提升搜索体验。">
+    <meta name="keywords" content="鲁虺文化网, 万能搜索, 搜索助手, 多引擎搜索, 淘宝搜索, Ababtools, Google, 百度">
+    <meta name="author" content="鲁虺，富派仙尊，黄冠富">
+    <link rel="canonical" href="http://鲁虺文化网.ababtools.com/">
+    <meta property="og:title" content="鲁虺文化网 - 万能搜索助手 | 一站式多引擎搜索工具">
+    <meta property="og:description" content="鲁虺文化网集成多个搜索引擎，让您轻松高效地获取所需信息。支持淘宝、Ababtools、Google、百度等多种搜索引擎。">
+    <meta property="og:url" content="https://鲁虺文化网.ababtools.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://鲁虺文化网.ababtools.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="鲁虺文化网 - 万能搜索助手 | 一站式多引擎搜索工具">
+    <meta name="twitter:description" content="鲁虺文化网集成多个搜索引擎，让您轻松高效地获取所需信息。支持淘宝、Ababtools、Google、百度等多种搜索引擎。">
+    <meta name="twitter:image" content="https://鲁虺文化网.ababtools.com/twitter-image.jpg">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --background-color: #ffffff;
+            --text-color: #333333;
+            --sidebar-width: 250px;
+            --sidebar-bg: #f1f3f4;
+            --hot-search-bg: #f1f3f4;
+        }
+
+        .dark-mode {
+            --primary-color: #4285f4;
+            --background-color: #1f1f1f;
+            --text-color: #e0e0e0;
+            --sidebar-bg: #2d2d2d;
+            --hot-search-bg: #3d3d3d;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            padding: 20px;
+            transition: width 0.3s;
+        }
+
+        .sidebar.collapsed {
+            width: 60px;
+        }
+
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-item {
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-item i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 18px;
+            border: 2px solid var(--primary-color);
+            border-radius: 24px;
+            outline: none;
+            margin-bottom: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        #search-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 24px;
+            transition: background-color 0.3s;
+        }
+
+        #search-button:hover {
+            background-color: #1669d6;
+        }
+
+        #engine-select {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid var(--primary-color);
+            border-radius: 24px;
+            outline: none;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .hot-searches {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .hot-search-item {
+            background-color: var(--hot-search-bg);
+            color: var(--text-color);
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        #history-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        #history-list li {
+            padding: 5px 0;
+            cursor: pointer;
+        }
+
+        #settings-panel {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #settings-panel label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                top: 0;
+                bottom: 0;
+                z-index: 1000;
+            }
+
+            .sidebar.collapsed {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <button class="sidebar-toggle">☰</button>
+        <div class="sidebar-item" id="history-btn"><i>🕒</i>历史记录</div>
+        <div class="sidebar-item" id="settings-btn"><i>⚙️</i>设置</div>
+        <div id="history-list"></div>
+        <div id="settings-panel">
+            <h3>选择搜索引擎</h3>
+            <!-- 搜索引擎选项将通过 JavaScript 动态添加 -->
+        </div>
+    </div>
+
+    <div class="main-content">
+        <button class="theme-toggle" id="theme-toggle">🌓</button>
+        <div class="search-container">
+            <h1>鲁虺搜索引擎群</h1>
+            <input type="text" id="search-input" placeholder="输入搜索关键词...">
+            <button id="search-button">搜索</button>
+            <select id="engine-select">
+                <!-- 搜索引擎选项将通过 JavaScript 动态添加 -->
+            </select>
+            <div class="hot-searches">
+                <div class="hot-search-item">🔥 热门话题</div>
+                <div class="hot-search-item">📱 最新科技</div>
+                <div class="hot-search-item">🎬 热门电影</div>
+                <div class="hot-search-item">🌍 世界新闻</div><!--下面的代码是调用的代码，可以自由调整框架的高度与宽度 -->
+
+
+</div>
+</div>
+
+<footer>
+
+
+<script type="text/javascript"> 
+window.onload=function () {
+function _GetUrlParams() {
+var url = location.search; //获取url中"?"符后的字串
+var theRequest = {};
+if (url.indexOf("?") != -1) {
+var str = url.substr(1);
+strs = str.split("&");
+for (var i = 0; i < strs.length; i++) {
+//console.log(strs[i]);
+theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+}
+}
+return theRequest;
+}
+var obj = _GetUrlParams();
+if(obj.q){
+var bingurl=obj.q;
+document.getElementById('engine').src = './searchv1.0.1.html?q=' + escape(bingurl);
+ $("#cnbing").addClass("on");
+ $("#google").removeClass("on");
+//console.log(bingurl);
+}
+}
+</script>
+<iframe id="engine" name="engine" frameborder="1" marginwidth="0" marginheight="0" allowtransparency="true" style="background-color:#fff" scrolling="yes"></iframe>
+<script type="text/javascript">
+		$(function() {
+			//改变div的高度
+			$("#engine").height($(window).height());
+			//改变div的宽度
+			$("#engine").width($(window).width());
+		});
+</script>
+  <script type="module" crossorigin src="https://newsnow.luhui.net/assets/index-BWojnwKb.js"></script>
+
+
+
+
+
+<script src="/assets/js/ultimateevolution.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p> <a href="about.html">使用帮助</a> | <a href="about.html">关于我们</a> | <a href="terms.html">使用条款</a></p>
+
+
+<p>Copyright © 2004-01-11 luhui.net all rights reserved.</a></p>
+
+
+
+
+
+
+</footer>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const engineSelect = document.getElementById('engine-select');
+        const themeToggle = document.getElementById('theme-toggle');
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const hotSearchItems = document.querySelectorAll('.hot-search-item');
+        const historyBtn = document.getElementById('history-btn');
+        const settingsBtn = document.getElementById('settings-btn');
+        const historyList = document.getElementById('history-list');
+        const settingsPanel = document.getElementById('settings-panel');
+
+        // 搜索引擎列表
+        const searchEngines = [
+            { name: "Google", url: "https://www.google.com/search?q=" },
+            { name: "Bing", url: "https://www.bing.com/search?q=" },
+            { name: "百度", url: "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=luhuinet&wd=" },
+            { name: "Yahoo", url: "https://search.yahoo.com/search?p=" },
+            { name: "DuckDuckGo", url: "https://duckduckgo.com/?q=" },
+            { name: "Yandex", url: "https://yandex.com/search/?text=" },
+            { name: "Ask", url: "https://www.ask.com/web?q=" },
+            { name: "Ecosia", url: "https://www.ecosia.org/search?q=" }, 
+            { name: "Qwant", url: "https://www.qwant.com/?q=" },
+            { name: "StartPage", url: "https://www.startpage.com/do/search?q=" },
+            { name: "搜狗", url: "https://www.sogou.com/web?query=" },
+            { name: "360搜索", url: "https://www.so.com/s?q=" },
+            { name: "Brave Search", url: "https://search.brave.com/search?q=" }, 
+            { name: "Swisscows", url: "https://swisscows.com/web?query=" }, 
+            { name: "Givero", url: "https://www.givero.com/search?q=" },
+            { name: "OneSearch", url: "https://www.onesearch.com/yhs/search?p=" },
+            { name: "Peekier", url: "https://peekier.com/#!" },
+            { name: "Oscobo", url: "https://www.oscobo.com/search.php?q=" },
+            { name: "Metager", url: "https://metager.org/meta/meta.ger3?eingabe=" },
+            { name: "Mojeek", url: "https://www.mojeek.com/search?q=" },
+            { name: "You", url: "https://you.com/search?q=" },
+            { name: "Openverse", url: "https://openverse.org/search?q=" },
+            { name: "Gibiru", url: "https://gibiru.com/results.html?q=" },
+            { name: "Internet Archive", url: "https://archive.org/search?query=" },
+            { name: "Wolfram Alpha", url: "https://www.wolframalpha.com/input?i=" },
+            { name: "Naver", url: "https://search.naver.com/search.naver?query=" },
+            { name: "Google Scholar", url: "https://scholar.google.com/scholar?q=" },
+            { name: "Google Patents", url: "https://patents.google.com/?q=" },
+            { name: "BASE", url: "https://www.base-search.net/Search/Results?lookfor=" },
+            { name: "SearXNG", url: "https://searx.hu/search?q=" }, 
+            { name: "百度开发者搜索", url: "https://kaifa.baidu.com/searchPage?wd=" },
+            { name: "播客搜索引擎", url: "https://www.listennotes.com/search/?q=" },
+            { name: "网盘搜索引擎", url: "https://miaosou.fun/info?searchKey=" },
+            { name: "Skrbtso", url: "https://skrbtso.top/search?keyword=" },
+            { name: "Xiongmaogb", url: "https://xiongmaogb.top/search?keyword=" },
+            { name: "PDF搜索引擎", url: "https://www.pdfdrive.com/search?q=" },
+            { name: "微博搜索", url: "https://s.weibo.com/weibo?q=" },
+            { name: "小宇宙搜索", url: "https://ask.xiaoyuzhoufm.com/result?q=" },
+            { name: "Userscript Zone", url: "https://www.userscript.zone/search?q=" },
+            { name: "Xtea", url: "https://xtea.io/ts_en.html#gsc.tab=0&gsc.q=" },
+            { name: "Fnd APP搜索", url: "https://fnd.io/#/cn/search?term=" },
+            { name: "豆瓣搜索", url: "https://www.douban.com/search?q=" },
+            { name: "百度学术", url: "https://xueshu.baidu.com/s?wd=" },
+            { name: "Google 图书", url: "https://www.google.com/search?tbm=bks&q=" },
+            { name: "GitHub 搜索", url: "https://github.com/search?q=" },
+            { name: "YouTube 搜索", url: "https://www.youtube.com/results?search_query=" },
+            { name: "知乎搜索", url: "https://www.zhihu.com/search?q=" },
+            { name: "小红书搜索", url: "https://www.xiaohongshu.com/search_result?keyword=" },
+            { name: "淘宝搜索", url: "https://ai.taobao.com/search/index.htm?key=&pid=mm_28935812_3329559_68818270" },
+            { name: "1688 搜索", url: "https://s.1688.com/selloffer/offer_search.htm?keywords=" },
+            { name: "抖音搜索", url: "https://www.douyin.com/search/" },
+            { name: "哔哩哔哩搜索", url: "https://search.bilibili.com/all?keyword=" },
+            { name: "OwlLook", url: "https://owllook2.yueing.org/search?wd=" },
+            { name: "Ababtools", url: "https://ababtools.com/index.php?keyword=" }, 
+            { name: "RouBuYaoQian", url: "https://roubuyaoqian.com/search?q=" },
+            { name: "CrxSoso", url: "https://www.crxsoso.com/search?keyword=" },
+            { name: "NPM 搜索引擎", url: "https://npm.io/search/" },
+            { name: "Search Encrypt", url: "https://www.searchencrypt.com/search?q=" },
+            { name: "Lukol", url: "https://www.lukol.com/s.php?q=" },
+            { name: "腾讯视频搜索", url: "https://v.qq.com/x/search/?q=" }
+        ];
+
+        // 初始化搜索引擎选项
+        function initSearchEngines() {
+            const defaultEngines = ["淘宝搜索", "Ababtools", "Google", "百度"]; // 修改默认搜索引擎
+            searchEngines.forEach(engine => {
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = engine.url;
+                checkbox.checked = defaultEngines.includes(engine.name);
+                checkbox.addEventListener('change', updateEngineSelect);
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(engine.name));
+                settingsPanel.appendChild(label);
+            });
+            updateEngineSelect();
+        }
+
+        // 更新搜索引擎下拉列表
+        function updateEngineSelect() {
+            engineSelect.innerHTML = '';
+            document.querySelectorAll('#settings-panel input:checked').forEach(checkbox => {
+                const option = document.createElement('option');
+                option.value = checkbox.value;
+                option.textContent = checkbox.nextSibling.textContent;
+                engineSelect.appendChild(option);
+            });
+        }
+
+        // 显示历史记录
+        function showHistory() {
+            const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+            historyList.innerHTML = '';
+            history.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                li.addEventListener('click', () => {
+                    searchInput.value = item;
+                    search();
+                });
+                
+                // 添加删除按钮
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = '删除';
+                deleteBtn.style.marginLeft = '10px';
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteHistoryItem(index);
+                });
+                
+                li.appendChild(deleteBtn);
+                historyList.appendChild(li);
+            });
+        }
+
+        // 删除历史记录项
+        function deleteHistoryItem(index) {
+            let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+            history.splice(index, 1);
+            localStorage.setItem('searchHistory', JSON.stringify(history));
+            showHistory();
+        }
+
+        // 保存搜索历史
+        function saveToHistory(query) {
+            let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+            if (!history.includes(query)) {
+                history.unshift(query);
+                history = history.slice(0, 10); // 只保留最近10条
+                localStorage.setItem('searchHistory', JSON.stringify(history));
+            }
+            showHistory();
+        }
+
+        // 侧边栏折叠功能
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+
+        // 从本地存储中获取默认搜索引擎
+        const savedEngine = localStorage.getItem('defaultEngine');
+        if (savedEngine) {
+            engineSelect.value = savedEngine;
+        }
+
+        // 保存默认搜索引擎
+        engineSelect.addEventListener('change', () => {
+            localStorage.setItem('defaultEngine', engineSelect.value);
+        });
+
+        // 搜索功能
+        function search() {
+            const query = searchInput.value.trim();
+            if (query) {
+                let searchUrl = engineSelect.value;
+                if (searchUrl.includes('taobao.com')) {
+                    // 处理淘宝搜索
+                    searchUrl = searchUrl.replace('key=', `key=${encodeURIComponent(query)}`);
+                } else {
+                    // 处理其他搜索引擎
+                    searchUrl += encodeURIComponent(query);
+                }
+                window.open(searchUrl, '_blank');
+                saveToHistory(query);
+            }
+        }
+
+        searchButton.addEventListener('click', search);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                search();
+            }
+        });
+
+        // 热门搜索词点击
+        hotSearchItems.forEach(item => {
+            item.addEventListener('click', () => {
+                searchInput.value = item.textContent.slice(2); // 移除 emoji
+                search();
+            });
+        });
+
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            themeToggle.textContent = isDarkMode ? '🌞' : '🌓';
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // 从本地存储中获取上次搜索内容
+        const savedSearch = localStorage.getItem('lastSearch');
+        if (savedSearch) {
+            searchInput.value = savedSearch;
+        }
+
+        // 保存搜索内容到本地存储
+        searchInput.addEventListener('input', () => {
+            localStorage.setItem('lastSearch', searchInput.value);
+        });
+
+        // 事件监听器
+        historyBtn.addEventListener('click', () => {
+            historyList.style.display = historyList.style.display === 'none' ? 'block' : 'none';
+            settingsPanel.style.display = 'none';
+            showHistory();
+        });
+
+        settingsBtn.addEventListener('click', () => {
+            settingsPanel.style.display = settingsPanel.style.display === 'none' ? 'block' : 'none';
+            historyList.style.display = 'none';
+        });
+
+        // 初始化
+        initSearchEngines();
+        showHistory();
+    </script>
+
+</body>
+</html>
