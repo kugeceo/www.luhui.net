@@ -1,0 +1,69 @@
+/*= Float & Clear =*/
+.fl { float:left}.clear { clear:both}
+hr { clear:both; height:0; border-color:#ace; border-style:solid; border-width:1px 0 0;}
+body { color:#07519A;}
+input,textarea { font-family:Arial, Helvetica, sans-serif;}
+#wrap { text-align:center; width:960px; margin:0 auto; position:relative;}
+.container {
+  text-align:left;
+  position: relative;
+  padding: 0;
+  overflow:hidden;
+  margin: 0 auto;  
+  width: 900px;
+  margin:0 auto;
+}
+a {color:#07519A; text-decoration:none;}
+a:hover { color:#F00; text-decoration:underline }
+
+.title,
+.title span.text,
+h5.title span em,
+#copyurl a,
+em.arrow
+{ background-image:url(../img/icons.png); _background-image:url(../img/icon.gif); background-repeat:no-repeat}
+.title { line-height:35px; height:35px; padding-right:10px; overflow:hidden; background-position: right 0; }
+.title span.text { display:block; float: left; background-position:0 -45px; height:35px;padding-left:12px;}
+.box { border:1px solid #ace; background:#F7FBFF; width:900px;}
+em.s1, em.m1, em.s, em.m,em.close,em.icon1{ cursor: pointer; float:left; width:14px; overflow:hidden; height:12px; margin-top:8px; text-indent:-9999px; display:block; background-position:-2px -121px }
+em.s1 { background-position:-408px -124px; margin-top:8px; width:15px;}
+em.s {background-position:-51px -117px;}
+em.m {background-position:-156px -117px;}
+em.icon1{background-position:-214px -119px; width:20px; height:16px; cursor:default}
+.icon { margin-right:10px;}
+#result h5.title {margin-bottom:2px; height:28px; border-bottom:1px solid #ace; line-height:33px;}
+#result .con input.int { border:1px solid #ace; background:#fff; font:bold 12px/14px Verdana; color:#07519A; padding:3px; height:14px;}
+#result .con { padding:15px; font-size:12px}
+#result .con dl{ line-height:1.8;}
+#result .con hr { margin:15px 0; border-style:dashed;}
+#result .con label { cursor:pointer; padding-right:5px;}
+#result .con table { margin-top:10px; border-left:1px solid #ace; border-top:1px solid #ace; width:100%;border-collapse:collapse; border-spacing:0}
+#result .con table a { color:#000}
+#result .con th,#result .con td { vertical-align:middle; text-align:center; height:25px; line-height:25px; border-right:1px solid #ace; border-bottom:1px solid #ace;}
+#result .con td { font-size:12px;}
+#result .con th { background:#ECF1F9}
+#result .con td.desc { text-align:left; width:250px; padding:0 10px}
+#result .con tr { height:25px; line-height:25px;}
+#result .con tr.db td{ background:#F1F5FB}
+#result .con .bg{ background:#fff; padding:5px; _height:1%}
+#result .con textarea { border:1px solid #ace}
+#copyurl { font-size:12px; width:640px; margin-top:6px;}
+
+.url { float:left;border:1px solid #7AAFE4; width:390px; background:#fff; height:14px; padding:3px 10px; color:#999; font:12px/14px Verdana, Arial}
+#copyurl a {  line-height:22px; font-size:12px; margin:0 5px; height:22px; overflow:hidden; float:left; text-indent:-9999px; _display:inline;}
+a.btn1 { width:81px; background-position:0 -166px;}
+a.btn2 { width:120px; background-position:-143px -166px;}
+
+.searchcon input.int,.searchcon input.btn,.img1,.txt{ vertical-align:middle;}
+.searchcon input.btn { height:26px; line-height:20px; width:80px; text-align:center }
+
+.loading {top:90px; width:80px; text-align:center; right:20px;background:#CC3300; font-style:italic; color:#fff;}
+.red { color:#f00;}
+.box8 {border:1px solid #ACE; margin-top:10px; background:#ECF1F9; padding:10px; _height:1%; margin:0 auto; margin-top:10px; text-align:left;}
+
+
+
+
+
+
+

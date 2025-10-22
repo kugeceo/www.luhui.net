@@ -1,0 +1,589 @@
+/* CSS Document */
+
+body {margin:0 auto; padding:0;font-size:12px; color:#000;text-align:center;line-height:22px;font-family:Arial, Helvetica, sans-serif，verdana;}
+
+body div{margin:0 auto;overflow:hidden;}
+
+div,form,img,ul,ol,li,dl,dt,dd,p{margin: 0; padding: 0; border: 0;overflow:hidden;}
+
+h1,h2,h3,h4,h5,h6{ margin:0; padding:0;}
+
+table,td,tr,th{font-size:12px;}
+
+li{list-style-type:none}
+
+
+
+/* 链接颜色 */
+
+a:link {color: #005EAC; text-decoration:none;}
+
+a:visited {color: #005EAC;text-decoration:none;}
+
+a:hover {color: #fd2828; text-decoration:underline;}
+
+a:active {color: #005EAC;}
+
+/* 颜色属性 [定义规则，小写c加颜色名称] */
+
+.cRed,a.cRed:link,a.cRed:visited{ color:#c00;}
+
+.cDRed,a.cDRed:link,a.cDRed:visited{color:#c00;font-size:14px;font-weight:bold;}
+
+.cDRed1,a.cDRed1:link,a.cDRed1:visited{font-size:18px;font-weight:bold;color:#CC0000}
+.cDRed2{font-size:14px;font-weight:bold;color:#CC0000}
+.cGreen,a.cGreen:link,a.cGreen:visited{color:#69AA19;}
+
+.cBlue,a.cBlue:link,a.cBlue:visited{color:#005EAC;}
+
+/* 字体属性*/
+
+.fon16{ font-size:16px;}
+
+.fon14{ font-size:14px;}
+
+.fB{font-weight:bold;}
+
+.fI{ font-style:italic}
+
+
+
+.fl{float:left;}
+
+.fr{float:right;}
+
+.items{width:700px;}
+
+
+
+/* 首页 */
+
+/* 头部和搜索 */
+
+.topbg{width:100%;background:url(http://www.btcha.com/img/topbg.gif) repeat-x center top;}
+
+.w950{width:950px;margin:0px auto;}
+
+.flo_l{float:left;}
+
+.flo_r{float:right;}
+
+.foot{border-top:1px solid #ECE2ED;color:#808080;line-height:30px;margin-top:22px;padding-bottom:30px;}
+
+.head1{height:101px;background:url(http://www.btcha.com/img/kuang1.gif) no-repeat 0 90px;}
+
+.logo{width:202px;padding-top:10px;}
+
+.head2{width:748px;}
+
+.rcor{margin-top:32px;height:30px;}
+
+.rcor li{float:left;margin-left:16px;}
+
+.rcor li a:link,.rcor li a:visited{color:#666;}
+
+.rcor img{float:left;padding:6px 6px 0 0;}
+
+.nav{width:714px;font-size:14px;font-weight:bold;}
+
+.nav li{float:left;width:114px;margin-right:5px;height:29px;line-height:29px;}
+
+.nav li a:link,.nav li a:visited{color:#005EAC;}
+
+.nav li a:hover{text-decoration:none;}
+
+.nav1{width:114px;height:29px;background:url(http://www.btcha.com/img/nav1.gif) no-repeat 0 0;}
+
+.nav2{width:114px;height:29px;background:url(http://www.btcha.com/img/nav2.gif) no-repeat 0 0;}
+
+.knr{width:948px;border-left:1px solid #A4C4DC;border-right:1px solid #A4C4DC;}
+
+.head3{height:10px;background:url(http://www.btcha.com/img/kuang1.gif) no-repeat 0 -10px;margin-bottom:8px;}
+
+.bkuang{padding:5px 8px;}
+
+.skuang{float:left;padding-left:12px;}
+
+.skuang li{float:left;}
+
+.skbg1{width:4px;height:66px;background:url(http://www.btcha.com/img/kuang2.gif) no-repeat 0 0;}
+
+.skbg2{width:420px;height:64px;background-color:#F6F8FC;border-top:1px solid #E6E2ED;border-bottom:1px solid #E6E2ED;}
+
+.skbg3{width:4px;height:66px;background:url(http://www.btcha.com/img/kuang2.gif) no-repeat -4px 0;}
+
+.info{width:400px;padding:5px 10px;text-align:left;}
+
+.info li{width:400px;line-height:25px;}
+
+.iptq,.iptq li{width:390px;}
+
+.skbg4{width:24px;height:66px;background:url(http://www.btcha.com/img/tqyb.gif) no-repeat 0 0;}
+
+.skbg5{width:440px;height:64px;background-color:#F6F8FC;border-top:1px solid #E6E2ED;border-bottom:1px solid #E6E2ED;}
+
+.tq{padding:8px 0 0 5px;color:#005EAC;}
+
+.tq li{float:left;width:145px;text-align:left;}
+
+.tq li img{display:block;float:left;margin-right:10px;width:48px;height:48px;}
+
+.tq li a:hover{text-decoration:none;color:#005EAC;}
+
+.search{width:700px;padding:6px 70px 10px 0;}
+
+.serint{width:340px;border:1px solid #7F9DB9;background-color:#fff;padding:4px 0;font-size:16px;}
+
+.ssbutton{float:left;display:block;width:88px;text-align:center;line-height:27px;height:26px;color: #333;font-size:14px;background: url(http://www.btcha.com/img/ssbt.gif) repeat-x 0 0;cursor: pointer;}
+
+.ssbutton:link,.ssbutton:visited{color:#000;}
+
+.ssbutton:hover{color:#000;background: url(http://www.btcha.com/img/ssbt1.gif) repeat-x 0 0;text-decoration:none;}
+
+
+
+/* 分类 */
+
+.flk{width:950px;margin:0px auto;margin-bottom:8px;}
+
+.flk li{float:left;}
+
+.flkbg1{width:950px;height:9px;background:url(http://www.btcha.com/img/kuang3.gif) no-repeat 0 0;}
+
+.flkbg2{width:928px;padding:0 10px;background-color:#F6F8FC;border-left:1px solid #A3C4DB;border-right:1px solid #A3C4DB;}
+
+.flkbg3{width:950px;height:9px;background:url(http://www.btcha.com/img/kuang3.gif) no-repeat 0 -9px;}
+
+.flbt{float:left;width:200px;background:url(http://www.btcha.com/img/arrow.gif) no-repeat 12px 3px;font-size:14px;font-weight:bold;text-align:left;padding-left:28px;}
+
+.more img{float:right;padding:6px 10px 3px 0;}
+
+
+
+
+
+/*图标推荐区*/
+
+.IND_TJ_area{width:100%;}
+
+a.Ico_aBox{position:relative;width:226px; height:60px; float:left; margin:1px 3px; display:inline; text-decoration:none;cursor:pointer!important;cursor:hand}
+
+a.Ico_aBox:hover{text-decoration:none;background:url(http://www.btcha.com/img/bgbut.gif) no-repeat;}
+
+.Ico_aBox_icon{position:absolute; top:7px; left:5px; width:42px; height:42px;background:url(http://www.btcha.com/img/icons.gif) no-repeat;}
+
+.Ico_aBox_icon1{position:absolute; top:7px; left:5px; width:42px; height:42px; }
+.Ico_aBox_icon1 img{
+	margin-top:7px;
+	margin-left:5px;
+}
+.Ico_aBox_icon2{position:absolute; top:7px; left:5px; width:42px; height:42px; }
+.Ico_aBox_tit{ position:absolute; left:56px; top:10px;font-size:14px; font-weight:bold; color:#005EAC;}
+
+.Ico_aBox_intro{position:absolute; left:56px; top:30px;font-size:12px}
+
+a.Ico_aBox .Ico_aBox_intro{ color:#666}
+
+a.Ico_aBox:hover .Ico_aBox_intro{ color:#333}
+
+.INico1{ background-position:-5px -2px}/*万年历*/
+
+.INico2{ background-position:-58px 0}/*手机归属*/
+
+.INico3{ background-position:-112px 0}/*快递*/
+
+.INico4{ background-position:-172px 0}/*邮编区号*/
+
+.INico5{ background-position:-5px -52px}/*地图*/
+
+.INico6{ background-position:-224px 0}/*常用电话号码*/
+
+.INico7{ background-position:-276px 0}/*身份证号*/
+
+.INico8{ background-position:-325px 0}/*各地医院*/
+
+.INico9{ background-position:-374px 0}/*理财工具*/
+
+.INico10{ background-position:-432px 0}/*实时汇率*/
+
+.INico11{ background-position:-486px 0}/*购房计算器*/
+
+.INico12{ background-position:-58px -52px}/*股市行情*/
+
+.INico13{ background-position:-110px -52px}/*智能计算器*/
+
+.INico14{ background-position:-170px -52px}/*长度面积*/
+
+.INico15{ background-position:-224px -52px}/*IP地址*/
+
+.INico16{ background-position:-274px -50px}/*词典翻译*/
+
+.INico17{ background-position:-326px -50px}/*JS加密解密*/
+
+.INico18{ background-position:-378px -50px}/*天气预报*/
+
+.INico19{ background-position:-378px -25px}/*生肖查询*/
+
+.INico20{background:url(/images/womensafe.gif)}/*女性安全期测算*/
+
+.INico21{background:url(/images/finance.gif)}/*财务工具*/
+
+.INico22{background:url(/images/ycq.gif)}/*预产期自测*/
+
+.INico26{background:url(/images/gold.gif)}/*黄金价格走势*/
+
+.INico47{background:url(/images/pinyin.gif)}/*汉字转拼音*/
+
+.INico48{background:url(/images/regular.gif)}/*正则表达式检测*/
+
+.INico49{background:url(/images/ubb.gif)}/*HTML转换UBB代码*/
+
+.INico50{background:url(/images/url16.gif)}/*URL16进制加密*/
+
+.INico51{background:url(/images/wb.gif)}/*五笔汉字编码查询*/
+
+.INico52{background:url(/images/utf8.gif)}/*UTF8 转换工具*/
+
+.INico53{background:url(/images/ascii2.gif)}/*字符串转换为ASCII码*/
+
+.INico76{ background:url(/images/pr.gif)}/*PR查询*/
+
+.INico77{ background:url(/images/whois.gif)}/*whios查询*/
+
+.INico78{ background:url(/images/color.gif)}/*网页颜色代码选择器*/
+
+/* 查询结果 */
+
+.result{width:440px;border:1px solid #A4C4DC;background-color:#fff;margin-right:45px;text-align:left;font-family:"宋体";line-height:20px;}
+
+.res_bt{background-color:#E2EFFE;padding:3px 8px;border-bottom:1px solid #A4C4DC;font-size:14px;font-weight:bold;color:#49494A;text-align:left;}
+
+.res_bt img{float:right;display:block;padding:4px 0 0 0;}
+
+.res_body{padding:6px 8px;color:#49494A;}
+
+.res_copy{padding:8px 10px;width:420px;background-color:#F6F8FC;border-top:1px solid #D5E6F3;}
+
+
+/* 内页小导航 */
+
+.xdh{width:934px;padding:0 8px;text-align:left;}
+
+.xdh li{float:left;width:151px;padding:2px 0 1px 0;margin:0 2px;background:url(http://www.btcha.com/img/xdhbg.gif) repeat-y 150px 0;}
+
+.xdh_img{float:left;width:28px;height:23px;background:url(http://www.btcha.com/img/icons1.gif) no-repeat;}
+
+.xdh_img_1{float:left;width:28px;height:23px;}
+
+.xdh_img_1 img{padding-top:2px;padding-left:3px;}
+
+.xdh_bt{float:left;height:23px;line-height:23px;font-size:14px;}
+
+a.xdhbg{color:#333;width:148px;height:23px;float:left;display:inline;text-decoration:none;cursor:pointer!important;cursor:hand;}
+
+a.xdhbg:hover{color:#005EAC;font-weight:bold;text-decoration:none;background:url(http://www.btcha.com/img/bgbut1.gif) no-repeat;}
+
+.xdhbg1{width:148px;height:23px;background:url(http://www.btcha.com/img/bgbut1.gif) no-repeat;}
+
+.xico1{background-position:-1px -2px}/*万年历*/
+
+.xico2{background-position:-31px -2px}/*天气预报*/
+
+.xico3{background-position:-62px -1px}/*手机号码归属地*/
+
+.xico4{background-position:-93px -1px}/*各类快递查询*/
+
+.xico5{background-position:-129px -1px}/*快递运费查询*/
+
+.xico6{background-position:-163px 0}/*邮编区号*/
+
+.xico7{background-position:-1px -27px}/*生肖查询*/
+
+.xico8{background-position:-31px -27px}/*中国/世界地图*/
+
+.xico9{background-position:-61px -26px}/*常用电话号码*/
+
+.xico10{background-position:-95px -27px}/*身份证号码查询*/
+
+.xico11{background-position:-129px -27px}/*预产期自测*/
+
+.xico12{background-position:-164px -26px}/*女性安全期测算*/
+
+.xico13{background-position:-1px -54px}/*全国各地著名医院*/
+
+.xico20{background:url(/images/xdh_womensafe.gif)}/*女性安全期测算*/
+
+.xico21{background:url(/images/xdh_finance.gif)}/*财务工具*/
+
+.xico22{background:url(/images/xdh_ycq.gif)}/*预产期自测*/
+
+.xico26{background:url(/images/xdh_gold.gif)}/*黄金价格走势*/
+
+.xico47{background:url(/images/xdh_pinyin.gif)}/*汉字转拼音*/
+
+.xico48{background:url(/images/xdh_regular.gif)}/*正则表达式检测*/
+
+.xico49{background:url(/images/xdh_ubb.gif)}/*HTML转换UBB代码*/
+
+.xico50{background:url(/images/xdh_url16.gif)}/*URL16进制加密*/
+
+.xico51{background:url(/images/xdh_wb.gif)}/*五笔汉字编码查询*/
+
+.xico52{background:url(/images/xdh_utf8.gif)}/*UTF8 转换工具*/
+
+.xico53{background:url(/images/xdh_ascii2.gif)}/*字符串转换为ASCII码*/
+
+.xico77{background:url(/images/xdh_whois.gif)}/*whios查询*/
+
+.xico78{ background:url(/images/xdh_color.gif)}/*网页颜色代码选择器*/
+
+/* 手机,IP */
+.head4{height:55px;background:url(http://www.btcha.com/img/kuang4.gif) no-repeat;}
+
+.Ico_aBox{position:relative;width:226px; height:60px; float:left; margin:3px; display:inline;}
+
+.city_int{border:1px solid #ace; background:#fff; font:bold 12px/14px Verdana; color:#07519A; padding:3px; height:14px; }
+
+table th{color:#07519A;}
+
+.mobile_main{width:728px;margin:15px auto;}
+
+.mobile_k{border:1px solid #AACCEE;}
+
+.mob_body{padding:10px 20px;font-size:14px;line-height:32px;}
+
+.mob_int{width:210px;padding:2px 0;font-size:16px;}
+
+.mob_anniu{width:106px;height:26px;line-height:26px;border:0;font-size:14px;background:url(http://www.btcha.com/img/anniubg2.gif) no-repeat;cursor:pointer!important;cursor:hand;}
+
+.mob_body span{font-size:20px;font-weight:bolder;color:#FE701A}
+
+.mob_dress{margin:3px 0 10px 0;padding:8px 0;text-align:left;font-size:14px;border-bottom:1px dashed #AACCEE;}
+
+.mob_copy1{width:58px;height:26px;line-height:26px;border:0;font-size:14px;background:url(http://www.btcha.com/img/anniubg1.gif) no-repeat;cursor:pointer!important;cursor:hand;}
+
+.mob_copy2{width:106px;height:26px;line-height:26px;border:0;font-size:14px;background:url(http://www.btcha.com/img/anniubg2.gif) no-repeat;cursor:pointer!important;cursor:hand;}
+
+.mob_int1{width:410px;padding:4px 0;color:#808080;border:1px solid #AACCEE;}
+
+.mob_body1{padding:10px 20px;font-size:14px;text-align:left;}
+
+.mob_body1 p{height:25px;line-height:25px;padding:7px 0;}
+
+.mob_test{padding:5px 12px;border:1px solid #AACCEE;background-color:#ECF1F9;color:#07519A;font-size:14px;text-align:left;line-height:24px;margin-bottom:8px;}
+
+.mar10{margin-bottom:10px;}
+
+.mob_det{border:1px solid #ddd;padding:5px 12px;color:#808080;text-align:left;}
+
+
+
+.self_ip{padding:6px;font-size:14px;color:#666;}
+
+.ip_anniu{width:92px;height:23px;line-height:23px;border:0;font-size:12px;color:#333;background:url(http://www.btcha.com/img/iconbg.gif) no-repeat;cursor:pointer!important;cursor:hand;}
+
+.ip_copy{padding:8px 10px;width:706px;background-color:#F6F8FC;border-top:1px solid #D5E6F3;}
+
+.edit_bt{background-color:#E2EFFE;padding:3px 10px;border-bottom:1px solid #A4C4DC;font-size:14px;font-weight:bold;color:#07519A;text-align:left;}
+
+.edit_body td{font-size:14px;text-align:left;}
+
+.edit_anniu{width:70px;height:26px;line-height:26px;border:0;font-size:14px;background:url(http://www.btcha.com/img/anniubg1.gif) no-repeat;cursor:pointer!important;cursor:hand;}
+
+.edit_result{color:#c00;font-size:14px;text-align:left;margin-top:60px;}
+
+.edit_result img{display:block;float:left;}
+
+
+
+/* 身份证 */
+.card_int { border:1px solid #ace; background:#fff;  color:#07519A; padding:3px; height:18px; width:250px; font-size:16px; font-weight:600;}
+.card_anniu{width:92px;height:25px;line-height:25px;border:0;font-size:12px;color:#333;background:url(/images/iconbg.gif) no-repeat;cursor:pointer!important;cursor:hand;}
+
+/* 天气预报 */
+
+.tq_main{width:908px;margin:15px auto;}
+
+.tq_top{width:882px;padding:12px;text-align:left;}
+
+.tq_cityname{width:190px;color:#c00;font-size:16px;font-weight:bold;}
+
+.tq_ss{width:650px;font-size:14px;}
+
+.tq_ss_sl{font-size:14px;color:#666;height:24px;}
+
+.tq_ss_int{width:170px;padding:2px 0;font-size:16px;}
+
+.tq_today{width:908px;margin-bottom:12px;}
+
+.tq_today_nav{height:32px;background:url(http://www.btcha.com/img/bluedot.gif) repeat-x 0 31px;}
+
+.tq_today_nav li{float:left;font-size:14px;width:220px;margin-right:5px;}
+
+.tq_tab1{border:1px solid #AACCEE;border-bottom:0;background-color:#fff;height:32px;line-height:30px;font-weight:bold;}
+
+.tq_tab2{border:1px solid #AACCEE;background-color:#E3EFFF;height:30px;line-height:30px;}
+
+.tq_today_body{width:886px;padding:10px;border:1px solid #AACCEE;border-top:0;}
+
+.tq_today_det1{width:340px;height:170px;background-color:#E3EFFF;}
+
+.tq_today_det1_l{float:left;width:205px;}
+
+.tq_today_det1_l li{float:left;width:200px;}
+
+.tq_today_det1_l li img{width:82px;height:82px;padding:10px 0 4px 0;}
+
+.tq_today_det1_l li.wd{font-size:25px;font-weight:bold;}
+
+.tq_today_det1_r{float:right;width:130px;}
+
+.tq_today_det1_r ul{float:left;margin-top:16px;}
+
+.tq_today_det1_r li{width:102px;line-height:20px;}
+
+.tq_today_det1_r li img{padding-top:3px;}
+
+.tq_today_det1_r li.bz{float:left;width:69px;background-color:#98afd5;color:#fff;margin:-4px 0 0 16px!important;*margin:-4px 0 0 8px;}
+
+.tq_today_det2{float:left;width:165px;height:170px;background-color:#E3EFFF;margin-left:8px;}
+
+.tq_eveday_nav{text-align:left;font-size:14px;font-weight:bold;line-height:26px;}
+
+.tq_eveday_pl{width:908px;margin:6px 0;}
+
+.tq_eveday_bk{float:left;width:137px;margin-right:12px;background-color:#EFF7FB;border:1px solid #A3C4DB;}
+
+.tq_eveday_bk_nav{font-weight:bold;background-color:#C7E0F5;border-top:1px solid #ECF6FF;border-left:1px solid #ECF6FF;border-bottom:1px solid #A3C4DB;}
+
+.tq_eveday_bk_det{width:117px;margin:0px 5px;}
+
+.tq_eveday_bk_det li{padding:1px 0;overflow:hidden;white-space:nowrap; }
+
+.tq_eveday_bk_det li img{width:58px;height:58px;}
+
+.tq_eveday_bk.no_marg{margin-right:0;}
+
+.tq_code{background-color:#EFF7FB;border-left:1px solid #A3C4DB;border-top:1px solid #A3C4DB;margin-top:10px;}
+
+.tq_code td{padding:10px;border-right:1px solid #A3C4DB;border-bottom:1px solid #A3C4DB;}
+
+.tq_code_sty1{width:66px;font-weight:bold;}
+
+.tq_code_sty2{width:430px;}
+
+.code_int{width:270px;padding:3px 0;}
+
+.tq_zs li{float:left;width:410px;margin:4px 6px;background-color:#E3EFFF;padding:10px;text-align:left;}
+
+.tq_zs li img{float:left;display:block;padding-right:20px;}
+
+
+
+.wnlHead{width:500px;}
+
+#todayNow{color:#333;}
+
+
+
+/* 天气预报修改 */
+.tqCity{font-size:30px;font-weight:bold;color:#005EAC;text-align:center;line-height:30px;}
+.tqCity a:hover{text-decoration:none;color:#005EAC;}
+.tqnew{width:908px;margin:0 auto 20px auto;border-bottom:2px solid #3E72B4;}
+.tqnewL{width:186px;background:url(http://www.btcha.com/img/tqkbg0.gif) repeat-y;}
+.tqnewR{width:722px;}
+.tqLdate{width:186px;height:25px;padding-top:10px;font-weight:bold;background:url(http://www.btcha.com/img/tqkbg1.gif) no-repeat;}
+.tqLinfo{padding-bottom:15px;}
+.tq_det{width:176px;margin:12px 5px;}
+.tq_det li{padding:2px 0;}
+.tq_det li img{width:100px;height:100px;margin-bottom:6px;}
+.tqRl{width:134px;margin:0 15px;padding:10px;text-align:left;border-top:1px solid #658AB9;}
+.tqwk{width:160px;height:140px;border:1px solid #658AB9;margin:10px auto;}
+.zrtq{float:left;width:722px;background:url(http://www.btcha.com/img/tqkbg2a.gif) repeat-y;}
+.zrxtq{width:722px;padding:8px 0 6px 0;background:url(http://www.btcha.com/img/tqkbg2.gif) no-repeat;}
+.zrxx{float:left;padding-left:10px;width:110px;}
+.zrxkk{width:110px;height:154px;background:url(http://www.btcha.com/img/tqxk.gif) no-repeat;}
+.zrxkk h3{font-size:12px;padding:2px 0 5px 0;}
+.zrxkk li{line-height:21px;}
+.zrxkk li img{width:54px;height:54px;margin-bottom:1px;}
+.shzsBt{float:left;width:722px;}
+.shzsBt li{float:left;}
+.zsBtbg1{width:12px;height:28px;background:url(http://www.btcha.com/img/tqkbg3.gif) no-repeat;}
+.zsBtbg2{width:12px;height:28px;background:url(http://www.btcha.com/img/tqkbg4.gif) no-repeat;}
+.zsBtbg3{width:698px;height:28px;line-height:28px;background:#3E72B4;color:#fff;font-size:14px;font-weight:bold;}
+.shzsBd{background:#fff;width:720px;border-right:2px solid #3E72B4;}
+.shzsBd li{width:680px;margin:3px 20px;padding:5px 2px;border-bottom:1px dashed #AFAFAF;line-height:27px;text-align:left;color:#444;}
+.shzsBd li img{float:left;padding:0 8px 0 0;}
+.shzsBd li b{padding-right:8px;color:#000;}
+.tq_eveday_nav span{padding-left:10px;font-size:12px;font-weight:normal;line-height:26px;color:#444;}
+.cityCen{width:560px;background:#fff;filter:progid:DXImageTransform.Microsoft.Shadow (Color=#666666,Direction=120,strength=5)}
+.cityCen h2{width:538px;padding:0 10px;font-size:12px;height:21px;border:1px solid #4C7CB0;background:url(http://www.btcha.com/img/citybg1.gif) repeat-x;font-weight:normal;text-align:left;}
+.cityCen h2 span{float:right;}
+.cityCen h2 a:link,.cityCen h2 a:visited,.cityCen h2 a:hover{color:#000;text-decoration:none;}
+.cityNav{width:560px;border-left:1px solid #4C7CB0;}
+.cityNav li{float:left;width:69px;height:31px;line-height:31px;border-right:1px solid #4C7CB0;background:url(http://www.btcha.com/img/citybg2.gif) no-repeat;font-size:14px;font-weight:bold;}
+.cityNav li a:link,.cityNav li a:visited,.cityNav li a:hover{display:block;color:#fff;text-decoration:none;}
+.cityNav li.xuanz a:link,.cityNav li.xuanz a:visited{display:block;background:#fff;color:#000;}
+.cityBd{border:1px solid #4C7CB0;border-top:0;padding:3px 0 0 0;}
+.cityBd th,.cityBd td{padding:2px 0;border-bottom:1px solid #ccc;}
+.cityBd th{width:70px;color:#005EAC;font-weight:normal;}
+.cityBd td{text-align:left;line-height:20px;}
+.cityBd a{padding-right:10px;}
+.cityBd a:link,.cityBd a:visited{color:#666;}
+
+
+/* 电脑时钟校对 */
+.pcclock{width:100%;text-align:left;font-size:20px;font-weight:bolder;color:#FE701A}
+.pcclock label{float:left;width:300px;text-align:right;font-size:16px;line-height:34px;font-weight:normal;color:#000;}
+.checktime{border:1px solid #AACCEE;padding:6px 20px;font-size:14px;text-align:center;margin:0 auto;}
+.checktime p{color:#666;}
+.jdtips{padding-top:8px;color:#666;}
+
+/* 在线翻译 */
+.onlinetrans{width:730px;margin:30px auto;}
+.onlinebg1{width:730px;height:5px;background:url(../img/fykbg1.gif) no-repeat;}
+.onlinebg2{width:730px;height:7px;background:url(../img/fykbg1.gif) no-repeat 0 -5px;}
+.onlinebg3{width:730px;background:url(../img/fykbg2.gif) repeat-y;}
+.transk{padding:10px 20px;text-align:left;}
+.transk h5{font-size:14px;font-weight:normal;padding-bottom:4px;}
+.transarea{width:682px;height:210px;font-size:14px;padding:2px;color:#BFBFBF;}
+.transdo{width:690px;padding:5px 0;}
+#shortcut,#allselect{float:left;font-family:"宋体";padding-top:4px;}
+.transbutton{float:right;}
+.transint1{width:80px;height:32px;font-size:14px;margin-right:8px;cursor:hand;}
+.transint2{width:108px;height:32px;font-size:14px;cursor:hand;}
+.transdo .tips{float:left;height:24px;background:url(../img/googletm.gif) no-repeat 62px 0;color:#999;margin-top:6px;}
+
+/* 成语词典 */
+.chengyutab th,.chengyutab td{vertical-align:top;font-size:14px;}
+.chengyutab th{width:130px;background:#EFF7FB;color:#000;padding:20px 0;}
+.chengyutab td{padding:20px 40px;}
+.cyfgx{border-top:1px dashed #A9CDEE;}
+.cysytab{border-top:1px solid #A4C4DB;border-left:1px solid #A4C4DB;font-size:14px;background:#F0F8FA;}
+.cysytab td{border-bottom:1px solid #A4C4DB;border-right:1px solid #A4C4DB;text-align:left;}
+.cysytab th{width:90px;border-top:1px solid #EDF6FF;border-left:1px solid #EDF6FF;border-bottom:1px solid #A4C4DB;border-right:1px solid #A4C4DB;background:#C7E0F6;}
+.cysytab th,.cysytab td{padding:12px 10px;}
+.cysspl li{float:left;width:128px;text-align:left;}
+.cysspl li a:link,.cysspl li a:visited{text-decoration:none;}
+.nossresult{font-weight:bold;background:url(../img/noneico.gif) no-repeat 0 1px;padding-left:30px;text-align:left;}
+
+/*站长工具*/
+.web_main{width:828px;margin:15px auto;}
+.web_int {
+	border:1px solid #CCC;
+	border-top-color:#666;
+	width:300px;
+	height:22px;
+	font-weight:bold;
+	font-family:Helvetica Neue,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	line-height:22px;
+	color:#333;
+}
+.anniu{width:106px;height:26px;line-height:26px;border:0;font-size:14px;background:url(/images/anniubg2.gif) no-repeat;cursor:pointer!important;cursor:hand;}
+.web_ace{border:1px solid #ace;color:#808080;padding:0px 12px;text-align:left; margin-top:10px;}
+.web_box{border:1px solid #ccc;padding:0px 12px;color:#000000;text-align:left; margin-top:10px;}
+
+
+
+

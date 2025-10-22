@@ -1,0 +1,75 @@
+TABLE {
+	FONT-FAMILY: "Verdana, Arial"; FONT-SIZE: 8pt; LINE-HEIGHT: 22px
+}
+BODY {
+	FONT-FAMILY: "Verdana, Arial"; FONT-SIZE: 8pt; COLOR: #666666 ; background-image: url(images/index_bg.gif);
+}
+INPUT {
+	FONT-FAMILY: "Verdana, Arial"; FONT-SIZE: 8pt
+}
+SELECT {
+	FONT-FAMILY: "Verdana, Arial"; FONT-SIZE: 8pt
+}
+A:link {
+	COLOR: #156EA8; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #156EA8; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #156EA8; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #FF0000; TEXT-DECORATION: underline
+}
+.table1 {
+	FONT-FAMILY: "Verdana, Arial"; COLOR: #ffffff; FONT-SIZE: 8pt; LINE-HEIGHT: 22px
+}
+.table2 {
+	FONT-FAMILY: "Verdana, Arial"; COLOR: #156EA8; FONT-SIZE: 8pt; LINE-HEIGHT: 22px
+}
+.table3 {
+	FONT-FAMILY: "Verdana, Arial"; COLOR: #ffffff; FONT-SIZE: 8pt; LINE-HEIGHT: 22px
+}
+.zhi {
+	BORDER-RIGHT: #cccccc 1px; BACKGROUND-POSITION: left top; BORDER-TOP: #cccccc 1px; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px; BACKGROUND-REPEAT: no-repeat
+}
+.ibr {
+	BACKGROUND-POSITION: right bottom; BACKGROUND-IMAGE: url(images/about_a1.gif); BACKGROUND-REPEAT: no-repeat
+}
+.tit {
+	FONT-SIZE: 16px; FONT-STYLE: normal; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.kuang {
+	BORDER-RIGHT: #1271AB 1px solid; BORDER-TOP: #1271AB 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #1271AB 1px solid; COLOR: #333333; BORDER-BOTTOM: #1271AB 1px solid; FONT-FAMILY: "ËÎÌו"
+}
+.kuangx {
+	BORDER-RIGHT: #1271AB 1px solid; BORDER-TOP: #1271AB 1px solid; BORDER-LEFT: #1271AB 1px solid; COLOR: #333333; BORDER-BOTTOM: #1271AB 1px solid; FONT-FAMILY: "ËÎÌו, Verdana, Arial"; FONT-SIZE: 12px;
+}
+.go-kuang {
+	BORDER-RIGHT: #006A9A 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #ffffff 1px solid; PADDING-LEFT: 1px; FONT-SIZE: 9pt; PADDING-BOTTOM: 1px; BORDER-LEFT: #ffffff 1px solid; CURSOR: hand; COLOR: #006A9A; PADDING-TOP: 1px; BORDER-BOTTOM: #006A9A 1px solid; FONT-FAMILY: "ËÎÌו"; HEIGHT: 19px; BACKGROUND-COLOR: #eeeeee
+}
+.table-zuoyou {
+	BORDER-RIGHT: #97BCCF 1px solid; BORDER-LEFT: #97BCCF 1px solid
+}
+.table-shangxia {
+	BORDER-TOP: #DBDBDB 1px solid; BORDER-BOTTOM: #DBDBDB 1px solid
+}
+.table-you {
+	BORDER-RIGHT: #DBDBDB 1px solid
+}
+.table-zuo {
+	BORDER-LEFT: #DBDBDB 1px solid
+}
+.table-shang {
+	BORDER-TOP: #DBDBDB 1px solid
+}
+.table-xia {
+	BORDER-BOTTOM: #DBDBDB 1px solid
+}
+.table-xu {
+	BORDER-BOTTOM: #DBDBDB 1px dotted
+}
+.jianju {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; MARGIN: 5px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; LINE-HEIGHT: 5px
+}

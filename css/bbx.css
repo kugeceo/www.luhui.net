@@ -1,0 +1,466 @@
+
+
+/*图片整合 */
+.Top,.NAV_L_Tit,.Cont_tit,.sx_J_12,.INDEX_Top,.Cont_caiDet12,.IND_Time .tit,.IND_Site .tit,.cs_cont div.on,.hb_r_tab th,.sx_top,.sx_tab td,.xzbg,.lieche_tab th{background-image:url(/images/bg_x.gif);background-repeat:repeat-x}
+
+
+/*菜谱*/
+h1.CP_h1C{color:#060}
+.Cont_table{width:100%;border:0px; table-layout:fixed}
+	.Cont_table td{border-bottom:#EFEFEF 1px solid;font-size:14px;line-height:220%;text-indent:1em;white-space:nowrap;text-overflow:ellipsis;overflow: hidden}
+	.Cont_table td a{font-size:14px;line-height:220%}
+.Cont_caiDet{border:0px;width:520px;height:auto}
+.Cont_caiDet11,.Cont_caiDet13,.Cont_caiDet21,.Cont_caiDet31,.Cont_caiDet32,.Cont_caiDet33{font-size:0px;line-height:0px;overflow:hidden}
+	.Cont_caiDet11{width:10px;height:60px;background-position:-772px -5px}
+	.Cont_caiDet12{width:auto;height:60px;background-position:-0px -451px}
+	.Cont_caiDet13{width:10px;height:60px;background-position:-782px -5px}
+	.Cont_caiDet21{width:10px;background-color:#EEF0EF}
+	.Cont_caiDet31{width:10px;height:10px;background-position:-772px -65px}
+	.Cont_caiDet33{width:10px;height:10px;background-position:-782px -65px}
+	.Cont_caiDet32{width:auto;height:10px;background-color:#EEF0EF}
+		.CP_tit{width:auto;height:60px;padding-left:100px;padding-right:15px;background-color:#FFF;float:left;margin-left:15px;background-image:url(CP_icon.gif);background-repeat:no-repeat;font-size:16px;font-weight:bold;color:#060;line-height:45px}
+		.CP_Cont_det{margin:0px 10px;border-top:#EEF0EF 1px solid;padding:20px;font-size:14px}
+		.CP_Cont_det span{font-size:14px;line-height:180%}
+.td_fh{text-align:center;padding:20px}
+	.td_fh input{padding:4px 20px 1px 20px;color:#333;font-size:14px;width:100px}
+.CP_det_pic{float:right; margin-left:20px; width:200px; height:150px; padding:1px; border:#ccc 1px solid}
+.cp_bot_noti{ font-size:12px; color:#999; margin-top:10px; margin-bottom:5px; text-indent:32px}
+
+
+/*朝代*/
+.CD_tab{ width:100%; border:0px}
+	.CD_tab th{ height:27px; color:#333; line-height:27px; background-image:url(chaodai_tit.gif); background-repeat:repeat-x; text-align:left; text-indent:0px; font-size:12px}
+	.CD_tab tr td{border-bottom:#EFF1F1 1px solid; line-height:30px; color:#333; text-align:left; font-size:14px; vertical-align:top}
+	.CD_tab .Wid1{ width:50px}
+		.ico_bY,.ico_bX{ display:block; width:8px; height:8px; margin-left:15px; margin-top:11px}
+		.ico_bY{ background-position:-93px -15px}
+		.ico_bX{ background-position:-94px -44px}
+		.CD_tab tr.tr_kai_tit td{ background-color:#EFF1EF; border-top:#BCC6B3 2px solid; border-bottom-color:#E6E8E8}
+		.CD_tab tr.tr_kai_cont td{ background-color:#FAFBFB;border-bottom-color:#F2F4F4}
+		#CD1_24 td,#CD2_9 td,#CD3_9 td,#CD4_17 td,#CD5_10 td{ border-bottom-color:#BCC6B3}
+		.CD_tab tr td.CD_TD_BOT{ padding:15px 25px; font-size:12px; line-height:18px; color:#666; border-bottom-width:0px}
+/*唐诗*/
+.ts_tab{ width:100%; border:0px}		
+	.ts_tab td{ line-height:250%; color:#999; font-size:12px; border-bottom:#F3F3F3 1px solid; text-indent:10px; text-align:left}
+	.ts_tab td a{ font-size:14px}
+.ts_tab_detail{ width:400px; border:0px; overflow:hidden}
+	.ts_det_top{ height:75px; background:url(ts_top.gif) right bottom no-repeat; text-align:center; border-bottom:#D8E1E8 1px solid}
+		.ts_m{ font-size:20px;font-weight:bold; font-family:"黑体"; color:#DAA501; line-height:2em}
+		.ts_a{ font-size:14px;color:#DAA501}
+	.ts_c{ height:auto;padding:25px 0px;text-align:center;font-size:14px; line-height:180%; color:#333;background-image:url(ts_det_bg.jpg); background-repeat:repeat-x}
+	.ts_back{ text-align:center; padding:15px 0px}
+	.ts_back input{ color:#333;padding-top:2px; font-size:14px; width:80px}
+/*百科*/
+.cs_cont{margin:10px 0px}
+.cs_cont div span{ padding-left:30px; padding-right:18px; display:block;line-height:31px;background-position:-2px -9px; font-size:14px; color:#555}
+div.cs_cont div.on span{background-position:-6px -266px; color:#000}
+.cs_cont div.on{ border:#F2E7B6 1px solid; border-width:1px 0px; background-color:#FEFCF1; background-image:none/* background-position:0px -889px*/}
+.cs_cont div{ border:#FFF 1px solid;border-width:1px 0px}
+
+.cs_bot{ width:95%; margin:0px auto; border-top:#C0C8CB 1px solid; height:40px}
+.cs_bot a,.cs_bot a:active{ line-height:24px; height:20px; font-size:12px; float:left; margin-left:5px; margin-top:5px}
+	.cs_bot a.f_a{ font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:200%; float:left;display:block; width:21px; height:20px; line-height:18px; text-align:center; margin-top:8px}
+	.cs_bot a.on,.cs_bot a.on:hover{ color:#FFF; font-weight:bold; background-position:-7px -196px; text-decoration:none}
+
+/*成语*/
+.Cont_tbL a.on_m,.Cont_tbL a.on_m:hover{ font-weight:bold;background-position:-112px -68px; font-weight:normal}
+	div.menu_div{ border-bottom:#D1E5F0 1px solid}
+	div.menu_div a{width:96px;height:25px;margin-left:4px; text-indent:18px;color:#5998DB; overflow:hidden}
+	div.menu_div a:hover{background-position:-11px -17px}
+	
+	div.menu_div a.on,div.menu_div a.on:hover{background-position:-11px -52px; color:#666}
+.cy_tit{ text-indent:10px;font-size:20px; font-family:"黑体";color:#000; border-bottom:#B5B5B5 1px solid; line-height:180%; width:500px}
+.cy_tit b{font-family:'黑体'; font-size:20px; color:#000}
+.cy_tit span{ color:#3373D5}
+.cy_btl{ width:500px; margin-top:2px; border-top:#DFDFDF 1px solid; font-size:0px; line-height:0px; overflow:hidden; height:10px}
+		
+.cy_tab{ width:500px; border:0px; font-size:14px}
+	.cy_tab td{ font-size:14px; vertical-align:top; line-height:180%; color:#444}
+	.cy_tab td img{ vertical-align:middle}
+	td.td_L{width:80px; color:#3373D5; text-align:right}
+.cy_so{ text-align:center; padding:15px 0px}
+
+td a.a_cy_ser{background-position:-290px -121px}
+td a.a_cy_ser:hover{ background-position:-290px -121px; text-decoration:underline}
+	.cy_so .inp{ padding:4px; font-size:14px; color:#000; width:180px; border:#647C96 1px solid; vertical-align:middle; height:25px}
+	.cy_so .btn{ width:80px; padding-top:2px; height:28px; font-size:14px; color:#333; vertical-align:middle}
+	.cy_so span{ display:block;color:#999; line-height:180%;width:275px; text-align:left; margin:1px auto; font-size:12px}
+	.cy_ses_line{ height:40px; line-height:40px; color:#000; font-size:14px; background-color:#F1FAFF; position:relative; text-indent:100px}
+		.cy_ses_line_TB{ position:absolute; left:25px; top:-15px;width:60px; height:54px; background-position:-7px -239px}
+		
+		.cy_ind_line{ padding:30px 30px 0px 0px;line-height:40px;color:#000; font-size:14px; background-color:#F1FAFF; position:relative; text-indent:2em; text-align:left; height:auto; margin-top:60px}
+		.cy_ind_line p{ margin:0px; padding:0px; color:#333;margin-left:155px; padding-bottom:8px; text-indent:2em; font-size:14px; line-height:30px}
+		
+		.cy_ind_line_TB{position:absolute; left:15px; top:-47px;width:289px; height:106px; background-image:url(cy_ind_l.gif); background-repeat:no-repeat}
+	
+/*宋词*/
+.sc_book_div{ width:742px; height:auto; border-bottom:#DEDAB7 2px solid; background-image:url(sc_book_bg.gif); background-repeat:repeat-y; border-top:#F3F0DF 1px solid; position:relative}
+	.sc_List_tab1{ width:320px; margin:15px 25px;display:inline; float:left}
+	*:lang(zh) .sc_List_tab1{ display:table}
+	.sc_List_tab1 td{border-bottom:#EEEDEB 1px solid; text-indent:1em}
+	.sc_List_tab1 td a{ font-size:14px; line-height:220%;}
+	
+	.b1{ background-image:url(sc_h1.gif); background-repeat:no-repeat; background-position:25px 10px}
+	.b2{ background-image:url(sc_h2.gif); background-repeat:no-repeat; background-position:150px 150px }
+	
+	td.sc_d_td{ text-indent:0px; border-bottom-width:0px}
+	
+	.sc_det_wide{ width:320px; margin:15px 25px; float:left; display:inline}
+	
+	.sc_det_tit{white-space:nowrap;text-overflow:ellipsis;overflow: hidden; width:100%; line-height:30px; border-bottom:#D8E1E8 1px solid; border-top:#D8E1E8 1px solid; width:320px; margin-top:40px; color:#999}
+	.sc_det_tit strong{ font-family:"黑体"; font-weight:normal; font-size:20px; color:#DAA501}
+	.sc_det_cont{ color:#666; line-height:180%; margin:10px 5px}
+	.sc_fy{ width:95%; border-top:#DFD9B7 1px solid; margin:5px auto; line-height:220%}
+	.sc_fy span{ color:#000}
+	
+	.sc_bot_div{ width:742px; text-align:center; margin:35px 0px;}
+	.sc_bot_div input{padding-top:2px; width:130px; height:27px; font-size:14px; color:#333}
+/*航班*/
+	.hb_r_tab{ width:100%; border:0px}
+	.hb_r_tab tr td table{ width:100%; border:0px}
+		.hb_r_tab th{ height:25px; line-height:25px; border-bottom:#E6EAEA 1px solid; background-position:0px -937px; color:#333; text-align:center; font-size:12px}
+		.hb_r_tab td{ line-height:20px; color:#555; text-align:center; border-bottom:#E6EAEA 1px solid; font-family:Verdana, Arial, Helvetica, sans-serif; padding-top:2px; padding-bottom:2px; font-size:12px}
+
+		.hb_r_tab td a.a_k,.lieche_tab td a.a_k{ padding-left:13px; background-position:-780px -143px}
+		.hb_r_tab td a.a_k:hover,.lieche_tab td a.a_k:hover{background-position:-780px -189px}
+		.hb_r_tab td a.a_g,.lieche_tab td a.a_g{ padding-left:13px; background-position:-780px -235px}
+		.hb_r_tab td a.a_g:hover,.lieche_tab td a.a_g:hover{background-position:-780px -281px}
+			*:lang(zh) .hb_r_tab td a.a_k,.lieche_tab td a.a_k{background-position:-780px -142px}
+			*:lang(zh) .hb_r_tab td a.a_k:hover,.lieche_tab td a.a_k:hover{background-position:-780px -188px}
+			*:lang(zh) .hb_r_tab td a.a_g,.lieche_tab td a.a_g{background-position:-780px -234px}
+			*:lang(zh) .hb_r_tab td a.a_g:hover,.lieche_tab td a.a_g:hover{background-position:-780px -280px}
+		.hb_r_tab td img{ vertical-align:middle}
+		
+		.hb_r_tab th.td_tl{ text-align:left; padding-left:3em}
+		.hb_r_tab td.td_tl{ text-align:left; padding-left:2em}
+.c_js_div{ margin-top:0px}
+	.c_js_div span{ display:inline}
+	span.Cc00{ color:#C00}
+
+	tr.zk_tb td{border-bottom:#E0EAF5 1px solid;background-color:#F3F9FE}
+	tr.zk_tb_T td{border-top:#9DB3C5 2px solid;background-color:#F3F9FE;border-bottom:#E0EAF5 1px solid}
+	tr.zk_tb_B td{border-bottom:#BBCAD7 1px solid;background-color:#F3F9FE}
+		
+td.hb_bot_f{ background-color:#F7F9FB; border-bottom:#DAE4E9 1px solid; line-height:3em}
+	a.a_syt{ padding-left:11px; background-position:-783px -453px}
+	a.a_xyt{ padding-right:16px; background-position:-697px -385px}
+.c_js_div .fr a.a_syt{background-position:-783px -455px} 
+.c_js_div .fr a.a_xyt{background-position:-697px -387px} 
+a.a_syt span,a.a_xyt span{ color:#666}
+
+	.jx_intro_res{ position:absolute; left:100px; top:20px; width:425px; height:325px; border:#B3CFA9 1px solid; background-color:#FAFEF8}
+	.jx_intro_res .tit{ font-weight:bold; font-size:14px; color:#060; line-height:30px; border-bottom:#DCE4E4 1px solid; width:400px; margin:5px auto; text-align:center}
+		a.jx_in_close{ position:absolute; right:8px; top:8px; color:#578846}
+		a.jx_in_close:hover{color:#060; text-decoration:underline}
+	.ifm_js{ width:423px; height:315px; margin:0px auto}
+	.F_jt{ width:300px; height:95px; left:300px; top:400px}
+		.F_jt .tit{ width:280px}	
+		.jt_tab_in{ line-height:2em; width:100%; border:0px; text-align:center}
+		.jt_tab_in td{ color:#333; border-right:#CCC 1px solid}
+		.jt_tab_in th{ color:#333; border-right:#CCC 1px solid}
+		.hb_gx{float:left; background-color:#FAFEF8; border:#B3CFA9 1px solid; padding:10px 20px; position:absolute; left:15px; top:150px; color:#333}
+	.hb_city_Chose,.hb_city_Chose table td{ font-size:12px}
+	.hb_out_div .dk_tab_Wid{ width:auto}
+h1.hb_h1_tit{ float:left}
+/*航班输入*/
+.hbinfo{font-size:14px; margin-top:80px; text-align:center}
+.hbinfo img{ vertical-align:middle}
+.hbinfo a{ font-size:14px}
+
+td.hb_time input{ vertical-align:middle; width:80px}
+td.hb_time select{ vertical-align:middle; font-size:14px}
+td.hb_time img{ vertical-align:middle}
+input.hb_inp_city{ width:175px; height:23px}
+
+.hb_city_Chose{width:210px;border:#94B3D1 1px solid; position:absolute; left:98px; top:181px; background-color:#FFF; padding-bottom:5px;min-height:85px;_height:85px}
+*:lang(zh) .hb_city_Chose{top:181px}
+.hb_city_Chose2{ top:211px}
+*:lang(zh) .hb_city_Chose2{ top:211px}
+
+.hb_city_Chose .tit{ width:200px; border-bottom:#C1C1C1 1px dashed; line-height:20px; margin:5px auto}
+.hb_city_Chose a{ display:block; background-color:#FFF; border:#FFF 1px solid; height:auto; margin:0px 3px; line-height:140%; border-left-width:0px; border-right-width:0px}
+.hb_city_Chose a:hover{ background-color:#ECF7FE; border-color:#8FC0E7; text-decoration:none}
+.hb_city_Chose a.on,.hb_city_Chose a.on:hover,.hb_city_Chose a.on table td{background-color:#DCEFFA; color:#000; border-color:#DCEFFA}
+.hb_city_Chose table td{line-height:140%}
+	input.hb_rq_inp{ height:23px; width:87px}
+	
+/*生肖属相*/
+.sx_top{ height:70px; background-position:0px -1007px; line-height:50px; color:#666; font-size:12px; padding-left:20px; padding-top:0px!important; padding-top:15px; overflow:hidden; clear:both}
+	div.sx_top input.inp{border:#7F9DB9 1px solid;padding:3px; vertical-align:middle; color:#000; width:40px; font-family:Verdana, Arial, Helvetica, sans-serif}
+	div.sx_top input.btn{ vertical-align:middle; height:24px; padding-top:2px; color:#333; width:80px}
+	div.sx_top span{ font-size:14px}
+.sx_tab{ width:100%; border:0px}
+.sx_tab td{ font-family:Arial, Helvetica, sans-serif; font-size:14px; border-bottom:#E6E6E6 1px solid; border-top:#FFF 1px solid; background-color:#F2F2F2; height:64px; background-position:0px -1100px}
+
+.TD1{ width:100px; text-align:right}
+.TD2{ width:90px; text-align:center; color:#000}
+.TD3{ width:330px; text-align:left; line-height:160%}
+/*星座*/
+.xzbg{ background-position:0px -1192px}
+	.xzbg .CC000EC{ padding-left:20px;background-position:-776px -773px}
+.xz_tab{ width:95%; border:0px}
+	.xz_tab td{ text-align:center; padding:10px 0px}
+	.xz_tab td a,.xz_tab td a:hover{ text-decoration:none}
+
+.xz_box{ width:120px;height:120px;position:relative}
+.xzbox_on{background-image:url(/images/jyc_xingzuo_bg.jpg); background-repeat:no-repeat}
+
+	.xz_box .xz_icon{ background-image:url(/images/jyc_xingzuo.gif); background-repeat:no-repeat; position:absolute; left:27px; top:13px; width:56px; height:56px}
+
+	.xz_box .xz_word_info{ width:100px; position:absolute; font-size:12px; left:5px; top:75px; color:#656567}
+	.xz_box .xz_word_info strong{ font-size:14px}
+
+.xz_box .ico1{ background-position:-4px 0px}
+.xz_box .ico2{ background-position:-91px -1px}
+.xz_box .ico3{ background-position:-178px -1px}
+.xz_box .ico4{ background-position:-265px -1px}
+.xz_box .ico5{ background-position:-4px -120px}
+.xz_box .ico6{ background-position:-91px -120px}
+.xz_box .ico7{ background-position:-175px -120px}
+.xz_box .ico8{ background-position:-262px -120px}
+.xz_box .ico9{ background-position:-1px -240px}
+.xz_box .ico10{ background-position:-87px -240px}
+.xz_box .ico11{ background-position:-173px -240px}
+.xz_box .ico12{ background-position:-259px -239px}
+
+.xz_Det_tit{ width:100%; border:0px; color:#537C90; font-size:12px; border-bottom:#C4CCCF 1px solid; line-height:1.8em}
+	.xz_Det_tit td{ color:#567C8F}
+
+	.xz_Det_tit .tit{ font-family:"黑体"; font-size:20px; line-height:1.3em}
+	.xz_Det_tit .ico{ text-align:center; width:70px}
+.xz_divH{ float:left; width:49%; line-height:2em; margin:15px 0px; color:#000; font-size:13px} 
+.xz_info_line{ padding:10px 15px 10px 35px; text-align:left; color:#333; line-height:1.8em; font-size:14px; background-position:-766px -760px}
+	.xz_Lbg{ background-color:#F8F2FF}
+	.xz_info_line strong{color:#333; font-size:14px}
+	.xz_info_line p{ text-indent:2em; margin:0px; padding:0px; color:#333; font-size:14px}
+.zl_bot{ margin:30px auto; text-align:center; border-top:#C3CBCE 1px solid; padding:15px}
+	.zl_bot input{color:#333;padding-top:2px; font-size:14px; width:80px}
+
+/*网址大全*/
+.WZ_table{ width:100%; border:0px; table-layout:fixed}
+	.WZ_table td{border-bottom:#EFEFEF 1px solid;font-size:14px;line-height:220%;text-indent:1em; width:17%;white-space:nowrap;text-overflow:ellipsis;overflow: hidden}
+	.WZ_table a{ color:#333; font-size:14px}
+
+.WZ_tit_b{ height:10px; border-bottom:#C7D6E2 1px solid; position:relative; margin:20px 0px}
+	.WZ_tit_W{ width:70px; height:22px; position:absolute; font-size:12px; left:0px; top:2px; background-position:-145px -119px; text-align:center; color:#FFF; line-height:20px}
+/*网址选择*/
+.PB_H{ padding-bottom:0px}
+*:lang(zh) .PB_H{ padding-bottom:15px}
+.WZ_CH{ width:151px; height:21px; background-position:-5px -339px; float:left; color:#00456C; line-height:21px; text-indent:15px;position:relative}
+	.on{background-position:-5px -365px}
+	
+	
+.WZ_CH_f{ position:absolute; left:0px; top:21px; width:330px; height:130px; background-color:#F1F7FC;border:#C4E3EA 1px solid; padding:10px}
+	.WZ_CH_f .tit{ border-bottom:#DBE2E6 1px solid; line-height:25px; color:#000; text-indent:10px}
+	
+.wz_city_S{ padding:0px; text-indent:0px; margin:10px; line-height:250%; font-size:12px}
+.wz_city_S a{ margin-left:8px}
+/*节日一览表*/
+
+.RL_box{ width:311px; height:300px; float:left; margin:20px 0px 0px 20px; position:relative;border-right:#C7CBCC 2px solid; border-bottom:#C7CBCC 3px solid}
+	.RL_mdiv{ position:absolute; left:0px; top:60px; font-size:200px; color:#F5F5F5; z-index:1; font-family:Arial, Helvetica, sans-serif; font-weight:bold; width:312px; text-align:center;}
+	.RL_box .jieri_tab{position:absolute; left:0px; top:40px;width:312px; z-index:2}
+	.RL_box .tit{height:40px; width:313px; line-height:40px; font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif
+	; font-weight:bold; text-align:center; color:#FFF; background-color:#DEDEDE; z-index:2; position:absolute; left:0px; top:0px}
+
+	
+.jieri_tab{ width:310px; height:auto;table-layout:fixed}
+	.jieri_tab td{ text-align:center; font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif}
+	.jieri_tab tr.Week_tr td{ background-color:#E1E1E1; height:20px; line-height:20px; color:#999; border-top:#FFF 1px solid; width:14.2%}
+	.jieri_tab tr.Day_tr td{ border-bottom:#ECECEC 1px solid; color:#999; width:14.2%; line-height:160%;white-space:nowrap;text-overflow:ellipsis;overflow: hidden;}
+		.jieri_tab tr.jr_trB td{ border-bottom-width:0px}
+		.Day_tr a{ font-weight:bold}
+		.Day_tr a div,.Day_tr a:hover div{ clear:both;color:#F00; text-decoration:none}
+		{ clear:both; color:#F00}
+		a.A_C1{ color:#02A1FD}
+		a.A_C2{ color:#FF9100}
+		a.A_C3{ color:#33CCCC}
+		a.A_C4{ color:#5CC252}
+		
+		
+/*月份banner头*/
+.chun .tit{ background-image:url(JR_ban/chun.jpg)}
+.chun_on .tit{ background-image:url(JR_ban/chun_on.jpg)}
+.xia .tit{ background-image:url(JR_ban/xia.jpg)}
+.xia_on .tit{ background-image:url(JR_ban/xia_on.jpg)}
+.qiu .tit{ background-image:url(JR_ban/qiu.jpg)}
+.qiu_on .tit{ background-image:url(JR_ban/qiu_on.jpg)}
+.dong .tit{ background-image:url(JR_ban/dong.jpg)}
+.dong_on .tit{ background-image:url(JR_ban/dong_on.jpg)}
+
+.chun_on .RL_mdiv{ color:#DEFAD1}
+.xia_on .RL_mdiv{ color:#FEEFE8}
+.qiu_on .RL_mdiv{ color:#FFFCD4}
+.dong_on .RL_mdiv{ color:#E8FAFF}
+
+div.chun_on .jieri_tab tr td.jr_today_td,div.chun_on .jieri_tab tr td.jr_today_td a{ background:#B8E590; color:#378A00; border-bottom-color:#378A00; font-weight:bold}
+div.xia_on .jieri_tab tr td.jr_today_td,div.xia_on .jieri_tab tr td.jr_today_td a{ background:#F5D6CB; color:#853423; border-bottom-color:#853423;font-weight:bold}
+div.qiu_on .jieri_tab tr td.jr_today_td,div.qiu_on .jieri_tab tr td.jr_today_td a{ background:#EAE693; color:#80630B; border-bottom-color:#80630B;font-weight:bold}
+div.dong_on .jieri_tab tr td.jr_today_td,div.dong_on .jieri_tab tr td.jr_today_td a{ background:#AAECFF; color:#15659F; border-bottom-color:#15659F;font-weight:bold}
+.jieri_tab tr td.jr_today_td a{ text-decoration:underline}
+
+.chun_on .jieri_tab tr.Week_tr td{ background-color:#D6FFC3; color:#0BD100}
+.xia_on .jieri_tab tr.Week_tr td{ background-color:#FEDBD5; color:#FF7978}
+.qiu_on .jieri_tab tr.Week_tr td{ background-color:#FCF67C; color:#CEB800}
+.dong_on .jieri_tab tr.Week_tr td{ background-color:#C3F1FF; color:#00A3D6}
+
+/*公交查询*/
+.gjc_tab{ border:0px}
+	.gjc_tab .tit{ font-weight:bold; color:#333; border-bottom:#DEE3E4 1px solid; text-indent:19px; font-size:12px}
+	.gjc_tab td{line-height:30px; vertical-align:top}
+	.gjc_tab td a{ font-size:14px; margin-left:15px; display:block; float:left;white-space:nowrap}
+	
+	.gjc_tab td.td_L{ color:#666;text-align:right; width:58px; font-size:12px}
+
+/*列车查询*/
+input.btn_comm{ width:80px; padding:3px; height:24px; vertical-align:middle; color:#333}
+.lc_wide{ border-bottom:#E3E3E3 1px solid; padding-bottom:16px}
+.lc_wide h2{ margin:0px; padding:0px; line-height:40px; margin-top:10px; font-weight:normal; font-size:12px}
+.lc_wide h2 strong{ font-weight:bold; color:#333}
+.lc_wide input.inp_jsq{ height:22px}
+
+.lieche_tab{ width:100%; border:0px}
+.lieche_tab th{height:25px; line-height:25px; border-bottom:#E6EAEA 1px solid; background-position:0px -937px; color:#333; font-weight:normal; text-align:left;white-space:nowrap;text-overflow:ellipsis;overflow: hidden; text-indent:8px; font-size:12px}
+.lieche_tab td{line-height:25px; border-bottom:#EAEAEA 1px solid;color:#666; text-align:left; text-align:left;font-family:Verdana, Arial, Helvetica, sans-serif; padding-top:4px; padding-bottom:4px;white-space:nowrap;text-overflow:ellipsis;overflow: hidden; text-indent:8px; font-size:12px}
+.lieche_tab td img{ vertical-align:middle}
+tr.lieche_ktit td{ border-top:#9DB3C5 2px solid; border-bottom:#EAEEEE 1px solid; background-color:#F1F6FC}
+tr.lieche_kcont td{ background-color:#F9FCFE; border-bottom:#BBCAD7 1px solid; text-indent:0px; text-align:center}
+
+.lieche_nei{ width:95%; text-align:left; margin:5px auto}
+	.lieche_nei_tab{ width:100%; border:#CEE5C8 1px solid; font-size:12px}
+	.lieche_nei_tab tr th{ height:23px; line-height:23px; color:#333; background-position:0px 0px; border-bottom:#CEE5C8 1px solid; text-indent:8px; background-color:#F7FEE9; font-size:12px}
+	.lieche_nei_tab tr td{ font-size:12px;text-align:left; text-indent:8px; border-bottom-width:0px; color:#999; background-color:#FFF}
+		tr.lc_trbg td{ background-color:#F8FCF5}
+		tr.lc_trblack td{ color:#333}
+.lieche_zk_bot{ color:#999; font-family:"宋体"}
+	.lieche_zk_bot span{ color:#333; font-family:Verdana, Arial, Helvetica, sans-serif}
+.btn_botm{ margin:40px auto; text-align:center}
+	input.btn_blue_B{ font-size:14px; color:#333; width:88px; height:30px; background-image:url(cx_btn.gif); background-repeat:no-repeat; border:0px; padding-top:2px}
+	.lc_T_noti{ float:right; color:#999; font-size:12px}
+	.lc_H{ margin-top:8px}
+	
+/*返回按钮*/
+.bot_back_btn{text-align:left; padding-left:95px; margin-top:15px; clear:both; border-top:#E0E9ED 2px solid; padding-top:8px; padding-bottom:15px}
+	input.Back_IND{font-size:14px; color:#333; padding-top:2px; height:30px;width:160px; padding-top:2px}
+
+
+
+
+/* 星座运势 */
+.blank3{ height:3px; font-size:1px; width:100%; clear:both; overflow:hidden;}
+.blank6{ height:6px; font-size:1px; width:100%; clear:both;overflow:hidden;}
+.blank9{ height:9px; font-size:1px; width:100%; clear:both;overflow:hidden;}
+.blank12{ height:12px; font-size:1px; width:100%; clear:both;overflow:hidden;}
+.blank9w{ height:9px; font-size:1px; width:100%;  clear:both; background:#fff;overflow:hidden;}
+.blank15{ height:15px; font-size:1px; width:100%; clear:both;overflow:hidden;}
+.blank20{ height:20px; font-size:1px; width:100%; clear:both;overflow:hidden;}
+.clear{ clear: both; font-size:1px; width:1px; height:0px; overflow:hidden; visibility: hidden; }
+
+.col2{width:183px; border-bottom:1px solid #ccc; float:left; overflow:hidden;background:#f00 url(rightbg.gif) repeat-y left top}
+.col2 .rightcol{ width:185px; margin:-1px -1px 0 -1px;*margin:0;float:left; background:url(rightbgt.gif) no-repeat left top}
+
+
+.tabBox {padding:0 16px; clear:both;}
+.tabBox .tab{font-size:12px}
+.tabBox .tab li {float:left; color:#1F3A87; line-height:26px; text-align:center;}
+.tabBox .tab li a:link, .dairy .tab li a:visited {color:#1F3A87;}
+.tabBox .tab li.active {font-weight:bold;}
+
+.tabLuck{ width:183px; float:left;padding:0 0 0 9px;}
+.tabLuck .tab{ float:left; width:44px; padding-top:3px;}
+.tabLuck .tab li{ float:none; background:url(http://cimg2.163.com/lady/img/xingzuo0215/tab2off.gif) no-repeat; line-height:23px; height:23px; overflow:hidden; margin-bottom:2px;}
+.tabLuck .tab li.active{ background:url(http://cimg2.163.com/lady/img/xingzuo0215/tab2on.gif) no-repeat left top; font-weight:400}
+.tabLuck .tab li.active a,.tabLuck .tab li.active a:visited{ color:#fff}
+.tabLuck .tabBoxContent{ float:left; width:121px; border:1px solid #555793;font-size:12px}
+.tabLuck .tabBoxContent .text{ width:119px; border:1px solid #fff; background:#fff url(http://cimg2.163.com/lady/img/xingzuo0215/tablist.gif) repeat-x left top}
+.tabLuck .tabBoxContent .text li{ width:56px; margin:0; padding:0; padding-left:2px; text-align:center;float:left; line-height:25px;}
+.tabLuck select,.tabLuck .bt{font-size:12px; padding:0}
+.tabBox .tab,.tabLuck .tabBoxContent ul{margin:0; padding:0; list-style:none}
+
+.formlist{ text-align:left; font-size:12px; color:#000}
+.rightTi{ text-align:left; margin:0 8px}
+.rightTi img{ border:0}
+.rightTi h3{ margin:0; padding:0; font-size:14px}
+
+
+/* 星座分类 */
+
+
+.imgBor{ border:1px solid #ccc}
+.borBlack{ border:1px solid #000}
+
+.tLeft{ text-align:left}
+.tRight{ text-align:right}
+.tCenter{ text-align:center}
+
+/*通栏*/
+.col960{ width:960px; margin:auto; background:url(http://cimg2.163.com/lady/img/xingzuo0215/col0bg.gif) repeat-y center}
+.col960 .colTop{ width:100%;background:url(http://cimg2.163.com/lady/img/xingzuo0215/col0top.gif) no-repeat center top}
+.col960 .colBot{font-size:1px; line-height:1px; height:3px; background:url(http://cimg2.163.com/lady/img/xingzuo0215/col0bot.gif) no-repeat center top}
+
+/* 主体架构 */
+.area {width:960px; margin:auto; background:url(http://cimg2.163.com/lady/img/constellation0430/areabg.gif) repeat-y left; overflow:hidden; clear:both;}
+.area .colline{ clear:both; line-height:1px; font-size:1px; height:1px; background:url(http://cimg2.163.com/lady/img/constellation0430/areabot.gif) no-repeat left top; text-align:left}
+.col1cTop{background:url(http://cimg2.163.com/lady/img/xingzuo0215/col1c.gif) no-repeat left top}
+
+.col1a {width:462px; float:left; overflow:hidden;}
+.col1b {width:288px; float:right; overflow:hidden}
+
+.twoCol{ background-color:#fff; margin:0 1px;overflow:hidden;}
+.twoCol .twoColbot{clear:both; width:100%; line-height:1px; font-size:1px; height:1px; overflow:hidden; background:#ccc}
+.twoCol .col1a{width:460px;background:url(http://cimg2.163.com/lady/img/xingzuo0215/col1top.gif) no-repeat -1px top;}
+.twoCol .col1b{width:288px;background:url(http://cimg2.163.com/lady/img/xingzuo0215/col2top.gif) no-repeat 0 top}
+
+.col1 {width:750px; float:left; overflow:hidden;}
+.col2 {width:185px; float:right; overflow:hidden;background:url(http://cimg2.163.com/lady/img/xingzuo0215/col4top.gif) no-repeat right top}
+
+.leftTi{ text-align:left}
+.leftTi .name{ display:inline; float:left; margin:1px 0 0 2px;}
+.leftTi .exp{ display:inline; float:right; margin:22px 28px 0 0;}
+.leftTi .more { padding:0 0 0 12px; color:#1F3A87; background:url(http://cimg2.163.com/lady/img/index0128/pinkarrow.gif) no-repeat 0 2px;}
+
+.leftTwoTi .name{ text-align:left; padding:1px;}
+
+.rightTi{ text-align:left; margin:0 8px}
+
+.rightCol{ padding:0 16px; text-align:left; line-height:20px}
+
+.line {height:1px; background:#ccc; overflow:hidden; clear:both; margin:3px 0;}
+
+.leftTwoCol{ width:370px; float:left}
+.leftTwoCol1{ display:inline; margin-right:10px;}
+
+/*星座档案*/
+.starData{ padding:0 16px; margin-top:10px; line-height:23px; font-size:14px; text-align:left;color:#7c7c7c}
+.starData a,.starData a:visited{color:#7c7c7c}
+.starData strong{ color:#000}
+
+.starpic{ border-left:1px dashed #ccc; margin:16px 0 8px; text-align:left; padding-left:12px;}
+.starpic .pic{ display:block}
+.starpic .til{ padding:10px 0 5px; font-size:14px}
+
+/*菜单切换*/
+.tabBox {padding:0 16px; clear:both;}
+.tabBox .tab{ height:26px; clear:both;}
+.tabBox .tab li {float:left; color:#1F3A87; line-height:26px; text-align:center;}
+.tabBox .tab li a:link, .dairy .tab li a:visited {color:#1F3A87;}
+.tabBox .tab li.active {font-weight:bold;}
+
+.tabLuck{ width:168px; float:left;padding:0 0 0 9px;}
+.tabLuck .tab{ float:left; width:44px; padding-top:3px;}
+.tabLuck .tab li{ float:none; background:url(http://cimg2.163.com/lady/img/xingzuo0215/tab2off.gif) no-repeat; line-height:23px; height:23px; overflow:hidden; margin-bottom:2px;}
+.tabLuck .tab li.active{ background:url(http://cimg2.163.com/lady/img/xingzuo0215/tab2on.gif) no-repeat left; font-weight:400}
+.tabLuck .tab li.active a,.tabLuck .tab li.active a:visited{ color:#fff}
+.tabLuck .tabBoxContent{ float:left; width:121px; border:1px solid #555793;}
+.tabLuck .tabBoxContent .text{ width:119px; border:1px solid #fff; background:#fff url(http://cimg2.163.com/lady/img/xingzuo0215/tablist.gif) repeat-x left top}
+.tabLuck .tabBoxContent .text li{ width:59px; float:left; line-height:25px;}
+.tabLuck select,.tabLuck .bt{font-size:12px; padding:0}
+
+.list14px{ text-align:left; font-size:14px}
+.list14px li{ margin-left:16px;line-height:22px; padding:0 0 0 10px; background:url(http://cimg2.163.com/lady/img/index0128/listdot.gif) no-repeat 0 8px;}
+
+.twoList{ float:left; padding-left:1%; width:49%; overflow:hidden}
+
+.picList{ padding-left:5px;}
+.picList li{ margin:0 auto; width:160px; text-align:center}
+.picList li .data{ display:block; text-align:left; line-height:18px; padding-top:10px}

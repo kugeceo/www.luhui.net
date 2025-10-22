@@ -1,0 +1,329 @@
+[
+    {
+        "name": "attention_seekers",
+        "desc": "引起注意动画效果",
+        "animationList": [
+            {
+                "name": "bounce"
+            },
+            {
+                "name": "flash"
+            },
+            {
+                "name": "pulse"
+            },
+            {
+                "name": "rubberBand"
+            },
+            {
+                "name": "shake"
+            },
+            {
+                "name": "swing"
+            },
+            {
+                "name": "tada"
+            },
+            {
+                "name": "wobble"
+            }
+        ]
+    },
+    {
+        "name": "bouncing_entrances",
+        "desc": "弹跳出现效果",
+        "animationList": [
+            {
+                "name": "bounceIn"
+            },
+            {
+                "name": "bounceInDown"
+            },
+            {
+                "name": "bounceInLeft"
+            },
+            {
+                "name": "bounceInRight"
+            },
+            {
+                "name": "bounceInUp"
+            }
+        ]
+    },
+    {
+        "name": "bouncing_exits",
+        "desc": "弹跳消失效果",
+        "animationList": [
+            {
+                "name": "bounceOut"
+            },
+            {
+                "name": "bounceOutDown"
+            },
+            {
+                "name": "bounceOutLeft"
+            },
+            {
+                "name": "bounceOutRight"
+            },
+            {
+                "name": "bounceOutUp"
+            }
+        ]
+    },
+    {
+        "name": "fading_entrances",
+        "desc": "淡入淡出 出现效果",
+        "animationList": [
+            {
+                "name": "fadeIn"
+            },
+            {
+                "name": "fadeInDown"
+            },
+            {
+                "name": "fadeInDownBig"
+            },
+            {
+                "name": "fadeInLeft"
+            },
+            {
+                "name": "fadeInLeftBig"
+            },
+            {
+                "name": "fadeInRight"
+            },
+            {
+                "name": "fadeInRightBig"
+            },
+            {
+                "name": "fadeInUp"
+            },
+            {
+                "name": "fadeInUpBig"
+            }
+        ]
+    },
+    {
+        "name": "fading_exits",
+        "desc": "淡入淡出 消失效果",
+        "animationList": [
+            {
+                "name": "fadeOut"
+            },
+            {
+                "name": "fadeOutDown"
+            },
+            {
+                "name": "fadeOutDownBig"
+            },
+            {
+                "name": "fadeOutLeft"
+            },
+            {
+                "name": "fadeOutLeftBig"
+            },
+            {
+                "name": "fadeOutRight"
+            },
+            {
+                "name": "fadeOutRightBig"
+            },
+            {
+                "name": "fadeOutUp"
+            },
+            {
+                "name": "fadeOutUpBig"
+            }
+        ]
+    },
+    {
+        "name": "flippers",
+        "desc": "翻转效果",
+        "animationList": [
+            {
+                "name": "flip"
+            },
+            {
+                "name": "flipInX"
+            },
+            {
+                "name": "flipInY"
+            },
+            {
+                "name": "flipOutX"
+            },
+            {
+                "name": "flipOutY"
+            }
+        ]
+    },
+    {
+        "name": "lightspeed",
+        "desc": "急速效果",
+        "animationList": [
+            {
+                "name": "lightSpeedIn"
+            },
+            {
+                "name": "lightSpeedOut"
+            }
+        ]
+    },
+    {
+        "name": "rotating",
+        "desc": "旋转效果",
+        "animationList": [
+            {
+                "name": "rotate"
+            },
+            {
+                "name": "rotateDownLeft"
+            },
+            {
+                "name": "rotateDownRight"
+            },
+            {
+                "name": "rotateUpLeft"
+            },
+            {
+                "name": "rotateUpRight"
+            }
+        ]
+    },
+    {
+        "name": "rotating_entrances",
+        "desc": "旋转 出现效果",
+        "animationList": [
+            {
+                "name": "rotateIn"
+            },
+            {
+                "name": "rotateInDownLeft"
+            },
+            {
+                "name": "rotateInDownRight"
+            },
+            {
+                "name": "rotateInUpLeft"
+            },
+            {
+                "name": "rotateInUpRight"
+            }
+        ]
+    },
+    {
+        "name": "rotating_exits",
+        "desc": "旋转 消失效果",
+        "animationList": [
+            {
+                "name": "rotateOut"
+            },
+            {
+                "name": "rotateOutDownLeft"
+            },
+            {
+                "name": "rotateOutDownRight"
+            },
+            {
+                "name": "rotateOutUpLeft"
+            },
+            {
+                "name": "rotateOutUpRight"
+            }
+        ]
+    },
+    {
+        "name": "specials",
+        "desc": "特殊效果",
+        "animationList": [
+            {
+                "name": "hinge"
+            },
+            {
+                "name": "rollIn"
+            },
+            {
+                "name": "rollOut"
+            }
+        ]
+    },
+    {
+        "name": "zooming_entrances",
+        "desc": "放大缩小 出现效果",
+        "animationList": [
+            {
+                "name": "zoomIn"
+            },
+            {
+                "name": "zoomInDown"
+            },
+            {
+                "name": "zoomInLeft"
+            },
+            {
+                "name": "zoomInRight"
+            },
+            {
+                "name": "zoomInUp"
+            }
+        ]
+    },
+    {
+        "name": "zooming_exits",
+        "desc": "放大缩小 消失效果",
+        "animationList": [
+            {
+                "name": "zoomOut"
+            },
+            {
+                "name": "zoomOutDown"
+            },
+            {
+                "name": "zoomOutLeft"
+            },
+            {
+                "name": "zoomOutRight"
+            },
+            {
+                "name": "zoomOutUp"
+            }
+        ]
+    },
+    {
+        "name": "sliding_entrances",
+        "desc": "滑动 出现效果",
+        "animationList": [
+            {
+                "name": "slideInDown"
+            },
+            {
+                "name": "slideInLeft"
+            },
+            {
+                "name": "slideInRight"
+            },
+            {
+                "name": "slideInUp"
+            }
+        ]
+    },
+    {
+        "name": "sliding_exits",
+        "desc": "滑动 消失效果",
+        "animationList": [
+            {
+                "name": "slideOutDown"
+            },
+            {
+                "name": "slideOutLeft"
+            },
+            {
+                "name": "slideOutRight"
+            },
+            {
+                "name": "slideOutUp"
+            }
+        ]
+    }
+]
