@@ -1,7 +1,7 @@
 <!--版权说明开始
 /*
 +---------------------------------------------------+
-| Name : 鲁虺智虺堂文献术语库JavaScript版utf-8编码
+| Name : 鲁虺贴吧搜索堂文献术语库JavaScript版utf-8编码
 +---------------------------------------------------+
 | 创建Created  2024-10-1 / 修改Modify 2024-10-8
 +---------------------------------------------------+
@@ -69,8 +69,8 @@
       const data = await loadData();
       if (id >= 1 && id <= data.length) {
         const detail = data[id - 1];
-        const title = `鲁虺智虺堂 - ${detail.title}`;
-        const keywords = `鲁虺智虺堂,${detail.title}`;
+        const title = `鲁虺贴吧搜索堂 - ${detail.title}`;
+        const keywords = `鲁虺贴吧搜索堂,${detail.title}`;
         const description = `${detail.title} - ${detail.content.slice(0, 100)}...`;
         document.title = title;
         document.querySelector('meta[name="keywords"]').content = keywords;
@@ -95,7 +95,7 @@
     <table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;" id="top">
       <tr>
         <td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle" colspan="5">
-          <b>鲁虺智虺堂</b>
+          <b>鲁虺贴吧搜索堂</b>
         </td>
       </tr>
       <tr>
@@ -209,7 +209,7 @@
           }
         }
       }
-      resultHTML = `<table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;"><tr><td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle" colspan="5"><b><a href="#">鲁虺智虺堂</a>：検索到 <a href="#"><font color="#c60a00">${q}</font></a> 的相关词语${r_num}个</b></td></tr><tr><td><table cellpadding="5" cellspacing="10" width="100%">${resultHTML}</table></td></tr></table>`;
+      resultHTML = `<table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;"><tr><td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle" colspan="5"><b><a href="#">鲁虺贴吧搜索堂</a>：検索到 <a href="#"><font color="#c60a00">${q}</font></a> 的相关词语${r_num}个</b></td></tr><tr><td><table cellpadding="5" cellspacing="10" width="100%">${resultHTML}</table></td></tr></table>`;
       document.getElementById('resultContainer').innerHTML = resultHTML;
       generatePagination(q, sortOption);
       history.pushState(null, null, `?q=${q}&page=${page}&sort=${sortOption}`);
@@ -242,7 +242,7 @@
         const detailHTML = `<table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;">
           <tr>
             <td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle">
-              <b><a href="?">鲁虺智虺堂</a> / ${detail.title}</b>
+              <b><a href="?">鲁虺贴吧搜索堂</a> / ${detail.title}</b>
             </td>
             <td style="background:#EDF7FF;padding:0 5px;color:#014198;" align="right">
               ${id > 1 && id <= data.length? '<a href="?id=' + (id - 1) + '.html">上一个</a> ' : ''}
