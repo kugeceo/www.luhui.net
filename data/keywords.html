@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>带分类功能的交互式标签云</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#8B5CF6',
+                        accent: '#EC4899',
+                        neutral: '#64748B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .tag-transition {
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+            .tag-hover {
+                transform: scale(1.3) translateZ(50px);
+                z-index: 50;
+                filter: brightness(1.2);
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            }
+            .perspective {
+                perspective: 1200px;
+            }
+            .preserve-3d {
+                transform-style: preserve-3d;
+            }
+            .glow {
+                box-shadow: 0 0 15px currentColor;
+            }
+            .tag-shadow {
+                filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-sans text-gray-800 min-h-screen">
+    <div class="container mx-auto px-4 py-12 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-gray-900 mb-4 relative inline-block">
+                分类标签云
+                <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+            </h1>
+            <p id="category-info" class="text-gray-600 text-lg max-w-3xl mx-auto">通过URL参数 ?category=分类名 加载对应分类的标签，如 ?category=paypal 加载 paypal/tag.txt</p>
+        </header>
+
+        <!-- 布局切换控制器 -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+            <button id="random" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full tag-transition shadow-md hover:shadow-lg">
+                <i class="fa fa-random mr-2"></i>随机分布
+            </button>
+            <button id="circular" class="bg-secondary hover:bg-secondary/90 text-white px-5 py-2 rounded-full tag-transition shadow-md hover:shadow-lg">
+                <i class="fa fa-circle-o mr-2"></i>圆形布局
+            </button>
+            <button id="spiral" class="bg-accent hover:bg-accent/90 text-white px-5 py-2 rounded-full tag-transition shadow-md hover:shadow-lg">
+                <i class="fa fa-sort-amount-desc mr-2"></i>螺旋布局
+            </button>
+            <button id="grid" class="bg-neutral hover:bg-neutral/90 text-white px-5 py-2 rounded-full tag-transition shadow-md hover:shadow-lg">
+                <i class="fa fa-th mr-2"></i>网格布局
+            </button>
+            <button id="3d" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full tag-transition shadow-md hover:shadow-lg">
+                <i class="fa fa-cube mr-2"></i>3D效果
+            </button>
+            <button id="refresh" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-full tag-transition shadow-md hover:shadow-lg">
+                <i class="fa fa-refresh mr-2"></i>刷新标签
+            </button>
+        </div>
+
+        <!-- 分类选择器 -->
+        <div class="bg-white rounded-lg p-4 mb-6 text-center shadow-sm border border-gray-100">
+            <p class="text-gray-700 mb-3"><i class="fa fa-folder-open text-primary mr-2"></i>选择标签分类</p>
+            <div class="flex flex-wrap justify-center gap-2" id="category-selector">
+                <button class="category-btn px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm" data-category="paypal">PayPal</button>
+                <button class="category-btn px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm" data-category="food">美食</button>
+                <button class="category-btn px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm" data-category="travel">旅游</button>
+                <button class="category-btn px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm" data-category="tech">科技</button>
+                <button class="category-btn px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm" data-category="sports">运动</button>
+            </div>
+        </div>
+
+        <!-- 控制说明 -->
+        <div class="bg-white rounded-lg p-4 mb-6 text-center shadow-sm border border-gray-100">
+            <p class="text-gray-700"><i class="fa fa-gamepad text-primary mr-2"></i>控制: 鼠标拖动旋转 | 方向键 ←→↑↓ 旋转 | 空格 暂停/开始自动旋转 | 悬停标签突出显示</p>
+        </div>
+
+        <!-- 标签云容器 -->
+        <div id="tag-cloud-container" class="relative w-full h-[500px] bg-white rounded-2xl shadow-xl overflow-hidden mb-8 border border-gray-100">
+            <div id="tag-cloud" class="absolute inset-0 w-full h-full p-6 perspective preserve-3d"></div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-inner border border-gray-100">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800 flex items-center">
+                <i class="fa fa-info-circle text-primary mr-2"></i>功能说明
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+                <li><span class="font-medium">分类加载：</span>通过URL参数 ?category=分类名 加载对应分类目录下的 tag.txt 文件，如 paypal/tag.txt</li>
+                <li><span class="font-medium">随机显示：</span>每次刷新页面或点击"刷新标签"按钮随机显示最多200条标签</li>
+                <li><span class="font-medium">交互控制：</span>支持鼠标拖动和键盘方向键控制3D旋转，空格键暂停/开始自动旋转</li>
+                <li><span class="font-medium">悬停效果：</span>鼠标悬停在标签上时，标签会暂停旋转并突出显示（放大、增加亮度和阴影）</li>
+                <li><span class="font-medium">标签链接：</span>点击任何标签将跳转到https://search.luhui.net/?q=标签内容</li>
+                <li><span class="font-medium">布局切换：</span>可在多种布局间切换，3D布局支持最丰富的旋转交互</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量
+        let allTags = []; // 存储所有标签
+        let displayTags = []; // 存储要显示的标签（最多200条）
+        let currentCategory = ''; // 当前分类
+        let angleX = 0;
+        let angleY = 0;
+        let isDragging = false;
+        let lastX, lastY;
+        let isAutoRotating = true;
+        let rotationInterval;
+        let hoveredTag = null; // 当前悬停的标签
+        const MAX_TAGS = 60; // 最大显示标签数量
+
+        // 从URL获取分类参数
+        function getCategoryFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('category') || 'data/sitemap'; // 默认分类为paypal
+        }
+
+        // 更新页面URL和信息
+        function updateUrlWithCategory(category) {
+            currentCategory = category;
+            
+            // 更新URL参数
+            const params = new URLSearchParams(window.location.search);
+            params.set('category', category);
+            window.history.replaceState(null, null, `${window.location.pathname}?${params.toString()}`);
+            
+            // 更新页面信息
+            document.getElementById('category-info').textContent = 
+                `当前显示: ${category} 分类的标签 (加载自 ${category}/tag.txt)`;
+            
+            // 更新分类按钮状态
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.classList.remove('bg-gray-100', 'hover:bg-gray-200');
+                    btn.classList.add('bg-primary', 'text-white', 'hover:bg-primary/90');
+                } else {
+                    btn.classList.remove('bg-primary', 'text-white', 'hover:bg-primary/90');
+                    btn.classList.add('bg-gray-100', 'hover:bg-gray-200');
+                }
+            });
+        }
+
+        // 初始化自动旋转
+        function startAutoRotation() {
+            if (rotationInterval) clearInterval(rotationInterval);
+            rotationInterval = setInterval(() => {
+                // 如果没有悬停的标签并且自动旋转开启，则继续旋转
+                if (isAutoRotating && !hoveredTag) {
+                    angleY += 0.01;
+                    updateRotation();
+                }
+            }, 30);
+        }
+
+        // 更新旋转状态
+        function updateRotation() {
+            const cloud = document.getElementById('tag-cloud');
+            cloud.style.transform = `rotateX(${angleX}rad) rotateY(${angleY}rad)`;
+        }
+
+        // 从文件加载标签 - 根据当前分类
+        function loadTagsFromFile() {
+            // 构建文件路径: 分类目录/tag.txt
+            const filePath = `/${currentCategory}/tag.txt`;
+            
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`文件加载失败: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(content => {
+                    // 解析文件内容，每行一个标签
+                    allTags = content.split('\n')
+                        .map(tag => tag.trim())
+                        .filter(tag => tag.length > 0)
+                        .map(tag => ({
+                            text: tag,
+                            weight: 50 + Math.random() * 50, // 随机权重
+                            category: currentCategory
+                        }));
+                    
+                    // 随机选择最多200条标签
+                    selectRandomTags();
+                    
+                    // 加载完成后渲染当前布局或默认布局
+                    renderCurrentLayout();
+                })
+                .catch(error => {
+                    console.error('加载标签失败:', error);
+                    // 显示错误信息
+                    const cloud = document.getElementById('tag-cloud');
+                    cloud.innerHTML = `
+                        <div class="flex items-center justify-center h-full">
+                            <div class="text-center text-red-500">
+                                <i class="fa fa-exclamation-circle text-2xl mb-2"></i>
+                                <p>无法加载 ${filePath} 文件</p>
+                                <p class="text-sm mt-1">请确保分类目录和文件存在</p>
+                            </div>
+                        </div>
+                    `;
+                });
+        }
+
+        // 随机选择标签（最多200条）
+        function selectRandomTags() {
+            // 先复制所有标签
+            const shuffled = [...allTags];
+            
+            // 打乱顺序
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            
+            // 选择前200条或所有可用标签
+            displayTags = shuffled.slice(0, MAX_TAGS);
+            
+            // 显示当前标签数量
+            console.log(`已随机选择 ${displayTags.length} 条标签（共 ${allTags.length} 条）`);
+        }
+
+        // 生成随机颜色
+        function getRandomColor() {
+            const colors = [
+                'bg-blue-500 text-white', 'bg-indigo-500 text-white', 'bg-purple-500 text-white', 
+                'bg-pink-500 text-white', 'bg-red-500 text-white', 'bg-orange-500 text-white',
+                'bg-yellow-500 text-gray-800', 'bg-green-500 text-white', 'bg-teal-500 text-white',
+                'bg-cyan-500 text-gray-800', 'bg-gray-700 text-white'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // 清除现有标签
+        function clearTags() {
+            const cloud = document.getElementById('tag-cloud');
+            cloud.innerHTML = '';
+        }
+
+        // 创建标签元素 - 带链接和悬停效果
+        function createTagElement(tag, additionalClasses = '') {
+            const tagEl = document.createElement('a');
+            const size = 0.8 + (tag.weight / 100) * 1.2; // 字体大小范围: 0.8em - 2.0em
+            const baseClasses = `inline-block px-3 py-1 rounded-full text-shadow tag-transition tag-shadow cursor-pointer whitespace-nowrap`;
+            
+            // 设置标签链接
+            const encodedTag = encodeURIComponent(tag.text);
+            tagEl.href = `https://search.luhui.net/?q=${encodedTag}`;
+            tagEl.target = '_blank'; // 新窗口打开
+            
+            tagEl.style.fontSize = `${size}em`;
+            tagEl.className = `${baseClasses} ${additionalClasses}`;
+            tagEl.textContent = tag.text;
+            tagEl.title = tag.text;
+            
+            // 添加悬停事件
+            tagEl.addEventListener('mouseenter', () => {
+                hoveredTag = tagEl;
+                tagEl.classList.add('tag-hover', 'glow');
+            });
+            
+            tagEl.addEventListener('mouseleave', () => {
+                if (hoveredTag === tagEl) {
+                    hoveredTag = null;
+                }
+                tagEl.classList.remove('tag-hover', 'glow');
+            });
+            
+            // 点击时添加额外动画
+            tagEl.addEventListener('click', (e) => {
+                e.preventDefault(); // 先阻止默认跳转
+                // 添加点击动画
+                tagEl.classList.add('scale-150');
+                setTimeout(() => {
+                    tagEl.classList.remove('scale-150');
+                    // 动画结束后跳转
+                    window.open(tagEl.href, '_blank');
+                }, 300);
+            });
+            
+            return tagEl;
+        }
+
+        // 记录当前布局
+        let currentLayout = 'random';
+
+        // 1. 随机分布布局
+        function renderRandomLayout() {
+            currentLayout = 'random';
+            clearTags();
+            const cloud = document.getElementById('tag-cloud');
+            cloud.className = 'absolute inset-0 w-full h-full p-6';
+            const cloudRect = cloud.getBoundingClientRect();
+            
+            displayTags.forEach(tag => {
+                const tagEl = createTagElement(tag, getRandomColor());
+                
+                // 随机位置，确保标签在容器内
+                const maxX = cloudRect.width - 100;
+                const maxY = cloudRect.height - 50;
+                const x = Math.floor(Math.random() * maxX);
+                const y = Math.floor(Math.random() * maxY);
+                
+                tagEl.style.position = 'absolute';
+                tagEl.style.left = `${x}px`;
+                tagEl.style.top = `${y}px`;
+                // 随机旋转角度
+                tagEl.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+                
+                cloud.appendChild(tagEl);
+            });
+        }
+
+        // 2. 圆形布局
+        function renderCircularLayout() {
+            currentLayout = 'circular';
+            clearTags();
+            const cloud = document.getElementById('tag-cloud');
+            cloud.className = 'absolute inset-0 w-full h-full p-6';
+            const cloudRect = cloud.getBoundingClientRect();
+            const centerX = cloudRect.width / 2;
+            const centerY = cloudRect.height / 2;
+            const radius = Math.min(centerX, centerY) * 0.8;
+            const totalTags = displayTags.length;
+            
+            displayTags.forEach((tag, index) => {
+                const tagEl = createTagElement(tag, getRandomColor());
+                
+                // 计算圆周上的位置
+                const angle = (index / totalTags) * 2 * Math.PI;
+                // 随机半径偏移，使布局更自然
+                const randomRadius = radius * (0.5 + Math.random() * 0.5);
+                const x = centerX + randomRadius * Math.cos(angle) - 50;
+                const y = centerY + randomRadius * Math.sin(angle) - 25;
+                
+                tagEl.style.position = 'absolute';
+                tagEl.style.left = `${x}px`;
+                tagEl.style.top = `${y}px`;
+                // 沿圆周切线方向旋转
+                tagEl.style.transform = `rotate(${angle * 180 / Math.PI}deg)`;
+                
+                cloud.appendChild(tagEl);
+            });
+        }
+
+        // 3. 螺旋布局
+        function renderSpiralLayout() {
+            currentLayout = 'spiral';
+            clearTags();
+            const cloud = document.getElementById('tag-cloud');
+            cloud.className = 'absolute inset-0 w-full h-full p-6';
+            const cloudRect = cloud.getBoundingClientRect();
+            const centerX = cloudRect.width / 2;
+            const centerY = cloudRect.height / 2;
+            const totalTags = displayTags.length;
+            const turns = 3; // 螺旋圈数
+            
+            displayTags.forEach((tag, index) => {
+                const tagEl = createTagElement(tag, getRandomColor());
+                
+                // 螺旋公式: r = a + bθ
+                const t = index / totalTags;
+                const angle = t * turns * 2 * Math.PI;
+                const radius = 50 + (Math.min(centerX, centerY) * 0.7) * t;
+                
+                const x = centerX + radius * Math.cos(angle) - 50;
+                const y = centerY + radius * Math.sin(angle) - 25;
+                
+                tagEl.style.position = 'absolute';
+                tagEl.style.left = `${x}px`;
+                tagEl.style.top = `${y}px`;
+                // 沿螺旋切线方向旋转
+                tagEl.style.transform = `rotate(${angle * 180 / Math.PI}deg)`;
+                
+                cloud.appendChild(tagEl);
+            });
+        }
+
+        // 4. 网格布局
+        function renderGridLayout() {
+            currentLayout = 'grid';
+            clearTags();
+            const cloud = document.getElementById('tag-cloud');
+            cloud.className = 'absolute inset-0 w-full h-full p-6 flex flex-wrap items-center justify-center gap-4';
+            
+            displayTags.forEach(tag => {
+                const tagEl = createTagElement(tag, getRandomColor());
+                cloud.appendChild(tagEl);
+            });
+        }
+
+        // 5. 3D效果布局
+        function render3DLayout() {
+            currentLayout = '3d';
+            clearTags();
+            const cloud = document.getElementById('tag-cloud');
+            cloud.className = 'absolute inset-0 w-full h-full p-6 perspective preserve-3d';
+            
+            const cloudRect = cloud.getBoundingClientRect();
+            const centerX = cloudRect.width / 2;
+            const centerY = cloudRect.height / 2;
+            const radius = Math.min(centerX, centerY) * 0.8;
+            const totalTags = displayTags.length;
+            
+            displayTags.forEach((tag, index) => {
+                const tagEl = createTagElement(tag, getRandomColor());
+                
+                // 球面分布
+                const phi = Math.acos(-1 + (2 * index) / totalTags);
+                const theta = Math.sqrt(totalTags * Math.PI) * phi;
+                
+                const x = centerX + radius * Math.sin(phi) * Math.cos(theta) - 50;
+                const y = centerY + radius * Math.sin(phi) * Math.sin(theta) - 25;
+                const z = radius * Math.cos(phi);
+                
+                tagEl.style.position = 'absolute';
+                tagEl.style.left = `${x}px`;
+                tagEl.style.top = `${y}px`;
+                tagEl.style.transform = `translateZ(${z}px) rotateY(${theta * 180 / Math.PI}deg)`;
+                tagEl.style.opacity = 0.7 + (z / radius) * 0.3; // 远处的标签更透明
+                
+                cloud.appendChild(tagEl);
+            });
+            
+            // 重置旋转角度
+            angleX = 0;
+            angleY = 0;
+            updateRotation();
+        }
+
+        // 渲染当前布局
+        function renderCurrentLayout() {
+            switch(currentLayout) {
+                case 'circular':
+                    renderCircularLayout();
+                    break;
+                case 'spiral':
+                    renderSpiralLayout();
+                    break;
+                case 'grid':
+                    renderGridLayout();
+                    break;
+                case '3d':
+                    render3DLayout();
+                    break;
+                default:
+                    renderRandomLayout();
+            }
+        }
+
+        // 初始化事件监听
+        function initEventListeners() {
+            // 布局切换按钮
+            document.getElementById('random').addEventListener('click', renderRandomLayout);
+            document.getElementById('circular').addEventListener('click', renderCircularLayout);
+            document.getElementById('spiral').addEventListener('click', renderSpiralLayout);
+            document.getElementById('grid').addEventListener('click', renderGridLayout);
+            document.getElementById('3d').addEventListener('click', render3DLayout);
+            
+            // 刷新标签按钮
+            document.getElementById('refresh').addEventListener('click', () => {
+                if (allTags.length > 0) {
+                    selectRandomTags();
+                    renderCurrentLayout();
+                }
+            });
+            
+            // 分类选择按钮
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.dataset.category;
+                    updateUrlWithCategory(category);
+                    loadTagsFromFile();
+                });
+            });
+            
+            // 鼠标拖动旋转
+            const container = document.getElementById('tag-cloud-container');
+            
+            container.addEventListener('mousedown', (e) => {
+                // 如果鼠标没有悬停在标签上，才允许拖动
+                if (!e.target.closest('.tag-transition')) {
+                    isDragging = true;
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    container.style.cursor = 'grabbing';
+                }
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const deltaX = e.clientX - lastX;
+                const deltaY = e.clientY - lastY;
+                
+                angleY += deltaX * 0.005;
+                angleX -= deltaY * 0.005;
+                
+                updateRotation();
+                
+                lastX = e.clientX;
+                lastY = e.clientY;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            });
+            
+            // 键盘控制
+            document.addEventListener('keydown', (e) => {
+                // 如果有标签被悬停，不响应键盘旋转
+                if (hoveredTag) return;
+                
+                const step = 0.05;
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        angleY -= step;
+                        updateRotation();
+                        e.preventDefault();
+                        break;
+                    case 'ArrowRight':
+                        angleY += step;
+                        updateRotation();
+                        e.preventDefault();
+                        break;
+                    case 'ArrowUp':
+                        angleX -= step;
+                        updateRotation();
+                        e.preventDefault();
+                        break;
+                    case 'ArrowDown':
+                        angleX += step;
+                        updateRotation();
+                        e.preventDefault();
+                        break;
+                    case ' ': // 空格键控制自动旋转
+                        isAutoRotating = !isAutoRotating;
+                        e.preventDefault();
+                        break;
+                }
+            });
+            
+            // 触摸设备支持
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    isDragging = true;
+                    lastX = e.touches[0].clientX;
+                    lastY = e.touches[0].clientY;
+                }
+            });
+            
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging || e.touches.length !== 1) return;
+                
+                const deltaX = e.touches[0].clientX - lastX;
+                const deltaY = e.touches[0].clientY - lastY;
+                
+                angleY += deltaX * 0.005;
+                angleX -= deltaY * 0.005;
+                
+                updateRotation();
+                
+                lastX = e.touches[0].clientX;
+                lastY = e.touches[0].clientY;
+            });
+            
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            // 从URL获取分类并初始化
+            const initialCategory = getCategoryFromUrl();
+            updateUrlWithCategory(initialCategory);
+            
+            initEventListeners();
+            startAutoRotation();
+            loadTagsFromFile();
+        });
+    </script>
+</body>
+</html>
+    
