@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network 鲁虺全面真实地反映英语国度民俗风情及前沿科技成果</title>	
+<meta name="keywords" content="Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network 鲁虺全面真实地反映英语国度民俗风情及前沿科技成果" />
+<meta name="description" content="Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network 鲁虺全面真实地反映英语国度民俗风情及前沿科技成果" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="flattr:id" content="kugeceo">
+<meta name="p:domain_verify" content="chinashanghai20040111"/>
+<meta name="theme-color" content="#CCCCFF">
+<meta name="twitter:title" content="Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network 鲁虺全面真实地反映英语国度民俗风情及前沿科技成果">
+<meta name="twitter:description" content="Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network 鲁虺全面真实地反映英语国度民俗风情及前沿科技成果">
+<meta name="twitter:image" content="http://mini.s-shot.ru/1024x768/400/jpeg/?http://www.luhui.net/en">
+<meta name="twitter:creator" content="@kugeceo">
+<meta property="og:title" content="Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network 鲁虺全面真实地反映英语国度民俗风情及前沿科技成果">
+<meta property="og:description" content="Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network 鲁虺全面真实地反映英语国度民俗风情及前沿科技成果">
+<meta property="og:url" content="http://luhui.net/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="http://mini.s-shot.ru/1024x768/400/jpeg/?http://www.luhui.net/en">
+<style>
+	html {
+height: 100%;
+	}
+
+	body {
+margin: 0;
+height: 100%;
+font-family: Helvetica, Arial, sans-serif;
+background-color: #CCCCFF;
+overflow: hidden;
+	}
+
+	#nav {
+background: linear-gradient(to bottom, #CCCCFF 50%,#1d1d1d 97%,#333333 97%);
+width: 100%;
+height: 61px;
+overflow: hidden;
+	}
+
+	#logo {
+height: 61px;
+float: left;
+	}
+
+	#projects {
+width: 2000px;
+	}
+
+.project {
+	transition: width 1s cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+
+	position: relative;
+
+	width: 20px;
+	height: 61px;
+
+	float: left;
+	/* padding: 12px 0px;*/
+
+	cursor: pointer;
+
+	overflow: hidden;
+}
+
+.project .image {
+	position: absolute;
+	top: 12px;
+	border: 2px solid #ffffff;
+	width: 32px;
+	height: 32px;
+	background-color: #CCCCFF;
+	background-image: url('index.png');
+	image-rendering: pixelated;
+}
+
+.project div {
+	position: absolute;
+
+	left: 46px;
+	top: 18px;
+	width: 132px;
+
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 8px;
+	line-height: 13px;
+
+	text-transform: uppercase;
+}
+
+.project .link {
+
+	position: absolute;
+	right: 12px;
+	top: 8px;
+	image-rendering: pixelated;
+
+}
+
+.project:hover {
+	transition: width 0.5s cubic-bezier(0.190, 1.000, 0.220, 1.000); /* easeOutExpo */
+	width: 45px;
+}
+
+.project.selected {
+	transition: width 0.5s cubic-bezier(0.190, 1.000, 0.220, 1.000); /* easeOutExpo */
+	width: 180px;
+}
+
+.project.selected:hover {
+	width: 180px;
+}
+
+	#expand {
+position: absolute;
+width: 32px;
+height: 32px;
+right: 15px;
+top: 15px;
+display: none;
+	}
+
+#expand span {
+	background: #888;
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin: 4px 6px;
+}
+
+#expand span:nth-child(1) {
+	margin-top: 8px;
+}
+
+	#viewer {
+position: absolute;
+width: 100%;
+top: 61px;
+bottom: 0px;
+	}
+
+	@media all and ( max-width: 640px ) {
+#nav {
+	background: none;
+	height: auto;
+	overflow: auto;
+}
+	#nav .hidden {
+display: none;
+	}
+#logo {
+	position: absolute;
+	background: linear-gradient(to bottom, #CCCCFF 50%,#1d1d1d 97%,#333333 97%);
+	width: 100%;
+}
+#projects {
+	position: absolute;
+	background: rgba(0,0,0,0.85);
+	top: 61px;
+	bottom: 0px;
+	width: 100%;
+	overflow: auto;
+	z-index: 1;
+}
+.project {
+	margin-left: 15px;
+	width: 140px;
+	display: inline;
+}
+.project:hover {
+	width: 140px;
+}
+.project.selected {
+	width: 140px;
+}
+.project.selected:hover {
+	width: 140px;
+}
+.project .link {
+	display: none;
+}
+#expand {
+	display: block;
+}
+#viewer {
+	z-index: 0;
+}
+	}
+
+</style>
+	</head>
+	<body>
+
+	
+
+<div id="nav">
+	<div id="logo">
+<map name="logo">
+	<area shape="rect" title="鲁虺文化网英语语系研究" target="_top" href="search.html" coords="12,13,91,32" alt="鲁虺文化网站首页 http://www.luhui.net" />
+	<area shape="rect" title="鲁虺文化网博客" target="_top" href="http://t.luhui.net" coords="12,32,44,46" alt="鲁虺文化网博客" />
+	<area shape="rect" title="鲁虺文化网常用社交软件" target="_top" href="/cn/Message/" coords="47,32,88,46" alt="鲁虺文化网常用社交软件" />
+</map>
+<img src="logo.png" alt="logo" width="105" usemap="#logo" />
+	</div>
+	<div id="projects"></div>
+	<div id="expand"><span></span><span></span><span></span></div>
+	<a title="更多" target="_top" href="/cs/"><img src="data:image/gif;base64,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" width="60" style="float:left" /></a> <!-- -->
+</div>
+
+<div id="viewer">
+	<iframe id="iframe" style="border:0;width:100%;height:100%"></iframe>
+</div>
+
+<script>
+
+	var data = [
+
+{
+	"id": 1,
+	"name": "luhui os",
+	"timestamp": "luhui os",
+	"link": "os#english.html"
+},
+
+{
+	"id": 2,
+	"name": "plane deformations",
+	"timestamp": "plane deformations",
+	"link": "plane_deformations"
+},
+
+{
+	"id": 3,
+	"name": "ai",
+	"timestamp": "ai",
+	"link": "ai"
+},
+
+{
+	"id": 4,
+	"name": "slitscan",
+	"timestamp": "slitscan",
+	"link": "slitscan"
+},
+
+
+{
+	"id": 5,
+	"name": "displace",
+	"timestamp": "displace",
+	"link": "displace"
+},
+
+{
+	"id": 6,
+	"name": "particles",
+	"timestamp": "particles",
+	"link": "particles"
+},
+
+{
+	"id": 7,
+	"name": "longurl",
+	"timestamp": "longurl",
+	"link": "longurl"
+},
+
+
+{
+	"id": 8,
+	"name": "sprite-replicator",
+	"timestamp": "sprite-replicator",
+	"link": "sprite-replicator"
+},
+
+{
+	"id": 9,
+	"name": "graphycalc",
+	"timestamp": "graphycalc",
+	"link": "graphycalc"
+},
+
+{
+	"id": 10,
+	"name": "audioeditor",
+	"timestamp": "audioeditor",
+	"link": "audioeditor"
+},
+
+
+
+
+{
+	"id": 11,
+	"name": "musicplayer",
+	"timestamp": "musicplayer",
+	"link": "musicplayer"
+},
+
+{
+	"id": 12,
+	"name": "particulate-medusae",
+	"timestamp": "particulate-medusae",
+	"link": "particulate-medusae"
+},
+
+
+
+{
+	"id": 13,
+	"name": "avatarmaker",
+	"timestamp": "avatarmaker",
+	"link": "avatarmaker"
+},
+
+
+
+
+{
+	"id": 14,
+	"name": "soundbox",
+	"timestamp": "soundbox",
+	"link": "soundbox"
+},
+
+
+
+
+
+{
+	"id": 15,
+	"name": "aaronetrope",
+	"timestamp": "aaronetrope",
+	"link": "aaronetrope"
+},
+
+
+
+{
+	"id": 16,
+	"name": "brokenmantra",
+	"timestamp": "brokenmantra",
+	"link": "brokenmantra"
+},
+
+
+
+{
+	"id": 17,
+	"name": "jamuscouk",
+	"timestamp": "jamuscouk",
+	"link": "jamuscouk"
+},
+
+
+
+{
+	"id": 18,
+	"name": "playtictactoe",
+	"timestamp": "playtictactoe",
+	"link": "playtictactoe"
+},
+
+
+
+{
+	"id": 19,
+	"name": "colors-palette-generator",
+	"timestamp": "colors-palette-generator",
+	"link": "colors-palette-generator"
+},
+
+
+
+{
+	"id": 20,
+	"name": "rap",
+	"timestamp": "rap",
+	"link": "rap"
+},
+
+
+
+{
+	"id": 21,
+	"name": "nodtotherhythm",
+	"timestamp": "nodtotherhythm",
+	"link": "nodtotherhythm"
+},
+
+
+
+{
+	"id": 22,
+	"name": "transparenttextures",
+	"timestamp": "transparenttextures",
+	"link": "transparenttextures"
+},
+
+
+
+{
+	"id": 23,
+	"name": "graphie-to-png",
+	"timestamp": "graphie-to-png",
+	"link": "graphie-to-png"
+},
+
+
+
+{
+	"id": 24,
+	"name": "English Classics 3000",
+	"timestamp": "English Classics 3000",
+	"link": "3kenglish"
+},
+
+
+{
+	"id": 25,
+	"name": "英语词典",
+	"timestamp": "简明汉英分类表达词典 庄智象 编著",
+	"link": "../api/pdfjs/viewer.html?file=/en/dictionary.pdf"
+},
+
+
+
+{
+	"id": 31,
+	"name": "Terms of Service.",
+	"timestamp": "Terms of Service.",
+	"link": "http://pw.guanfu.org/pages/#/policy/tos"
+},
+
+
+
+{
+	"id": 32,
+	"name": "business copy",
+	"timestamp": "商业文案",
+	"link": "search.html"
+},
+
+
+
+{
+	"id": 33,
+	"name": "Cultural Media",
+	"timestamp": "文化传媒",
+	"link": "search.html"
+},
+
+
+
+
+{
+	"id": 34,
+	"name": "search engine",
+	"timestamp": "搜索引擎",
+	"link": "search.html"
+},
+
+
+
+
+
+{
+	"id": 35,
+	"name": "Privacy protection",
+	"timestamp": "隐私保护”可以用“Privacy protection”或“Protection of privacy”来表达。这个词组通常用于强调对个人隐私的保护措施或原则。",
+	"link": "search.html"
+},
+
+
+
+
+{
+	"id": 36,
+	"name": "software source code",
+	"timestamp": "软件源码",
+	"link": "search.html"
+},
+
+
+
+{
+	"id": 37,
+	"name": "product service",
+	"timestamp": "产品服务",
+	"link": "search.html"
+},
+
+
+
+{
+	"id": 38,
+	"name": "payment method",
+	"timestamp": "付款方式",
+	"link": "/alipay"
+},
+
+
+
+{
+	"id": 39,
+	"name": "about luhui",
+	"timestamp": "关于鲁虺",
+	"link": "search.html"
+},
+
+
+
+{
+	"id": 40,
+	"name": "Contact luhui",
+	"timestamp": "联系我们",
+	"link": "about.html"
+},
+
+
+{
+	"id": 96,
+	"name": "Google Sphere",
+	"timestamp": "2009 / 05 / 28",
+	"link": "projects/chromeexperiments/google-sphere/"
+},
+
+{
+	"id": 97,
+	"name": "Depth of Field",
+	"timestamp": "2009 / 06 / 10",
+	"link": "projects/chromeexperiments/depth_of_field/"
+},
+
+
+{
+	"id": 158,
+	"name": "paint",
+	"timestamp": "paint",
+	"link": "paint"
+},
+
+{
+	"id": 157,
+	"name": "Spin Painter",
+	"timestamp": "2015 / 05 / 10",
+	"link": "lab/javascript/spinpainter/"
+},
+
+
+{
+	"id": 156,
+	"name": "xplsv Dataworld",
+	"timestamp": "2015 / 03 / 05",
+	"link": "xplsv_dataworld#xplsv.github.io/dataworld/"
+},
+
+{
+	"id": 155,
+	"name": "Texgen.js",
+	"timestamp": "2015 / 01 / 26",
+	"link": "texgenjs#/texgenjs.org/"
+},
+
+
+
+{
+	"id": 153,
+	"name": "Sporel",
+	"timestamp": "2013 / 12 / 24",
+	"link": "sporel/#//mrdoob.github.io/sporel/"
+},
+
+{
+	"id": 152,
+	"name": "Obsidian",
+	"timestamp": "2013 / 07 / 28",
+	"link": "obsidian/#//xplsv.github.io/obsidian/"
+},
+
+
+{
+	"id": 150,
+	"name": "Beach Balls",
+	"timestamp": "2013 / 03 / 24",
+	"link": "lab/javascript/beachballs/"
+},
+
+
+
+{
+	"id": 147,
+	"name": "Google Space",
+	"timestamp": "2012 / 10 / 15",
+	"link": "projects/chromeexperiments/google-space/"
+},
+
+{
+	"id": 146,
+	"name": "HTML Editor",
+	"timestamp": "2012 / 09 / 02",
+	"link": "projects/htmleditor/"
+},
+
+{
+	"id": 145,
+	"name": "Webcam Displacement",
+	"timestamp": "2012 / 08 / 25",
+	"link": "lab/javascript/webcam/displace/"
+},
+
+{
+	"id": 144,
+	"name": "Magic dust",
+	"timestamp": "2012 / 07 / 31",
+	"link": "lab/javascript/webgl/particles/magicdust.html"
+},
+
+{
+	"id": 143,
+	"name": "DAT particles (thanks zz85)",
+	"timestamp": "2012 / 07 / 31",
+	"link": "lab/javascript/webgl/particles/particles_zz85_1m.html"
+},
+
+{
+	"id": 142,
+	"name": "Winning Solitaire",
+	"timestamp": "2012 / 05 / 07",
+	"link": "lab/javascript/effects/solitaire/"
+},
+
+{
+	"id": 141,
+	"name": "IE with WebGL",
+	"timestamp": "2012 / 05 / 03",
+	"link": "lab/javascript/webgl/ie/"
+},
+
+{
+	"id": 140,
+	"name": "The Single Lane Superhighway",
+	"timestamp": "2011 / 12 / 07",
+	"link": "http://thesinglelanesuperhighway.com/"
+},
+
+{
+	"id": 139,
+	"name": "GLSL Sandbox",
+	"timestamp": "2011 / 11 / 09",
+	// "link": "projects/glsl_sandbox/"
+	"link": "http://glslsandbox.com/"
+},
+
+{
+	"id": 138,
+	"name": "Kinect",
+	"timestamp": "2011 / 10 / 30",
+	"link": "lab/javascript/webgl/kinect/"
+},
+
+{
+	"id": 137,
+	"name": "Voxels liquid",
+	"timestamp": "2011 / 10 / 17",
+	"link": "lab/javascript/webgl/voxels_liquid/"
+},
+
+{
+	"id": 135,
+	"name": "Sphere",
+	"timestamp": "2011 / 08 / 16",
+	"link": "lab/javascript/webgl/sphere/"
+},
+
+{
+	"id": 134,
+	"name": "Comments Audio Visualiser",
+	"timestamp": "2011 / 06 / 17",
+	"link": "lab/javascript/commentsvisualiser/"
+},
+
+
+{
+	"id": 132,
+	"name": "WebGL Globe",
+	"timestamp": "2011 / 05 / 05",
+	"link": "projects/google/globe/redirect/"
+},
+
+{
+	"id": 131,
+	"name": "Clouds",
+	"timestamp": "2011 / 03 / 25",
+	"link": "lab/javascript/webgl/clouds/"
+},
+
+{
+	"id": 130,
+	"name": "Disturb",
+	"timestamp": "2010 / 12 / 11",
+	"link": "lab/javascript/effects/disturb/"
+},
+
+{
+	"id": 129,
+	"name": "Voxels",
+	"timestamp": "2010 / 11 / 06",
+	"link": "projects/voxels/#A/bnciaTraheakhacTSiahfaotaiafUscierhoShahfShahfafiWheSheUeWSfafhchhefffchhWffahherhpfXTbdUhUhUhVihShaffahfahhcfhYhaffYhahhaeeUhahhahhcdfShYhYhafhUheffdafhcjhShYfYfahfYfahfYfafhcjhYeahfShShWhfVbfdjjhaffaffaffafhafhafhahhahhahhahfahfeehhahfahfaffaffafhafhahhWhfahhWhfWffahhefXhUhehffahiaddbnfffYhcmfrfsaaiU"
+},
+
+{
+	"id": 128,
+	"name": "Internet Explorer 6",
+	"timestamp": "2010 / 10 / 07",
+	"link": "lab/javascript/effects/ie6/"
+},
+
+
+{
+	"id": 119,
+	"name": "Zoom blur",
+	"timestamp": "2010 / 03 / 08",
+	"link": "lab/javascript/effects/zoomblur/03/"
+},
+
+{
+	"id": 118,
+	"name": "Rotozoomer",
+	"timestamp": "2010 / 02 / 26",
+	"link": "lab/javascript/effects/rotozoomer/00/"
+},
+
+{
+	"id": 117,
+	"name": "Fire",
+	"timestamp": "2010 / 02 / 15",
+	"link": "lab/javascript/effects/fire/01/"
+},
+
+{
+	"id": 116,
+	"name": "Water Remix",
+	"timestamp": "2010 / 02 / 11",
+	"link": "lab/javascript/effects/water/01/"
+},
+
+{
+	"id": 115,
+	"name": "Water",
+	"timestamp": "2010 / 02 / 11",
+	"link": "lab/javascript/effects/water/00/"
+},
+
+
+{
+	"id": 107,
+	"name": "Strange Attractor",
+	"timestamp": "2009 / 11 / 04",
+	"link": "lab/javascript/strangeattractor/"
+},
+
+{
+	"id": 106,
+	"name": "Checkbox Painter",
+	"timestamp": "2009 / 11 / 04",
+	"link": "lab/javascript/checkbox_painter/"
+},
+
+{
+	"id": 105,
+	"name": "Checkboxes Ball",
+	"timestamp": "2009 / 11 / 04",
+	"link": "lab/javascript/checkboxes/"
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+	];
+
+	var nav = document.getElementById( 'projects' ); // document.getElementById( 'nav' );
+	var viewer = document.getElementById( 'viewer' );
+	var iframe = document.getElementById( 'iframe' );
+
+	// iOS iframe auto-resize workaround
+
+	if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+iframe.style.width = getComputedStyle( iframe ).width;
+iframe.style.height = getComputedStyle( iframe ).height;
+	}
+
+	var expand = document.getElementById( 'expand' );
+	expand.addEventListener( 'click', function () {
+
+nav.className = nav.className === '' ? 'hidden' : '';
+
+	} );
+
+	var selected, divs = {};
+
+	init();
+
+	function init () {
+
+buildNav( data );
+
+if ( window.location.hash ) {
+
+	var hash = window.location.hash.substr( 1 );
+
+	var id = hash.split( '/' )[ 1 ];
+
+	for ( var i in data ) {
+
+if ( data[ i ].id == id ) {
+
+	loadProject( data[ i ] );
+	break;
+
+}
+
+	}
+
+} else {
+
+	loadProject( data[ 0 ] );
+
+}
+
+window.addEventListener( 'popstate', function ( event ) {
+
+	if ( event.state != null ) loadProject( event.state );
+
+}, false );
+
+	};
+
+	function buildNav( projects ) {
+
+for ( var i in projects ) {
+
+	nav.appendChild( buildProject( projects[ i ] ) );
+
+}
+
+	}
+
+	function buildProject( data ) {
+
+var div = document.createElement( 'div' );
+div.className = 'project';
+div.addEventListener( 'click', function ( event ) {
+
+	loadProject( data );
+	window.location.hash = '/' + data.id + '/' + data.name.toLowerCase().replace( /\ /gi, '_' ).replace( /[:.,\'()%]/gi, '' );
+
+}, false );
+
+var id = data.id - 1;
+var x = id % 32;
+var y = Math.floor( id / 32 );
+
+var span = document.createElement( 'span' );
+span.className = 'image';
+span.style.backgroundPosition = '-' + ( x * 32 ) + 'px -' + ( y * 32 ) + 'px';
+div.appendChild( span );
+
+var text = document.createElement( 'div' );
+text.innerHTML = data.name + '<br>';
+text.innerHTML += '<span style="color:#606060">' + data.timestamp + '</spa><br>';
+text.innerHTML += '<a class="link" href="' + data.link + '" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAFpJREFUGNNjZMACuKp+/YexWZA4BxkYGC4yMDDc+dbGxggXR1aNZMIBuBy6Aq6qXxOhdC4DAwMDE5pk7rc2tnwoVwVDwbc2tslIXH0MBWjAnoGBgYEFl0NhAACB5CInSa6GCQAAAABJRU5ErkJggg==" style="margin-top:1px"></a>'; // ' + data.link.replace( /http:\/\//gi, '' ) +
+div.appendChild( text );
+
+divs[ data.id ] = div;
+
+return div;
+
+	}
+
+	function loadProject( data ) {
+
+if ( selected ) {
+
+	selected.className = 'project';
+
+}
+
+nav.className = 'hidden';
+
+selected = divs[ data.id ];
+selected.className = 'project selected';
+
+document.title = 'Luhui English Language Humanities Resource Network 魯虺英语语系人文资源网 http://www.luhui.net 鲁虺文化网 Luhui Culture Network| ' + data.name;
+iframe.src = data.link;
+
+	}
+
+</script>
+	</body>
+</html>
