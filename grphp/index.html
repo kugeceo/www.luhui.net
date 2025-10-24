@@ -1,0 +1,451 @@
+<!--版权说明开始
+/*
++---------------------------------------------------+
+| Name : 鲁虺智虺堂文献术语库JavaScript版utf-8编码
++---------------------------------------------------+
+| 创建Created  2024-10-1 / 修改Modify 2024-10-8
++---------------------------------------------------+
+| Version : 1.0.0
++---------------------------------------------------+
+| Author : 鲁虺文化网  冠富研究院  冠富商务通
++---------------------------------------------------+
+| Powered by luhui.net 2004-01-11
++---------------------------------------------------+
+| QQ : 63625244 
+| Email : info@mail.luhui.net
+| 鲁虺文化网 : http://www.luhui.net
+| 冠富研究院 : http://www.guanfu.org
+| 冠富商务通 : http://www.guanfu.net.cn
++---------------------------------------------------+
+| Note :
+|
+| 1.本软件对于非商业用户完全免费,如果要使用在商业用途
+|   方面,必须取得作者的授权.
+|
+| 2.你可以任意传播以及修改本程序,但不能以任何形式删除
+|   本程序的版权.请记住,保留作者版权是对原创作者的尊敬.
+|
+| 3.如果有问题,可以通过上面提供的方式进行解答,但作者
+|   业务繁重,如果不能及时或者不解答,请谅解.
+|
+| 4.作者对使用该程序导致的问题,不予以负责.
+|
+| 5.本程序版权归 鲁虺文化网 所有.禁止任何侵权行为!
+|
++---------------------------------------------------+
+*/
+--版权说明结束-->
+<!DOCTYPE html>
+<html lang="zh">
+<title>鲁虺贴吧搜索堂</title>
+<meta name="keywords" content="鲁虺贴吧搜索堂" />
+<meta name="description" content="鲁虺贴吧搜索堂utf-8版" />
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script>
+    async function loadData() {
+      try {
+        const response = await fetch('grphpneirong2024927.txt');
+        const text = await response.text();
+        const lines = text.split('\n');
+        const dataArray = [];
+        for (const line of lines) {
+          const parts = line.split('\t');
+          if (parts.length === 2) {
+            // 假设这里为每个数据项添加一个随机的热度值用于模拟按热度排序
+            dataArray.push({ title: parts[0], content: parts[1], heat: Math.random() });
+          }
+        }
+        return dataArray;
+      } catch (error) {
+        console.error('Error loading data:', error);
+        return [];
+      }
+    }
+  </script>
+  <script>
+    async function updateMetaTags(id) {
+      const data = await loadData();
+      if (id >= 1 && id <= data.length) {
+        const detail = data[id - 1];
+        const title = `鲁虺智虺堂 - ${detail.title}`;
+        const keywords = `鲁虺智虺堂,${detail.title}`;
+        const description = `${detail.title} - ${detail.content.slice(0, 100)}...`;
+        document.title = title;
+        document.querySelector('meta[name="keywords"]').content = keywords;
+        document.querySelector('meta[name="description"]').content = description;
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div align="center">
+    <center></center>
+    <br>
+<!--自定义通栏头部文件-->
+<script src='/js/header.js' language='JavaScript' charset='utf-8'></script>
+
+
+<a href="./" class="logo-expanded">
+<img src="./logo.png" width="100%" alt="" />
+</a>
+
+    <table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;" id="top">
+      <tr>
+        <td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle" colspan="5">
+          <b>鲁虺智虺堂</b>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" valign="middle" height="60">
+          输入关键词：<input type="text" id="searchInput" size="18" style="width:200px;height:22px;font-size:16px;font-family: Geneva, Arial, Helvetica, sans-serif;" />
+          <button onclick="search()">搜索</button>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" height="30" style="font-size:14px;">类目资源：
+
+
+<a title="《康熙字典》，是张玉书、陈廷敬等三十多位著名学者奉康熙圣旨编撰的一部具有深远影响的汉字辞书。该书的编撰工作始于康熙四十九年（1710），成书于康熙五十五年（1716），历时六年，因此书名叫《康熙字典》。由总纂官张玉书、陈廷敬主持，修纂官凌绍霄、史夔、周起渭、陈世儒等合力完成。字典采用部首分类法，按笔画排列单字，字典全书分为十二集，以十二地支标识，每集又分为上、中、下三卷，并按韵母、声调以及音节分类排列韵母表及其对应汉字，共收录汉字四万七千零三十五个（47，035个），为汉字研究的主要参考文献之一。《康熙字典》依据明朝《字汇》《正字通》两书加以增订。对两书错误之处，《康熙字典》还做过一番“辨疑订讹”的工夫。《康熙字典》有这样三个优点：一、收字相当丰富，在很长一个时期内是我国字数最多的一部字典（直到一九一五年《中华大字典》出版，达四万八千余字，才超过了它）。  二、它以二百一十四个部首分类，并注有反切注音、出处、及参考等，差不多把每一个字的不同音切和不同意义都列举进去，可以供使用者检阅。   三、除了僻字僻义以外，它又差不多在每字每义下，都举了例子；这些例子又几乎全都是引用了“始见”的古书。" href="kangxi">康熙字典</a> 
+
+<a title="现代汉语词典在线查询在线汉语词典" href="cidian">汉语词典</a>
+
+<a title="毒鸡汤" href="dujitang">毒鸡汤</a>
+
+<a title="谜语" href="miyu">谜语</a>
+
+<a title="名人名言" href="mingyan">名言</a>
+
+<a title="周公解梦" href="meng">解梦</a>
+
+<a title="民间谚语/英文谚语" href="yanyu">谚语</a>
+
+<a title="古籍溯源" href="guji">古籍溯源</a>
+
+<a title="异体字查询查询一个字的所有写法" href="yitizi">异体字</a>
+
+<a title="大辞海 " href="dacihai">大辞海</a>
+
+<a title="制度" href="?q=制度">制度</a>
+
+<a title="语言翻译" href="/cn/fy">语言翻译</a> 
+
+
+        </td>
+      </tr>
+    </table>
+    <br />
+    <div id="resultContainer"></div>
+    <div class="pagination"></div>
+    <div>
+      排序方式：
+      <select id="sortSelect" onchange="search(document.getElementById('searchInput').value.trim())">
+        <option value="default">默认</option>
+        <option value="asc">升序</option>
+        <option value="desc">降序</option>
+        <option value="hot">按热度</option>
+      </select>
+    </div>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+  </div>
+  <script>
+    let data = [];
+
+    async function init() {
+      data = await loadData();
+      const urlParams = new URLSearchParams(window.location.search);
+      const idParam = urlParams.get('id');
+      const qParam = urlParams.get('q');
+      if (idParam) {
+        showDetail(parseInt(idParam));
+      } else if (qParam) {
+        search(qParam);
+      } else {
+        if (!data.length) return;
+        const randomStart = Math.floor(Math.random() * (data.length - 60));
+        let resultHTML = '';
+        let r_num = 0;
+        for (let i = randomStart; i < randomStart + 60 && i < data.length; i++) {
+          if (r_num % 3 === 0) resultHTML += "<tr>";
+          const detail = data[i];
+          resultHTML += `<td width="${100 / 3}%"><img src="data:image/gif;base64,R0lGODlhCQAPAJEAAAAAAP///02xJv///yH5BAEAAAMALAAAAAAJAA8AQAIZnH+iEisIXVswOjVU2BtfXIVi9ZWMOZlKAQA7" /> <a href="?id=${i + 1}.html">${detail.title}</a></td>`;
+          if ((r_num + 1) % 3 === 0) resultHTML += "</tr>";
+          r_num++;
+        }
+        const randomHTML = `<table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;"><tr><td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle" colspan="5"><b>推荐智虺堂${r_num}个</b></td></tr><tr><td><table cellpadding="5" cellspacing="10" width="100%">${resultHTML}</table></td></tr></table>`;
+        document.getElementById('resultContainer').innerHTML = randomHTML;
+      }
+    }
+
+    function search(q) {
+      let resultHTML = '';
+      let r_num = 0;
+      const page = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+      const startIndex = (page - 1) * 200;
+      const endIndex = startIndex + 200;
+      const sortOption = new URLSearchParams(window.location.search).get('sort') || 'default';
+      let sortedData = [...data];
+      if (sortOption === 'asc') {
+        sortedData.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortOption === 'desc') {
+        sortedData.sort((a, b) => b.title.localeCompare(a.title));
+      } else if (sortOption === 'hot') {
+        sortedData.sort((a, b) => b.heat - a.heat);
+      }
+      for (let i = startIndex; i < endIndex && i < sortedData.length; i++) {
+        const detail = sortedData[i];
+        const keywords = q.split(" ");
+        for (let ai = 0; ai < keywords.length; ai++) {
+          if (detail.title.includes(keywords[ai])) {
+            if (r_num % 3 === 0) resultHTML += "<tr>";
+            resultHTML += `<td width="${100 / 3}%"><img src="data:image/gif;base64,R0lGODlhCQAPAJEAAAAAAP///02xJv///yH5BAEAAAMALAAAAAAJAA8AQAIZnH+iEisIXVswOjVU2BtfXIVi9ZWMOZlKAQA7" /> <a href="?id=${i + 1}.html">${detail.title}</a></td>`;
+            if ((r_num + 1) % 3 === 0) resultHTML += "</tr>";
+            r_num++;
+            break;
+          }
+        }
+      }
+      resultHTML = `<table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;"><tr><td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle" colspan="5"><b><a href="#">鲁虺智虺堂</a>：検索到 <a href="#"><font color="#c60a00">${q}</font></a> 的相关词语${r_num}个</b></td></tr><tr><td><table cellpadding="5" cellspacing="10" width="100%">${resultHTML}</table></td></tr></table>`;
+      document.getElementById('resultContainer').innerHTML = resultHTML;
+      generatePagination(q, sortOption);
+      history.pushState(null, null, `?q=${q}&page=${page}&sort=${sortOption}`);
+    }
+
+    function generatePagination(q, sortOption) {
+      const totalResults = data.length;
+      const totalPages = Math.ceil(totalResults / 200);
+      let paginationHTML = '';
+      const currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+      if (currentPage > 1) {
+        paginationHTML += `<a href="?q=${q}&page=1&sort=${sortOption}">首页</a> <a href="?q=${q}&page=${currentPage - 1}&sort=${sortOption}">上一页</a> `;
+      }
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === currentPage) {
+          paginationHTML += `<span>${i}</span> `;
+        } else {
+          paginationHTML += `<a href="?q=${q}&page=${i}&sort=${sortOption}">${i}</a> `;
+        }
+      }
+      if (currentPage < totalPages) {
+        paginationHTML += `<a href="?q=${q}&page=${currentPage + 1}&sort=${sortOption}">下一页</a> <a href="?q=${q}&page=${totalPages}&sort=${sortOption}">尾页</a>`;
+      }
+      document.querySelector('.pagination').innerHTML = paginationHTML;
+    }
+
+    function showDetail(id) {
+      if (id >= 1 && id <= data.length) {
+        const detail = data[id - 1];
+        const detailHTML = `<table width="100%" cellpadding="2" cellspacing="0" style="border:1px solid #B2D0EA;">
+          <tr>
+            <td style="background:#EDF7FF;padding:0 5px;color:#014198;" height="26" valign="middle">
+              <b><a href="?">鲁虺智虺堂</a> / ${detail.title}</b>
+            </td>
+            <td style="background:#EDF7FF;padding:0 5px;color:#014198;" align="right">
+              ${id > 1 && id <= data.length? '<a href="?id=' + (id - 1) + '.html">上一个</a> ' : ''}
+              <a href="?">查看全部</a>
+              ${id >= 1 && id < data.length? ' <a href="?id=' + (id + 1) + '.html">下一个</a>' : ''}
+            </td>
+          </tr>
+          <tr>
+            <td align="center" colspan="2"><h3>${detail.title}</h3></td>
+          </tr>
+          <tr>
+            <td style="padding:5px;line-height:21px;" colspan="2"><p>${detail.content? detail.content : '暂无内容'}</p></td>
+          </tr>
+        </table>`;
+        document.getElementById('resultContainer').innerHTML = detailHTML;
+
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'ArrowLeft') {
+            if (id > 1) {
+              showDetail(id - 1);
+              document.querySelectorAll('#resultContainer tr').forEach(tr => tr.classList.remove('highlight'));
+              document.querySelectorAll('#resultContainer tr')[id - 2].classList.add('highlight');
+              updateProgressBar(id - 1);
+              history.pushState(null, null, `?id=${id - 1}`);
+            }
+          } else if (event.key === 'ArrowRight') {
+            if (id < data.length) {
+              showDetail(id + 1);
+              document.querySelectorAll('#resultContainer tr').forEach(tr => tr.classList.remove('highlight'));
+              document.querySelectorAll('#resultContainer tr')[id].classList.add('highlight');
+              updateProgressBar(id + 1);
+              history.pushState(null, null, `?id=${id + 1}`);
+            }
+          }
+        });
+        updateMetaTags(id);
+      } else {
+        document.getElementById('resultContainer').innerHTML = '无效的 ID。';
+      }
+    }
+
+    function updateProgressBar(currentId) {
+      const progress = ((currentId - 1) / data.length) * 100;
+      document.querySelector('.progress').style.width = progress + '%';
+    }
+
+    document.getElementById('searchInput').addEventListener('keyup', function(event) {
+      if (event.key === 'Enter') {
+        search(this.value.trim());
+      }
+    });
+
+    document.querySelector('button').addEventListener('click', function() {
+      const inputValue = document.getElementById('searchInput').value.trim();
+      if (inputValue) {
+        search(inputValue);
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const qParam = urlParams.get('q');
+      const sortOption = urlParams.get('sort') || 'default';
+      const currentPage = parseInt(urlParams.get('page')) || 1;
+      if (event.key === 'ArrowLeft') {
+        if (currentPage > 1) {
+          search(qParam, currentPage - 1, sortOption);
+        }
+      } else if (event.key === 'ArrowRight') {
+        const totalPages = Math.ceil(data.length / 200);
+        if (currentPage < totalPages) {
+          search(qParam, currentPage + 1, sortOption);
+        }
+      }
+    });
+
+    init();
+  </script>
+  
+  
+  
+  
+
+<!--此方法可以自动获取调用网址来源
+将HOPE做个有趣的分解，会发现：
+H--Health 健康
+O--Opportunity机遇
+P--Passion激情
+E--Energy 精力
+这样的愿景很不错：拥有健康、在充满机遇的一年、和亲友同事一起迸发着激情、让精力的释放都有所收获！-->
+<script>var yreflocation_html=document.location.href;</script><script>var url="<iframe allowTransparency=true border=0 align=center vspace=0  hspace=0 name=searchbar marginwidth=0 marginheight=0 framespacing=0 frameborder=0 scrolling=no width=100% height=60";url+='  src="/search/code46840.htm#?url='+escape(yreflocation_html)+'"></iframe>';document.write(url);</script>
+
+<!--
+//                            _ooOoo_
+//                           o8888888o
+//                           88" . "88
+//                           (| -_- |)
+//                            O\ = /O
+//                        ____/`---'\____
+//                      .   ' \\| |// `.
+//                       / \\||| : |||// \
+//                     / _||||| -:- |||||- \
+//                       | | \\\ - /// | |
+//                     | \_| ''\---/'' | |
+//                      \ .-\__ `-` ___/-. /
+//                   ___`. .' /--.--\ `. . __
+//                ."" '< `.___\_<|>_/___.' >'"".
+//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+//                 \ \ `-. \_ __\ /__ _/ .-` / /
+//         ======`-.____`-.___\_____/___.-`____.-'======
+//                            `=---='
+//
+//         .............................................
+//                  佛祖镇楼                  BUG辟易
+//          佛曰:
+//                  写字楼里写字间，写字间里程序员；
+//                  程序人员写程序，又拿程序换酒钱。
+//                  酒醒只在网上坐，酒醉还来网下眠；
+//                  酒醉酒醒日复日，网上网下年复年。
+//                  但愿老死电脑间，不愿鞠躬老板前；
+//                  奔驰宝马贵者趣，公交自行程序员。
+//                  别人笑我忒疯癫，我笑自己命太贱；
+//                  不见满街漂亮妹，哪个归得程序员？
+
+━━━━━━神兽出没，妖挡杀妖 ，魔挡降魔，神挡弑神，鬼挡灭鬼━━━━━━“人挡杀人，佛挡杀佛”出自《临济录》。
+*
+　　 ┏┓ ┏┓
+　　┏┛┻━━━━━┛┻┓
+　　┃　　　┃
+　　┃　　━┃
+　　┃　┳┛　┗┳ ┃
+　　┃　　　　┃
+　　┃　　┻　　┃
+　　┃　　　 ┃
+　　┗━┓　　　┏━┛　Code is far away from bug with the animal protecting
+　　　 ┃　　　┃ 神兽保佑,代码无bug！
+　　　　┃　　　┃
+　　　　┃　　　┗━━━┓
+　　　　┃　　　　┣┓
+　　　　┃　　　┏┛
+　　　　┗┓┓┏━┳┓┏┛
+　　　　 ┃┫┫ ┃┫┫
+　　　　 ┗┻┛ ┗┻┛
+*
+━神佛魔尊感觉这娘们萌萌哒，哈哈哈o(*￣︶￣*)o━*━
+
+               .::::.
+              .::::::::.
+             :::::::::::
+          ..:::::::::::'
+       '::::::::::::'
+         .::::::::::
+    '::::::::::::::..
+         ..::::::::::::.
+       ``::::::::::::::::
+        ::::``:::::::::'        .:::.
+       ::::'   ':::::'       .::::::::.
+     .::::'      ::::     .:::::::'::::.
+    .:::'       :::::  .:::::::::' ':::::.
+   .::'        :::::.:::::::::'      ':::::.
+  .::'         ::::::::::::::'         ``::::.
+.:::           ::::::::::::'              ``::.
+  ':.          ':::::::::'                  ::::..
+
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  色即是空,空即是色
+   .............................................
+                       _ooOoo_
+                      o8888888o
+                      88" . "88
+                      (| -_- |)
+                      O\  =  /O
+                   ____/`---'\____
+                 .'  \\|     |//  `.
+                /  \\|||  :  |||//  \
+               /  _||||| -:- |||||-  \
+               |   | \\\  -  /// |   |
+               | \_|  ''\---/''  |   |
+               \  .-\__  `-`  ___/-. /
+             ___`. .'  /--.--\  `. . __
+          ."" '<  `.___\_<|>_/___.'  >'"".
+         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+         \  \ `-.   \_ __\ /__ _/   .-` /  /
+    ======`-.____`-.___\_____/___.-`____.-'======
+                       `=---='
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 Buddha Bless, No Bug !
+   .............................................  
+   黑暗神书              富派仙尊  
+
+   砖业僚机:  ==================================
+   
+   神聊莫若虺，添情那是强，
+   原创成二奶，转载变正房！
+   
+   ————————————聊机中的颤抖机鲁之虺
+   Text to ASCII Art
+   http://texteditor.luhui.net/ascii-art/
+   -------------------------------------------->
+   
+<!--自定义通栏底部文件-->
+<script src='/js/footer.js' language='JavaScript' charset='utf-8'></script>
+<script src='/js/tongji.js' language='JavaScript' charset='utf-8'></script>  
+</body>
+
+</html>
