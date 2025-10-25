@@ -1,0 +1,12 @@
+document.writeln("<li><a href=\"\/groups/xiehouyu\">歇后语大全<\/a><\/li>");
+document.writeln("<li><a href=\"\/groups/meng\">周公解梦<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/sjjx\">手机吉凶测试<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/qqliao\">QQ强制对话<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/huoxing\">火星文转换<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/gangqin\">钢琴键盘<\/a><\/li>");
+document.writeln("<li><a href=\"\/groups/miyu\">谜语大全<\/a><\/li>");
+document.writeln("<li><a href=\"\/groups/yanyu\">民间谚语大全<\/a><\/li>");
+document.writeln("<li><a href=\"\/groups/naojin\">脑筋急转弯<\/a><\/li>");
+document.writeln("<li><a href=\"\/groups/mingyan\">名人名言<\/a><\/li>");
+document.writeln("<li><a href=\"\/groups/raokouling\">绕口令大全<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/qqjx\">QQ号码吉凶<\/a><\/li>")

@@ -1,0 +1,12 @@
+document.writeln("<li><a href=\"\/htmledit/jsq\">智能计算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/wendu\">温度换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/changdu\">长度换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/zhongliang\">重量换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/mianji\">面积换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/reliang\">功、能和热量换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/tiji\">体积和容量换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/gonglv\">功率换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/yali\">压力换算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/nianling\">年龄计算器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/tizhi\">体质指数计算<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/riqicha\">两日距离天数计算<\/a><\/li>")

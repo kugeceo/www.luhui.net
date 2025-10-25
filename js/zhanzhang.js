@@ -1,0 +1,17 @@
+document.writeln("<li><a href=\"\/htmledit/htmljs\">HTML转换JS<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/base64\">BASE64加密、解密<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/jsmi\">JS加密\/解密<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/utf8\">UTF8 转换工具<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/url16\">URL16进制加密<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/md5\">MD5加密<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/escape\">Escape加密\/解密<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/ascii2\">字符串转换ASCII码<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/jsformat\">JS\/HTML美化压缩<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/ascii\">ASCII字形生成器<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/ymzhxg\">页面转换效果<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/regular\">正则表达式检测<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/pr\">Google PR 查询<\/a><\/li>");
+document.writeln("<li><a href=\"http://whois.luhui.net\">WHOIS查询<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/color\">网页颜色代码选择器<\/a><\/li>");
+document.writeln("<li><a href=\"\/ads/\">广告代码<\/a><\/li>");
+document.writeln("<li><a href=\"\/css\">CSS样式<\/a><\/li>")

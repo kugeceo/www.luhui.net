@@ -1,0 +1,12 @@
+document.writeln("<li><a href=\"http://ip.luhui.net\">IP&#x5730;&#x5740;&#x67E5;&#x8BE2;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/fanyi\">&#x5728;&#x7EBF;&#x7FFB;&#x8BD1;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/speed\">&#x7F51;&#x901F;&#x6D4B;&#x8BD5;<\/a><\/li>");
+document.writeln("<li><a href=\"\/cn/mail\">&#x90AE;&#x7BB1;&#x56FE;&#x6807;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/xunlei\">&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#x8F6C;&#x6362;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/ico\">ICO&#x56FE;&#x6807;&#x751F;&#x6210;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/jianfan\">&#x7E41;&#x7B80;&#x8F6C;&#x6362;&#x5DE5;&#x5177;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/ubb\">HTML\/UBB&#x4E92;&#x8F6C;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/gushu\">&#x53E4;&#x4E66;&#x6392;&#x7248;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/wubipinyin\">&#x4E94;&#x7B14;\/&#x62FC;&#x97F3;&#x67E5;&#x8BE2;<\/a><\/li>");
+document.writeln("<li><a href=\"\/api\">API&#x8D44;&#x6E90;&#x5217;&#x8868;<\/a><\/li>");
+document.writeln("<li><a href=\"\/htmledit/pinyin\">&#x6C49;&#x5B57;&#x8F6C;&#x6362;&#x62FC;&#x97F3;<\/a><\/li>")

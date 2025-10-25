@@ -1,0 +1,2 @@
+document.writeln("<li><a href=\"http:\/\/www.2mfa.cn\/\" target=\"_blank\" title=\"安全上网主页\">网址导航<\/a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<\/li>");
+document.writeln("<li><a style=\"color:#FF0000;\"href=\"http:\/\/www.guanfu.net.cn\" target=\"_blank\" title=\"购物要实惠，就上E折网\">购物要实惠，就上E折网<\/a><\/li>")

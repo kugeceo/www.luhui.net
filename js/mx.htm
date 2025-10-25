@@ -1,0 +1,137 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<!--{block index-css}-->
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<!--{/block}-->
+</head>
+<body>
+<div id="lang-div">
+
+<div id="main-bg"></div>
+<div id="main-bg-mask"></div>
+
+<div id="tab-sync">#TabSync#</div>
+<div id="option-btn"></div>
+
+<div id="slider-left"></div>
+<div id="slider-right"></div>
+
+<section id="page-area"></section>
+<div id="widget-sidebar"></div>
+<nav id="page-nav"></nav>
+
+<!-- 下面是见不得人的元素同志们 -->
+<div id="drag"></div>
+<div id="mask"></div>
+
+<div id="zoom-box" class="zoom-box"></div>
+
+<section id="grid-add">
+	<header>
+        <a class="close"></a>
+        <span class="nav-grid selected">#HotTab#</span>
+        <span class="nav-widget">#HotWidget#</span>
+        <span class="nav-custom">#CustomAdd#</span>
+    </header>
+    <article class="grid-add-list">
+        <ul class="side"></ul>
+        <div class="grid-list">
+            <div class="search-div">
+                <input id="grid-add-search" type="search" placeholder="#SearchTab#"/>
+            </div>
+            <div class="search-list"></div>
+            <div class="no-result">
+                <h5>#NoSearchResult#</h5>
+                <button>#QuickAdd#</button>
+            </div>
+        </div>
+    </article>
+    <article class="widget-add-list"></article>
+    <article class="custom-add-list">
+        <p><span id="custom-url-error">#UrlInputError#</span></p>
+        <div class="custom-img"></div>
+        <p><span><em>*</em>#Url#</span><input id="custom-url" type="text" maxlength="1024"/></p>
+        <p><span>#Title#</span><input id="custom-title" type="text" maxlength="1024"/></p>
+        <div id="custom-tab">
+            <ol>
+                <li title="#CurrentlyVisitedPages#">#CurrentlyVisitedPages#</li>
+                <li title="#MostVisitedPages#">#MostVisitedPages#</li>
+                <li title="#MyFavorites#">#MyFavorites#</li>
+            </ol>
+            <ul>
+                <li data-type="currentadd"></li>
+                <li data-type="usualadd"></li>
+                <li data-type="favadd"></li>
+            </ul>
+        </div>
+        <p><button id="custom-add-btn">#Ok#</button></p>
+    </article>
+</section>
+
+<section id="option-div">
+    <article>
+        <p>#Background#</p>
+        <div id="option-bg-list"></div>
+    </article>
+    <hr/>
+    <article>
+        <p>#Thumb#</p>
+        <div>
+            <input id="option-thumb-2" name="option-thumb" type="radio" value="2"/>
+            <input id="option-thumb-1" name="option-thumb" type="radio" value="1"/>
+            <label for="option-thumb-2">#ColorBlock#</label>
+            <label for="option-thumb-1">#WebThumb#</label>
+        </div>
+    </article>
+    <hr/>
+    <article id="option-checkbox">
+        <div><input id="option-new" type="checkbox" value="1"/><label for="option-new">#NewTabOpen#</label></div>
+        <div><input id="option-hide" type="checkbox" value="1"/><label for="option-hide">#HideBlankGrid#</label></div>
+        <div><input id="option-hide-qa" type="checkbox" value="1"/><label for="option-hide-qa">#HideQuickAccess#</label></div>
+        <div><input id="option-force" type="checkbox" value="1"/><label for="option-force">#BackgroundPush#</label></div>
+    </article>
+</section>
+
+<div id="pop-box">
+    <p></p>
+    <p>
+        <button class="ok">#Ok#</button>
+        <button class="cancel">#Cancel#</button>
+    </p>
+</div>
+
+<div id="guide">
+    <button class="close"></button>
+</div>
+
+</div>
+
+<script type="text/javascript" src="/js/mx.config.js"></script>
+<script type="text/javascript" src="/base/js/jquery.js"></script>
+<!--{block index-js}-->
+<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/language.js"></script>
+<script type="text/javascript" src="js/tool.js"></script>
+<script type="text/javascript" src="js/logic.js"></script>
+<script type="text/javascript" src="js/widget-api.js"></script>
+<script type="text/javascript" src="js/transform.js"></script>
+<script type="text/javascript" src="js/event.js"></script>
+<script type="text/javascript" src="js/weather.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript" src="js/tab-sync.js"></script>
+<!--{/block}-->
+
+<script>
+console.timeEnd(1);
+</script>
+
+</body>
+</html>
+
+
+
