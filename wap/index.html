@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />	
+	<link rel="stylesheet" href="./assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<meta name="author" content="viggo" />
+	<title>鲁虺移动互联 http://www.luhui.net 移动互联网内容终端提供者。移动技术是指与移动通信和移动计算相关的一系列技术。从1G到5G，每一代的移动通信技术都有其独特的特点和优势。例如，第五代移动通信技术（5G）具有高速率、低时延和大连接等特点。此外，随着移动通讯和移动计算技术的融合，移动交互、普适计算、随时随地在线联接、通讯联络和信息交换等应用成为可能。还有一些新的尝试和实践，如超级SIM技术和5G+等也在推动相关产业链的发展。全球最好网真互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网</title>
+	<link href="http://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="http://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<meta name="keywords"
+	  content="移动终端,操作系统,安全软件,安卓应用,苹果应用,移动网站,手机网站,应用开发,硬件厂家,万物互联,浏览器,播放器,微网站,小程序,Wap网站,HTML5,Web APP,3G网站,4G网站,5G网站,6G网站">
+	<meta name="description"
+	  content="鲁虺移动互联，luhui WAP是Wireless Application Protocol无线应用协议的缩写，是一种向移动终端提供互联网内容和先进增值服务的全球统一的开放式协议标准，是简化了的无线Internet协议。鲁虺移动互联网内容是指在移动互联网上生产和传播的各种信息和内容。这些内容包括但不限于文字、图片、音频、视频等多种形式。随着移动通讯和移动计算技术的融合，以及1G到5G每一代的移动通信技术的发展，尤其是4G开启以及移动终端设备的凸显，为移动互联网的发展注入了巨大的能量。目前，中国移动互联网用户总规模突破12亿大关，全网的触网程度继续稳步加深，尤其是人均使用时长，过去一年得到大幅增长，用户的线上粘性愈发增强。这都表明移动互联网内容正在对人们获取信息和交流方式产生深远影响。">
+	<meta property="og:title"
+	content="鲁虺移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计目标是使这些设备能够更好地访问并展示网站内容。这种网站不仅需要适应各种屏幕尺寸，还需要考虑到用户的操作习惯和网络环境等因素。例如，在移动设备上查看网站时，页面元素会彼此堆叠在一个长列中，并且每个元素周围的空间较小；此外，按钮较大，方便用户在移动设备上点击；文本也相对较大，以便于阅读。同时，移动网站应尽量采用响应式设计或自适应设计，以便自动切换电脑版和手机版网页。">
+	<meta property="og:description"
+	content="鲁虺移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计目标是使这些设备能够更好地访问并展示网站内容。这种网站不仅需要适应各种屏幕尺寸，还需要考虑到用户的操作习惯和网络环境等因素。例如，在移动设备上查看网站时，页面元素会彼此堆叠在一个长列中，并且每个元素周围的空间较小；此外，按钮较大，方便用户在移动设备上点击；文本也相对较大，以便于阅读。同时，移动网站应尽量采用响应式设计或自适应设计，以便自动切换电脑版和手机版网页。">
+	<meta property="og:image"
+	content="./assets/images/AiMapProOg.jpg">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://www.luhui.net">
+	<meta property="og:site_name" content="鲁虺移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计目标是使这些设备能够更好地访问并展示网站内容。这种网站不仅需要适应各种屏幕尺寸，还需要考虑到用户的操作习惯和网络环境等因素。例如，在移动设备上查看网站时，页面元素会彼此堆叠在一个长列中，并且每个元素周围的空间较小；此外，按钮较大，方便用户在移动设备上点击；文本也相对较大，以便于阅读。同时，移动网站应尽量采用响应式设计或自适应设计，以便自动切换电脑版和手机版网页。
+
+">
+	
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="鲁虺移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计目标是使这些设备能够更好地访问并展示网站内容。这种网站不仅需要适应各种屏幕尺寸，还需要考虑到用户的操作习惯和网络环境等因素。例如，在移动设备上查看网站时，页面元素会彼此堆叠在一个长列中，并且每个元素周围的空间较小；此外，按钮较大，方便用户在移动设备上点击；文本也相对较大，以便于阅读。同时，移动网站应尽量采用响应式设计或自适应设计，以便自动切换电脑版和手机版网页。">
+	<meta name="twitter:description"
+	content="鲁虺移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计移动网站是指针对移动设备如智能手机、平板电脑等进行优化的网站，其设计目标是使这些设备能够更好地访问并展示网站内容。这种网站不仅需要适应各种屏幕尺寸，还需要考虑到用户的操作习惯和网络环境等因素。例如，在移动设备上查看网站时，页面元素会彼此堆叠在一个长列中，并且每个元素周围的空间较小；此外，按钮较大，方便用户在移动设备上点击；文本也相对较大，以便于阅读。同时，移动网站应尽量采用响应式设计或自适应设计，以便自动切换电脑版和手机版网页。">
+	<meta name="twitter:image" content="./assets/images/AiMapProOg.jpg">
+	<link rel="shortcut icon" href="./assets/images/favicon.png">
+	<link rel="stylesheet" href="./assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="./assets/css/bootstrap.css">
+	<link rel="stylesheet" id="theme-css" href="./assets/css/xenon-core.css">
+	<link rel="stylesheet" href="./assets/css/xenon-components.css">
+	<link rel="stylesheet" href="./assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="./assets/css/prompts.css">
+	<script src="./assets/js/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body class="page-body">
+	<!-- skin-white -->
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed" id="sidebar-top" style="height: 60px">
+			<div class="sidebar-menu-inner">
+				<header class="logo-env">
+					<!-- logo -->
+					<div class="logo">
+						<a href="/" class="logo-expanded">
+							<img src="./assets/images/logo_dark@2x.png" width="100%" alt="" />
+						</a>
+						<a href="/" class="logo-collapsed">
+							<img src="./assets/images/logo-collapsed@2x.png" width="40" alt="" />
+						</a>
+					</div>
+					<button class="menu-toggle" style="border: none; background-color: transparent;">
+					    <i class="fas fa-bars"></i>
+					</button>							
+				</header>
+				<ul id="main-menu" class="main-menu">
+					<li>
+						<a title="鲁虺文化网文化传媒" target="_top" href="cultural.html">
+							<i class="linecons-desktop"></i>
+							<span class="tooltip-blue">文化传媒</span>
+						</a>
+					</li>
+					<li class="active">
+						<a title="鲁虺移动互联" target="_top" href="index.html">
+							<i class="linecons-search"></i>
+							<span class="tooltip-blue">移动互联</span>
+						</a>
+					</li>
+					<li>
+						<a title="鲁虺人工情感引擎" target="_top"  href="artificialemotions.html">
+							<i class="linecons-photo"></i>
+							<span class="tooltip-blue">人工情感</span>
+						</a>
+					</li>
+					<li>
+						<a title="设计智造" target="_top" href="designIntelligence.html">
+							<i class="linecons-tag"></i>
+							<span class="tooltip-blue">设计智造</span>
+						</a>
+					</li>
+					<li>
+						<a title="终极进化" target="_top" href="ultimateevolution.html">
+							<i class="linecons-doc"></i>
+							<span class="tooltip-blue">终极进化</span>
+						</a>
+					</li>
+					<li>
+						<a title="生活服务" target="_top" href="lifeservices.html">
+							<i class="linecons-calendar"></i>
+							<span class="tooltip-blue">生活服务</span>
+						</a>
+					</li>
+					<li>
+						<a title="搜索引擎" target="_top" href="searchengines.html">
+							<i class="linecons-params"></i>
+							<span class="tooltip-blue">搜索引擎</span>
+						</a>
+					</li>
+					<li>
+						<a title="关于鲁虺" target="_top" href="about.html">
+							<i class="linecons-user"></i>
+							<span class="tooltip-blue">关于我们</span>
+						</a>
+					</li>
+				</ul>
+					</div>
+				</div>
+				
+				<div class="sidebar-wrapper">
+					<div id="sidebar">
+						<div class="sidebar-header">
+							<button class="close"><i class="fas fa-times"></i></button>
+						</div>
+						<ul id="main-menu" class="main-menu">
+							<li>
+								<a title="鲁虺文化网文化传媒" target="_top" href="cultural.html">
+									<i class="linecons-desktop"></i>
+									<span class="tooltip-blue">文化传媒</span>
+								</a>
+							</li>
+							<li class="active">
+								<a title="鲁虺文化网移动互联" target="_top" href="index.html">
+									<i class="linecons-search"></i>
+									<span class="tooltip-blue">移动互联</span>
+								</a>
+							</li>
+							<li>
+								<a title="鲁虺人工情感引擎" target="_top"  href="artificialemotions.html">
+									<i class="linecons-photo"></i>
+									<span class="tooltip-blue">人工情感</span>
+								</a>
+							</li>
+							<li>
+								<a title="设计智造" target="_top" href="designIntelligence.html">
+									<i class="linecons-tag"></i>
+									<span class="tooltip-blue">设计智造</span>
+								</a>
+							</li>
+							<li>
+								<a title="终极进化" target="_top" href="ultimateevolution.html">
+									<i class="linecons-doc"></i>
+									<span class="tooltip-blue">终极进化</span>
+								</a>
+							</li>
+							<li>
+								<a title="生活服务" target="_top" href="lifeservices.html">
+									<i class="linecons-calendar"></i>
+									<span class="tooltip-blue">生活服务</span>
+								</a>
+							</li>
+							<li>
+								<a title="搜索引擎" target="_top" href="searchengines.html">
+									<i class="linecons-params"></i>
+									<span class="tooltip-blue">搜索引擎</span>
+								</a>
+							</li>
+							<li>
+								<a title="关于鲁虺" target="_top" href="about.html">
+									<i class="linecons-user"></i>
+									<span class="tooltip-blue">关于我们</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+		<div class="main-content">
+
+
+<script src="/js/header.js#/search/js/link.js"></script>
+
+		
+			<div id="main-contents">
+				<div class="topbar">
+
+					<div class="slideshow-hi-wrapper">
+					    <i class="fa fa-search"></i>
+					    <input type="text" id="search-input" placeholder="搜索">
+					</div>
+
+
+
+					<!-- 公告轮动 -->
+					<div id="announcement-container"></div>
+
+
+
+
+				</div>
+				<!-- 推荐 -->
+
+
+<h3 title="鲁虺网络移动互联资源" class="text-gray">🧭鲁虺网络移动互联资源</h3>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+  </tr>				
+				<div class="category-buttons-container">
+ <button class="category-button active" data-label="网站首页"><a title="网站首页" target="_top" href="/">网站首页</a></button>
+				  <button class="category-button" data-label="移动终端">移动终端</button>
+				  <button class="category-button" data-label="操作系统">操作系统</button>
+				  <button class="category-button" data-label="安全软件">安全软件</button>
+				  <button class="category-button" data-label="安卓应用">安卓应用</button>
+				  <button class="category-button" data-label="苹果应用">苹果应用</button>
+				  <button class="category-button" data-label="移动网站">移动网站</button>
+				  <button class="category-button" data-label="手机网站">手机网站</button>
+				  <button class="category-button" data-label="应用开发">应用开发</button>
+				  <button class="category-button" data-label="硬件厂家">硬件厂家</button>
+				  <button class="category-button" data-label="万物互联">万物互联</button>
+				  <button class="category-button" data-label="浏览器">浏览器</button>
+				  <button class="category-button" data-label="播放器">播放器</button>
+				  <button class="category-button" data-label="微网站">微网站</button>
+				  <button class="category-button" data-label="小程序">小程序</button>
+				  <button class="category-button" data-label="Wap网站">Wap网站</button>
+				  <button class="category-button" data-label="HTML5">HTML5</button>
+				  <button class="category-button" data-label="WebAPP">Web APP</button>
+				  <button class="category-button" data-label="3G网站">3G网站</button>
+				  <button class="category-button" data-label="4G网站">4G网站</button>
+				  <button class="category-button" data-label="5G网站">5G网站</button>
+				  <button class="category-button" data-label="6G网站">6G网站</button>
+				  <button class="category-button" data-label="其它">其它</button>
+				</div>
+
+
+<div class="searchtopbar">
+<div class="searchslideshow-hi-wrapper"> 
+<!--此方法可以自动获取调用网址来源-->
+<script>var yreflocation_html=document.location.href;</script><script>var url="<iframe allowTransparency=true border=0 align=center vspace=0  hspace=0 name=searchbar marginwidth=0 marginheight=0 framespacing=0 frameborder=0 scrolling=no width=100% height=60";url+='  src="/search/code46840.htm?url='+escape(yreflocation_html)+'"></iframe>';document.write(url);</script>
+</div>
+</div>
+				
+				<div id="recommendations-container" class="row">
+				    <!-- 推荐卡片会在这里动态生成 -->
+				</div>
+				
+				
+				<nav style="margin-top: 30px;">
+				  <div class="d-flex justify-content-center d-none d-xl-flex">
+				        <div class="d-flex align-items-center pagination-container w-100">
+				            <div class="d-flex justify-content-center align-items-center w-100">
+				                <div>
+				                    <span id="page-info" class="mx-2"></span>
+				                </div>
+				                <div class="mx-2">
+				                    <input type="text" id="page-input" class="form-control form-control-sm text-center" autocomplete="off">
+				                </div>
+				                <div class="d-flex align-items-center">
+				                    <button id="first-page-button" class="btn btn-primary btn-sm">首页</button>
+				                    <ul id="pagination" class="pagination justify-content-center">
+				                        <!-- 分页按钮将在这里动态生成 -->
+				                    </ul>
+				                    <button id="last-page-button" class="btn btn-primary btn-sm">尾页</button>
+				                </div>
+				
+				            </div>
+				        </div>
+				    </div>
+				</nav>
+				
+				
+				
+				
+				<div id="mobile-pagination" class="d-flex align-items-center justify-content-center d-block d-xl-none">
+				    <button id="mobile-prev-page-button" class="btn btn-primary btn-sm">上一页</button>
+				    <input type="text" id="mobile-page-info" class="form-control form-control-sm text-center" autocomplete="off">
+				    <button id="mobile-next-page-button" class="btn btn-primary btn-sm">下一页</button>
+				</div>
+				
+<!--
+<script type="text/javascript">
+ad4all_url="http://luhui.net/cn/Netchain";			//虺客链[酷站]
+document.writeln('<div id="ShowAD" style="position:absolute; z-index: 100;"> ');
+document.writeln('<div style="width:100%;height:18px;font-size:14px;font-weight:bold;text-align:right;CURSOR: hand;" onclick="closead();">关闭&nbsp;</div>');
+document.writeln('  <iframe scrolling="no" style="width:100%;height:500px;" frameborder="0" src="'+ad4all_url+'"></iframe>');
+document.writeln('</div>');
+
+var bodyfrm = ( document.compatMode.toLowerCase()=="css1compat" ) ? document.documentElement : document.body;
+var adst = document.getElementById("ShowAD").style;
+	adst.top = ( bodyfrm.clientHeight - 218 ) + "px";
+	adst.left = ( bodyfrm.clientWidth - 778 ) + "px";
+function moveR() {
+	adst.top = ( bodyfrm.scrollTop + bodyfrm.clientHeight - 500 ) + "px";
+	adst.left = ( bodyfrm.scrollLeft + bodyfrm.clientWidth - 778 ) + "px";
+}
+setInterval("moveR();", 80);
+
+function closead()
+{
+	adst.display='none';
+}
+</script>
+-->
+<br />
+
+				<div class="footer-inner">
+<p align="center"> Copyright&nbsp;  &#169; 2004-01-11&nbsp;<a href="http://luhui.net" title="鲁虺文化网" target="_top">luhui.net</a>&nbsp;all rights reserved.</p>	
+					<div id="back-to-top-btn" style="display:none;">
+					    <i class="fas fa-angle-double-up" style="font-size: 25px;"></i>
+					</div>
+
+					<div class="footer-inner">
+					    <div id="back-to-top-btn" style="display:none;">
+					        <i class="fas fa-angle-double-up" style="font-size: 25px;"></i>
+					    </div>
+					
+					    <div id="share-switcher-btn">
+					        <i class="fa-brands fa-weixin"></i>
+					    </div>
+					
+					    <div id="share-popup" class="share-popup">
+					        <div class="share-popup-content">
+					            <img id="qrcode" src="./assets/images/flags/weixin.png" alt="二维码" />
+					        </div>
+					        <div class="copy-btn-container">
+					            <button id="copy-btn" class="share-popup-copy-btn">扫码联系</button>
+					        </div>
+					    </div>
+					</div>
+					
+					<div id="color-switcher-btn">
+					    <i class="sun-icon fas fa-sun"></i>
+					    <i class="moon-icon fas fa-moon"></i>
+					</div>
+
+					<div id="language-switcher-btn">
+						<i class="fas fa-language"></i>
+					</div>
+					
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="./assets/js/neuralnetwork.js"></script>
+	<script src="./assets/js/news.js"></script>	
+	<script src="/js/tongji.js"></script>
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Google tag (gtag.js) -->
+	
+
+	
+	<script>
+		document.addEventListener('contextmenu', function(event) {
+		  event.preventDefault();
+		});
+	
+		
+	</script>
+	
+	<script src="./assets/js/color.js"></script>
+	<script src="./assets/js/lozad.js"></script>
+</body>
+
+</html>
