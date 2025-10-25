@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关键词云生成器</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.min.js"></script>
+  
+  <!-- 配置Tailwind主题 -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#7B61FF',
+            accent: '#00B42A',
+            neutral: {
+              100: '#F5F7FA',
+              200: '#E5E6EB',
+              300: '#C9CDD4',
+              400: '#86909C',
+              500: '#4E5969',
+              600: '#272E3B',
+              700: '#1D2129',
+            }
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .transition-theme {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+      .card-shadow {
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+      }
+      .card-shadow-dark {
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+      }
+      .btn-hover-effect {
+        @apply transform hover:-translate-y-0.5 transition-all duration-200;
+      }
+    }
+  </style>
+  
+  <style>
+    /* 基础样式 */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    
+    /* 词云容器 */
+    #wordcloud-container {
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.3s ease;
+    }
+    
+    /* 导出选项动画 */
+    .export-options {
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .export-options.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* 滑块样式 */
+    input[type="range"] {
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #e5e6eb;
+      outline: none;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #165DFF;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb:hover {
+      background: #0E42D2;
+      transform: scale(1.1);
+    }
+    
+    /* 暗色模式滑块 */
+    .dark input[type="range"] {
+      background: #272E3B;
+    }
+    
+    /* 文件上传按钮样式 */
+    .file-upload-label {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .file-upload-input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      opacity: 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-100 transition-theme min-h-screen flex flex-col">
+  <!-- 顶部导航栏 -->
+  <header class="bg-white dark:bg-neutral-600 shadow-md transition-theme">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-cloud text-primary text-2xl"></i>
+        <h1 class="text-xl font-bold text-primary">关键词云生成器</h1>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <!-- 导出按钮 -->
+        <div class="relative">
+          <button id="export-btn" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all flex items-center space-x-2 shadow-md hover:shadow-lg btn-hover-effect">
+            <i class="fa fa-download"></i>
+            <span>导出</span>
+          </button>
+          
+          <!-- 导出选项 -->
+          <div id="export-options" class="export-options absolute right-0 mt-2 bg-white dark:bg-neutral-600 rounded-lg shadow-lg p-3 w-48 z-10">
+            <button id="export-png" class="w-full text-left px-3 py-2 rounded hover:bg-neutral-100 dark:hover:bg-neutral-500 transition-all flex items-center space-x-2 btn-hover-effect">
+              <i class="fa fa-file-image-o"></i>
+              <span>PNG 格式</span>
+            </button>
+            <button id="export-svg" class="w-full text-left px-3 py-2 rounded hover:bg-neutral-100 dark:hover:bg-neutral-500 transition-all flex items-center space-x-2 btn-hover-effect">
+              <i class="fa fa-file-code-o"></i>
+              <span>SVG 格式</span>
+            </button>
+            <button id="export-text" class="w-full text-left px-3 py-2 rounded hover:bg-neutral-100 dark:hover:bg-neutral-500 transition-all flex items-center space-x-2 btn-hover-effect">
+              <i class="fa fa-file-text-o"></i>
+              <span>文本格式</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 主题切换按钮 -->
+        <button id="theme-toggle" class="w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-500 flex items-center justify-center hover:bg-neutral-300 dark:hover:bg-neutral-400 transition-all btn-hover-effect focus:outline-none focus:ring-2 focus:ring-primary">
+          <i class="fa fa-moon-o dark:hidden text-neutral-600"></i>
+          <i class="fa fa-sun-o hidden dark:inline text-yellow-300"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要内容区域 -->
+  <main class="flex-grow container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- 左侧控制面板 -->
+      <div class="lg:col-span-1 space-y-6">
+        <!-- 关键词输入卡片 -->
+        <div class="bg-white dark:bg-neutral-600 rounded-xl p-5 shadow card-shadow dark:card-shadow-dark transition-theme">
+          <h2 class="text-lg font-semibold mb-4 flex items-center">
+            <i class="fa fa-keyboard-o text-primary mr-2"></i>
+            关键词输入
+          </h2>
+          <p class="text-sm text-neutral-500 dark:text-neutral-300 mb-3">每行输入一个关键词，支持纯关键词或带权重格式</p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-300 mb-3">示例：png 或 png,8</p>
+          
+          <!-- 导入按钮 -->
+          <div class="mb-3">
+            <label for="file-upload" class="file-upload-label inline-block bg-neutral-200 dark:bg-neutral-500 hover:bg-neutral-300 dark:hover:bg-neutral-400 text-neutral-700 dark:text-neutral-200 px-3 py-1.5 rounded-lg text-sm transition-all flex items-center space-x-1 btn-hover-effect">
+              <i class="fa fa-upload"></i>
+              <span>导入TXT关键词列表</span>
+              <input id="file-upload" type="file" accept=".txt" class="file-upload-input">
+            </label>
+          </div>
+          
+          <textarea id="keywords-input" rows="10" class="w-full p-3 border border-neutral-200 dark:border-neutral-500 rounded-lg bg-neutral-50 dark:bg-neutral-700 transition-theme focus:outline-none focus:ring-2 focus:ring-primary resize-none" placeholder="请输入关键词..."></textarea>
+          <div class="mt-3 flex space-x-2">
+            <button id="generate-btn" class="flex-1 bg-primary hover:bg-primary/90 text-white py-2 rounded-lg transition-all flex items-center justify-center space-x-1 shadow-md hover:shadow-lg btn-hover-effect focus:outline-none focus:ring-2 focus:ring-primary/50">
+              <i class="fa fa-magic"></i>
+              <span>生成词云</span>
+            </button>
+            <button id="clear-btn" class="px-4 bg-neutral-200 dark:bg-neutral-500 hover:bg-neutral-300 dark:hover:bg-neutral-400 rounded-lg transition-all btn-hover-effect focus:outline-none focus:ring-2 focus:ring-neutral-400">
+              <i class="fa fa-trash-o"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 自定义选项卡片 -->
+        <div class="bg-white dark:bg-neutral-600 rounded-xl p-5 shadow card-shadow dark:card-shadow-dark transition-theme">
+          <h2 class="text-lg font-semibold mb-4 flex items-center">
+            <i class="fa fa-sliders text-primary mr-2"></i>
+            自定义选项
+          </h2>
+          
+          <!-- 布局选项 -->
+          <div class="mb-4">
+            <h3 class="font-medium mb-2 text-sm">布局选项</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm block mb-1">词云大小</label>
+                <input type="range" id="size-range" min="50" max="100" value="80" class="w-full">
+              </div>
+              <div>
+                <label class="text-sm block mb-1">词语数量</label>
+                <input type="range" id="count-range" min="10" max="100" value="50" class="w-full">
+              </div>
+            </div>
+          </div>
+          
+          <!-- 突出设置 -->
+          <div class="mb-4">
+            <h3 class="font-medium mb-2 text-sm">突出设置</h3>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <input type="checkbox" id="highlight-frequency" checked class="mr-2 focus:ring-primary">
+                <label for="highlight-frequency" class="text-sm">突出高频词</label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="highlight-sentiment" class="mr-2 focus:ring-primary">
+                <label for="highlight-sentiment" class="text-sm">突出情感关键词</label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 颜色方案 -->
+          <div>
+            <h3 class="font-medium mb-2 text-sm">颜色方案</h3>
+            <div class="grid grid-cols-5 gap-2">
+              <button class="color-scheme-btn w-full h-8 rounded-full bg-primary" data-scheme="default"></button>
+              <button class="color-scheme-btn w-full h-8 rounded-full bg-gradient-to-r from-red-500 to-purple-500" data-scheme="vibrant"></button>
+              <button class="color-scheme-btn w-full h-8 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500" data-scheme="cool"></button>
+              <button class="color-scheme-btn w-full h-8 rounded-full bg-gradient-to-r from-amber-500 to-orange-600" data-scheme="warm"></button>
+              <button class="color-scheme-btn w-full h-8 rounded-full bg-gray-700" data-scheme="monochrome"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 右侧预览区域 -->
+      <div class="lg:col-span-2">
+        <div class="bg-white dark:bg-neutral-600 rounded-xl p-5 shadow card-shadow dark:card-shadow-dark transition-theme h-full flex flex-col">
+          <h2 class="text-lg font-semibold mb-4 flex items-center">
+            <i class="fa fa-eye text-primary mr-2"></i>
+            词云预览
+          </h2>
+          <div id="wordcloud-container" class="flex-grow w-full bg-neutral-50 dark:bg-neutral-700 rounded-lg flex items-center justify-center overflow-hidden">
+            <div id="wordcloud-placeholder" class="text-center p-8">
+              <i class="fa fa-cloud text-5xl text-neutral-300 dark:text-neutral-500 mb-3"></i>
+              <p class="text-neutral-400 dark:text-neutral-400">输入关键词或导入TXT文件，然后点击生成按钮</p>
+            </div>
+            <canvas id="wordcloud-canvas" class="hidden w-full h-full"></canvas>
+          </div>
+          <div class="mt-4 text-sm text-neutral-500 dark:text-neutral-400 flex justify-between">
+            <div>提示：点击词云中的词语可以查看详情</div>
+            <div id="word-count-info">词语数量：0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- 详情模态框 -->
+  <div id="word-detail-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white dark:bg-neutral-600 rounded-xl p-6 max-w-md w-full mx-4 transform transition-all scale-95 opacity-0" id="modal-content">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold" id="modal-word"></h3>
+        <button id="close-modal" class="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 transition-colors">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      <div class="space-y-3">
+        <div class="flex justify-between">
+          <span class="text-neutral-500 dark:text-neutral-400">权重：</span>
+          <span id="modal-weight" class="font-medium"></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-neutral-500 dark:text-neutral-400">频率排名：</span>
+          <span id="modal-rank" class="font-medium"></span>
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button id="modal-close-btn" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all btn-hover-effect">
+          关闭
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 通知提示 -->
+  <div id="notification" class="fixed bottom-4 right-4 bg-neutral-700 text-white px-4 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all flex items-center space-x-2 z-50">
+    <i class="fa fa-check-circle text-accent"></i>
+    <span id="notification-text">操作成功</span>
+  </div>
+  
+  <!-- 页脚 -->
+  <footer class="bg-white dark:bg-neutral-600 py-4 transition-theme">
+    <div class="container mx-auto px-4 text-center text-sm text-neutral-500 dark:text-neutral-400">
+      <p>关键词云生成器 &copy; 2023 - 简单高效的词云生成工具</p>
+    </div>
+  </footer>
+
+  <script>
+    // 全局变量
+    let currentWords = [];
+    let currentColorScheme = 'default';
+    
+    // DOM 元素
+    const themeToggle = document.getElementById('theme-toggle');
+    const exportBtn = document.getElementById('export-btn');
+    const exportOptions = document.getElementById('export-options');
+    const exportPng = document.getElementById('export-png');
+    const exportSvg = document.getElementById('export-svg');
+    const exportText = document.getElementById('export-text');
+    const keywordsInput = document.getElementById('keywords-input');
+    const generateBtn = document.getElementById('generate-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const fileUpload = document.getElementById('file-upload');
+    const wordcloudContainer = document.getElementById('wordcloud-container');
+    const wordcloudCanvas = document.getElementById('wordcloud-canvas');
+    const wordcloudPlaceholder = document.getElementById('wordcloud-placeholder');
+    const wordCountInfo = document.getElementById('word-count-info');
+    const highlightFrequency = document.getElementById('highlight-frequency');
+    const highlightSentiment = document.getElementById('highlight-sentiment');
+    const sizeRange = document.getElementById('size-range');
+    const countRange = document.getElementById('count-range');
+    const colorSchemeBtns = document.querySelectorAll('.color-scheme-btn');
+    const wordDetailModal = document.getElementById('word-detail-modal');
+    const modalContent = document.getElementById('modal-content');
+    const modalWord = document.getElementById('modal-word');
+    const modalWeight = document.getElementById('modal-weight');
+    const modalRank = document.getElementById('modal-rank');
+    const closeModal = document.getElementById('close-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const notification = document.getElementById('notification');
+    const notificationText = document.getElementById('notification-text');
+    
+    // 初始化
+    function init() {
+      // 检查用户偏好的主题
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      
+      // 添加示例关键词
+      keywordsInput.value = `png
+webp to png
+png to pdf
+svg to png
+png to jpg
+png to jpg converter
+arrow png
+png to pdf converter
+heart png
+instagram logo png
+png maker
+png arrow
+png art
+png acronym
+png airport
+png app
+png a pdf
+png aesthetic
+png american flag
+png avatar maker
+avif to png
+a logo png`;
+      
+      // 确保所有事件监听器正确绑定
+      bindEventListeners();
+    }
+    
+    // 绑定所有事件监听器
+    function bindEventListeners() {
+      // 防止重复绑定
+      if (window.eventListenersBound) return;
+      window.eventListenersBound = true;
+      
+      // 切换主题
+      themeToggle.addEventListener('click', toggleTheme);
+      
+      // 导出选项切换
+      exportBtn.addEventListener('click', toggleExportOptions);
+      
+      // 点击其他地方关闭导出选项
+      document.addEventListener('click', closeExportOptionsOnOutsideClick);
+      
+      // 阻止导出选项内部点击事件冒泡
+      exportOptions.addEventListener('click', stopPropagation);
+      
+      // 清除输入
+      clearBtn.addEventListener('click', clearInput);
+      
+      // 颜色方案选择
+      colorSchemeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectColorScheme(btn);
+        });
+      });
+      
+      // 生成词云
+      generateBtn.addEventListener('click', generateWordCloudFromInput);
+      
+      // 关闭模态框
+      closeModal.addEventListener('click', hideModal);
+      modalCloseBtn.addEventListener('click', hideModal);
+      wordDetailModal.addEventListener('click', closeModalOnOutsideClick);
+      
+      // 导出功能
+      exportPng.addEventListener('click', exportAsPNG);
+      exportSvg.addEventListener('click', exportAsSVG);
+      exportText.addEventListener('click', exportAsText);
+      
+      // 窗口大小改变时重新生成词云
+      window.addEventListener('resize', handleWindowResize);
+      
+      // 突出设置改变时重新生成词云
+      highlightFrequency.addEventListener('change', regenerateWordCloud);
+      highlightSentiment.addEventListener('change', regenerateWordCloud);
+      
+      // 大小和数量滑块改变时重新生成词云
+      sizeRange.addEventListener('input', regenerateWordCloud);
+      countRange.addEventListener('input', regenerateWordCloud);
+      
+      // 文件上传处理
+      fileUpload.addEventListener('change', handleFileUpload);
+    }
+    
+    // 辅助函数 - 阻止事件冒泡
+    function stopPropagation(e) {
+      e.stopPropagation();
+    }
+    
+    // 切换主题
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+      // 如果已有词云，重新渲染以适应主题
+      if (currentWords.length > 0) {
+        generateWordCloud();
+      }
+    }
+    
+    // 切换导出选项显示/隐藏
+    function toggleExportOptions(e) {
+      e.stopPropagation();
+      exportOptions.classList.toggle('show');
+    }
+    
+    // 点击外部关闭导出选项
+    function closeExportOptionsOnOutsideClick() {
+      exportOptions.classList.remove('show');
+    }
+    
+    // 清除输入
+    function clearInput() {
+      keywordsInput.value = '';
+      showNotification('已清除输入内容');
+    }
+    
+    // 选择颜色方案
+    function selectColorScheme(btn) {
+      // 移除所有按钮的选中状态
+      colorSchemeBtns.forEach(b => b.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'dark:ring-offset-neutral-700'));
+      // 添加当前按钮的选中状态
+      btn.classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'dark:ring-offset-neutral-700');
+      // 设置当前颜色方案
+      currentColorScheme = btn.dataset.scheme;
+      // 重新生成词云
+      if (currentWords.length > 0) {
+        generateWordCloud();
+      }
+    }
+    
+    // 从输入生成词云
+    function generateWordCloudFromInput() {
+      const input = keywordsInput.value.trim();
+      if (!input) {
+        showNotification('请输入关键词', 'error');
+        return;
+      }
+      
+      // 解析输入的关键词
+      currentWords = parseKeywords(input);
+      
+      if (currentWords.length === 0) {
+        showNotification('关键词格式不正确，请检查', 'error');
+        return;
+      }
+      
+      // 更新词语数量信息
+      wordCountInfo.textContent = `词语数量：${currentWords.length}`;
+      
+      // 生成词云
+      generateWordCloud();
+      
+      // 显示词云，隐藏占位符
+      wordcloudCanvas.classList.remove('hidden');
+      wordcloudPlaceholder.classList.add('hidden');
+      
+      showNotification('词云生成成功');
+    }
+    
+    // 解析关键词输入
+    function parseKeywords(input) {
+      const lines = input.split('\n');
+      const words = [];
+      const wordFrequency = {};
+      
+      // 第一遍：计算词频
+      lines.forEach(line => {
+        const trimmedLine = line.trim();
+        if (!trimmedLine) return;
+        
+        const parts = trimmedLine.split(',');
+        const word = parts[0].trim();
+        
+        // 计算词频
+        wordFrequency[word] = (wordFrequency[word] || 0) + 1;
+      });
+      
+      // 第二遍：创建词语对象，考虑权重
+      lines.forEach(line => {
+        const trimmedLine = line.trim();
+        if (!trimmedLine) return;
+        
+        const parts = trimmedLine.split(',');
+        const word = parts[0].trim();
+        
+        // 如果已添加则跳过，避免重复
+        if (words.some(w => w.word === word)) return;
+        
+        // 权重：如果用户指定了权重则使用，否则使用词频
+        let weight = 5; // 默认权重
+        if (parts.length >= 2 && !isNaN(parts[1])) {
+          weight = parseInt(parts[1]);
+        } else {
+          // 使用词频作为权重
+          weight = Math.min(10, wordFrequency[word]); // 限制最大权重为10
+        }
+        
+        // 情感：简化处理，默认中性
+        const sentiment = parts.length >= 3 ? parts[2].trim().toLowerCase() : 'neutral';
+        
+        words.push({
+          word,
+          weight: Math.max(1, Math.min(10, weight)), // 限制权重在1-10之间
+          sentiment: ['positive', 'negative', 'neutral'].includes(sentiment) ? sentiment : 'neutral'
+        });
+      });
+      
+      // 按权重排序
+      return words.sort((a, b) => b.weight - a.weight);
+    }
+    
+    // 生成词云
+    function generateWordCloud() {
+      // 清空画布
+      const ctx = wordcloudCanvas.getContext('2d');
+      ctx.clearRect(0, 0, wordcloudCanvas.width, wordcloudCanvas.height);
+      
+      // 设置画布大小
+      const containerRect = wordcloudContainer.getBoundingClientRect();
+      wordcloudCanvas.width = containerRect.width;
+      wordcloudCanvas.height = containerRect.height;
+      
+      // 准备词云数据
+      const maxCount = parseInt(countRange.value);
+      const displayWords = currentWords.slice(0, maxCount);
+      
+      // 准备词云选项
+      const sizeFactor = parseInt(sizeRange.value) / 100;
+      
+      // 根据颜色方案生成颜色函数
+      const getColor = createColorFunction();
+      
+      // 生成词云
+      try {
+        WordCloud(wordcloudCanvas, {
+          list: displayWords.map(word => [word.word, word.weight]),
+          size: Math.floor(60 * sizeFactor),
+          minSize: Math.floor(10 * sizeFactor),
+          weightFactor: function(size) {
+            return size * sizeFactor * 5;
+          },
+          color: function(word, weight) {
+            // 找到对应的词数据
+            const wordData = displayWords.find(w => w.word === word);
+            return getColor(wordData, weight);
+          },
+          rotateRatio: 0.5,
+          backgroundColor: document.documentElement.classList.contains('dark') ? '#272E3B' : '#F5F7FA',
+          fontFamily: 'Inter, sans-serif',
+          onClick: function(item) {
+            showWordDetail(item[0]);
+          }
+        });
+      } catch (error) {
+        console.error('生成词云时出错:', error);
+        showNotification('生成词云失败: ' + error.message, 'error');
+      }
+    }
+    
+    // 创建颜色函数
+    function createColorFunction() {
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      const highlightFreq = highlightFrequency.checked;
+      const highlightSent = highlightSentiment.checked;
+      
+      // 获取最大权重值
+      const maxWeight = currentWords.length > 0 ? Math.max(...currentWords.map(w => w.weight)) : 10;
+      
+      // 根据颜色方案返回不同的颜色函数
+      switch (currentColorScheme) {
+        case 'vibrant':
+          return (wordData, weight) => {
+            if (!wordData) return '#333';
+            
+            // 情感颜色
+            if (highlightSent) {
+              if (wordData.sentiment === 'positive') return '#00B42A';
+              if (wordData.sentiment === 'negative') return '#F53F3F';
+            }
+            
+            // 频率颜色
+            if (highlightFreq) {
+              const ratio = wordData.weight / maxWeight;
+              if (ratio > 0.8) return '#722ED1';
+              if (ratio > 0.6) return '#EB0AA4';
+              if (ratio > 0.4) return '#FF7D00';
+              if (ratio > 0.2) return '#FFCC00';
+            }
+            
+            // 默认颜色
+            return isDarkMode ? '#E5E6EB' : '#4E5969';
+          };
+          
+        case 'cool':
+          return (wordData, weight) => {
+            if (!wordData) return '#333';
+            
+            // 情感颜色
+            if (highlightSent) {
+              if (wordData.sentiment === 'positive') return '#0FC6C2';
+              if (wordData.sentiment === 'negative') return '#F53F3F';
+            }
+            
+            // 频率颜色
+            if (highlightFreq) {
+              const ratio = wordData.weight / maxWeight;
+              if (ratio > 0.8) return '#165DFF';
+              if (ratio > 0.6) return '#0FC6C2';
+              if (ratio > 0.4) return '#4E5969';
+              if (ratio > 0.2) return '#86909C';
+            }
+            
+            // 默认颜色
+            return isDarkMode ? '#E5E6EB' : '#4E5969';
+          };
+          
+        case 'warm':
+          return (wordData, weight) => {
+            if (!wordData) return '#333';
+            
+            // 情感颜色
+            if (highlightSent) {
+              if (wordData.sentiment === 'positive') return '#FF7D00';
+              if (wordData.sentiment === 'negative') return '#F53F3F';
+            }
+            
+            // 频率颜色
+            if (highlightFreq) {
+              const ratio = wordData.weight / maxWeight;
+              if (ratio > 0.8) return '#FF5722';
+              if (ratio > 0.6) return '#FF7D00';
+              if (ratio > 0.4) return '#FFB800';
+              if (ratio > 0.2) return '#FFD600';
+            }
+            
+            // 默认颜色
+            return isDarkMode ? '#E5E6EB' : '#4E5969';
+          };
+          
+        case 'monochrome':
+          return (wordData, weight) => {
+            if (!wordData) return '#333';
+            
+            // 情感颜色
+            if (highlightSent) {
+              if (wordData.sentiment === 'positive') return isDarkMode ? '#86909C' : '#4E5969';
+              if (wordData.sentiment === 'negative') return isDarkMode ? '#4E5969' : '#86909C';
+            }
+            
+            // 频率颜色
+            if (highlightFreq) {
+              const ratio = wordData.weight / maxWeight;
+              const lightness = isDarkMode ? 
+                90 - ratio * 60 : // 暗色模式：高频词更亮
+                30 + ratio * 40;  // 亮色模式：高频词更深
+              
+              return `hsl(0, 0%, ${lightness}%)`;
+            }
+            
+            // 默认颜色
+            return isDarkMode ? '#C9CDD4' : '#6B7280';
+          };
+          
+        default: // default
+          return (wordData, weight) => {
+            if (!wordData) return '#333';
+            
+            // 情感颜色
+            if (highlightSent) {
+              if (wordData.sentiment === 'positive') return '#00B42A';
+              if (wordData.sentiment === 'negative') return '#F53F3F';
+            }
+            
+            // 频率颜色
+            if (highlightFreq) {
+              const ratio = wordData.weight / maxWeight;
+              if (ratio > 0.8) return '#165DFF';
+              if (ratio > 0.6) return '#7B61FF';
+              if (ratio > 0.4) return '#4E5969';
+              if (ratio > 0.2) return '#86909C';
+            }
+            
+            // 默认颜色
+            return isDarkMode ? '#E5E6EB' : '#4E5969';
+          };
+      }
+    }
+    
+    // 显示词语详情
+    function showWordDetail(word) {
+      const wordData = currentWords.find(w => w.word === word);
+      if (!wordData) return;
+      
+      // 计算排名
+      const rank = currentWords.findIndex(w => w.word === word) + 1;
+      
+      // 填充模态框数据
+      modalWord.textContent = wordData.word;
+      modalWeight.textContent = wordData.weight;
+      modalRank.textContent = rank;
+      
+      // 显示模态框
+      wordDetailModal.classList.remove('hidden');
+      // 触发动画
+      setTimeout(() => {
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+    
+    // 关闭模态框
+    function hideModal() {
+      modalContent.classList.remove('scale-100', 'opacity-100');
+      modalContent.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        wordDetailModal.classList.add('hidden');
+      }, 300);
+    }
+    
+    // 点击模态框外部关闭
+    function closeModalOnOutsideClick(e) {
+      if (e.target === wordDetailModal) {
+        hideModal();
+      }
+    }
+    
+    // 导出为 PNG
+    function exportAsPNG() {
+      if (currentWords.length === 0) {
+        showNotification('请先生成词云', 'error');
+        return;
+      }
+      
+      try {
+        // 创建下载链接
+        const link = document.createElement('a');
+        link.download = '关键词云.png';
+        link.href = wordcloudCanvas.toDataURL('image/png');
+        link.click();
+        
+        showNotification('PNG 导出成功');
+      } catch (error) {
+        console.error('PNG导出失败:', error);
+        showNotification('导出失败：' + error.message, 'error');
+      }
+      
+      exportOptions.classList.remove('show');
+    }
+    
+    // 导出为 SVG
+    function exportAsSVG() {
+      if (currentWords.length === 0) {
+        showNotification('请先生成词云', 'error');
+        return;
+      }
+      
+      try {
+        // 生成SVG内容
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${wordcloudCanvas.width}" height="${wordcloudCanvas.height}">
+          <image href="${wordcloudCanvas.toDataURL('image/png')}" width="100%" height="100%"/>
+        </svg>`;
+        
+        const blob = new Blob([svg], { type: 'image/svg+xml' });
+        const link = document.createElement('a');
+        link.download = '关键词云.svg';
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        
+        showNotification('SVG 导出成功');
+      } catch (error) {
+        console.error('SVG导出失败:', error);
+        showNotification('导出失败：' + error.message, 'error');
+      }
+      
+      exportOptions.classList.remove('show');
+    }
+    
+    // 导出为文本
+    function exportAsText() {
+      if (currentWords.length === 0) {
+        showNotification('请先生成词云', 'error');
+        return;
+      }
+      
+      try {
+        // 生成文本内容
+        let text = '关键词,权重\n';
+        currentWords.forEach(word => {
+          text += `${word.word},${word.weight}\n`;
+        });
+        
+        const blob = new Blob([text], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.download = '关键词列表.txt';
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        
+        showNotification('文本导出成功');
+      } catch (error) {
+        console.error('文本导出失败:', error);
+        showNotification('导出失败：' + error.message, 'error');
+      }
+      
+      exportOptions.classList.remove('show');
+    }
+    
+    // 显示通知
+    function showNotification(message, type = 'success') {
+      notificationText.textContent = message;
+      
+      // 设置通知图标和颜色
+      const icon = notification.querySelector('i');
+      if (type === 'error') {
+        icon.className = 'fa fa-exclamation-circle text-red-500';
+      } else {
+        icon.className = 'fa fa-check-circle text-accent';
+      }
+      
+      // 显示通知
+      notification.classList.remove('translate-y-20', 'opacity-0');
+      notification.classList.add('translate-y-0', 'opacity-100');
+      
+      // 3秒后隐藏通知
+      setTimeout(() => {
+        notification.classList.remove('translate-y-0', 'opacity-100');
+        notification.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+    
+    // 窗口大小改变时处理
+    function handleWindowResize() {
+      if (currentWords.length > 0) {
+        generateWordCloud();
+      }
+    }
+    
+    // 重新生成词云
+    function regenerateWordCloud() {
+      if (currentWords.length > 0) {
+        generateWordCloud();
+      }
+    }
+    
+    // 处理文件上传
+    function handleFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      // 检查文件类型
+      if (file.type !== 'text/plain' && !file.name.endsWith('.txt')) {
+        showNotification('请上传TXT格式的文件', 'error');
+        fileUpload.value = ''; // 重置文件输入
+        return;
+      }
+      
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        try {
+          const content = e.target.result;
+          keywordsInput.value = content;
+          showNotification(`成功导入 ${file.name}，共 ${content.split('\n').filter(line => line.trim()).length} 个关键词`);
+          // 自动生成词云
+          generateWordCloudFromInput();
+        } catch (error) {
+          console.error('文件解析失败:', error);
+          showNotification('文件解析失败: ' + error.message, 'error');
+        }
+        // 重置文件输入，允许重复上传同一个文件
+        fileUpload.value = '';
+      };
+      
+      reader.onerror = function() {
+        showNotification('文件读取失败，请重试', 'error');
+        fileUpload.value = '';
+      };
+      
+      reader.readAsText(file);
+    }
+    
+    // 初始化页面
+    init();
+    
+    // 设置默认选中的颜色方案
+    document.querySelector('[data-scheme="default"]').classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'dark:ring-offset-neutral-700');
+  </script>
+</body>
+</html>

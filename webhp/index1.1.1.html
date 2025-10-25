@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鲁虺网址导航系统</title>
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1F2937',
+                        light: '#F3F4F6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .nav-item {
+                @apply px-4 py-2 rounded-md transition-colors hover:bg-primary/10 cursor-pointer;
+            }
+            .nav-item.active {
+                @apply bg-primary/20 font-medium text-primary;
+            }
+            .pagination-item {
+                @apply w-9 h-9 flex items-center justify-center rounded-md border border-gray-300 hover:border-primary hover:text-primary transition-colors;
+            }
+            .pagination-item.active {
+                @apply bg-primary text-white border-primary;
+            }
+            .debug-info {
+                @apply text-xs text-gray-500 mt-2 p-2 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-400;
+            }
+        }
+    </style>
+    
+    <!-- 黑暗模式样式 -->
+    <style>
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .bg-white {
+            background-color: #1e1e1e;
+        }
+        
+        body.dark-mode .bg-gray-100 {
+            background-color: #2d2d2d;
+        }
+        
+        body.dark-mode .text-gray-500, 
+        body.dark-mode .text-gray-600, 
+        body.dark-mode .text-gray-700,
+        body.dark-mode .text-gray-800 {
+            color: #bbbbbb;
+        }
+        
+        body.dark-mode .text-dark {
+            color: #ffffff;
+        }
+        
+        body.dark-mode .border-gray-200,
+        body.dark-mode .border-gray-300 {
+            border-color: #3d3d3d;
+        }
+        
+        body.dark-mode .bg-gray-700 {
+            background-color: #333333;
+        }
+        
+        body.dark-mode .hover:bg-gray-100:hover {
+            background-color: #333333;
+        }
+        
+        body.dark-mode .hover:bg-gray-200:hover {
+            background-color: #3d3d3d;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 transition-colors duration-300">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm transition-colors duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-compass text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-dark">鲁虺网址导航</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="./" class="text-gray-600 hover:text-primary transition-colors">网站首页</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors">关于本站</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors">意见反馈</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <i class="fa fa-moon-o text-gray-600"></i>
+                </button>
+                <button id="refresh-data" class="p-2 rounded-full hover:bg-gray-100 transition-colors" title="刷新数据">
+                    <i class="fa fa-refresh text-gray-600"></i>
+                </button>
+                <button id="mobile-menu-btn" class="p-2 rounded-full hover:bg-gray-100 transition-colors md:hidden">
+                    <i class="fa fa-bars text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 搜索栏 -->
+        <div class="bg-gray-100 py-4 transition-colors duration-300">
+            <div class="container mx-auto px-4">
+                <div class="relative max-w-2xl mx-auto">
+                    <input 
+                        type="text" 
+                        id="search-input"
+                        placeholder="搜索网站..." 
+                        class="w-full py-3 px-5 pr-12 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                    >
+                    <button id="search-button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary transition-colors">
+                        <i class="fa fa-search text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- 左侧分类导航 -->
+            <aside class="md:w-64 lg:w-72 shrink-0">
+                <div class="bg-white rounded-xl shadow-sm p-4 sticky top-24 transition-colors duration-300">
+                    <h2 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fa fa-folder-open text-primary mr-2"></i>分类导航
+                    </h2>
+                    <div class="mb-4">
+                        <p class="text-sm text-gray-500 mb-2">分类共 <span id="total-categories" class="font-medium text-primary">0</span> 个</p>
+                        <p class="text-sm text-gray-500">网站共 <span id="total-websites" class="font-medium text-primary">0</span> 个</p>
+                    </div>
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="category-search"
+                            placeholder="搜索分类..." 
+                            class="w-full py-2 px-4 pr-8 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                        >
+                        <i class="fa fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                    </div>
+                    <div class="mt-4 max-h-[calc(100vh-320px)] overflow-y-auto pr-1 scrollbar-thin">
+                        <ul id="category-list" class="space-y-1">
+                            <!-- 分类将通过JavaScript动态生成 -->
+                            <li class="flex items-center justify-center py-4 text-gray-500">
+                                <i class="fa fa-spinner fa-spin mr-2"></i>加载分类中...
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 分类分页 -->
+                    <div id="category-pagination" class="mt-4 flex justify-center items-center space-x-1 hidden">
+                        <button id="category-prev" class="pagination-item" disabled>
+                            <i class="fa fa-chevron-left text-xs"></i>
+                        </button>
+                        <div id="category-pages" class="flex space-x-1">
+                            <!-- 分类分页按钮将动态生成 -->
+                        </div>
+                        <button id="category-next" class="pagination-item" disabled>
+                            <i class="fa fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- 右侧网站列表 -->
+            <div class="flex-1">
+                <!-- 分类标题 -->
+                <div class="mb-6">
+                    <h2 id="category-title" class="text-2xl font-bold text-dark">全部网站</h2>
+                    <p id="category-description" class="text-gray-500 mt-1">发现并访问各类优质网站</p>
+                    <div class="flex items-center mt-2 text-sm text-gray-500">
+                        <span id="website-count"><i class="fa fa-spinner fa-spin mr-1"></i>统计中...</span>
+                    </div>
+                    <!-- 调试信息区域 - 默认隐藏 -->
+                    <div id="debug-container" class="debug-info hidden">
+                        <p><strong>调试信息:</strong></p>
+                        <p id="debug-info">加载状态初始化中...</p>
+                    </div>
+                </div>
+                
+                <!-- 网站列表 -->
+                <div id="website-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 网站卡片将通过JavaScript动态生成 -->
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa fa-spinner fa-spin text-gray-300 text-5xl mb-4"></i>
+                        <p class="text-gray-500">加载网站中...</p>
+                        <p class="text-xs text-gray-400 mt-2">数据路径: websites/[分类ID]/[编号].txt</p>
+                    </div>
+                </div>
+                
+                <!-- 网站列表分页 -->
+                <div id="website-pagination" class="mt-8 flex justify-center items-center space-x-1 hidden">
+                    <button id="website-prev" class="pagination-item" disabled>
+                        <i class="fa fa-chevron-left text-xs"></i>
+                    </button>
+                    <div id="website-pages" class="flex flex-wrap justify-center gap-1">
+                        <!-- 网站分页按钮将动态生成 -->
+                    </div>
+                    <button id="website-next" class="pagination-item" disabled>
+                        <i class="fa fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 网站详情模态框 -->
+    <div id="detail-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-auto transition-colors duration-300">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 id="detail-title" class="text-xl font-bold"></h3>
+                    <button id="close-modal" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                        <i class="fa fa-times text-gray-500"></i>
+                    </button>
+                </div>
+                
+                <div class="border-b pb-4 mb-4">
+                    <p class="text-gray-500 mb-2 flex items-center">
+                        <i class="fa fa-link mr-2"></i>
+                        <a id="detail-url" href="#" target="_blank" class="text-primary hover:underline"></a>
+                    </p>
+                    <p class="text-gray-500 mb-2 flex items-center">
+                        <i class="fa fa-folder mr-2"></i>
+                        <span id="detail-category"></span>
+                    </p>
+                    <p id="detail-short-desc" class="text-gray-600"></p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-2">详细测评</h4>
+                    <div id="detail-full-review" class="text-gray-700 leading-relaxed"></div>
+                </div>
+                
+                <div class="mt-6 flex justify-between items-center">
+                    <div class="flex space-x-3">
+                        <button id="prev-website" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <i class="fa fa-chevron-left mr-2"></i> 上一页
+                        </button>
+                        <button id="next-website" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            下一页 <i class="fa fa-chevron-right ml-2"></i>
+                        </button>
+                    </div>
+                    <a id="visit-button" href="#" target="_blank" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                        <i class="fa fa-external-link mr-2"></i> 访问网站
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12 mt-16 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fa fa-compass text-primary mr-2"></i>网址导航
+                    </h3>
+                    <p class="text-gray-400">提供优质、安全、实用的网站导航服务，让您的网络生活更便捷。</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/" class="hover:text-primary transition-colors">网站首页</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">关于我们</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">联系方式</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">使用帮助</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="http://weibo.com/kugeceo" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="weixin://dl/chat?kugeceo" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-wechat"></i>
+                        </a>
+                        <a href="https://github.com/kugeceo" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                    <p class="mt-4 text-gray-400">反馈邮箱: info@mail.luhui.net</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>Copyright&nbsp;  &#169; 2004-01-11&nbsp;<a href="http://luhui.net" title="鲁虺文化网" target="_top">luhui.net</a>&nbsp;all rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 系统配置 - 关闭调试模式，优化性能
+        const config = {
+            categories: [
+                { id: 'social', name: '社交平台', description: '国内外主流社交网络平台' },
+                { id: 'search', name: '搜索引擎', description: '各类搜索引擎服务' },
+                { id: 'life', name: '生活服务', description: '提供各类生活相关服务的网站' },
+                { id: 'gov', name: '政府网站', description: '各级政府及相关机构官方网站' },
+                { id: 'email', name: '邮箱服务', description: '各类电子邮件服务提供商' },
+                { id: 'company', name: '商业公司', description: '各类商业企业官方网站' },
+                { id: 'edu', name: '文化教育', description: '教育机构及文化类网站' },
+                { id: 'code', name: '软件源码', description: '软件开发及源代码相关网站' },
+                { id: 'structure', name: '数据算法', description: '数据处理及算法相关网站' },
+                { id: 'news', name: '新闻传媒', description: '新闻媒体及资讯类网站' },
+                { id: 'picture', name: '图片网站', description: '图片分享及素材类网站' },
+                { id: 'video', name: '影视音乐', description: '电影、电视、音乐相关网站' },
+                { id: 'games', name: '游戏娱乐', description: '各类游戏及娱乐网站' },
+                { id: 'animation', name: '动画制作', description: '动画创作及相关资源网站' },
+                { id: 'dia', name: '设计智造', description: '设计及智能制造相关网站' }
+            ],
+            categoriesPerPage: 10,
+            websitesPerPage: 6,
+            maxWebsitePerCategory: 50,
+            cacheDuration: 3600000, // 缓存有效期1小时(毫秒)
+            loadTimeout: 8000, // 加载超时时间为8秒
+            useMockData: false, // 默认关闭模拟数据
+            forceMockData: false, // 强制使用模拟数据的开关
+            debugMode: false, // 关闭调试模式
+            dataFileType: 'txt', // 数据文件类型
+            initialLoadDelay: 1000 // 初始加载延迟
+        };
+
+        // 存储所有加载的网站数据和分类计数
+        let allWebsites = [];
+        let categoryCounts = {}; // 存储每个分类的网站数量
+        let filteredCategories = [];
+        let loadErrors = []; // 记录加载错误，但不显示
+        
+        // 当前状态
+        let currentCategory = null;
+        let currentSearchQuery = '';
+        let currentWebsitePage = 1;
+        let currentCategoryPage = 1;
+        let filteredWebsites = [];
+        let totalWebsitePages = 1;
+        let totalCategoryPages = 1;
+        
+        // 搜索缓存
+        let searchCache = new Map();
+
+        // DOM元素引用
+        const categoryList = document.getElementById('category-list');
+        const categoryTitle = document.getElementById('category-title');
+        const categoryDescription = document.getElementById('category-description');
+        const websiteCount = document.getElementById('website-count');
+        const totalCategoriesEl = document.getElementById('total-categories');
+        const totalWebsitesEl = document.getElementById('total-websites');
+        const websiteGrid = document.getElementById('website-grid');
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const categorySearchInput = document.getElementById('category-search');
+        const detailModal = document.getElementById('detail-modal');
+        const detailTitle = document.getElementById('detail-title');
+        const detailUrl = document.getElementById('detail-url');
+        const detailCategory = document.getElementById('detail-category');
+        const detailShortDesc = document.getElementById('detail-short-desc');
+        const detailFullReview = document.getElementById('detail-full-review');
+        const visitButton = document.getElementById('visit-button');
+        const closeModal = document.getElementById('close-modal');
+        const prevWebsiteBtn = document.getElementById('prev-website');
+        const nextWebsiteBtn = document.getElementById('next-website');
+        const themeToggle = document.getElementById('theme-toggle');
+        const refreshDataBtn = document.getElementById('refresh-data');
+        const showDebugBtn = document.getElementById('show-debug');
+        const debugContainer = document.getElementById('debug-container');
+        const debugInfo = document.getElementById('debug-info');
+        
+        // 分页元素
+        const websitePagination = document.getElementById('website-pagination');
+        const websitePrevBtn = document.getElementById('website-prev');
+        const websiteNextBtn = document.getElementById('website-next');
+        const websitePagesEl = document.getElementById('website-pages');
+        
+        const categoryPagination = document.getElementById('category-pagination');
+        const categoryPrevBtn = document.getElementById('category-prev');
+        const categoryNextBtn = document.getElementById('category-next');
+        const categoryPagesEl = document.getElementById('category-pages');
+
+        // 初始化页面
+        async function init() {
+            // 检查并应用保存的主题设置
+            checkSavedTheme();
+            
+            // 初始化分类计数
+            initializeCategoryCounts();
+            
+            try {
+                // 立即渲染分类框架
+                renderCategorySkeleton();
+                
+                // 设置加载超时
+                const loadPromise = loadAllWebsites();
+                const timeoutPromise = new Promise((_, reject) => 
+                    setTimeout(() => reject(new Error('加载超时')), config.loadTimeout)
+                );
+                
+                // 等待加载完成或超时
+                await Promise.race([loadPromise, timeoutPromise]);
+            } catch (error) {
+                // 静默处理错误，不显示详细信息
+                if (config.debugMode) console.error(`加载失败: ${error.message}`);
+                showLoadError(false); // 不显示详细错误
+            } finally {
+                // 无论加载成功与否，确保分类列表被渲染
+                renderCategoryPage(currentCategoryPage);
+            }
+            
+            // 加载URL参数中的状态
+            loadFromUrlParams();
+            
+            // 添加事件监听器
+            addEventListeners();
+            
+            // 调试模式默认关闭
+            if (config.debugMode) {
+                debugContainer.classList.remove('hidden');
+                updateDebugInfo();
+            }
+        }
+        
+        // 渲染分类骨架屏
+        function renderCategorySkeleton() {
+            totalCategoriesEl.textContent = config.categories.length;
+            
+            let skeletonHtml = `
+                <li>
+                    <div class="nav-item">
+                        <i class="fa fa-globe mr-2"></i>全部网站
+                        <span class="float-right text-gray-500"><i class="fa fa-spinner fa-spin"></i></span>
+                    </div>
+                </li>
+            `;
+            
+            // 添加几个骨架分类项
+            for (let i = 0; i < 5; i++) {
+                skeletonHtml += `
+                    <li>
+                        <div class="nav-item animate-pulse">
+                            <i class="fa fa-folder mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">加载中...</span>
+                            <span class="float-right text-gray-400">-</span>
+                        </div>
+                    </li>
+                `;
+            }
+            
+            categoryList.innerHTML = skeletonHtml;
+        }
+        
+        // 记录调试信息（仅在调试模式下）
+        function logDebug(message) {
+            if (!config.debugMode) return;
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            loadErrors.push(logEntry);
+            
+            // 更新调试信息显示
+            updateDebugInfo();
+        }
+        
+        // 更新调试信息显示
+        function updateDebugInfo() {
+            if (!config.debugMode) return;
+            
+            let info = `
+                总网站数: ${allWebsites.length}<br>
+                加载错误数: ${loadErrors.length}<br>
+                使用模拟数据: ${config.useMockData || config.forceMockData}<br>
+                数据文件类型: ${config.dataFileType}
+            `;
+            
+            if (loadErrors.length > 0) {
+                info += `<br>错误详情:<br>${loadErrors.slice(-5).join('<br>')}`;
+                if (loadErrors.length > 5) {
+                    info += `<br>...还有 ${loadErrors.length - 5} 个错误`;
+                }
+            }
+            
+            debugInfo.innerHTML = info;
+        }
+        
+        // 显示加载错误信息（简化版，不显示详细错误）
+        function showLoadError(showDetails = false) {
+            // 更新统计信息
+            totalWebsitesEl.textContent = allWebsites.length || 0;
+            websiteCount.textContent = `共 ${filteredWebsites.length || 0} 个网站`;
+            
+            // 显示错误信息
+            if (allWebsites.length === 0) {
+                websiteGrid.innerHTML = `
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa fa-exclamation-triangle text-yellow-500 text-5xl mb-4"></i>
+                        <p class="text-gray-500">加载数据失败</p>
+                        <div class="mt-4 flex flex-col sm:flex-row gap-2 justify-center">
+                            <button onclick="refreshAllData()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                <i class="fa fa-refresh mr-2"></i>重试加载
+                            </button>
+                            <button onclick="toggleMockData()" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                                <i class="fa fa-database mr-2"></i>${config.useMockData ? '使用实际数据' : '使用模拟数据'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // 部分加载成功，显示已加载的数据
+                if (currentSearchQuery) {
+                    handleSearch();
+                } else if (currentCategory === 'all' || !currentCategory) {
+                    showAllWebsites();
+                }
+                
+                // 只在有严重错误时显示简单警告
+                if (loadErrors.length > 10 && showDetails) {
+                    const warningEl = document.createElement('div');
+                    warningEl.className = 'col-span-full p-3 bg-yellow-50 text-yellow-700 rounded-lg text-sm flex items-center';
+                    warningEl.innerHTML = `
+                        <i class="fa fa-warning mr-2"></i>
+                        <span>部分数据加载失败</span>
+                        ${config.debugMode ? `<button onclick="document.getElementById('debug-container').classList.toggle('hidden')" class="ml-auto text-xs bg-yellow-100 px-2 py-1 rounded">
+                            查看详情
+                        </button>` : ''}
+                    `;
+                    websiteGrid.prepend(warningEl);
+                }
+            }
+        }
+        
+        // 切换是否使用模拟数据
+        function toggleMockData() {
+            config.useMockData = !config.useMockData;
+            logDebug(`切换模拟数据模式: ${config.useMockData}`);
+            refreshAllData();
+        }
+        
+        // 初始化分类计数
+        function initializeCategoryCounts() {
+            config.categories.forEach(category => {
+                categoryCounts[category.id] = 0;
+            });
+            totalCategoriesEl.textContent = config.categories.length;
+        }
+        
+        // 并行加载所有网站数据，优化性能
+        async function loadAllWebsites() {
+            // 显示加载状态
+            websiteGrid.innerHTML = `
+                <div class="col-span-full py-12 text-center">
+                    <i class="fa fa-spinner fa-spin text-gray-300 text-5xl mb-4"></i>
+                    <p class="text-gray-500">加载网站中...</p>
+                </div>
+            `;
+            
+            // 重置数据
+            allWebsites = [];
+            loadErrors = [];
+            initializeCategoryCounts();
+            
+            try {
+                logDebug(`开始加载所有分类数据，使用模拟数据: ${config.useMockData || config.forceMockData}`);
+                
+                // 使用Promise.allSettled并行加载所有分类，忽略失败的分类
+                const categoryPromises = config.categories.map(category => 
+                    loadCategoryWebsites(category)
+                );
+                
+                const results = await Promise.allSettled(categoryPromises);
+                
+                // 处理结果，只关注成功的加载
+                results.forEach(result => {
+                    if (result.status === 'fulfilled' && result.value) {
+                        allWebsites.push(...result.value);
+                    }
+                });
+                
+                // 更新总网站数
+                totalWebsitesEl.textContent = allWebsites.length;
+                logDebug(`所有分类加载完成，总网站数: ${allWebsites.length}`);
+                
+                // 重新渲染当前视图
+                if (currentSearchQuery) {
+                    handleSearch();
+                } else if (currentCategory === 'all' || !currentCategory) {
+                    showAllWebsites();
+                } else if (currentCategory) {
+                    showCategoryWebsites(currentCategory);
+                }
+                
+                // 如果没有加载到任何数据，自动切换到模拟数据
+                if (allWebsites.length === 0 && !config.useMockData && !config.forceMockData) {
+                    logDebug("未加载到任何数据，自动切换到模拟数据模式");
+                    config.useMockData = true;
+                    return loadAllWebsites(); // 重新加载
+                }
+            } catch (error) {
+                logDebug(`加载网站数据失败: ${error.message}`);
+                throw error; // 抛出错误让上层处理
+            }
+            
+            return allWebsites;
+        }
+        
+        // 解析TXT内容为网站数据对象
+        function parseTxtContent(txtContent) {
+            // 按行分割内容，忽略空行
+            const lines = txtContent.split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0);
+                
+            // 检查是否有足够的行
+            if (lines.length < 4) {
+                throw new Error(`TXT文件格式不正确`);
+            }
+            
+            // 提取各部分内容
+            const name = lines[0];
+            let url = lines[1];
+            const shortDesc = lines[2];
+            
+            // 合并剩余行作为详细测评，并添加HTML分段标签
+            const fullReviewLines = lines.slice(3);
+            const fullReview = fullReviewLines.map(line => `<p>${line}</p>`).join('');
+            
+            // 验证URL格式
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = `https://${url}`;
+            }
+            
+            return { name, url, shortDesc, fullReview };
+        }
+        
+        // 生成模拟网站数据
+        function generateMockWebsiteData(category, number) {
+            const categoryInfo = config.categories.find(c => c.id === category.id);
+            const siteTypes = {
+                'social': ['社交网络', '论坛社区', '交友平台'],
+                'search': ['综合搜索', '图片搜索', '学术搜索'],
+                'life': ['外卖服务', '出行服务', '购物平台'],
+                'gov': ['政府门户', '政务服务', '政策发布'],
+                'email': ['个人邮箱', '企业邮箱', '临时邮箱'],
+                'company': ['科技公司', '制造企业', '服务公司'],
+                'edu': ['在线教育', '学术期刊', '图书馆'],
+                'code': ['代码托管', '开发工具', '开源社区'],
+                'structure': ['数据分析', '可视化工具', '算法平台'],
+                'news': ['综合新闻', '行业资讯', '财经报道'],
+                'picture': ['图片分享', '素材下载', '设计灵感'],
+                'video': ['视频平台', '音乐网站', '直播平台'],
+                'games': ['游戏平台', '游戏资讯', '电竞社区'],
+                'animation': ['动画资讯', '素材下载', '创作社区'],
+                'dia': ['设计平台', '创意社区', '智能制造']
+            };
+            
+            const typeIndex = Math.floor(Math.random() * siteTypes[category.id].length);
+            const siteType = siteTypes[category.id][typeIndex];
+            
+            return {
+                name: `${categoryInfo.name} - ${siteType} ${number}`,
+                url: `https://example.com/${category.id}/${number}`,
+                shortDesc: `这是一个${siteType}网站，提供丰富的${categoryInfo.description}相关服务。`,
+                fullReview: `<p>这是${categoryInfo.name}分类下的第${number}个${siteType}网站的详细测评。</p>
+                            <p>该网站提供全面的${siteType}服务，界面友好，操作简单，内容丰富。</p>
+                            <p>用户体验良好，加载速度快，是同类网站中的佼佼者。推荐指数：★★★★☆</p>`
+            };
+        }
+        
+        // 加载单个分类的所有网站，忽略错误
+        async function loadCategoryWebsites(category) {
+            const categoryWebsites = [];
+            
+            try {
+                // 为每个网站设置独立的超时时间
+                const loadPromises = [];
+                const maxItems = 5; // 每个分类加载5个网站
+                
+                for (let i = 1; i <= maxItems; i++) {
+                    // 检查缓存（优先使用缓存提高性能）
+                    const now = Date.now();
+                    const lastCacheTime = localStorage.getItem(`cache_time_${category.id}_${i}`);
+                    
+                    if (lastCacheTime && now - parseInt(lastCacheTime) < config.cacheDuration) {
+                        const cachedData = localStorage.getItem(`website_${category.id}_${i}`);
+                        if (cachedData) {
+                            try {
+                                const websiteData = JSON.parse(cachedData);
+                                const website = {
+                                    id: `${i}`,
+                                    number: i,
+                                    categoryId: category.id,
+                                    categoryName: category.name,
+                                    ...websiteData
+                                };
+                                categoryWebsites.push(website);
+                                categoryCounts[category.id]++;
+                                logDebug(`从缓存加载: ${category.id}/${i}.${config.dataFileType}`);
+                                continue;
+                            } catch (e) {
+                                // 静默处理缓存错误
+                                localStorage.removeItem(`website_${category.id}_${i}`);
+                                localStorage.removeItem(`cache_time_${category.id}_${i}`);
+                            }
+                        }
+                    }
+                    
+                    // 没有缓存或缓存过期，加载数据
+                    loadPromises.push(new Promise(async (resolve) => {
+                        try {
+                            let websiteData;
+                            const useMock = config.useMockData || config.forceMockData;
+                            
+                            if (useMock) {
+                                // 使用模拟数据
+                                await new Promise(resolve => setTimeout(resolve, 100 * i));
+                                websiteData = generateMockWebsiteData(category, i);
+                                logDebug(`使用模拟数据: ${category.id}/${i}.${config.dataFileType}`);
+                            } else {
+                                // 尝试加载真实数据（TXT格式）
+                                const url = `websites/${category.id}/${i}.${config.dataFileType}`;
+                                logDebug(`尝试加载: ${url}`);
+                                
+                                const response = await Promise.race([
+                                    fetch(url),
+                                    new Promise((_, reject) => 
+                                        setTimeout(() => reject(new Error(`加载超时`)), 3000)
+                                    )
+                                ]);
+                                
+                                if (!response.ok) {
+                                    if (response.status === 404) {
+                                        resolve(); // 404表示该文件不存在，直接 resolve
+                                        return;
+                                    }
+                                    throw new Error(`HTTP错误: ${response.status}`);
+                                }
+                                
+                                // 读取并解析TXT内容
+                                const txtContent = await response.text();
+                                websiteData = parseTxtContent(txtContent);
+                            }
+                            
+                            if (websiteData) {
+                                const website = {
+                                    id: `${i}`,
+                                    number: i,
+                                    categoryId: category.id,
+                                    categoryName: category.name,
+                                    ...websiteData
+                                };
+                                
+                                // 缓存数据
+                                localStorage.setItem(`website_${category.id}_${i}`, JSON.stringify(websiteData));
+                                localStorage.setItem(`cache_time_${category.id}_${i}`, now.toString());
+                                
+                                categoryWebsites.push(website);
+                                categoryCounts[category.id]++;
+                            }
+                        } catch (error) {
+                            // 静默处理单个网站加载错误，不记录详细信息
+                            logDebug(`加载失败: ${category.id}/${i}`);
+                            
+                            // 实际数据加载失败时，使用模拟数据作为备选
+                            if (!config.useMockData && !config.forceMockData) {
+                                const websiteData = generateMockWebsiteData(category, i);
+                                const website = {
+                                    id: `${i}`,
+                                    number: i,
+                                    categoryId: category.id,
+                                    categoryName: category.name,
+                                    ...websiteData,
+                                    isFallback: true
+                                };
+                                categoryWebsites.push(website);
+                                categoryCounts[category.id]++;
+                            }
+                        }
+                        resolve();
+                    }));
+                }
+                
+                // 等待所有网站加载完成
+                await Promise.all(loadPromises);
+                
+            } catch (error) {
+                // 静默处理分类加载错误
+                logDebug(`分类加载失败: ${category.id}`);
+            }
+            
+            return categoryWebsites;
+        }
+        
+        // 显示所有网站
+        function showAllWebsites() {
+            currentCategory = 'all';
+            filteredWebsites = [...allWebsites];
+            currentWebsitePage = 1;
+            
+            // 更新标题
+            categoryTitle.textContent = '全部网站';
+            categoryDescription.textContent = '发现并访问各类优质网站';
+            websiteCount.textContent = `共 ${filteredWebsites.length} 个网站`;
+            
+            // 渲染网站列表
+            renderWebsites(currentWebsitePage);
+            updateWebsitePagination();
+            
+            // 更新URL参数
+            updateUrlParams();
+            
+            // 更新分类选中状态
+            updateCategoryActiveState();
+        }
+        
+        // 显示特定分类的网站
+        function showCategoryWebsites(categoryId) {
+            currentCategory = categoryId;
+            currentSearchQuery = '';
+            searchInput.value = '';
+            currentWebsitePage = 1;
+            
+            // 筛选网站
+            filteredWebsites = allWebsites.filter(website => website.categoryId === categoryId);
+            
+            // 找到分类信息
+            const category = config.categories.find(cat => cat.id === categoryId);
+            
+            // 更新标题
+            if (category) {
+                categoryTitle.textContent = category.name;
+                categoryDescription.textContent = category.description;
+            } else {
+                categoryTitle.textContent = '分类不存在';
+                categoryDescription.textContent = '';
+            }
+            websiteCount.textContent = `共 ${filteredWebsites.length} 个网站`;
+            
+            // 渲染网站列表
+            renderWebsites(currentWebsitePage);
+            updateWebsitePagination();
+            
+            // 更新URL参数
+            updateUrlParams();
+            
+            // 更新分类选中状态
+            updateCategoryActiveState();
+        }
+        
+        // 渲染网站列表
+        function renderWebsites(page) {
+            if (filteredWebsites.length === 0) {
+                websiteGrid.innerHTML = `
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa fa-folder-open-o text-gray-300 text-5xl mb-4"></i>
+                        <p class="text-gray-500">没有找到相关网站</p>
+                        <button onclick="refreshAllData()" class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                            <i class="fa fa-refresh mr-2"></i>刷新数据
+                        </button>
+                        ${!config.useMockData ? `<button onclick="toggleMockData()" class="mt-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                            <i class="fa fa-database mr-2"></i>尝试使用模拟数据
+                        </button>` : ''}
+                    </div>
+                `;
+                return;
+            }
+            
+            // 计算分页范围
+            const startIndex = (page - 1) * config.websitesPerPage;
+            const endIndex = Math.min(startIndex + config.websitesPerPage, filteredWebsites.length);
+            const pageWebsites = filteredWebsites.slice(startIndex, endIndex);
+            
+            // 生成HTML
+            websiteGrid.innerHTML = pageWebsites.map(website => `
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover transition-colors duration-300">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-semibold text-lg text-dark hover:text-primary transition-colors cursor-pointer" onclick="openWebsiteDetail('${website.categoryId}', '${website.id}')">
+                                ${website.name} ${website.isFallback ? '<span class="text-xs text-yellow-500">(备用数据)</span>' : ''}
+                            </h3>
+                            <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                                ${website.categoryName}
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">${website.shortDesc}</p>
+                        <div class="flex justify-between items-center">
+                            <a href="${website.url}" target="_blank" class="text-primary hover:underline text-sm flex items-center">
+                                <i class="fa fa-external-link mr-1"></i> 访问网站
+                            </a>
+                            <button onclick="openWebsiteDetail('${website.categoryId}', '${website.id}')" class="text-gray-500 hover:text-primary text-sm transition-colors">
+                                <i class="fa fa-info-circle mr-1"></i> 详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // 打开网站详情
+        function openWebsiteDetail(categoryId, websiteId) {
+            const website = allWebsites.find(w => w.categoryId === categoryId && w.id === websiteId);
+            if (website) {
+                openDetailModal(
+                    website.name,
+                    website.url,
+                    website.categoryName,
+                    website.shortDesc,
+                    website.fullReview,
+                    website.categoryId,
+                    website.id,
+                    website.isFallback
+                );
+            }
+        }
+        
+        // 打开详情模态框
+        function openDetailModal(name, url, category, shortDesc, fullReview, categoryId, websiteId, isFallback) {
+            detailTitle.textContent = name + (isFallback ? ' (备用数据)' : '');
+            detailUrl.href = url;
+            detailUrl.textContent = url;
+            detailCategory.textContent = category;
+            detailShortDesc.textContent = shortDesc;
+            detailFullReview.innerHTML = fullReview;
+            visitButton.href = url;
+            
+            // 显示模态框
+            detailModal.classList.remove('hidden');
+            detailModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            
+            // 更新导航按钮状态
+            updateDetailNavigation({categoryId, id: websiteId});
+        }
+        
+        // 更新详情页导航
+        function updateDetailNavigation(currentWebsite) {
+            // 找到当前网站在筛选列表中的位置
+            const currentIndex = filteredWebsites.findIndex(w => 
+                w.categoryId === currentWebsite.categoryId && w.id === currentWebsite.id
+            );
+            
+            // 更新上一页/下一页按钮状态
+            prevWebsiteBtn.disabled = currentIndex <= 0;
+            nextWebsiteBtn.disabled = currentIndex >= filteredWebsites.length - 1;
+            
+            // 存储当前网站信息，供导航使用
+            prevWebsiteBtn.dataset.index = currentIndex - 1;
+            nextWebsiteBtn.dataset.index = currentIndex + 1;
+        }
+        
+        // 关闭详情模态框
+        function closeDetailModal() {
+            detailModal.classList.add('hidden');
+            detailModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+        
+        // 处理搜索
+        function handleSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            currentSearchQuery = query;
+            currentWebsitePage = 1;
+            
+            // 检查缓存
+            if (searchCache.has(query)) {
+                filteredWebsites = searchCache.get(query);
+                renderWebsites(currentWebsitePage);
+                updateWebsitePagination();
+                updateUrlParams();
+                return;
+            }
+            
+            if (query === '') {
+                // 空搜索，显示当前分类
+                if (currentCategory === 'all' || !currentCategory) {
+                    showAllWebsites();
+                } else {
+                    showCategoryWebsites(currentCategory);
+                }
+                searchCache.delete(query); // 清空空查询缓存
+            } else {
+                // 执行搜索
+                filteredWebsites = allWebsites.filter(website => 
+                    website.name.toLowerCase().includes(query) ||
+                    website.shortDesc.toLowerCase().includes(query) ||
+                    website.fullReview.toLowerCase().includes(query) ||
+                    website.categoryName.toLowerCase().includes(query)
+                );
+                
+                // 更新缓存
+                searchCache.set(query, filteredWebsites);
+                
+                // 更新分类标题
+                categoryTitle.textContent = `搜索结果: "${query}"`;
+                categoryDescription.textContent = `找到 ${filteredWebsites.length} 个相关网站`;
+                websiteCount.textContent = `共 ${filteredWebsites.length} 个网站`;
+                
+                // 渲染结果
+                renderWebsites(currentWebsitePage);
+                updateWebsitePagination();
+                updateUrlParams();
+            }
+        }
+        
+        // 渲染分类页面
+        function renderCategoryPage(page) {
+            // 筛选分类
+            const query = categorySearchInput.value.trim().toLowerCase();
+            filteredCategories = query 
+                ? config.categories.filter(category => 
+                    category.name.toLowerCase().includes(query) || 
+                    category.description.toLowerCase().includes(query)
+                  )
+                : [...config.categories];
+            
+            // 计算总页数
+            totalCategoryPages = Math.ceil(filteredCategories.length / config.categoriesPerPage);
+            currentCategoryPage = Math.max(1, Math.min(page, totalCategoryPages));
+            
+            // 计算分页范围
+            const startIndex = (currentCategoryPage - 1) * config.categoriesPerPage;
+            const endIndex = Math.min(startIndex + config.categoriesPerPage, filteredCategories.length);
+            const pageCategories = filteredCategories.slice(startIndex, endIndex);
+            
+            // 生成HTML
+            if (pageCategories.length === 0) {
+                categoryList.innerHTML = `
+                    <li class="flex items-center justify-center py-4 text-gray-500">
+                        <i class="fa fa-folder-open-o mr-2"></i>没有找到分类
+                    </li>
+                `;
+            } else {
+                categoryList.innerHTML = `
+                    <li>
+                        <div class="nav-item ${currentCategory === 'all' ? 'active' : ''}" onclick="showAllWebsites()">
+                            <i class="fa fa-globe mr-2"></i>全部网站
+                            <span class="float-right text-gray-500">${allWebsites.length}</span>
+                        </div>
+                    </li>
+                ` + pageCategories.map(category => `
+                    <li>
+                        <div class="nav-item ${currentCategory === category.id ? 'active' : ''}" onclick="showCategoryWebsites('${category.id}')">
+                            <i class="fa fa-folder mr-2"></i>${category.name}
+                            <span class="float-right text-gray-500">${categoryCounts[category.id] || 0}</span>
+                        </div>
+                    </li>
+                `).join('');
+            }
+            
+            // 更新分页控件
+            updateCategoryPagination();
+        }
+        
+        // 更新分类分页控件
+        function updateCategoryPagination() {
+            if (totalCategoryPages <= 1) {
+                categoryPagination.classList.add('hidden');
+                return;
+            }
+            
+            categoryPagination.classList.remove('hidden');
+            categoryPagesEl.innerHTML = '';
+            
+            // 智能显示页码
+            let startPage = Math.max(1, currentCategoryPage - 2);
+            let endPage = Math.min(totalCategoryPages, currentCategoryPage + 2);
+            
+            // 确保至少显示5个页码
+            if (endPage - startPage < 4) {
+                if (startPage === 1) {
+                    endPage = Math.min(5, totalCategoryPages);
+                } else if (endPage === totalCategoryPages) {
+                    startPage = Math.max(1, totalCategoryPages - 4);
+                }
+            }
+            
+            // 添加第一页按钮
+            if (startPage > 1) {
+                addCategoryPageButton(1);
+                if (startPage > 2) {
+                    addCategoryEllipsis();
+                }
+            }
+            
+            // 添加中间页码
+            for (let i = startPage; i <= endPage; i++) {
+                addCategoryPageButton(i);
+            }
+            
+            // 添加最后一页按钮
+            if (endPage < totalCategoryPages) {
+                if (endPage < totalCategoryPages - 1) {
+                    addCategoryEllipsis();
+                }
+                addCategoryPageButton(totalCategoryPages);
+            }
+            
+            // 更新上一页/下一页按钮状态
+            categoryPrevBtn.disabled = currentCategoryPage === 1;
+            categoryNextBtn.disabled = currentCategoryPage === totalCategoryPages;
+        }
+        
+        // 添加分类页码按钮
+        function addCategoryPageButton(pageNum) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `pagination-item ${pageNum === currentCategoryPage ? 'active' : ''}`;
+            pageBtn.textContent = pageNum;
+            pageBtn.addEventListener('click', () => renderCategoryPage(pageNum));
+            categoryPagesEl.appendChild(pageBtn);
+        }
+        
+        // 添加分类分页省略号
+        function addCategoryEllipsis() {
+            const ellipsis = document.createElement('span');
+            ellipsis.className = 'pagination-item';
+            ellipsis.textContent = '...';
+            ellipsis.disabled = true;
+            ellipsis.style.cursor = 'default';
+            categoryPagesEl.appendChild(ellipsis);
+        }
+        
+        // 更新网站分页控件
+        function updateWebsitePagination() {
+            // 计算总页数
+            totalWebsitePages = Math.ceil(filteredWebsites.length / config.websitesPerPage);
+            
+            // 处理没有结果的情况
+            if (filteredWebsites.length === 0) {
+                websitePagination.classList.add('hidden');
+                return;
+            }
+            
+            // 处理只有一页的情况
+            if (totalWebsitePages <= 1) {
+                websitePagination.classList.add('hidden');
+                return;
+            }
+            
+            websitePagination.classList.remove('hidden');
+            websitePagesEl.innerHTML = '';
+            
+            // 智能显示页码
+            let startPage = Math.max(1, currentWebsitePage - 2);
+            let endPage = Math.min(totalWebsitePages, currentWebsitePage + 2);
+            
+            // 确保至少显示5个页码
+            if (endPage - startPage < 4) {
+                if (startPage === 1) {
+                    endPage = Math.min(5, totalWebsitePages);
+                } else if (endPage === totalWebsitePages) {
+                    startPage = Math.max(1, totalWebsitePages - 4);
+                }
+            }
+            
+            // 添加第一页按钮
+            if (startPage > 1) {
+                addWebsitePageButton(1);
+                if (startPage > 2) {
+                    addWebsiteEllipsis();
+                }
+            }
+            
+            // 添加中间页码
+            for (let i = startPage; i <= endPage; i++) {
+                addWebsitePageButton(i);
+            }
+            
+            // 添加最后一页按钮
+            if (endPage < totalWebsitePages) {
+                if (endPage < totalWebsitePages - 1) {
+                    addWebsiteEllipsis();
+                }
+                addWebsitePageButton(totalWebsitePages);
+            }
+            
+            // 更新上一页/下一页按钮状态
+            websitePrevBtn.disabled = currentWebsitePage === 1;
+            websiteNextBtn.disabled = currentWebsitePage === totalWebsitePages;
+        }
+        
+        // 添加网站页码按钮
+        function addWebsitePageButton(pageNum) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `pagination-item ${pageNum === currentWebsitePage ? 'active' : ''}`;
+            pageBtn.textContent = pageNum;
+            pageBtn.addEventListener('click', () => {
+                currentWebsitePage = pageNum;
+                renderWebsites(currentWebsitePage);
+                updateWebsitePagination();
+                updateUrlParams();
+            });
+            websitePagesEl.appendChild(pageBtn);
+        }
+        
+        // 添加网站分页省略号
+        function addWebsiteEllipsis() {
+            const ellipsis = document.createElement('span');
+            ellipsis.className = 'pagination-item';
+            ellipsis.textContent = '...';
+            ellipsis.disabled = true;
+            ellipsis.style.cursor = 'default';
+            websitePagesEl.appendChild(ellipsis);
+        }
+        
+        // 更新分类选中状态
+        function updateCategoryActiveState() {
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (currentCategory === 'all') {
+                items[0].classList.add('active');
+            } else {
+                const activeItem = document.querySelector(`.nav-item[onclick="showCategoryWebsites('${currentCategory}')"]`);
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
+            }
+        }
+        
+        // 从URL参数加载状态
+        function loadFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const category = params.get('category');
+            const search = params.get('search');
+            const page = params.get('page');
+            const debug = params.get('debug');
+            
+            // 只有明确参数才开启调试模式
+            if (debug === 'true') {
+                config.debugMode = true;
+                debugContainer.classList.remove('hidden');
+            }
+            
+            if (page) {
+                currentWebsitePage = parseInt(page) || 1;
+            }
+            
+            if (search) {
+                currentSearchQuery = search;
+                searchInput.value = search;
+                handleSearch();
+            } else if (category) {
+                showCategoryWebsites(category);
+            } else {
+                showAllWebsites();
+            }
+        }
+        
+        // 更新URL参数
+        function updateUrlParams() {
+            const params = new URLSearchParams();
+            
+            if (currentSearchQuery) {
+                params.set('search', currentSearchQuery);
+            } else if (currentCategory && currentCategory !== 'all') {
+                params.set('category', currentCategory);
+            }
+            
+            if (currentWebsitePage > 1) {
+                params.set('page', currentWebsitePage);
+            }
+            
+            if (config.debugMode) {
+                params.set('debug', 'true');
+            }
+            
+            const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+            window.history.replaceState({}, '', newUrl);
+        }
+        
+        // 检查并应用保存的主题设置
+        function checkSavedTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const isDarkMode = savedTheme === 'dark' || 
+                              (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fa fa-sun-o text-gray-600"></i>';
+            } else {
+                document.body.classList.remove('dark-mode');
+                themeToggle.innerHTML = '<i class="fa fa-moon-o text-gray-600"></i>';
+            }
+        }
+        
+        // 切换主题
+        function toggleTheme() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<i class="fa fa-sun-o text-gray-600"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fa fa-moon-o text-gray-600"></i>';
+            }
+        }
+        
+        // 刷新所有数据
+        async function refreshAllData() {
+            // 显示加载状态
+            refreshDataBtn.innerHTML = '<i class="fa fa-spinner fa-spin text-gray-600"></i>';
+            refreshDataBtn.disabled = true;
+            
+            try {
+                // 清除缓存
+                config.categories.forEach(category => {
+                    for (let i = 1; i <= config.maxWebsitePerCategory; i++) {
+                        localStorage.removeItem(`website_${category.id}_${i}`);
+                        localStorage.removeItem(`cache_time_${category.id}_${i}`);
+                    }
+                });
+                searchCache.clear();
+                logDebug("已清除缓存并开始刷新数据");
+                
+                // 重新渲染分类骨架屏
+                renderCategorySkeleton();
+                
+                // 重新加载所有数据
+                await loadAllWebsites();
+            } catch (error) {
+                logDebug(`刷新数据失败: ${error.message}`);
+                showLoadError(false);
+            } finally {
+                // 恢复按钮状态
+                refreshDataBtn.innerHTML = '<i class="fa fa-refresh text-gray-600"></i>';
+                refreshDataBtn.disabled = false;
+            }
+        }
+        
+        // 添加事件监听器
+        function addEventListeners() {
+            // 搜索按钮点击事件
+            searchButton.addEventListener('click', handleSearch);
+            
+            // 搜索框回车事件
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+            
+            // 分类搜索框事件
+            categorySearchInput.addEventListener('input', () => {
+                renderCategoryPage(1);
+            });
+            
+            // 关闭模态框
+            closeModal.addEventListener('click', closeDetailModal);
+            
+            // 点击模态框背景关闭
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) {
+                    closeDetailModal();
+                }
+            });
+            
+            // 模态框导航按钮
+            prevWebsiteBtn.addEventListener('click', () => {
+                const index = parseInt(prevWebsiteBtn.dataset.index);
+                if (index >= 0 && index < filteredWebsites.length) {
+                    const website = filteredWebsites[index];
+                    openDetailModal(
+                        website.name,
+                        website.url,
+                        website.categoryName,
+                        website.shortDesc,
+                        website.fullReview,
+                        website.categoryId,
+                        website.id,
+                        website.isFallback
+                    );
+                }
+            });
+            
+            nextWebsiteBtn.addEventListener('click', () => {
+                const index = parseInt(nextWebsiteBtn.dataset.index);
+                if (index >= 0 && index < filteredWebsites.length) {
+                    const website = filteredWebsites[index];
+                    openDetailModal(
+                        website.name,
+                        website.url,
+                        website.categoryName,
+                        website.shortDesc,
+                        website.fullReview,
+                        website.categoryId,
+                        website.id,
+                        website.isFallback
+                    );
+                }
+            });
+            
+            // 网站分页按钮
+            websitePrevBtn.addEventListener('click', () => {
+                if (currentWebsitePage > 1) {
+                    currentWebsitePage--;
+                    renderWebsites(currentWebsitePage);
+                    updateWebsitePagination();
+                    updateUrlParams();
+                }
+            });
+            
+            websiteNextBtn.addEventListener('click', () => {
+                if (currentWebsitePage < totalWebsitePages) {
+                    currentWebsitePage++;
+                    renderWebsites(currentWebsitePage);
+                    updateWebsitePagination();
+                    updateUrlParams();
+                }
+            });
+            
+            // 分类分页按钮
+            categoryPrevBtn.addEventListener('click', () => {
+                if (currentCategoryPage > 1) {
+                    renderCategoryPage(currentCategoryPage - 1);
+                }
+            });
+            
+            categoryNextBtn.addEventListener('click', () => {
+                if (currentCategoryPage < totalCategoryPages) {
+                    renderCategoryPage(currentCategoryPage + 1);
+                }
+            });
+            
+            // 主题切换
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // 刷新数据
+            refreshDataBtn.addEventListener('click', refreshAllData);
+            
+            // 窗口大小变化时重新计算分页
+            window.addEventListener('resize', () => {
+                updateWebsitePagination();
+                updateCategoryPagination();
+            });
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+
+
+
+<!--版权说明开始
+/*
++------------------------------------------------------------------------+
+ System Name : Luhui Website Classification Navigation System V1.1.1
+ 系统名称 : 鲁虺网站分类导航系统 html JavaScript txt V1.1.1
++------------------------------------------------------------------------+
+ 创建 Created  2025-9-1 / 修改 Modify 2025-9-2
++------------------------------------------------------------------------+
+ Version : 1.1.1
++------------------------------------------------------------------------+
+ 版本更新 : 该版本所有详细更新细节都已在系统迭代说明中详述,如需了解请查阅鲁虺软件文档
+ 鲁虺软件 : http://soft.luhui.net 点击浏览鲁虺软件开发文档“软件开发”列表查询品鉴
++------------------------------------------------------------------------+
+ Author : 鲁虺文化网  冠富研究院  冠富商务通
++------------------------------------------------------------------------+
+ Powered by luhui.net 2004-01-11
++------------------------------------------------------------------------+
+ QQ : 63625244  tel:13162920188  tel:13386070835   tel:15900718107
+ Email : info@mail.luhui.net
+ 鲁虺文化网 : http://www.luhui.net
+ 冠富研究院 : http://www.guanfu.org
+ 冠富商务通 : http://www.guanfu.net.cn
++------------------------------------------------------------------------+
+ Note :
+
+ 1.本软件对于非商业用户完全免费,如果要使用在商业用途
+   方面,必须取得作者的授权.
+
+ 2.你可以任意传播以及修改本程序,但不能以任何形式删除
+   本程序的版权.请记住,保留作者版权是对原创作者的尊敬.
+
+ 3.如果有问题,可以通过上面提供的方式进行解答,但作者
+   时间有限,如果不能及时或者不解答,请谅解.
+
+ 4.作者对非法使用该程序导致的问题,不予负责.
+
+ 5.本程序版权归 鲁虺文化网 所有.禁止任何侵权行为!
+
++------------------------------------------------------------------------+
+*/
+--版权说明结束-->	
+
+
+
+
+
+
+</body>
+</html>
