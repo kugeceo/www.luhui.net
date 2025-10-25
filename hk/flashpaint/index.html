@@ -1,0 +1,77 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>基于位图的Flash涂鸦板 - FlashPaint</title>
+
+<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="swfobject.js"></script>
+<style type="text/css">
+body{margin:0; padding:0; background:#000; font:12px/1.5 arial;}
+</style>
+</head>
+<body>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr valign="top">
+		<td>
+			<div id="swfcon">
+
+				<h1>FlashPaint - 基于位图的Flash涂鸦板</h1>
+				<p>
+					基本介绍：<br>
+					基于位图处理的flash涂鸦板，可undo/redo50步。<br>
+					一共5种笔触,8个绘图工具<br>
+					可以设定背景、边框，并可添加库元素。<br>
+					强健的record和play功能<br>
+					强健的本地存储功能（带缩略图）<br>
+					强健的打印功能（纸张自适应，横竖自适应）<br>
+				</p>
+
+			</div>
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+
+	function strGetUrlArg(s,sv,sd){
+		var a=s.match(new RegExp("(^|&|\\?)"+sv+"=[^&]*"))
+		return a==null||sv==""?(sd||""):a[0].slice(sv.length+2)
+	}
+
+	$(function(){
+		var loc=strGetUrlArg(String(window.location.search),"loc","zh-cn")
+		if(deconcept.SWFObjectUtil.getPlayerVersion()["major"]>=10){
+			var so = new SWFObject("flashpaint.swf?v=20211129", "swf_flashpaint", "100%", $(window).height(), "10", "#FFFFFF")
+			so.addParam("menu","false")
+			so.addParam("allowScriptAccess","always")
+			so.write("swfcon")
+		}else{
+			var s=''
+			if(loc=='zh-cn'){
+				s='您的浏览器不支持Flash，<a href=http://www.r12345.com/rzbrowser/ target=_blank>请下载仁者浏览器<u></u></a>'
+			}else{
+				s='Your browser does not support Flash, <a href=http://www.r12345.com/rzbrowser/ target=_blank>Please install Chrome 46.</a>'
+			}
+			$('#swfcon').html(s).css({'color':'#ccc', 'font-size':'16px', 'padding':'2em'}).find('a').css({'color':'#fff', 'text-decoration':'underline'})
+		}
+	})
+
+	$(window).resize(function() {
+		//$('#swfcon').parent().width($(window).width()-302)
+		$('#swf_flashpaint').height($(window).height())
+	})
+	$(window).resize()
+
+</script>
+
+<div style="display:none">
+
+统计
+
+</div>
+
+</body>
+</html>

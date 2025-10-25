@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<title>二年级第九周网课表</title>
+		<style>
+			body {
+				font-size: 0.8rem;
+				font-weight: normal;
+				color: #919191;
+			}
+
+			h1 {
+				font-size: 1.3rem;
+				text-align: center;
+				color: #000;
+			}
+
+			a {
+				text-decoration: none;
+				background-color: #55aa7f;
+				color: #fff;
+				padding: 0.2rem 0.4rem;
+			}
+
+			.week {
+				font-weight: bold;
+				font-size: 1rem;
+				text-decoration: underline;
+				color: #000000;
+			}
+
+			#w1,
+			#w2,
+			#w3,
+			#w4,
+			#w5 {
+				height: 1.5rem;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>二年级第九周网课表</h1>
+
+
+		<p>第一节课 9:20-9:40</p>
+		<p>第二节课 10:30-10:50</p>
+		<p>第三节课 15:50-16:10</p>
+
+		<div id="w1" onclick="this.style.height='100%'">
+			<div class="week">周一</div>
+			一、语文40:第九课《枫树上的喜鹊》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5849&week=8&_=1587906415042" target="_blank">去上课</a></p>
+			二、数学32:6-6 《练习六》3<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5477&week=7&_=1587906543146" target="_blank">去上课</a></p>
+			三、心理健康7:《快乐过好每一天》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5318&week=7&_=1587907097581" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w2" onclick="this.style.height='100%'">
+			<div class="week">周二</div>
+			一、数学33:6-7 《三位数加两》（三）位数（不连续进位）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4876&week=7&_=1587906581529" target="_blank">去上课</a></p>
+			二、语文41:第九课《枫树上的喜鹊》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=6277&week=9&_=1587906473866" target="_blank">去上课</a></p>
+			三、音乐8:第三单元《飞呀飞》第二课时：演唱《小蜜蜂》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1160&week=4&_=1587906816445" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w3" onclick="this.style.height='100%'">
+			<div class="week">周三</div>
+			一、语文42:课文10《沙滩上的童话》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=6647&week=9&_=1587906496931" target="_blank">去上课</a></p>
+			二、数学34:6-8 （三位数加两三）位数（连续进位）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5036&week=7&_=1587906591411" target="_blank">去上课</a></p>
+			三、道德与法治第9课5健康游戏我常玩（第一课时）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3498&week=5&_=1587906847030" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w4" onclick="this.style.height='100%'">
+			<div class="week">周四</div>
+			一、数学第35课6-9练习七（一）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5165&week=7&_=1587906603735" target="_blank">去上课</a></p>
+			二、语文43:课文10《沙滩上的童话》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=6649&week=9&_=1587906504794" target="_blank">去上课</a></p>
+			三、体育第9课第九次课1武术基本腿法（正踢腿、侧踢腿）；2体适能练习（发展柔韧性练习）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2257&week=3&_=1587906905228" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w5" onclick="this.style.height='100%'">
+			<div class="week">周五</div>
+			一、科学第9课第三单元第2课四季与动物<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3704&week=6&_=1586182644089" target="_blank">去上课</a></p>
+			二、语文第44课课文；11.我是一只小虫子（第1课时）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=6676&week=9&_=1587906515646" target="_blank">去上课</a></p>
+			三、美术第9课 动漫亮相<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3927&week=5&_=1587906935047" target="_blank">去上课</a></p>
+		</div>
+
+		<script>
+			function myFunction() {
+				var d = new Date();
+				var day = d.getDay();
+				
+				if (day == 1){
+					document.getElementById("w1").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 2){
+					document.getElementById("w2").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 3){
+					document.getElementById("w3").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 4){
+					document.getElementById("w4").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 5){
+					document.getElementById("w5").style = "font-size:1rem; color:#ff1787;height:100%;";}
+			
+			    
+			}
+			window.onload = myFunction();
+		</script>
+	</body>
+</html>

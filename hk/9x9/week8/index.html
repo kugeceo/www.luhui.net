@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<title>二年级第八周网课表</title>
+		<style>
+			body {
+				font-size: 0.8rem;
+				font-weight: normal;
+				color: #919191;
+			}
+
+			h1 {
+				font-size: 1.3rem;
+				text-align: center;
+				color: #000;
+			}
+
+			a {
+				text-decoration: none;
+				background-color: #55aa7f;
+				color: #fff;
+				padding: 0.2rem 0.4rem;
+			}
+
+			.week {
+				font-weight: bold;
+				font-size: 1rem;
+				text-decoration: underline;
+				color: #000000;
+			}
+
+			#w1,
+			#w2,
+			#w3,
+			#w4,
+			#w5 {
+				height: 1.5rem;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>二年级第八周网课表</h1>
+
+
+		<p>第一节课 9:20-9:40</p>
+		<p>第二节课 10:30-10:50</p>
+		<p>第三节课 15:50-16:10</p>
+
+		<div id="w1" onclick="this.style.height='100%'">
+			<div class="week">周一</div>
+			一、语文35:《语文园地3》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5606&week=7&_=1587303669019" target="_blank">去上课</a></p>
+			二、数学28:6-2 《两位数减两位数的口算》例2<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4504&week=6&_=1587303893122" target="_blank">去上课</a></p>
+			三、心理健康7:《快乐过好每一天》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4522&week=6&_=1586732953251" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w2" onclick="this.style.height='100%'">
+			<div class="week">周二</div>
+			一、数学29:6-3 《两步计算的加减实际问题》例3<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4495&week=6&_=1587303937511" target="_blank">去上课</a></p>
+			二、语文36:《语文园地3》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5853&week=8&_=1587423607071" target="_blank">去上课</a></p>
+			三、音乐8:第三单元《飞呀飞》第二课时：演唱《小蜜蜂》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1160&week=4&_=1587304161427" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w3" onclick="this.style.height='100%'">
+			<div class="week">周三</div>
+			一、语文37:《语文园地3》第三课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5854&week=8&_=1587423621410" target="_blank">去上课</a></p>
+			二、数学30:6-4 练习六（1）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4499&week=6&_=1587303952946" target="_blank">去上课</a></p>
+			三、道德与法治8:第四课《试种一粒籽》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3211&week=4&_=1587304199377" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w4" onclick="this.style.height='100%'">
+			<div class="week">周四</div>
+			一、数学31:6-5 练习六（2）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5197&week=7&_=1587303991946" target="_blank">去上课</a></p>
+			二、语文38:课文《彩色的梦》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5868&week=8&_=1587423635984" target="_blank">去上课</a></p>
+			三、体育8:1.《旭日东升（第二节 抻拉运动）》2.体适能练习（发展肌力及肌耐力练习）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1343&week=2&_=1587304249252" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w5" onclick="this.style.height='100%'">
+			<div class="week">周五</div>
+			一、科学8:第三单元第1课《春夏秋冬》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3704&week=6&_=1586182644089" target="_blank">去上课</a></p>
+			二、语文39:课文《彩色的梦》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5869&week=8&_=1587423646797" target="_blank">去上课</a></p>
+			三、美术8:《彩点点》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2801&week=4&_=1587304363108" target="_blank">去上课</a></p>
+		</div>
+
+		<script>
+			function myFunction() {
+				var d = new Date();
+				var day = d.getDay();
+				
+				if (day == 1){
+					document.getElementById("w1").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 2){
+					document.getElementById("w2").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 3){
+					document.getElementById("w3").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 4){
+					document.getElementById("w4").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 5){
+					document.getElementById("w5").style = "font-size:1rem; color:#ff1787;height:100%;";}
+			
+			    
+			}
+			window.onload = myFunction();
+		</script>
+	</body>
+</html>

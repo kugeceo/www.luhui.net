@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<title>二年级第五周网课表</title>
+		<style>
+			body {
+				font-size: 0.8rem;
+				font-weight: normal;
+				color: #919191;
+			}
+
+			h1 {
+				font-size: 1.3rem;
+				text-align: center;
+				color: #000;
+			}
+
+			a {
+				text-decoration: none;
+				background-color: #55aa7f;
+				color: #fff;
+				padding: 0.2rem 0.4rem;
+			}
+
+			.week {
+				font-weight: bold;
+				font-size: 1rem;
+				text-decoration: underline;
+				color: #000000;
+			}
+
+			#w1,
+			#w2,
+			#w3,
+			#w4,
+			#w5 {
+				height: 1.5rem;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>二年级第五周网课表</h1>
+
+
+		<p>第一节课 9:20-9:40</p>
+		<p>第二节课 10:30-10:50</p>
+		<p>第三节课 15:50-16:10</p>
+
+		<div id="w1" onclick="this.style.height='100%'">
+			<div class="week">周一</div>
+			一、语文21:第二单元第三课《一匹出色的马》第1课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4030&week=5&_=1585570963998">去上课</a></p>
+			二、数学17:万以内数的组成与读写（中间不含0）例5例6<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2937&week=4&_=1585571313466">去上课</a></p>
+			三、心理健康5:《走在春风里-心怀感恩》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3958&week=5&_=1585571507020">去上课</a></p>
+		</div>
+
+		<div id="w2" onclick="this.style.height='100%'">
+			<div class="week">周二</div>
+			一、数学18:中间有0的数的组成和读写例7<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2944&week=4&_=1585571335600">去上课</a></p>
+			二、语文22:第二单元第三课《一匹出色的马》第2课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4031&week=5&_=1585571072174">去上课</a></p>
+			三、音乐5难忘的歌《卖报歌》第2课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1164&week=3&_=1585571588615">去上课</a></p>
+		</div>
+
+		<div id="w3" onclick="this.style.height='100%'">
+			<div class="week">周三</div>
+			一、语文23:语文园地二第1课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3826&week=5&_=1585571105795">去上课</a></p>
+			二、数学19:万以内数的大小比较例8<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2945&week=4&_=1585571356215">去上课</a></p>
+			三、道德与法治5:第三课《做个“开心果”》第1课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2073&week=3&_=1585571644475">去上课</a></p>
+		</div>
+
+		<div id="w4" onclick="this.style.height='100%'">
+			<div class="week">周四</div>
+			一、数学20:简单的近似数例9<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3412&week=4&_=1585571386863">去上课</a></p>
+			二、语文24:语文园地二第2课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3821&week=5&_=1585571146401">去上课</a></p>
+			三、体育5:1.《旭日东升》第一节 起势2.体适能练习<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1215&week=2&_=1585572006173">去上课</a></p>
+		</div>
+
+		<div id="w5" onclick="this.style.height='100%'">
+			<div class="week">周五</div>
+			一、科学5:第二单元第一课《我们来造纸》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3638&week=5&_=1585571463553">去上课</a></p>
+			二、语文25:语文园地二第3课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3820&week=5&_=1585571167047">去上课</a></p>
+			三、美术5:左邻右舍<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2280&week=3&_=1585572115975">去上课</a></p>
+		</div>
+
+		<script>
+			function myFunction() {
+				var d = new Date();
+				var day = d.getDay();
+				
+				if (day == 1){
+					document.getElementById("w1").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 2){
+					document.getElementById("w2").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 3){
+					document.getElementById("w3").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 4){
+					document.getElementById("w4").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 5){
+					document.getElementById("w5").style = "font-size:1rem; color:#ff1787;height:100%;";}
+			
+			    
+			}
+			window.onload = myFunction();
+		</script>
+	</body>
+</html>

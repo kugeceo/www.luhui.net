@@ -1,0 +1,79 @@
+body{
+				color: #ce4678;
+				background-color: antiquewhite;
+			}
+			.box{
+				width:100%;
+			}
+			table{
+				width: 100%;
+			}
+			td{
+				width: 32%;
+			}
+			.tbox{				
+				font-size: 2.5rem;
+				font-weight: normal;
+				padding-left: 0.6rem;
+				width:39%;
+				line-height: 3rem;
+				margin-top: 0.4rem;
+				margin-left: 0.4rem;
+			}
+			.ques{
+				font-size: 3rem;
+				float: left;
+				font-weight: bold;
+			}
+			#times{
+				display: none;
+			}
+			.tline{
+				font-size: 1.3rem;
+				margin-bottom: 1rem;
+				clear:both;
+				margin-left: 0.5rem;
+				
+			}
+			.redo{
+				float: right;
+				margin-right: 1.5rem;
+			}
+			td{
+				position:relative;
+				display:inline-block;
+				margin:0.5rem 0;
+			}
+			input.btn{
+				text-align: center;
+				color:white;
+				font-weight:bold;
+				font-size:2rem;
+				text-align: center;
+				text-decoration:none;
+				background-color:#1dbba9;
+				display:block;
+				position:relative;
+				width: 90%;
+				line-height: 4rem;
+
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+				text-shadow: 0px 2px 0px #07312d;
+				filter: dropshadow(color=#07312d, offx=0px, offy=2px);
+
+				-webkit-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #096f6c;
+				-moz-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #096f6c;
+				box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #096f6c;
+
+				-webkit-border-radius: 1rem;
+				-moz-border-radius: 1rem;
+				border-radius: 1rem;
+				outline: none;
+			}
+			input.btn:active{
+				top:10px;
+				background-color:#128c7e;
+				-webkit-box-shadow:inset 0 1px 0#FFE5C4,inset 0-3px 0#096f6c;
+				-moz-box-shadow:inset 0 1px 0#FFE5C4,inset 0-3pxpx 0#096f6c;
+				box-shadow:inset 0 1px 0#FFE5C4,inset 0-3px 0#096f6c
+			}

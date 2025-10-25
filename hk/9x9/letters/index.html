@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字母记忆</title>
+</head>
+<style>
+    body{
+        padding: 3rem;
+        height: 100%;
+        background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 200%);
+    }
+    #letter{
+        padding-top: 3rem;
+        font-size: 15rem;
+        height: 100%;
+        line-height: 20rem;
+        text-align: center;
+        color: #3e5d77;
+    }
+    button{
+        position: fixed;
+        width: 8rem;
+        height: 3rem;
+        font-size: 1.4rem;
+    }
+    #rest{
+        position: fixed;
+        right: 3rem;
+        font-size: 1.5rem;
+    }
+    #yes,#no{
+        bottom: 3rem;
+    }
+    #no{
+        right: 3rem;
+    }
+</style>
+<body>
+    <button id="restart">Restart</button>
+    <div id="rest"></div>
+    <div id="letter"></div>
+    <button id="yes">Yes!</button>
+    <button id="no">No!!</button>
+<script>
+    //单字母数量
+    // const quantity = 4;
+    const quantity = prompt('随机字母检查说明：\n1.快速读对选Yes！：删除该字母\n2.读错或读慢选No！！：复制该字母两次插入字母库\n\n请输入每个字母的初始数量\n（默认为4，即大写字母26+小写字母26，共52x4=208个字母）：',4);
+    //获取所有字母
+    const getAllChars = () => {
+    const startChar = 65;
+    const allUpChars = [];
+    //获取所有大写字母
+    for ( let i = 0; i < 26; i++) {
+        allUpChars.push(String.fromCharCode(startChar+i));
+    }
+    for ( let i = 0; i < 26; i++) {
+        allUpChars.push(String.fromCharCode(startChar+i+32));
+    }
+    return allUpChars;
+}
+    const AllChars = getAllChars();
+    //初始化字母库
+    const getAllnewChars  = () => {   
+    let newChars = AllChars;  
+    for ( let i = 0; i < quantity-1; i++) {
+        newChars=newChars.concat(AllChars);
+    }
+    return newChars;
+    }
+    //初始化练习
+    const RandomArray=getAllnewChars().sort(function() {
+    return .5 - Math.random();
+});
+    const rest=document.querySelector("#rest");
+    const letter=document.querySelector("#letter");
+    const btnYes=document.querySelector("#yes");
+    const btnNo=document.querySelector("#no");
+    const btnRs=document.querySelector("#restart");
+    letter.innerHTML=(RandomArray[0]);
+    rest.innerHTML=('剩余: '+ RandomArray.length);
+    btnRs.addEventListener('click',()=>{
+        location.reload();
+    })
+    btnYes.addEventListener('click',()=>{
+        RandomArray.shift();
+        letter.innerHTML=(RandomArray[0]);
+        rest.innerHTML=('剩余: '+ RandomArray.length);
+    })
+    btnNo.addEventListener('click',()=>{
+        const theLetter=RandomArray[0]
+        RandomArray.push(theLetter);
+        RandomArray.push(theLetter);
+        RandomArray.shift();
+        letter.innerHTML=(RandomArray[0]);
+        rest.innerHTML=('剩余: '+ RandomArray.length);
+    })
+</script>
+</body>
+</html>

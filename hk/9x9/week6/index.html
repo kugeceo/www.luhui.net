@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<title>二年级第六周网课表</title>
+		<style>
+			body {
+				font-size: 0.8rem;
+				font-weight: normal;
+				color: #919191;
+			}
+
+			h1 {
+				font-size: 1.3rem;
+				text-align: center;
+				color: #000;
+			}
+
+			a {
+				text-decoration: none;
+				background-color: #55aa7f;
+				color: #fff;
+				padding: 0.2rem 0.4rem;
+			}
+
+			.week {
+				font-weight: bold;
+				font-size: 1rem;
+				text-decoration: underline;
+				color: #000000;
+			}
+
+			#w1,
+			#w2,
+			#w3,
+			#w4,
+			#w5 {
+				height: 1.5rem;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>二年级第六周网课表</h1>
+
+
+		<p>第一节课 9:20-9:40</p>
+		<p>第二节课 10:30-10:50</p>
+		<p>第三节课 15:50-16:10</p>
+
+		<div id="w1" onclick="this.style.height='100%'">
+			<div class="week">周一</div>
+			休息
+		</div>
+
+		<div id="w2" onclick="this.style.height='100%'">
+			<div class="week">周二</div>
+			一、数学21:练习四<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3838&week=5&_=1586182271429" target="_blank">去上课</a></p>
+			二、语文26:识字一《神州谣》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4737&week=6&_=1586182210739" target="_blank">去上课</a></p>
+			三、音乐6:难忘的歌《都有一颗红亮的心》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1154&week=3&_=1586182331993" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w3" onclick="this.style.height='100%'">
+			<div class="week">周三</div>
+			一、语文27:识字一《神州谣》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4738&week=6&_=1586182231818" target="_blank">去上课</a></p>
+			二、数学22:复习（一）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3837&week=5&_=1586182286651" target="_blank">去上课</a></p>
+			三、道德与法治6:第三课《做个“开心果”》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2072&week=3&_=1586182372067" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w4" onclick="this.style.height='100%'">
+			<div class="week">周四</div>
+			一、数学23:复习（二）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3831&week=5&_=1586182293261" target="_blank">去上课</a></p>
+			二、语文28:识字二《传统节日》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4639&week=6&_=1586182242559" target="_blank">去上课</a></p>
+			三、体育6:《健康饮食益处多》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1853&week=2&_=1586182416089" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w5" onclick="this.style.height='100%'">
+			<div class="week">周五</div>
+			一、科学6:第二单元第2课《装订我的小书》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3704&week=6&_=1586182644089" target="_blank">去上课</a></p>
+			二、语文29:识字二《传统节日》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4640&week=6&_=1586182251932" target="_blank">去上课</a></p>
+			三、美术6:六面怪脸<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2164&week=3&_=1586182456415" target="_blank">去上课</a></p>
+		</div>
+
+		<script>
+			function myFunction() {
+				var d = new Date();
+				var day = d.getDay();
+				
+				if (day == 1){
+					document.getElementById("w1").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 2){
+					document.getElementById("w2").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 3){
+					document.getElementById("w3").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 4){
+					document.getElementById("w4").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 5){
+					document.getElementById("w5").style = "font-size:1rem; color:#ff1787;height:100%;";}
+			
+			    
+			}
+			window.onload = myFunction();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<title>二年级第七周网课表</title>
+		<style>
+			body {
+				font-size: 0.8rem;
+				font-weight: normal;
+				color: #919191;
+			}
+
+			h1 {
+				font-size: 1.3rem;
+				text-align: center;
+				color: #000;
+			}
+
+			a {
+				text-decoration: none;
+				background-color: #55aa7f;
+				color: #fff;
+				padding: 0.2rem 0.4rem;
+			}
+
+			.week {
+				font-weight: bold;
+				font-size: 1rem;
+				text-decoration: underline;
+				color: #000000;
+			}
+
+			#w1,
+			#w2,
+			#w3,
+			#w4,
+			#w5 {
+				height: 1.5rem;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>二年级第七周网课表</h1>
+
+
+		<p>第一节课 9:20-9:40</p>
+		<p>第二节课 10:30-10:50</p>
+		<p>第三节课 15:50-16:10</p>
+
+		<div id="w1" onclick="this.style.height='100%'">
+			<div class="week">周一</div>
+			一、语文30:识字3《“贝”的故事》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4646&week=6&_=1586732715816" target="_blank">去上课</a></p>
+			二、数学24:5-1 《分米和毫米的认识》 例1例2<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3848&week=5&_=1586732833929" target="_blank">去上课</a></p>
+			三、心理健康6:《做快乐的自己》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4522&week=6&_=1586732953251" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w2" onclick="this.style.height='100%'">
+			<div class="week">周二</div>
+			一、数学25:5-2 《简单的单位换算》例3<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3849&week=5&_=1586732847889" target="_blank">去上课</a></p>
+			二、语文31:识字三《“贝”的故事》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4647&week=7&_=1586732741798" target="_blank">去上课</a></p>
+			三、音乐7:第三单元《飞呀飞》第一课时：聆听《蜜蜂》《蝴蝶》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1162&week=4&_=1586733042252" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w3" onclick="this.style.height='100%'">
+			<div class="week">周三</div>
+			一、语文32:识字四《中国美食》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5421&week=7&_=1586732762176" target="_blank">去上课</a></p>
+			二、数学26:5-3 练习（五）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4384&week=6&_=1586732887252" target="_blank">去上课</a></p>
+			三、道德与法治7:第四课《试种一粒籽》第一课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3210&week=4&_=1586733085120" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w4" onclick="this.style.height='100%'">
+			<div class="week">周四</div>
+			一、数学27:6-1 《两位数加两位数的口算》例1<p><a href="http://jiaoxue.ahedu.cn/video.html?id=4465&week=6&_=1586732909919" target="_blank">去上课</a></p>
+			二、语文33:识字四《中国美食》第二课时<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5422&week=7&_=1586732776672" target="_blank">去上课</a></p>
+			三、体育7:1.《无数基本步型（弓步、马步）》2.体适能练习（发展心肺功能练习）<p><a href="http://jiaoxue.ahedu.cn/video.html?id=1313&week=2&_=1586733140033" target="_blank">去上课</a></p>
+		</div>
+
+		<div id="w5" onclick="this.style.height='100%'">
+			<div class="week">周五</div>
+			一、科学7:第二单元第3课《科技产品体验会》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=3704&week=6&_=1586182644089" target="_blank">去上课</a></p>
+			二、语文34:口语交际 《长大以后做什么》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=5478&week=7&_=1586732791406" target="_blank">去上课</a></p>
+			三、美术7:《快乐地舞蹈》<p><a href="http://jiaoxue.ahedu.cn/video.html?id=2382&week=4&_=1586733175680" target="_blank">去上课</a></p>
+		</div>
+
+		<script>
+			function myFunction() {
+				var d = new Date();
+				var day = d.getDay();
+				
+				if (day == 1){
+					document.getElementById("w1").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 2){
+					document.getElementById("w2").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 3){
+					document.getElementById("w3").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 4){
+					document.getElementById("w4").style = "font-size:1rem; color:#ff1787;height:100%;";}
+				else if (day == 5){
+					document.getElementById("w5").style = "font-size:1rem; color:#ff1787;height:100%;";}
+			
+			    
+			}
+			window.onload = myFunction();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<title>董小满的混合运算练习器</title>
+		<meta name="Description" content="给董小满做数学练习用的"/>
+		<meta name="author" content="黑本"/>
+		<style>
+			/*!初始化 */
+			html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6{margin:0;padding:0}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}ul{list-style:none}button,input,select,textarea{margin:0}html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}img,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}td:not([align]),th:not([align]){text-align:left}
+			/*!自定义 */
+			html{
+				height: 90%;
+				width: 100%;		
+			}
+			body{
+				height: 100%;
+				width: 100%;	
+				background: #bc8d9e;
+				font: normal 100% Helvetica, Arial, sans-serif;
+
+			}
+			.container{
+				height: 34rem;
+				width: 100%;
+				background: #eabbcd;
+				border-bottom: #f3d5e0 1px solid;
+				
+
+			}
+			.calc{
+				margin: 0 auto;
+				text-align: center;
+				width: 100%;
+				padding-top: 0.5rem;
+			}
+			.top{				
+				background: #f9cadc;
+				padding: 0.5rem;
+				height: 8.5rem;
+				display: block;
+
+			}
+			.display,.tbox{
+				background: -webkit-linear-gradient(320deg, rgb(143, 212, 217) 0%, rgb(132, 154, 152) 100%);
+				background: -o-linear-gradient(320deg, rgb(143, 212, 217) 0%, rgb(132, 154, 152) 100%);
+				background: -ms-linear-gradient(320deg, rgb(143, 212, 217) 0%, rgb(132, 154, 152) 100%);
+				background: -moz-linear-gradient(320deg, rgb(143, 212, 217) 0%, rgb(132, 154, 152) 100%);
+				background: linear-gradient(130deg, rgb(143, 212, 217) 0%, rgb(132, 154, 152) 100%);
+
+			}
+			.display{
+				clear: both;
+				margin: 0.9rem auto 0.7rem;
+				width: 90%;
+				height: 6rem;	
+				-webkit-border-radius: 0.4rem;
+				-moz-border-radius: 0.4rem;
+				border-radius: 0.4rem;
+				-webkit-box-shadow: inset 15px 14px 15px -14px rgba(0,0,0,0.69);
+				-moz-box-shadow: inset 15px 14px 15px -14px rgba(0,0,0,0.69);
+				box-shadow: inset 15px 14px 15px -14px rgba(0,0,0,0.69);
+				font-size: 2.3rem;
+				padding: 0.5rem;
+				text-shadow: 2px 2px #87a8a5;
+			}
+			#question{
+				clear:both;
+				float: left;
+				margin-top: 0.8rem;
+			}
+			.tbox{
+				margin-top: 0.5rem;
+				float: left;
+				width: 24%;
+				border:none;
+				padding:0.3rem ;
+				background: transparent;
+				font-size: 2.3rem;
+				color:#000;
+				text-shadow: 2px 2px #87a8a5;	
+			}
+			#times,.timer{
+				font-size: 1rem;
+			}
+			#times{
+				float: left;
+			}
+			.timer,#timer{
+				float: right;
+			}
+			#timer{				
+				margin-top: 0.15rem;
+			}
+			table{
+				margin: 0 auto;
+				
+			}
+			td{padding-bottom: 1rem;
+				background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ4IDc5LjE2NDAzNiwgMjAxOS8wOC8xMy0wMTowNjo1NyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjhGRTBDMDgxNTdCNzExRUE5RTNBODkxNEI0QjJENTE2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhGRTBDMDgyNTdCNzExRUE5RTNBODkxNEI0QjJENTE2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OEZFMEMwN0Y1N0I3MTFFQTlFM0E4OTE0QjRCMkQ1MTYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OEZFMEMwODA1N0I3MTFFQTlFM0E4OTE0QjRCMkQ1MTYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7ptU3CAAAFKElEQVR42uydT4gcRRTGX3XP/okuUeNCEtSLCooHRfQSr4IKnnIRFPHqPxD1GMhBDB4TRLxJDiZePCSnFUERL4IHxYMgCCaCQWLCYKLEZGZ2uspX21Xjm0pNtma64850fw++7dme3umuX7/56vUs81oZYwhx8yMDAoAGaARAAzRAIwC6SdGJrVRKbfd3KnHdoodJXPffkxOuSzpT7ljJ5aOUa/FcznqS9Qzrcdb9rNtZqwsAtMe6zPqF9R3rc9ZXrE2/wQ9UZNMAvw5c7AxMyGglQGcO9JAXa6w3nPY2KJsvsD5gvc+6wqB9UmoB2qRmdCpoJWQhK4Y84OVB1oes/Q221/Os11mnGfayg6sFaJMCOpvSLuz2mcvko6xTDYdMbnx2nMd43IVnENpoXVWHf/F8Fyl7Vk+w3mpZ4fCmHbcbfy6Y1FLehZaRP0jZu7x8oaVV2vM8/iMCtArmrpknwxFgW6E8RPnBFaKTba+J+0Qv/kTFaX5oLbQQnj3zZOjfHp39lO1ZJ/U9T7372g6a6f7RJfPYedJ/OtjaVyOzTIaylMv2kHqFANnHPubxWuDTqrJHr/EEwBu+Cr5j4F5eKyfGJI9OAn03ZfaKbx3/9Bq7JFx3XOoDzb78lJn2mrPhoE35+cXTdYAeFeT84BHgjQJ6OPXCJSmj+ce9wBqFc19d1lGWgES3AWvUQnbXfQm+DKzVuGRTnD1MhhVY4F9Z/1/djQBogEYANEADNAKgARoB0AAN0AiABmgEQAM0QCMAGqARAA3QAI0AaIBGADRAAzQCoAEaAdAADdCIOQKtwGtmDgA9j6AR8OiFBw23qMlNkr45C45JkCt9cxYBj24GaNhFzV6dmtG2xx2+OevCBFzqtI6/gDcaf9cKms/gr8jo6zOal2drBa2JfvQ76Lcctx2/CbhUAS2/wG+GRF9E/Knt/mz7sH05nuCT8WQpr/sb6a95Ou0qt6LXUtw9l82u5Uz3HHNJzb8U0Jp3MOCzd1yubBvsnrAMl83Hr5Hpk+jiWNWjt94SF0h/RGVP5bRXbqBliK7kFx2P5B4p2XaA/T4ukbnME8FhRWrrrWN3eq0luO049cgylJ0QD1sedIM+0jNZB5WNToszpD/jBx/7y5+iBbDt+Apx2WfHzxw2PJO6rMMEsDfPUvGOJrUhYV/lTa42DLgfk4Rsx23HT2Xv/yLI6MrWoQXoIU8CvTNUvM3LTzIBW7uDawpkP2APicd70o27R+PtjJNgp/SPttrqH81aYq1QeSeKXfeQenaV1CESfUt9w+lbFvBzKQ/YjH9C1OWK471zZDa2nKQE3XdZ7YGPQFe5mcJYs24qe7152Kv84869lL3EZ+A5/v0Ov8cseMvMI3ZxhTdairaMl5jkpxdJn2C6XQfYQx5QpEl3HaAl7CWR2SPg/MSt66SeWCF1gDd8gHUXlbcO6SxAMltoV5jY76yfuar4tkvmG6b4TwDYZ/JEj67r9iB5xEaklp2W3Db+5Kg5TmojoA0dxIFTP5C0i4KmuD1IZ8qD0tuUgEMnD1re3WHeYEcn+wC01OYku0iJzhQHpSbAjoHuCNAyo1XwLtnJz4RMkNHy+AfCIjbF+hCyqRt0+KI6gByCzoOMVkEpqXY4k+U4wkQpAriTSrmbktHhQZqI5MHmE2xjHq0jTJaY9KyZPCvomI2EoLNIJs/7ZBhmtg5kqkCeFfQkr9MCahGUhTG72GmPDkvpGPTKgKuCvhFwJWp/muNsDo87ZomVAfv4V4ABAOHyJmnQAhNYAAAAAElFTkSuQmCC")no-repeat;
+			}
+			footer{				
+				line-height: 2rem;
+				text-align: center;
+				font-size: 0.8rem;
+				color:rgba(150, 112, 126, 255);
+				text-shadow:1px 1px 0 #e5acc1,0 0 0 #000,1px 1px 0 #680e32;
+			}
+			input{
+				
+				-webkit-appearance : none ;  /*解决iphone safari上的圆角问题*/
+			}
+			input.btn{
+				width: 4.2rem;
+				height: 4.2rem;
+				margin: 0.2rem 0.7rem;
+				color:rgba(204, 78, 112, 0.7);
+				text-shadow:1px 1px 1px #fff,0 0 0 #000,1px 1px 1px #fff;
+				font-size:2rem;
+				text-decoration:none;
+				background-color:#f1e7f0;
+				display:block;
+				position:relative;
+				line-height: 4rem;
+			
+				-webkit-box-shadow:inset 0 0 0 #9d6187, 0 11px 0 #9d6187;
+				-moz-box-shadow:inset 0 0 0 #9d6187, 0 11px 0 #9d6187;
+				box-shadow:inset 0 0 0 #9d6187, 0 8px 0  0 #9d6187;
+			
+				-webkit-border-radius: 1rem;
+				-moz-border-radius: 1rem;
+				border-radius: 1rem;				
+				border:1px solid #ebdeec;
+				outline: none; 
+			}
+			input.btn:active{
+				top:7px;
+				box-shadow:inset 0 0 0 #9d6187,inset 0-2px 0 #9d6187;
+				border:0 ;
+			}
+			
+			input.btns{
+				color:rgba(255, 255, 255, 0.7);
+				text-shadow:1px 1px 0 #ffffff,0px 0px 1px #000000,1px 1px 1px #ffffff;	
+				font-size:2rem;
+				text-decoration:none;
+				background-color:#b9355d;		
+				border:1px solid #ca587a;
+			
+				-webkit-box-shadow:inset 0 0 0 #8c0d2a, 0 11px 0 #8c0d2a;
+				-moz-box-shadow:inset 0 0 0 #8c0d2a, 0 11px 0 #8c0d2a;
+				box-shadow:inset 0 0 0 #8c0d2a, 0 8px 0  0 #8c0d2a;
+				
+			}
+			input.btns:active{
+				box-shadow:inset 0 0 0 #8c0d2a,inset 0-2px 0 #8c0d2a;
+			}
+			.reset{
+				text-align: center;
+			}
+			.reset input{
+				margin-top: 0.3rem;
+				margin-left: -11.3rem;
+				font-size: 0.6rem;
+				background: #bd8a6c;
+				color: #fff;
+				padding: 0.2rem 0.5rem;
+				border-radius: 0.2rem;
+				box-shadow: inset 0 0 0 #bd2886, 0 2px 0 0 #524d0a;	
+				border:0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		<div class="top">
+			<div class="display" id="total">			
+				<div id="times">题1：</div>
+				<div class="timer">倒计时：<div id="timer">1</div></div>
+				<div id="question"></div>
+				<input class="tbox" type="text" id="inp1" disabled/>
+			</div>
+			
+		
+		</div>
+		
+		<div class="calc">
+		<table>
+			<tr>
+				<td><input class="btn" type="button" value="1" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="2" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="3" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+			</tr>
+			<tr>
+				<td><input class="btn" type="button" value="4" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="5" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="6" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+			</tr>
+			<tr>
+				<td><input class="btn" type="button" value="7" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="8" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="9" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+			</tr>
+			<tr>
+				<td><input class="btn" type="button" value="C" onmouseup="audio.play()" onclick="clearinp();" /></td>
+				<td><input class="btn" type="button" value="0" onmouseup="audio2.play()" onclick="inp(this);"/></td> 
+				<td><input class="btn btns" type="button" value="㋡" onmouseup="audio.play()" onclick="sumbit();" id="sub"/></td>
+			</tr>
+		</table>
+		<script type="text/javascript">		
+			//定义随机数
+			function random(min, max) {
+			      return Math.floor(Math.random() * (max - min)) + min;
+			}
+			var i=1;			
+			var qs= document.getElementById('question');
+			var as;
+			
+			//定义公式
+			function ques(){
+				var a = random(2,9);
+				var b = random(2,9);
+				var c = random(3,100);
+				var r = random(1,3);	
+				var rr= random(1,3);
+				if (r == 1){
+					as =a*b+c ;
+					if (as <= 100){
+						if (rr == 1){
+							qs.innerHTML= (a+" x "+b+" + "+c+" = ");
+						}
+						else{							
+							qs.innerHTML= (c+" + "+a+" x "+b+" = ");
+						}
+					}
+					else{
+						var d = as-100;	
+						c = random(3,d);
+						as = a*b+c;
+						if (rr == 1){
+							qs.innerHTML= (a+" x "+b+" + "+c+" = ");
+						}
+						else{							
+							qs.innerHTML= (c+" + "+a+" x "+b+" = ");
+						}
+					}
+				}
+				if (r==2){
+					as =a*b-c;
+					if (as<0){						
+						as =c-a*b;
+						qs.innerHTML=(c+" - "+a+" x "+b+" = ")
+					}
+					else{
+						qs.innerHTML=(+a+" x "+b+" - "+c+" = ")
+					}
+				}
+				return as;
+			}			
+			
+			//数字按钮
+			function inp(btn){
+				var inp=document.getElementById('inp1'), val=parseInt(inp.value), val=isNaN(val)?'':val;
+				val+=btn.value;
+				inp.value=val;
+				x=inp.value;
+				return x;		
+			}	
+			//提交按钮
+			function sumbit(){
+					var inp2=document.getElementById('inp1');
+					if (x!=as){
+						inp2.value="×";						
+						audiow.play();
+						setTimeout(function(){								
+								inp2.value='';	
+							},800);
+						}	
+					else{
+						inp2.value='✓';	
+						audior.play();
+						setTimeout(function(){								
+								i++;
+								document.getElementById("times").innerHTML = ("题"+i+"：");	
+								ques();
+						inp2.value='';	
+							},350);
+						}	
+					return i;
+					}
+					
+			//清除输入		
+				function clearinp(){
+					var inp3=document.getElementById('inp1');
+					inp3.value="";
+				}
+			//倒计时，并使按钮不可用
+			var t = 101;  
+			var ot = t-1;
+			function showTime(){  
+				t -= 1;  
+				document.getElementById('timer').innerHTML= t;  				
+				setTimeout("showTime()",1000);  
+				if(t<=0){  
+					document.getElementsByClassName("btn").disabled=true; 
+					document.getElementById('timer').innerHTML= "0";
+					document.getElementById("sub").disabled=true; 
+					var total=i-1
+					document.getElementById('total').innerHTML=("<div id='times'>您在 "+ot+" 秒内</div><div id='question'>共完成 "+total+" 道题</div>");
+				}
+			}  
+			//定义音频			
+			const audio = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/04.mp3')
+			const audio2 = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/05.mp3')
+			const audior = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/06.mp3')
+			const audiow = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/07.mp3')
+			//载入问题
+			window.onload=ques();			
+			window.onload=showTime();
+		</script>
+		</div>
+		<div class="reset">
+			<input type="button" value="RESET" onmouseup="audio.play()" onclick="window.location.reload();" />
+		</div>
+		</div>
+		<footer>			
+			<p>Math Exerciser V3 for Dong XiaoMan</p>
+		</footer>
+	</body>
+</html>

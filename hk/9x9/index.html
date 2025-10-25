@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<title>董小满的乘法表练习器 第二版</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<script type="text/javascript">
+				var a = Math.floor(Math.random() * 9+1);
+				var b = Math.floor(Math.random() * 9+1); 
+				var c = a*b;				
+				const audior = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/06.mp3')
+				const audiow = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/07.mp3')
+				function inp(btn){
+					var inp=document.getElementById('inp1'), val=parseInt(inp.value), val=isNaN(val)?'':val;
+					val+=btn.value;
+					inp.value=val;
+					x=inp.value;
+					return x;		
+				}	
+				
+				function inp2(btn){
+					var inp2=document.getElementById('inp1');
+					if (x!=c){
+						inp2.value="× 错误！";
+						
+						audiow.play();
+					}
+					else{
+						inp2.value='✓';	
+						audior.play();
+						setTimeout(function(){window.location.reload();},400);				
+					}
+					
+				}	
+				function inp3(btn){
+					var inp3=document.getElementById('inp1');
+					inp3.value="";
+				}
+				
+	
+
+		
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<div class="ques">
+				<script type="text/javascript">
+					document.write(a," x ",b," = ");
+				</script>
+			</div>
+			<input class="tbox" type="text" id="inp1" disabled/>
+			<div class="tline">
+				<span id="visits">第 0 题</span>
+				<pre id="times">--:--:--</pre>		
+				<a class="redo" href="index.html" onclick="Session.clear();">重新计数</a>
+			</div>
+		<table>
+			<tr>
+				<td><input class="btn" type="button" value="1" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="2" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="3" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+			</tr>
+			<tr>
+				<td><input class="btn" type="button" value="4" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="5" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="6" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+			</tr>
+			<tr>
+				<td><input class="btn" type="button" value="7" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="8" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+				<td><input class="btn" type="button" value="9" onmouseup="audio2.play()" onclick="inp(this);"/></td>
+			</tr>
+			<tr>
+				<td><input class="btn" type="button" value="重填" onmouseup="audio.play()" onclick="inp3(this);"/></td>
+				<td><input class="btn" type="button" value="0" onmouseup="audio2.play()" onclick="inp(this);"/></td> 
+				<td><input class="btn" type="button" value="提交" onmouseup="audio.play()" onclick="inp2(this);"/></td>
+			</tr>
+			<script type="text/javascript">
+				
+				const audio = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/04.mp3')
+				const audio2 = new Audio('https://wtstock.oss-cn-hangzhou.aliyuncs.com/Audio/05.mp3')
+			</script>
+		</table>
+		<div style="clear:both;margin: 5px;"></div>
+		
+	<script src="js/json-serialization.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+		// <![CDATA[
+		
+		// initialize application defaults
+		var counter = Session.get("counter") || {
+			visits: 0,
+			time: []
+		};
+		
+		// onload
+		window.onload = function() {
+		
+			// update previous visits
+			var d = new Date();
+			counter.visits++;
+			counter.time.push(Pad(d.getHours()) + ":" + Pad(d.getMinutes()) + ":" + Pad(d.getSeconds()));
+			if (counter.time.length > 10) counter.time = counter.time.slice(1);
+		
+			// update page
+			document.getElementById("visits").firstChild.nodeValue = "第 "+counter.visits + " 题" + (counter.visits == 1 ? "" : "");
+			var t = "";
+			for (var i = counter.time.length-1; i >= 0; i--) t += counter.time[i] + "\n";
+			document.getElementById("times").firstChild.nodeValue = t;
+		
+			// store value in session
+			Session.set("counter", counter);
+		
+		};
+		
+		// add leading zeros
+		function Pad(n) {
+			n = "00" + n;
+			return n.substr(n.length-2);
+		}
+		// ]]>
+		</script>
+</div>
+	</body>
+</html>
