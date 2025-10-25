@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>鲁虺文化网在线黄页大全 http://www.luhui.net 互联网上流行的免费中国黄页、企业名录、工商指南、消费指南等</title>	
+<meta name="keywords" content="鲁虺在线黄页大全,luhui Yellow pages,中国黄页、企业名录、工商指南、消费指南器" />
+<meta name="description" content="鲁虺文化网黄页，在很多国家和地区都用来表示一份商业用社会团体的电话名册、通讯目录。 一如其名，这份目录一般以黄色的纸张印刷出版。基于网络科技的发展，黄页亦可用作代表网上的商业索引。而黄页这个名称是美国在19世纪发明的。 “黄页”起源于北美洲，1880年世界上第一本黄页电话号簿在美国问世，至今已有100多年的历史。" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="flattr:id" content="kugeceo">
+<meta name="p:domain_verify" content="chinashanghai20040111"/>
+<meta name="theme-color" content="#feba07">
+<meta name="twitter:title" content="鲁虺文化网在线黄页大全 http://www.luhui.net 互联网上流行的免费中国黄页、企业名录、工商指南、消费指南等">
+<meta name="twitter:description" content="鲁虺文化网黄页，在很多国家和地区都用来表示一份商业用社会团体的电话名册、通讯目录。 一如其名，这份目录一般以黄色的纸张印刷出版。基于网络科技的发展，黄页亦可用作代表网上的商业索引。而黄页这个名称是美国在19世纪发明的。 “黄页”起源于北美洲，1880年世界上第一本黄页电话号簿在美国问世，至今已有100多年的历史。">
+<meta name="twitter:image" content="http://mini.s-shot.ru/1024x768/400/jpeg/?http://www.luhui.net/pagead">
+<meta name="twitter:creator" content="@kugeceo">
+<meta property="og:title" content="鲁虺文化网在线黄页大全 http://www.luhui.net 互联网上流行的免费中国黄页、企业名录、工商指南、消费指南等">
+<meta property="og:description" content="鲁虺文化网黄页，在很多国家和地区都用来表示一份商业用社会团体的电话名册、通讯目录。 一如其名，这份目录一般以黄色的纸张印刷出版。基于网络科技的发展，黄页亦可用作代表网上的商业索引。而黄页这个名称是美国在19世纪发明的。 “黄页”起源于北美洲，1880年世界上第一本黄页电话号簿在美国问世，至今已有100多年的历史。">
+<meta property="og:url" content="http://luhui.net/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="http://mini.s-shot.ru/1024x768/400/jpeg/?http://www.luhui.net/pagead">
+<style>
+	html {
+height: 100%;
+	}
+
+	body {
+margin: 0;
+height: 100%;
+font-family: Helvetica, Arial, sans-serif;
+background-color: #feba07;
+overflow: hidden;
+	}
+
+	#nav {
+background: linear-gradient(to bottom, #feba07 50%,#1d1d1d 97%,#333333 97%);
+width: 100%;
+height: 61px;
+overflow: hidden;
+	}
+
+	#logo {
+height: 61px;
+float: left;
+	}
+
+	#projects {
+width: 2000px;
+	}
+
+.project {
+	transition: width 1s cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+
+	position: relative;
+
+	width: 20px;
+	height: 61px;
+
+	float: left;
+	/* padding: 12px 0px;*/
+
+	cursor: pointer;
+
+	overflow: hidden;
+}
+
+.project .image {
+	position: absolute;
+	top: 12px;
+	border: 2px solid #ffffff;
+	width: 32px;
+	height: 32px;
+	background-color: #feba07;
+	background-image: url('index.png');
+	image-rendering: pixelated;
+}
+
+.project div {
+	position: absolute;
+
+	left: 46px;
+	top: 18px;
+	width: 132px;
+
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 8px;
+	line-height: 13px;
+
+	text-transform: uppercase;
+}
+
+.project .link {
+
+	position: absolute;
+	right: 12px;
+	top: 8px;
+	image-rendering: pixelated;
+
+}
+
+.project:hover {
+	transition: width 0.5s cubic-bezier(0.190, 1.000, 0.220, 1.000); /* easeOutExpo */
+	width: 45px;
+}
+
+.project.selected {
+	transition: width 0.5s cubic-bezier(0.190, 1.000, 0.220, 1.000); /* easeOutExpo */
+	width: 180px;
+}
+
+.project.selected:hover {
+	width: 180px;
+}
+
+	#expand {
+position: absolute;
+width: 32px;
+height: 32px;
+right: 15px;
+top: 15px;
+display: none;
+	}
+
+#expand span {
+	background: #888;
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin: 4px 6px;
+}
+
+#expand span:nth-child(1) {
+	margin-top: 8px;
+}
+
+	#viewer {
+position: absolute;
+width: 100%;
+top: 61px;
+bottom: 0px;
+	}
+
+	@media all and ( max-width: 640px ) {
+#nav {
+	background: none;
+	height: auto;
+	overflow: auto;
+}
+	#nav .hidden {
+display: none;
+	}
+#logo {
+	position: absolute;
+	background: linear-gradient(to bottom, #feba07 50%,#1d1d1d 97%,#333333 97%);
+	width: 100%;
+}
+#projects {
+	position: absolute;
+	background: rgba(0,0,0,0.85);
+	top: 61px;
+	bottom: 0px;
+	width: 100%;
+	overflow: auto;
+	z-index: 1;
+}
+.project {
+	margin-left: 15px;
+	width: 140px;
+	display: inline;
+}
+.project:hover {
+	width: 140px;
+}
+.project.selected {
+	width: 140px;
+}
+.project.selected:hover {
+	width: 140px;
+}
+.project .link {
+	display: none;
+}
+#expand {
+	display: block;
+}
+#viewer {
+	z-index: 0;
+}
+	}
+
+</style>
+	</head>
+	<body>
+
+	
+
+<div id="nav">
+	<div id="logo">
+<map name="logo">
+	<area shape="rect" title="鲁虺文化网黄页大全" target="_top" href="/pagead" coords="12,13,91,32" alt="鲁虺文化网生活黄页大全 http://www.luhui.net" />
+	<area shape="rect" title="鲁虺博客" target="_top" href="http://t.luhui.net" coords="12,32,44,46" alt="Blog" />
+	<area shape="rect" title="鲁虺文化网站首页" target="_top" href="/" coords="47,32,88,46" alt="Twitter" />
+</map>
+<img title="鲁虺文化网生活黄页大全标志" src="logo.png" alt="logo" width="105" usemap="#logo" />
+	</div>
+	<div id="projects"></div>
+	<div id="expand"><span></span><span></span><span></span></div>
+	<a title="更多" target="_top" href="/cs/"><img src="more.png" width="60" style="float:left" /></a> <!-- -->
+</div>
+
+<div id="viewer">
+	<iframe id="iframe" style="border:0;width:100%;height:100%"></iframe>
+</div>
+
+<script>
+
+	var data = [
+
+{
+	"id": 20,
+	"name": "鲁虺黄页",
+	"timestamp": "黄页通常指的是一种商业电话簿，用于列出本地或区域性企业的联系信息和广告。这种目录通常按行业分类，方便人们查找特定类型的服务或产品供应商。在互联网普及之前，黄页通常以印刷版的形式发行，但随着互联网的普及，许多黄页服务也转移到了在线平台上。总的来说，黄页是一种方便人们找到商业联系信息的工具，它可以帮助人们找到需要的服务或产品供应商。",
+	"link": "http://search.luhui.net/search?q=黄页"
+},
+
+{
+	"id": 2,
+	"name": "科学、教育、文化",
+	"timestamp": "自然科学 社会科学 工程技术",
+	"link": "http://search.luhui.net/search?q=科学、教育、文化&Category=web"
+},
+
+{
+	"id": 3,
+	"name": "医药、卫生、保健",
+	"timestamp": "医院、诊所 卫生保健、管理机构",
+	"link": "http://search.luhui.net/search?q=医药、卫生、保健"
+},
+
+{
+	"id": 4,
+	"name": "公共事业和生活服务",
+	"timestamp": "居民服务 婚姻服务 摄影服务",
+	"link": "http://search.luhui.net/search?q=公共事业和生活服务"
+},
+
+
+{
+	"id": 5,
+	"name": "餐饮、娱乐、购物、旅游",
+	"timestamp": "中餐 西餐 宾馆 票务",
+	"link": "http://search.luhui.net/search?q=餐饮、娱乐、购物、旅游"
+},
+
+{
+	"id": 6,
+	"name": "居家生活用品",
+	"timestamp": "日化产品 妇女、儿童用品 家用电器",
+	"link": "http://search.luhui.net/search?q=居家生活用品"
+},
+
+{
+	"id": 7,
+	"name": "服装、皮革、纺织",
+	"timestamp": "纺织、染整 皮革、羽绒及制品",
+	"link": "http://search.luhui.net/search?q=服装、皮革、纺织"
+},
+
+
+{
+	"id": 8,
+	"name": "文体、休闲用品，工艺美术品",
+	"timestamp": "珠宝首饰 工艺美术品、礼品、收藏",
+	"link": "http://search.luhui.net/search?q=文体、休闲用品，工艺美术品"
+},
+
+{
+	"id": 9,
+	"name": "商务服务、广告、物流",
+	"timestamp": "专业技术服务 商务服务 运输",
+	"link": "http://search.luhui.net/search?q=商务服务、广告、物流"
+},
+
+{
+	"id": 10,
+	"name": "印刷、包装和造纸",
+	"timestamp": "造纸 纸制品 印刷",
+	"link": "http://search.luhui.net/search?q=印刷、包装和造纸"
+},
+
+
+
+
+{
+	"id": 11,
+	"name": "金融、保险、贸易",
+	"timestamp": "保险 进出口 贸易、物资",
+	"link": "http://search.luhui.net/search?q=金融、保险、贸易"
+},
+
+{
+	"id": 12,
+	"name": "工程、建筑、房地产、装潢",
+	"timestamp": "房地产经纪及服务 工程、建筑 净化",
+	"link": "http://search.luhui.net/search?q=工程、建筑、房地产、装潢"
+},
+
+
+
+{
+	"id": 13,
+	"name": "计算机、互联网、通讯、办公设备",
+	"timestamp": "计算机硬件及软件技术 互联网技术及服务",
+	"link": "http://search.luhui.net/search?q=计算机、互联网、通讯、办公设备"
+},
+
+
+
+
+{
+	"id": 14,
+	"name": "电子、电工、电器",
+	"timestamp": "电子元件、组件 电子、电工材料",
+	"link": "http://search.luhui.net/search?q=电子、电工、电器"
+},
+
+
+
+
+
+{
+	"id": 15,
+	"name": "机械、设备、仪器、仪表及专业用品",
+	"timestamp": "通用机械、设备 通用零配件 专用机械",
+	"link": "http://search.luhui.net/search?q=机械、设备、仪器、仪表及专业用品"
+},
+
+
+
+{
+	"id": 16,
+	"name": "金属、非金属材料品",
+	"timestamp": "金属材料 金属、五金制品 非金属材料",
+	"link": "http://search.luhui.net/search?q=金属、非金属材料品"
+},
+
+
+
+{
+	"id": 17,
+	"name": "化工",
+	"timestamp": "石油、煤炭化工 化肥、农药 化工原料",
+	"link": "http://search.luhui.net/search?q=化工"
+},
+
+
+
+{
+	"id": 18,
+	"name": "交通",
+	"timestamp": "交通管理、服务及客运、交通设施与器材",
+	"link": "http://search.luhui.net/search?q=交通"
+},
+
+
+
+{
+	"id": 19,
+	"name": "粮油、食品、农林牧渔",
+	"timestamp": "食品 副食品 糖烟酒茶",
+	"link": "http://search.luhui.net/search?q=粮油、食品、农林牧渔"
+},
+
+
+
+{
+	"id": 1,
+	"name": "党政、国家机构及社会团体",
+	"timestamp": "基层群众组织 直属委办局",
+	"link": "http://search.luhui.net/search?q=党政、国家机构及社会团体"
+},
+
+
+
+{
+	"id": 21,
+	"name": "中国工商企业名录大全",
+	"timestamp": "中国工商企业名录大全",
+	"link": "http://search.luhui.net/search?q=企业名录"
+},
+
+
+
+{
+	"id": 22,
+	"name": "电话号码簿",
+	"timestamp": "电话号码簿通讯录或地址簿是一个用于存储联系人信息的小册子或数据库。每个联系人条目通常由几个标准字段组成，例如名字、姓氏、公司名称、地址、电话号码、电子邮件地址、传真号码、手机号码。大多数通讯录按人名的字母顺序存储信息。许多地址簿使用小型环形活页夹，这样人们可以添加和取走纸张。",
+	"link": "http://search.luhui.net/search?q=电话号码簿"
+},
+
+
+
+
+
+
+
+
+	];
+
+	var nav = document.getElementById( 'projects' ); // document.getElementById( 'nav' );
+	var viewer = document.getElementById( 'viewer' );
+	var iframe = document.getElementById( 'iframe' );
+
+	// iOS iframe auto-resize workaround
+
+	if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+iframe.style.width = getComputedStyle( iframe ).width;
+iframe.style.height = getComputedStyle( iframe ).height;
+	}
+
+	var expand = document.getElementById( 'expand' );
+	expand.addEventListener( 'click', function () {
+
+nav.className = nav.className === '' ? 'hidden' : '';
+
+	} );
+
+	var selected, divs = {};
+
+	init();
+
+	function init () {
+
+buildNav( data );
+
+if ( window.location.hash ) {
+
+	var hash = window.location.hash.substr( 1 );
+
+	var id = hash.split( '/' )[ 1 ];
+
+	for ( var i in data ) {
+
+if ( data[ i ].id == id ) {
+
+	loadProject( data[ i ] );
+	break;
+
+}
+
+	}
+
+} else {
+
+	loadProject( data[ 0 ] );
+
+}
+
+window.addEventListener( 'popstate', function ( event ) {
+
+	if ( event.state != null ) loadProject( event.state );
+
+}, false );
+
+	};
+
+	function buildNav( projects ) {
+
+for ( var i in projects ) {
+
+	nav.appendChild( buildProject( projects[ i ] ) );
+
+}
+
+	}
+
+	function buildProject( data ) {
+
+var div = document.createElement( 'div' );
+div.className = 'project';
+div.addEventListener( 'click', function ( event ) {
+
+	loadProject( data );
+	window.location.hash = '/' + data.id + '/' + data.name.toLowerCase().replace( /\ /gi, '_' ).replace( /[:.,\'()%]/gi, '' );
+
+}, false );
+
+var id = data.id - 1;
+var x = id % 32;
+var y = Math.floor( id / 32 );
+
+var span = document.createElement( 'span' );
+span.className = 'image';
+span.style.backgroundPosition = '-' + ( x * 32 ) + 'px -' + ( y * 32 ) + 'px';
+div.appendChild( span );
+
+var text = document.createElement( 'div' );
+text.innerHTML = data.name + '<br>';
+text.innerHTML += '<span style="color:#606060">' + data.timestamp + '</spa><br>';
+text.innerHTML += '<a class="link" href="' + data.link + '" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAFpJREFUGNNjZMACuKp+/YexWZA4BxkYGC4yMDDc+dbGxggXR1aNZMIBuBy6Aq6qXxOhdC4DAwMDE5pk7rc2tnwoVwVDwbc2tslIXH0MBWjAnoGBgYEFl0NhAACB5CInSa6GCQAAAABJRU5ErkJggg==" style="margin-top:1px"></a>'; // ' + data.link.replace( /http:\/\//gi, '' ) +
+div.appendChild( text );
+
+divs[ data.id ] = div;
+
+return div;
+
+	}
+
+	function loadProject( data ) {
+
+if ( selected ) {
+
+	selected.className = 'project';
+
+}
+
+nav.className = 'hidden';
+
+selected = divs[ data.id ];
+selected.className = 'project selected';
+
+document.title = '鲁虺文化网生活黄页分类大全 http://www.luhui.net | ' + data.name;
+iframe.src = data.link;
+
+	}
+
+</script>
+	</body>
+</html>
