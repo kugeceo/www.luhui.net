@@ -1,0 +1,34 @@
+有哪些好用的视频剪辑软件?
+
+鲁虺/撰稿
+
+
+面向不同需求与平台，下面这些剪辑软件更稳妥、更常用，覆盖新手到专业全场景。
+
+### 推荐清单（按场景）
+| 软件 | 平台 | 适合人群 | 核心亮点 |
+|---|---|---|---|
+| CapCut（剪映） | Win/macOS/iOS/Android | 新手/短视频 | 中文界面、模板与素材丰富、AI字幕/智能剪辑、移动端同步  |
+| iMovie | Mac/iOS | 苹果入门 | 预装免费、拖放易用、模板滤镜齐全  |
+| Shotcut | Win/macOS/Linux | 开源轻量 | 跨平台、免费无水印、支持4K/滤镜  |
+| OpenShot | Win/macOS/Linux | 极简入门 | 界面直观、基础剪辑友好、资源占用低  |
+| Blender | Win/macOS/Linux | 进阶/特效 | 3D+合成+剪辑一体、节点特效、插件丰富  |
+| Adobe Premiere Pro | Win/macOS | 专业剪辑 | 行业标准、多轨精细、与AE/PS生态联动  |
+| Final Cut Pro | macOS | Mac专业 | 磁性时间线、Metal加速、多机位高效  |
+| DaVinci Resolve | Win/macOS/Linux | 综合后期 | 剪辑+调色+特效+音频一体、节点调色强、免费版强大  |
+| Avid Media Composer | Win/macOS | 影视工业 | 多用户协作、媒体管理强、行业管线标准  |
+| Camtasia | Win/macOS | 录屏教学 | 录制+剪辑一体、标注/字幕便捷  |
+
+---
+
+### 怎么选（3步）
+1. 明确用途：日常/短视频选 CapCut/iMovie；专业剪辑选 PR/FCP/Resolve；影视协作选 Avid；录屏教学选 Camtasia。  
+2. 看平台与预算：Mac 优先 FCP；跨平台且想少花钱，Shotcut/OpenShot 或 DaVinci Resolve 免费版；需生态协作选 PR。  
+3. 评估配置：入门与轻量剪辑对硬件要求低；4K/多轨/调色/特效建议中高配（≥16GB 内存、SSD、独立显卡）。
+
+---
+
+### 新手起步建议
+- 中文环境、素材模板多、上手快：优先 CapCut（剪映），电脑/手机均可快速出片 。  
+- 苹果设备：先用 iMovie 入门，再上 FCP 做进阶 。  
+- 想免费且功能全：DaVinci Resolve 免费版覆盖剪辑+调色+特效，性价比高 。

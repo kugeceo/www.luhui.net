@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鲁虺LOGO徽标标志设计工具</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标库 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 引入Iconbrew图标库 -->
+    <link href="https://cdn.jsdelivr.net/npm/iconbrew@1.0.4/css/iconbrew.min.css" rel="stylesheet">
+    <!-- 引入Google字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#64748b',
+                        accent: '#f97316',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        canvas: '#ffffff',
+                        'canvas-grid': '#f1f5f9'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        roboto: ['Roboto', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .canvas-grid {
+                background-image: linear-gradient(#f1f5f9 1px, transparent 1px),
+                                linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            .dragging {
+                opacity: 0.7;
+                cursor: grabbing;
+            }
+            .resizer {
+                @apply absolute w-3 h-3 bg-primary rounded-full -mr-1.5 -mb-1.5 border border-white cursor-se-resize;
+            }
+            .selected-element {
+                @apply outline outline-2 outline-primary outline-offset-1;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-100 text-dark h-screen flex flex-col overflow-hidden">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white border-b border-gray-200 shadow-sm px-4 py-2 flex items-center justify-between z-10">
+        <div class="flex items-center space-x-2">
+            <div class="text-primary text-2xl">
+                <i class="fa fa-paint-brush mr-2"></i>
+                <span class="font-bold">鲁虺LOGO设计工具</span>
+            </div>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <button id="new-design" class="px-3 py-1.5 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors flex items-center">
+                <i class="fa fa-file-o mr-1.5"></i> 新建
+            </button>
+            <button id="save-design" class="px-3 py-1.5 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors flex items-center">
+                <i class="fa fa-save mr-1.5"></i> 保存
+            </button>
+            <div class="relative group">
+                <button id="export-button" class="px-3 py-1.5 bg-primary text-white rounded hover:bg-primary/90 transition-colors flex items-center">
+                    <i class="fa fa-download mr-1.5"></i> 导出
+                </button>
+                <div id="export-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-20">
+                    <a href="#" id="export-svg" class="block px-4 py-2 text-sm hover:bg-gray-100">SVG 格式</a>
+                    <a href="#" id="export-png" class="block px-4 py-2 text-sm hover:bg-gray-100">PNG 格式</a>
+                    <a href="#" id="export-jpeg" class="block px-4 py-2 text-sm hover:bg-gray-100">JPEG 格式</a>
+                    <a href="#" id="export-dataurl" class="block px-4 py-2 text-sm hover:bg-gray-100">Data URL</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="flex flex-1 overflow-hidden">
+        <!-- 左侧工具栏 -->
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col h-full">
+            <!-- 工具选项卡 -->
+            <div class="flex border-b border-gray-200">
+                <button class="tool-tab active flex-1 py-3 text-center text-sm font-medium text-primary border-b-2 border-primary" data-tab="icons">
+                    <i class="fa fa-th mr-1"></i> 图标库
+                </button>
+                <button class="tool-tab flex-1 py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-700" data-tab="text">
+                    <i class="fa fa-font mr-1"></i> 文字
+                </button>
+                <button class="tool-tab flex-1 py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-700" data-tab="shapes">
+                    <i class="fa fa-square-o mr-1"></i> 形状
+                </button>
+            </div>
+            
+            <!-- 图标库面板 -->
+            <div class="tool-panel active flex-1 overflow-hidden flex flex-col" id="icons-panel">
+                <!-- 图标库选择 -->
+                <div class="p-2 border-b border-gray-200">
+                    <select id="icon-library" class="w-full p-1.5 border border-gray-300 rounded text-sm">
+                        <option value="font-awesome">Font Awesome</option>
+                        <option value="iconbrew">Iconbrew</option>
+                    </select>
+                </div>
+                
+                <!-- 图标搜索 -->
+                <div class="p-2 border-b border-gray-200">
+                    <div class="relative">
+                        <input type="text" id="icon-search" placeholder="搜索图标..." 
+                            class="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded text-sm">
+                        <i class="fa fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- 图标分类 -->
+                <div class="p-2 border-b border-gray-200 overflow-x-auto scrollbar-hide">
+                    <div class="flex space-x-1 min-w-max">
+                        <button class="icon-category px-2 py-1 bg-primary text-white text-xs rounded" data-category="all">全部</button>
+                        <button class="icon-category px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200" data-category="business">商务</button>
+                        <button class="icon-category px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200" data-category="technology">科技</button>
+                        <button class="icon-category px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200" data-category="nature">自然</button>
+                        <button class="icon-category px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200" data-category="abstract">抽象</button>
+                        <button class="icon-category px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200" data-category="symbols">符号</button>
+                    </div>
+                </div>
+                
+                <!-- 图标网格 -->
+                <div class="flex-1 overflow-y-auto p-2" id="icons-grid">
+                    <!-- 图标将通过JavaScript动态生成 -->
+                </div>
+                
+                <!-- 自定义图标上传 -->
+                <div class="p-3 border-t border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">上传自定义图标</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded p-3 text-center hover:border-primary transition-colors cursor-pointer" id="upload-area">
+                        <i class="fa fa-cloud-upload text-gray-400 text-xl mb-1.5"></i>
+                        <p class="text-xs text-gray-500">拖放SVG文件或点击上传</p>
+                        <input type="file" id="custom-icon-upload" accept=".svg" class="hidden">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 文字面板 -->
+            <div class="tool-panel hidden flex-1 overflow-hidden flex flex-col" id="text-panel">
+                <div class="p-3 border-b border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">添加文字</label>
+                    <input type="text" id="text-input" placeholder="输入文字..." 
+                        class="w-full p-1.5 border border-gray-300 rounded text-sm mb-2">
+                    
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">选择字体</label>
+                    <select id="font-family" class="w-full p-1.5 border border-gray-300 rounded text-sm mb-2">
+                        <option value="Inter, sans-serif">Inter</option>
+                        <option value="Roboto, sans-serif">Roboto</option>
+                        <option value="Montserrat, sans-serif">Montserrat</option>
+                        <option value="Poppins, sans-serif">Poppins</option>
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="'Times New Roman', serif">Times New Roman</option>
+                    </select>
+                    
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-sm font-medium text-gray-700">字体大小</label>
+                        <input type="number" id="font-size" value="24" min="8" max="120"
+                            class="w-16 p-1 border border-gray-300 rounded text-sm text-center">
+                    </div>
+                    
+                    <div class="flex space-x-1 mb-2">
+                        <button id="font-bold" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                            <i class="fa fa-bold"></i>
+                        </button>
+                        <button id="font-italic" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                            <i class="fa fa-italic"></i>
+                        </button>
+                        <button id="font-underline" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                            <i class="fa fa-underline"></i>
+                        </button>
+                    </div>
+                    
+                    <button id="add-text" class="w-full py-1.5 bg-primary text-white rounded hover:bg-primary/90 transition-colors text-sm">
+                        添加到画布
+                    </button>
+                </div>
+                
+                <div class="p-3">
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">文本样式预设</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="border border-gray-200 rounded p-2 text-center hover:border-primary cursor-pointer text-lg font-bold" data-text-style="heading">标题样式</div>
+                        <div class="border border-gray-200 rounded p-2 text-center hover:border-primary cursor-pointer text-sm" data-text-style="subtitle">副标题样式</div>
+                        <div class="border border-gray-200 rounded p-2 text-center hover:border-primary cursor-pointer font-montserrat" data-text-style="brand">品牌名称</div>
+                        <div class="border border-gray-200 rounded p-2 text-center hover:border-primary cursor-pointer italic" data-text-style="tagline">标语样式</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 形状面板 -->
+            <div class="tool-panel hidden flex-1 overflow-hidden flex flex-col" id="shapes-panel">
+                <div class="p-3">
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">基本形状</label>
+                    <div class="grid grid-cols-3 gap-2 mb-3">
+                        <div class="shape-item border border-gray-200 rounded p-2 flex items-center justify-center hover:border-primary cursor-pointer" data-shape="rectangle">
+                            <i class="fa fa-square-o text-lg"></i>
+                        </div>
+                        <div class="shape-item border border-gray-200 rounded p-2 flex items-center justify-center hover:border-primary cursor-pointer" data-shape="circle">
+                            <i class="fa fa-circle-o text-lg"></i>
+                        </div>
+                        <div class="shape-item border border-gray-200 rounded p-2 flex items-center justify-center hover:border-primary cursor-pointer" data-shape="triangle">
+                            <i class="fa fa-caret-up text-lg transform rotate-180"></i>
+                        </div>
+                        <div class="shape-item border border-gray-200 rounded p-2 flex items-center justify-center hover:border-primary cursor-pointer" data-shape="line">
+                            <i class="fa fa-minus text-lg"></i>
+                        </div>
+                        <div class="shape-item border border-gray-200 rounded p-2 flex items-center justify-center hover:border-primary cursor-pointer" data-shape="star">
+                            <i class="fa fa-star-o text-lg"></i>
+                        </div>
+                        <div class="shape-item border border-gray-200 rounded p-2 flex items-center justify-center hover:border-primary cursor-pointer" data-shape="diamond">
+                            <i class="fa fa-diamond text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">形状属性</label>
+                    <div class="mb-2">
+                        <label class="block text-xs text-gray-500 mb-1">填充颜色</label>
+                        <div class="flex">
+                            <input type="color" id="shape-fill" value="#2563eb" class="w-8 h-8 p-0 border border-gray-300">
+                            <input type="text" id="shape-fill-hex" value="#2563eb" class="flex-1 ml-2 p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label class="block text-xs text-gray-500 mb-1">边框颜色</label>
+                        <div class="flex">
+                            <input type="color" id="shape-stroke" value="#0f172a" class="w-8 h-8 p-0 border border-gray-300">
+                            <input type="text" id="shape-stroke-hex" value="#0f172a" class="flex-1 ml-2 p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="block text-xs text-gray-500 mb-1">边框宽度</label>
+                        <input type="number" id="shape-stroke-width" value="2" min="0" max="20"
+                            class="w-full p-1 border border-gray-300 rounded text-sm">
+                    </div>
+                    
+                    <button id="add-shape" class="w-full py-1.5 bg-primary text-white rounded hover:bg-primary/90 transition-colors text-sm">
+                        添加到画布
+                    </button>
+                </div>
+                
+                <div class="p-3 border-t border-gray-200 mt-auto">
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">标志模板</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="border border-gray-200 rounded overflow-hidden hover:border-primary cursor-pointer" data-template="simple">
+                            <div class="bg-gray-100 p-2 text-center text-xs">简约型</div>
+                        </div>
+                        <div class="border border-gray-200 rounded overflow-hidden hover:border-primary cursor-pointer" data-template="emblem">
+                            <div class="bg-gray-100 p-2 text-center text-xs">徽章型</div>
+                        </div>
+                        <div class="border border-gray-200 rounded overflow-hidden hover:border-primary cursor-pointer" data-template="text-icon">
+                            <div class="bg-gray-100 p-2 text-center text-xs">图文型</div>
+                        </div>
+                        <div class="border border-gray-200 rounded overflow-hidden hover:border-primary cursor-pointer" data-template="abstract">
+                            <div class="bg-gray-100 p-2 text-center text-xs">抽象型</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 中央画布区域 -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- 画布控制 -->
+            <div class="bg-white border-b border-gray-200 p-2 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <button id="undo-btn" class="p-1.5 rounded hover:bg-gray-100 text-gray-600">
+                        <i class="fa fa-undo"></i>
+                    </button>
+                    <button id="redo-btn" class="p-1.5 rounded hover:bg-gray-100 text-gray-600">
+                        <i class="fa fa-repeat"></i>
+                    </button>
+                    <div class="h-4 border-r border-gray-300"></div>
+                    <button id="delete-selected" class="p-1.5 rounded hover:bg-gray-100 text-gray-600">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-2">
+                    <button id="zoom-out" class="p-1.5 rounded hover:bg-gray-100 text-gray-600">
+                        <i class="fa fa-search-minus"></i>
+                    </button>
+                    <span id="zoom-level" class="text-sm w-10 text-center">100%</span>
+                    <button id="zoom-in" class="p-1.5 rounded hover:bg-gray-100 text-gray-600">
+                        <i class="fa fa-search-plus"></i>
+                    </button>
+                    <button id="zoom-reset" class="p-1.5 rounded hover:bg-gray-100 text-gray-600">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 画布容器 -->
+            <div class="flex-1 overflow-auto bg-gray-50 relative" id="canvas-container">
+                <!-- 画布 -->
+                <div id="canvas" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-canvas canvas-grid w-[800px] h-[600px] shadow-md cursor-default">
+                    <!-- 标准标志稿规范参考线 -->
+                    <div class="absolute inset-0 pointer-events-none">
+                        <div class="absolute inset-[10%] border border-dashed border-gray-300"></div>
+                        <div class="absolute inset-[25%] border border-dashed border-gray-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="w-px h-full bg-gray-300"></div>
+                            <div class="w-full h-px bg-gray-300"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 元素将通过JavaScript动态添加到这里 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧属性面板 -->
+        <aside class="w-64 bg-white border-l border-gray-200 h-full overflow-y-auto" id="properties-panel">
+            <div class="p-3 border-b border-gray-200">
+                <h3 class="font-medium text-gray-700">属性编辑</h3>
+                <p class="text-xs text-gray-500" id="no-selection-message">未选择任何元素</p>
+            </div>
+            
+            <div id="element-properties" class="hidden p-3 space-y-3">
+                <!-- 位置和大小 -->
+                <div class="space-y-2">
+                    <h4 class="text-sm font-medium text-gray-700">位置和大小</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">X 坐标</label>
+                            <input type="number" id="position-x" class="w-full p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">Y 坐标</label>
+                            <input type="number" id="position-y" class="w-full p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">宽度</label>
+                            <input type="number" id="element-width" class="w-full p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">高度</label>
+                            <input type="number" id="element-height" class="w-full p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 旋转和不透明度 -->
+                <div class="space-y-2">
+                    <h4 class="text-sm font-medium text-gray-700">旋转和透明度</h4>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">旋转角度 (0-360°)</label>
+                        <input type="number" id="rotation-angle" min="0" max="360" class="w-full p-1 border border-gray-300 rounded text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">不透明度 (0-100%)</label>
+                        <input type="range" id="opacity-range" min="0" max="100" value="100" class="w-full">
+                        <input type="number" id="opacity-value" min="0" max="100" value="100" class="w-full mt-1 p-1 border border-gray-300 rounded text-sm">
+                    </div>
+                </div>
+                
+                <!-- 颜色和样式 -->
+                <div class="space-y-2" id="color-properties">
+                    <h4 class="text-sm font-medium text-gray-700">颜色和样式</h4>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">颜色</label>
+                        <div class="flex">
+                            <input type="color" id="element-color" class="w-8 h-8 p-0 border border-gray-300">
+                            <input type="text" id="element-color-hex" class="flex-1 ml-2 p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 文本属性 (仅文本元素显示) -->
+                <div class="space-y-2 hidden" id="text-properties">
+                    <h4 class="text-sm font-medium text-gray-700">文本属性</h4>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">文本内容</label>
+                        <input type="text" id="text-content" class="w-full p-1 border border-gray-300 rounded text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">字体</label>
+                        <select id="text-font-family" class="w-full p-1 border border-gray-300 rounded text-sm">
+                            <option value="Inter, sans-serif">Inter</option>
+                            <option value="Roboto, sans-serif">Roboto</option>
+                            <option value="Montserrat, sans-serif">Montserrat</option>
+                            <option value="Poppins, sans-serif">Poppins</option>
+                            <option value="Arial, sans-serif">Arial</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">字体大小</label>
+                        <input type="number" id="text-font-size" min="8" max="120" class="w-full p-1 border border-gray-300 rounded text-sm">
+                    </div>
+                    <div class="flex space-x-1">
+                        <button id="text-bold" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                            <i class="fa fa-bold"></i>
+                        </button>
+                        <button id="text-italic" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                            <i class="fa fa-italic"></i>
+                        </button>
+                        <button id="text-underline" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                            <i class="fa fa-underline"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">文本对齐</label>
+                        <div class="flex space-x-1">
+                            <button id="text-align-left" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                                <i class="fa fa-align-left"></i>
+                            </button>
+                            <button id="text-align-center" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                                <i class="fa fa-align-center"></i>
+                            </button>
+                            <button id="text-align-right" class="flex-1 p-1 border border-gray-300 rounded hover:bg-gray-100">
+                                <i class="fa fa-align-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 形状属性 (仅形状元素显示) -->
+                <div class="space-y-2 hidden" id="shape-properties">
+                    <h4 class="text-sm font-medium text-gray-700">形状属性</h4>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">填充颜色</label>
+                        <div class="flex">
+                            <input type="color" id="shape-prop-fill" class="w-8 h-8 p-0 border border-gray-300">
+                            <input type="text" id="shape-prop-fill-hex" class="flex-1 ml-2 p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">边框颜色</label>
+                        <div class="flex">
+                            <input type="color" id="shape-prop-stroke" class="w-8 h-8 p-0 border border-gray-300">
+                            <input type="text" id="shape-prop-stroke-hex" class="flex-1 ml-2 p-1 border border-gray-300 rounded text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">边框宽度</label>
+                        <input type="number" id="shape-prop-stroke-width" min="0" max="20" class="w-full p-1 border border-gray-300 rounded text-sm">
+                    </div>
+                </div>
+                
+                <button id="bring-to-front" class="w-full py-1.5 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm">
+                    <i class="fa fa-arrow-up mr-1"></i> 移到顶层
+                </button>
+                <button id="send-to-back" class="w-full py-1.5 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm">
+                    <i class="fa fa-arrow-down mr-1"></i> 移到底层
+                </button>
+                <button id="delete-element" class="w-full py-1.5 bg-red-50 text-red-600 rounded hover:bg-red-100 transition-colors text-sm">
+                    <i class="fa fa-trash-o mr-1"></i> 删除元素
+                </button>
+            </div>
+        </aside>
+    </main>
+    
+    <!-- 导出成功提示 -->
+    <div id="export-toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center">
+        <i class="fa fa-check-circle mr-2"></i>
+        <span id="export-message">导出成功！</span>
+    </div>
+
+    <script>
+        // 全局变量
+        let currentZoom = 100;
+        let selectedElement = null;
+        let elements = [];
+        let elementCounter = 0;
+        let history = [];
+        let historyIndex = -1;
+        
+        // DOM 元素
+        const canvas = document.getElementById('canvas');
+        const canvasContainer = document.getElementById('canvas-container');
+        const iconsGrid = document.getElementById('icons-grid');
+        const iconLibrary = document.getElementById('icon-library');
+        const iconSearch = document.getElementById('icon-search');
+        const iconCategories = document.querySelectorAll('.icon-category');
+        const toolTabs = document.querySelectorAll('.tool-tab');
+        const toolPanels = document.querySelectorAll('.tool-panel');
+        const uploadArea = document.getElementById('upload-area');
+        const customIconUpload = document.getElementById('custom-icon-upload');
+        const addTextBtn = document.getElementById('add-text');
+        const textInput = document.getElementById('text-input');
+        const fontSize = document.getElementById('font-size');
+        const fontFamily = document.getElementById('font-family');
+        const fontBold = document.getElementById('font-bold');
+        const fontItalic = document.getElementById('font-italic');
+        const fontUnderline = document.getElementById('font-underline');
+        const textStyles = document.querySelectorAll('[data-text-style]');
+        const shapeItems = document.querySelectorAll('.shape-item');
+        const addShapeBtn = document.getElementById('add-shape');
+        const shapeFill = document.getElementById('shape-fill');
+        const shapeFillHex = document.getElementById('shape-fill-hex');
+        const shapeStroke = document.getElementById('shape-stroke');
+        const shapeStrokeHex = document.getElementById('shape-stroke-hex');
+        const shapeStrokeWidth = document.getElementById('shape-stroke-width');
+        const templates = document.querySelectorAll('[data-template]');
+        const zoomInBtn = document.getElementById('zoom-in');
+        const zoomOutBtn = document.getElementById('zoom-out');
+        const zoomResetBtn = document.getElementById('zoom-reset');
+        const zoomLevel = document.getElementById('zoom-level');
+        const undoBtn = document.getElementById('undo-btn');
+        const redoBtn = document.getElementById('redo-btn');
+        const deleteSelectedBtn = document.getElementById('delete-selected');
+        const exportSvgBtn = document.getElementById('export-svg');
+        const exportPngBtn = document.getElementById('export-png');
+        const exportJpegBtn = document.getElementById('export-jpeg');
+        const exportDataUrlBtn = document.getElementById('export-dataurl');
+        const newDesignBtn = document.getElementById('new-design');
+        const saveDesignBtn = document.getElementById('save-design');
+        const exportToast = document.getElementById('export-toast');
+        const exportMessage = document.getElementById('export-message');
+        const noSelectionMessage = document.getElementById('no-selection-message');
+        const elementProperties = document.getElementById('element-properties');
+        const positionX = document.getElementById('position-x');
+        const positionY = document.getElementById('position-y');
+        const elementWidth = document.getElementById('element-width');
+        const elementHeight = document.getElementById('element-height');
+        const rotationAngle = document.getElementById('rotation-angle');
+        const opacityRange = document.getElementById('opacity-range');
+        const opacityValue = document.getElementById('opacity-value');
+        const elementColor = document.getElementById('element-color');
+        const elementColorHex = document.getElementById('element-color-hex');
+        const textProperties = document.getElementById('text-properties');
+        const textContent = document.getElementById('text-content');
+        const textFontFamily = document.getElementById('text-font-family');
+        const textFontSize = document.getElementById('text-font-size');
+        const textBold = document.getElementById('text-bold');
+        const textItalic = document.getElementById('text-italic');
+        const textUnderline = document.getElementById('text-underline');
+        const textAlignLeft = document.getElementById('text-align-left');
+        const textAlignCenter = document.getElementById('text-align-center');
+        const textAlignRight = document.getElementById('text-align-right');
+        const shapeProperties = document.getElementById('shape-properties');
+        const shapePropFill = document.getElementById('shape-prop-fill');
+        const shapePropFillHex = document.getElementById('shape-prop-fill-hex');
+        const shapePropStroke = document.getElementById('shape-prop-stroke');
+        const shapePropStrokeHex = document.getElementById('shape-prop-stroke-hex');
+        const shapePropStrokeWidth = document.getElementById('shape-prop-stroke-width');
+        const bringToFrontBtn = document.getElementById('bring-to-front');
+        const sendToBackBtn = document.getElementById('send-to-back');
+        const deleteElementBtn = document.getElementById('delete-element');
+        const colorProperties = document.getElementById('color-properties');
+        
+        // 示例图标数据 - 实际应用中可以扩展更多图标
+        const iconData = {
+            'font-awesome': {
+                business: [
+                    'fa-briefcase', 'fa-building', 'fa-bank', 'fa-line-chart', 'fa-bar-chart', 
+                    'fa-pie-chart', 'fa-money', 'fa-credit-card', 'fa-shopping-cart', 'fa-tags'
+                ],
+                technology: [
+                    'fa-microchip', 'fa-laptop', 'fa-mobile', 'fa-wifi', 'fa-server', 
+                    'fa-database', 'fa-code', 'fa-cogs', 'fa-lightbulb-o', 'fa-rocket'
+                ],
+                nature: [
+                    'fa-leaf', 'fa-tree', 'fa-pagelines', 'fa-paw', 'fa-sun-o', 
+                    'fa-moon-o', 'fa-cloud', 'fa-tint', 'fa-fire', 'fa-mountain'
+                ],
+                abstract: [
+                    'fa-cube', 'fa-cubes', 'fa-diamond', 'fa-circle', 'fa-square', 
+                    'fa-triangle', 'fa-star', 'fa-heart', 'fa-shield', 'fa-anchor'
+                ],
+                symbols: [
+                    'fa-check', 'fa-times', 'fa-plus', 'fa-minus', 'fa-arrow-up', 
+                    'fa-arrow-down', 'fa-arrow-left', 'fa-arrow-right', 'fa-refresh', 'fa-lock'
+                ]
+            },
+            'iconbrew': {
+                business: [
+                    'ib-briefcase', 'ib-building', 'ib-bank', 'ib-chart-line', 'ib-chart-bar', 
+                    'ib-chart-pie', 'ib-money', 'ib-credit-card', 'ib-shopping-cart', 'ib-tag'
+                ],
+                technology: [
+                    'ib-microchip', 'ib-laptop', 'ib-mobile', 'ib-wifi', 'ib-server', 
+                    'ib-database', 'ib-code', 'ib-cogs', 'ib-lightbulb', 'ib-rocket'
+                ],
+                nature: [
+                    'ib-leaf', 'ib-tree', 'ib-pagelines', 'ib-paw', 'ib-sun', 
+                    'ib-moon', 'ib-cloud', 'ib-tint', 'ib-fire', 'ib-mountain'
+                ],
+                abstract: [
+                    'ib-cube', 'ib-cubes', 'ib-diamond', 'ib-circle', 'ib-square', 
+                    'ib-triangle', 'ib-star', 'ib-heart', 'ib-shield', 'ib-anchor'
+                ],
+                symbols: [
+                    'ib-check', 'ib-times', 'ib-plus', 'ib-minus', 'ib-arrow-up', 
+                    'ib-arrow-down', 'ib-arrow-left', 'ib-arrow-right', 'ib-refresh', 'ib-lock'
+                ]
+            }
+        };
+        
+        // 初始化
+        function init() {
+            renderIcons('all');
+            setupEventListeners();
+            saveState();
+        }
+        
+        // 渲染图标
+        function renderIcons(category) {
+            const library = iconLibrary.value;
+            const searchTerm = iconSearch.value.toLowerCase();
+            iconsGrid.innerHTML = '';
+            
+            let iconsToRender = [];
+            
+            if (category === 'all') {
+                // 获取所有分类的图标
+                Object.keys(iconData[library]).forEach(cat => {
+                    iconsToRender = iconsToRender.concat(iconData[library][cat]);
+                });
+            } else {
+                iconsToRender = iconData[library][category] || [];
+            }
+            
+            // 过滤搜索结果
+            if (searchTerm) {
+                iconsToRender = iconsToRender.filter(icon => 
+                    icon.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // 渲染图标
+            iconsToRender.forEach(iconClass => {
+                const iconElement = document.createElement('div');
+                iconElement.className = 'icon-item flex items-center justify-center w-12 h-12 rounded border border-gray-200 hover:border-primary hover:bg-primary/5 cursor-move transition-colors';
+                iconElement.innerHTML = `<i class="${library === 'font-awesome' ? 'fa' : 'ib'} ${iconClass} text-2xl text-gray-700"></i>`;
+                iconElement.setAttribute('draggable', 'true');
+                iconElement.setAttribute('data-icon', iconClass);
+                iconElement.setAttribute('data-library', library);
+                iconsGrid.appendChild(iconElement);
+            });
+        }
+        
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 工具选项卡切换
+            toolTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 移除所有活动状态
+                    toolTabs.forEach(t => {
+                        t.classList.remove('active', 'text-primary', 'border-primary', 'border-b-2');
+                        t.classList.add('text-gray-500');
+                    });
+                    
+                    // 添加当前活动状态
+                    tab.classList.add('active', 'text-primary', 'border-primary', 'border-b-2');
+                    tab.classList.remove('text-gray-500');
+                    
+                    // 隐藏所有面板
+                    toolPanels.forEach(panel => panel.classList.add('hidden'));
+                    
+                    // 显示对应面板
+                    const panelId = `${tab.dataset.tab}-panel`;
+                    document.getElementById(panelId).classList.remove('hidden');
+                });
+            });
+            
+            // 图标库切换
+            iconLibrary.addEventListener('change', () => {
+                renderIcons(getActiveCategory());
+            });
+            
+            // 图标搜索
+            iconSearch.addEventListener('input', () => {
+                renderIcons(getActiveCategory());
+            });
+            
+            // 图标分类切换
+            iconCategories.forEach(category => {
+                category.addEventListener('click', () => {
+                    iconCategories.forEach(c => {
+                        c.classList.remove('bg-primary', 'text-white');
+                        c.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    
+                    category.classList.remove('bg-gray-100', 'text-gray-700');
+                    category.classList.add('bg-primary', 'text-white');
+                    
+                    renderIcons(category.dataset.category);
+                });
+            });
+            
+            // 获取当前活动的分类
+            function getActiveCategory() {
+                for (let cat of iconCategories) {
+                    if (cat.classList.contains('bg-primary')) {
+                        return cat.dataset.category;
+                    }
+                }
+                return 'all';
+            }
+            
+            // 图标拖拽
+            iconsGrid.addEventListener('dragstart', (e) => {
+                if (e.target.classList.contains('icon-item')) {
+                    e.dataTransfer.setData('text/plain', JSON.stringify({
+                        type: 'icon',
+                        icon: e.target.dataset.icon,
+                        library: e.target.dataset.library
+                    }));
+                    e.target.classList.add('dragging');
+                }
+            });
+            
+            iconsGrid.addEventListener('dragend', (e) => {
+                if (e.target.classList.contains('icon-item')) {
+                    e.target.classList.remove('dragging');
+                }
+            });
+            
+            // 画布拖放
+            canvas.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+            
+            canvas.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+                
+                if (data.type === 'icon') {
+                    // 计算相对于画布的位置
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    addIconToCanvas(data.icon, data.library, x, y);
+                }
+            });
+            
+            // 自定义图标上传区域点击
+            uploadArea.addEventListener('click', () => {
+                customIconUpload.click();
+            });
+            
+            // 自定义图标拖放上传
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('border-primary', 'bg-primary/5');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('border-primary', 'bg-primary/5');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('border-primary', 'bg-primary/5');
+                
+                if (e.dataTransfer.files.length) {
+                    const file = e.dataTransfer.files[0];
+                    if (file.type === 'image/svg+xml') {
+                        handleSvgUpload(file);
+                    } else {
+                        showToast('请上传SVG格式的图标文件', 'error');
+                    }
+                }
+            });
+            
+            // 自定义图标文件选择
+            customIconUpload.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    const file = e.target.files[0];
+                    if (file.type === 'image/svg+xml') {
+                        handleSvgUpload(file);
+                    } else {
+                        showToast('请上传SVG格式的图标文件', 'error');
+                    }
+                }
+            });
+            
+            // 处理SVG上传
+            function handleSvgUpload(file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    // 将SVG添加到画布中央
+                    const svgContent = event.target.result;
+                    addCustomSvgToCanvas(svgContent);
+                    showToast('自定义图标已添加到画布');
+                };
+                reader.readAsText(file);
+            }
+            
+            // 添加文本按钮
+            addTextBtn.addEventListener('click', () => {
+                const text = textInput.value || '双击编辑文本';
+                const size = parseInt(fontSize.value) || 24;
+                const family = fontFamily.value;
+                const isBold = fontBold.classList.contains('bg-gray-200');
+                const isItalic = fontItalic.classList.contains('bg-gray-200');
+                const isUnderline = fontUnderline.classList.contains('bg-gray-200');
+                
+                addTextToCanvas(text, size, family, isBold, isItalic, isUnderline);
+            });
+            
+            // 文本样式按钮
+            textStyles.forEach(style => {
+                style.addEventListener('click', () => {
+                    const styleType = style.dataset.textStyle;
+                    let text, size, family, bold, italic, underline;
+                    
+                    switch(styleType) {
+                        case 'heading':
+                            text = '标题';
+                            size = 36;
+                            family = 'Montserrat, sans-serif';
+                            bold = true;
+                            italic = false;
+                            underline = false;
+                            break;
+                        case 'subtitle':
+                            text = '副标题';
+                            size = 20;
+                            family = 'Inter, sans-serif';
+                            bold = false;
+                            italic = true;
+                            underline = false;
+                            break;
+                        case 'brand':
+                            text = '品牌名称';
+                            size = 28;
+                            family = 'Montserrat, sans-serif';
+                            bold = true;
+                            italic = false;
+                            underline = false;
+                            break;
+                        case 'tagline':
+                            text = '品牌标语';
+                            size = 16;
+                            family = 'Poppins, sans-serif';
+                            bold = false;
+                            italic = true;
+                            underline = false;
+                            break;
+                    }
+                    
+                    addTextToCanvas(text, size, family, bold, italic, underline);
+                });
+            });
+            
+            // 文本格式按钮
+            fontBold.addEventListener('click', () => {
+                fontBold.classList.toggle('bg-gray-200');
+            });
+            
+            fontItalic.addEventListener('click', () => {
+                fontItalic.classList.toggle('bg-gray-200');
+            });
+            
+            fontUnderline.addEventListener('click', () => {
+                fontUnderline.classList.toggle('bg-gray-200');
+            });
+            
+            // 形状选择
+            shapeItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    shapeItems.forEach(i => i.classList.remove('border-primary', 'bg-primary/5'));
+                    item.classList.add('border-primary', 'bg-primary/5');
+                    addShapeBtn.dataset.shape = item.dataset.shape;
+                });
+            });
+            
+            // 默认选择第一个形状
+            if (shapeItems.length > 0) {
+                shapeItems[0].click();
+            }
+            
+            // 形状颜色选择器同步
+            shapeFill.addEventListener('input', () => {
+                shapeFillHex.value = shapeFill.value;
+            });
+            
+            shapeFillHex.addEventListener('input', () => {
+                if (/^#[0-9A-F]{6}$/i.test(shapeFillHex.value)) {
+                    shapeFill.value = shapeFillHex.value;
+                }
+            });
+            
+            shapeStroke.addEventListener('input', () => {
+                shapeStrokeHex.value = shapeStroke.value;
+            });
+            
+            shapeStrokeHex.addEventListener('input', () => {
+                if (/^#[0-9A-F]{6}$/i.test(shapeStrokeHex.value)) {
+                    shapeStroke.value = shapeStrokeHex.value;
+                }
+            });
+            
+            // 添加形状按钮
+            addShapeBtn.addEventListener('click', () => {
+                const shapeType = addShapeBtn.dataset.shape;
+                const fill = shapeFill.value;
+                const stroke = shapeStroke.value;
+                const strokeWidth = parseInt(shapeStrokeWidth.value) || 2;
+                
+                addShapeToCanvas(shapeType, fill, stroke, strokeWidth);
+            });
+            
+            // 模板选择
+            templates.forEach(template => {
+                template.addEventListener('click', () => {
+                    const templateType = template.dataset.template;
+                    loadTemplate(templateType);
+                });
+            });
+            
+            // 缩放控制
+            zoomInBtn.addEventListener('click', () => {
+                if (currentZoom < 300) {
+                    currentZoom += 25;
+                    updateZoom();
+                }
+            });
+            
+            zoomOutBtn.addEventListener('click', () => {
+                if (currentZoom > 50) {
+                    currentZoom -= 25;
+                    updateZoom();
+                }
+            });
+            
+            zoomResetBtn.addEventListener('click', () => {
+                currentZoom = 100;
+                updateZoom();
+            });
+            
+            // 更新缩放
+            function updateZoom() {
+                canvas.style.transform = `scale(${currentZoom / 100})`;
+                zoomLevel.textContent = `${currentZoom}%`;
+            }
+            
+            // 撤销和重做
+            undoBtn.addEventListener('click', undo);
+            redoBtn.addEventListener('click', redo);
+            
+            // 删除选中元素
+            deleteSelectedBtn.addEventListener('click', deleteSelectedElement);
+            
+            // 画布点击事件 - 选择元素或取消选择
+            canvas.addEventListener('click', (e) => {
+                if (e.target === canvas) {
+                    // 点击画布空白处，取消选择
+                    deselectElement();
+                } else {
+                    // 查找最近的可选择元素
+                    let targetElement = e.target.closest('.design-element');
+                    if (targetElement) {
+                        selectElement(targetElement);
+                    }
+                }
+            });
+            
+            // 元素拖拽功能
+            let isDragging = false;
+            let dragOffsetX = 0;
+            let dragOffsetY = 0;
+            
+            canvas.addEventListener('mousedown', (e) => {
+                const element = e.target.closest('.design-element');
+                if (element && e.button === 0) { // 左键点击
+                    isDragging = true;
+                    const rect = element.getBoundingClientRect();
+                    dragOffsetX = e.clientX - rect.left;
+                    dragOffsetY = e.clientY - rect.top;
+                    element.style.zIndex = 100; // 拖拽时置于顶层
+                    document.body.style.cursor = 'grabbing';
+                    
+                    // 如果没选中，选中它
+                    if (element !== selectedElement) {
+                        selectElement(element);
+                    }
+                    
+                    e.preventDefault();
+                }
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && selectedElement) {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left - dragOffsetX;
+                    const y = e.clientY - rect.top - dragOffsetY;
+                    
+                    // 更新元素位置
+                    selectedElement.style.left = `${x}px`;
+                    selectedElement.style.top = `${y}px`;
+                    
+                    // 更新属性面板
+                    updatePositionInputs();
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    if (selectedElement) {
+                        selectedElement.style.zIndex = ''; // 恢复z-index
+                        saveState(); // 保存状态
+                    }
+                    document.body.style.cursor = '';
+                }
+            });
+            
+            // 导出按钮
+            exportSvgBtn.addEventListener('click', () => exportAs('svg'));
+            exportPngBtn.addEventListener('click', () => exportAs('png'));
+            exportJpegBtn.addEventListener('click', () => exportAs('jpeg'));
+            exportDataUrlBtn.addEventListener('click', () => exportAs('dataurl'));
+            
+            // 新建设计
+            newDesignBtn.addEventListener('click', () => {
+                if (confirm('确定要创建新设计吗？当前设计将被清空。')) {
+                    clearCanvas();
+                    saveState();
+                }
+            });
+            
+            // 保存设计
+            saveDesignBtn.addEventListener('click', () => {
+                saveCurrentDesign();
+                showToast('设计已保存');
+            });
+            
+            // 属性面板事件
+            positionX.addEventListener('input', updateElementPosition);
+            positionY.addEventListener('input', updateElementPosition);
+            elementWidth.addEventListener('input', updateElementSize);
+            elementHeight.addEventListener('input', updateElementSize);
+            rotationAngle.addEventListener('input', updateElementRotation);
+            opacityRange.addEventListener('input', () => {
+                opacityValue.value = opacityRange.value;
+                updateElementOpacity();
+            });
+            opacityValue.addEventListener('input', () => {
+                opacityRange.value = opacityValue.value;
+                updateElementOpacity();
+            });
+            
+            // 颜色选择器同步
+            elementColor.addEventListener('input', () => {
+                elementColorHex.value = elementColor.value;
+                updateElementColor();
+            });
+            
+            elementColorHex.addEventListener('input', () => {
+                if (/^#[0-9A-F]{6}$/i.test(elementColorHex.value)) {
+                    elementColor.value = elementColorHex.value;
+                    updateElementColor();
+                }
+            });
+            
+            // 文本属性事件
+            textContent.addEventListener('input', updateTextContent);
+            textFontFamily.addEventListener('change', updateTextFont);
+            textFontSize.addEventListener('input', updateTextSize);
+            textBold.addEventListener('click', () => {
+                textBold.classList.toggle('bg-gray-200');
+                updateTextStyle();
+            });
+            textItalic.addEventListener('click', () => {
+                textItalic.classList.toggle('bg-gray-200');
+                updateTextStyle();
+            });
+            textUnderline.addEventListener('click', () => {
+                textUnderline.classList.toggle('bg-gray-200');
+                updateTextStyle();
+            });
+            textAlignLeft.addEventListener('click', () => updateTextAlignment('left'));
+            textAlignCenter.addEventListener('click', () => updateTextAlignment('center'));
+            textAlignRight.addEventListener('click', () => updateTextAlignment('right'));
+            
+            // 形状属性事件
+            shapePropFill.addEventListener('input', () => {
+                shapePropFillHex.value = shapePropFill.value;
+                updateShapeFill();
+            });
+            
+            shapePropFillHex.addEventListener('input', () => {
+                if (/^#[0-9A-F]{6}$/i.test(shapePropFillHex.value)) {
+                    shapePropFill.value = shapePropFillHex.value;
+                    updateShapeFill();
+                }
+            });
+            
+            shapePropStroke.addEventListener('input', () => {
+                shapePropStrokeHex.value = shapePropStroke.value;
+                updateShapeStroke();
+            });
+            
+            shapePropStrokeHex.addEventListener('input', () => {
+                if (/^#[0-9A-F]{6}$/i.test(shapePropStrokeHex.value)) {
+                    shapePropStroke.value = shapePropStrokeHex.value;
+                    updateShapeStroke();
+                }
+            });
+            
+            shapePropStrokeWidth.addEventListener('input', updateShapeStrokeWidth);
+            
+            // 元素层级控制
+            bringToFrontBtn.addEventListener('click', bringToFront);
+            sendToBackBtn.addEventListener('click', sendToBack);
+            
+            // 删除元素
+            deleteElementBtn.addEventListener('click', deleteSelectedElement);
+        }
+        
+        // 添加图标到画布
+        function addIconToCanvas(iconClass, library, x, y) {
+            elementCounter++;
+            const elementId = `element-${elementCounter}`;
+            
+            const iconElement = document.createElement('div');
+            iconElement.id = elementId;
+            iconElement.className = 'design-element absolute cursor-move';
+            iconElement.dataset.type = 'icon';
+            iconElement.dataset.icon = iconClass;
+            iconElement.dataset.library = library;
+            iconElement.style.left = `${x - 24}px`; // 居中图标
+            iconElement.style.top = `${y - 24}px`;
+            iconElement.style.width = '48px';
+            iconElement.style.height = '48px';
+            iconElement.innerHTML = `<i class="${library === 'font-awesome' ? 'fa' : 'ib'} ${iconClass} text-4xl text-gray-700"></i>`;
+            
+            canvas.appendChild(iconElement);
+            elements.push(iconElement);
+            
+            // 选中新添加的元素
+            selectElement(iconElement);
+            
+            // 保存历史状态
+            saveState();
+        }
+        
+        // 添加自定义SVG到画布
+        function addCustomSvgToCanvas(svgContent) {
+            elementCounter++;
+            const elementId = `element-${elementCounter}`;
+            
+            const svgElement = document.createElement('div');
+            svgElement.id = elementId;
+            svgElement.className = 'design-element absolute cursor-move';
+            svgElement.dataset.type = 'custom-svg';
+            svgElement.style.left = '50%';
+            svgElement.style.top = '50%';
+            svgElement.style.transform = 'translate(-50%, -50%)';
+            svgElement.style.width = '120px';
+            svgElement.style.height = '120px';
+            svgElement.innerHTML = svgContent;
+            
+            // 尝试设置SVG颜色
+            const svg = svgElement.querySelector('svg');
+            if (svg) {
+                // 移除SVG中的width和height属性，使用CSS控制
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = '100%';
+            }
+            
+            canvas.appendChild(svgElement);
+            elements.push(svgElement);
+            
+            // 选中新添加的元素
+            selectElement(svgElement);
+            
+            // 保存历史状态
+            saveState();
+        }
+        
+        // 添加文本到画布
+        function addTextToCanvas(text, size, family, bold, italic, underline) {
+            elementCounter++;
+            const elementId = `element-${elementCounter}`;
+            
+            const textElement = document.createElement('div');
+            textElement.id = elementId;
+            textElement.className = 'design-element absolute cursor-move select-none';
+            textElement.dataset.type = 'text';
+            textElement.style.left = '50%';
+            textElement.style.top = '50%';
+            textElement.style.transform = 'translate(-50%, -50%)';
+            textElement.style.fontSize = `${size}px`;
+            textElement.style.fontFamily = family;
+            textElement.style.fontWeight = bold ? 'bold' : 'normal';
+            textElement.style.fontStyle = italic ? 'italic' : 'normal';
+            textElement.style.textDecoration = underline ? 'underline' : 'none';
+            textElement.style.color = '#333333';
+            textElement.textContent = text;
+            
+            // 双击编辑文本
+            textElement.addEventListener('dblclick', () => {
+                const currentText = textElement.textContent;
+                textElement.contentEditable = true;
+                textElement.focus();
+                
+                // 选中所有文本
+                const selection = window.getSelection();
+                const range = document.createRange();
+                range.selectNodeContents(textElement);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                
+                // 失去焦点时保存
+                textElement.addEventListener('blur', () => {
+                    textElement.contentEditable = false;
+                    if (textElement.textContent !== currentText) {
+                        textContent.value = textElement.textContent;
+                        saveState();
+                    }
+                }, { once: true });
+                
+                // 按下Enter时保存（但不换行）
+                textElement.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        textElement.blur();
+                    }
+                }, { once: true });
+            });
+            
+            canvas.appendChild(textElement);
+            elements.push(textElement);
+            
+            // 选中新添加的元素
+            selectElement(textElement);
+            
+            // 保存历史状态
+            saveState();
+        }
+        
+        // 添加形状到画布
+        function addShapeToCanvas(shapeType, fill, stroke, strokeWidth) {
+            elementCounter++;
+            const elementId = `element-${elementCounter}`;
+            const size = 100;
+            
+            const shapeElement = document.createElement('div');
+            shapeElement.id = elementId;
+            shapeElement.className = 'design-element absolute cursor-move';
+            shapeElement.dataset.type = 'shape';
+            shapeElement.dataset.shape = shapeType;
+            shapeElement.style.left = `calc(50% - ${size/2}px)`;
+            shapeElement.style.top = `calc(50% - ${size/2}px)`;
+            shapeElement.style.width = `${size}px`;
+            shapeElement.style.height = `${size}px`;
+            shapeElement.style.boxSizing = 'border-box';
+            
+            // 根据形状类型设置样式
+            switch(shapeType) {
+                case 'rectangle':
+                    shapeElement.style.borderRadius = '4px';
+                    break;
+                case 'circle':
+                    shapeElement.style.borderRadius = '50%';
+                    break;
+                case 'triangle':
+                    shapeElement.style.width = '0';
+                    shapeElement.style.height = '0';
+                    shapeElement.style.borderLeft = `${size/2}px solid transparent`;
+                    shapeElement.style.borderRight = `${size/2}px solid transparent`;
+                    shapeElement.style.borderBottom = `${size}px solid ${fill}`;
+                    shapeElement.style.backgroundColor = 'transparent';
+                    shapeElement.style.borderTop = 'none';
+                    break;
+                case 'line':
+                    shapeElement.style.height = '0';
+                    shapeElement.style.borderTop = `${strokeWidth}px solid ${stroke}`;
+                    shapeElement.style.backgroundColor = 'transparent';
+                    shapeElement.style.borderRadius = '0';
+                    break;
+                case 'star':
+                    // 使用CSS绘制星形
+                    shapeElement.style.clipPath = 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                    break;
+                case 'diamond':
+                    shapeElement.style.transform = 'rotate(45deg)';
+                    shapeElement.style.left = `calc(50% - ${size/2 * 0.707}px)`; // 考虑旋转后的位置
+                    shapeElement.style.top = `calc(50% - ${size/2 * 0.707}px)`;
+                    break;
+            }
+            
+            // 对于不是三角形、线条的形状应用填充和边框
+            if (!['triangle', 'line'].includes(shapeType)) {
+                shapeElement.style.backgroundColor = fill;
+                shapeElement.style.border = `${strokeWidth}px solid ${stroke}`;
+            }
+            
+            canvas.appendChild(shapeElement);
+            elements.push(shapeElement);
+            
+            // 选中新添加的元素
+            selectElement(shapeElement);
+            
+            // 保存历史状态
+            saveState();
+        }
+        
+        // 加载模板
+        function loadTemplate(templateType) {
+            // 清空画布
+            clearCanvas();
+            
+            // 根据模板类型添加元素
+            switch(templateType) {
+                case 'simple':
+                    // 简约型：一个图标 + 品牌名
+                    addIconToCanvas('fa-cube', 'font-awesome', 300, 250);
+                    addTextToCanvas('鲁虺科技', 36, 'Montserrat, sans-serif', true, false, false);
+                    break;
+                case 'emblem':
+                    // 徽章型：圆形背景 + 图标 + 环绕文字
+                    addShapeToCanvas('circle', '#2563eb', '#0f172a', 3);
+                    addIconToCanvas('fa-shield', 'font-awesome', 400, 300);
+                    addTextToCanvas('鲁虺', 28, 'Montserrat, sans-serif', true, false, false);
+                    break;
+                case 'text-icon':
+                    // 图文型：图标 + 文字组合
+                    addIconToCanvas('fa-rocket', 'font-awesome', 250, 300);
+                    addTextToCanvas('鲁虺', 48, 'Montserrat, sans-serif', true, false, false);
+                    addTextToCanvas('创新科技', 24, 'Inter, sans-serif', false, true, false);
+                    break;
+                case 'abstract':
+                    // 抽象型：几何图形组合
+                    addShapeToCanvas('circle', 'transparent', '#2563eb', 4);
+                    addShapeToCanvas('triangle', '#f97316', '#0f172a', 2);
+                    addTextToCanvas('LH', 48, 'Montserrat, sans-serif', true, false, false);
+                    break;
+            }
+            
+            // 保存状态
+            saveState();
+        }
+        
+        // 选择元素
+        function selectElement(element) {
+            // 取消之前的选择
+            deselectElement();
+            
+            selectedElement = element;
+            element.classList.add('selected-element');
+            
+            // 显示属性面板
+            noSelectionMessage.classList.add('hidden');
+            elementProperties.classList.remove('hidden');
+            
+            // 根据元素类型显示不同的属性
+            const elementType = element.dataset.type;
+            
+            // 重置所有属性面板
+            textProperties.classList.add('hidden');
+            shapeProperties.classList.add('hidden');
+            colorProperties.classList.add('hidden');
+            
+            // 更新通用属性
+            updatePositionInputs();
+            updateSizeInputs();
+            updateRotationInput();
+            updateOpacityInput();
+            
+            // 根据元素类型显示特定属性
+            switch(elementType) {
+                case 'icon':
+                case 'custom-svg':
+                    colorProperties.classList.remove('hidden');
+                    updateColorInputs();
+                    break;
+                case 'text':
+                    textProperties.classList.remove('hidden');
+                    updateTextInputs();
+                    break;
+                case 'shape':
+                    shapeProperties.classList.remove('hidden');
+                    updateShapeInputs();
+                    break;
+            }
+        }
+        
+        // 取消选择元素
+        function deselectElement() {
+            if (selectedElement) {
+                selectedElement.classList.remove('selected-element');
+                selectedElement = null;
+            }
+            
+            // 隐藏属性面板
+            elementProperties.classList.add('hidden');
+            noSelectionMessage.classList.remove('hidden');
+        }
+        
+        // 更新位置输入框
+        function updatePositionInputs() {
+            if (selectedElement) {
+                positionX.value = Math.round(parseFloat(selectedElement.style.left) || 0);
+                positionY.value = Math.round(parseFloat(selectedElement.style.top) || 0);
+            }
+        }
+        
+        // 更新大小输入框
+        function updateSizeInputs() {
+            if (selectedElement) {
+                elementWidth.value = Math.round(parseFloat(selectedElement.style.width) || 0);
+                elementHeight.value = Math.round(parseFloat(selectedElement.style.height) || 0);
+            }
+        }
+        
+        // 更新旋转输入框
+        function updateRotationInput() {
+            if (selectedElement) {
+                const transform = selectedElement.style.transform || '';
+                const match = transform.match(/rotate\((\d+)deg\)/);
+                rotationAngle.value = match ? parseInt(match[1]) : 0;
+            }
+        }
+        
+        // 更新透明度输入框
+        function updateOpacityInput() {
+            if (selectedElement) {
+                const opacity = parseFloat(selectedElement.style.opacity) || 1;
+                const opacityPercent = Math.round(opacity * 100);
+                opacityRange.value = opacityPercent;
+                opacityValue.value = opacityPercent;
+            }
+        }
+        
+        // 更新颜色输入框
+        function updateColorInputs() {
+            if (selectedElement) {
+                let color;
+                
+                if (selectedElement.dataset.type === 'icon') {
+                    const icon = selectedElement.querySelector('i');
+                    color = icon.style.color || '#333333';
+                } else if (selectedElement.dataset.type === 'custom-svg') {
+                    // 尝试获取SVG的主要颜色
+                    const svg = selectedElement.querySelector('svg');
+                    color = svg.style.color || '#333333';
+                }
+                
+                elementColor.value = color;
+                elementColorHex.value = color;
+            }
+        }
+        
+        // 更新文本输入框
+        function updateTextInputs() {
+            if (selectedElement && selectedElement.dataset.type === 'text') {
+                textContent.value = selectedElement.textContent;
+                textFontFamily.value = selectedElement.style.fontFamily || 'Inter, sans-serif';
+                textFontSize.value = parseInt(selectedElement.style.fontSize) || 24;
+                
+                // 更新文本样式按钮状态
+                textBold.classList.toggle('bg-gray-200', selectedElement.style.fontWeight === 'bold');
+                textItalic.classList.toggle('bg-gray-200', selectedElement.style.fontStyle === 'italic');
+                textUnderline.classList.toggle('bg-gray-200', selectedElement.style.textDecoration === 'underline');
+                
+                // 更新文本对齐按钮状态
+                const textAlign = selectedElement.style.textAlign || 'left';
+                textAlignLeft.classList.toggle('bg-gray-200', textAlign === 'left');
+                textAlignCenter.classList.toggle('bg-gray-200', textAlign === 'center');
+                textAlignRight.classList.toggle('bg-gray-200', textAlign === 'right');
+                
+                // 设置文本颜色
+                elementColor.value = selectedElement.style.color || '#333333';
+                elementColorHex.value = selectedElement.style.color || '#333333';
+                colorProperties.classList.remove('hidden');
+            }
+        }
+        
+        // 更新形状输入框
+        function updateShapeInputs() {
+            if (selectedElement && selectedElement.dataset.type === 'shape') {
+                // 对于三角形和线条，特殊处理
+                const shapeType = selectedElement.dataset.shape;
+                
+                if (shapeType === 'triangle') {
+                    const borderBottom = selectedElement.style.borderBottom || '';
+                    const match = borderBottom.match(/solid (#[0-9A-Fa-f]+)/);
+                    shapePropFill.value = match ? match[1] : '#2563eb';
+                    shapePropFillHex.value = match ? match[1] : '#2563eb';
+                } else if (shapeType === 'line') {
+                    const borderTop = selectedElement.style.borderTop || '';
+                    const colorMatch = borderTop.match(/solid (#[0-9A-Fa-f]+)/);
+                    const widthMatch = borderTop.match(/^(\d+)px/);
+                    
+                    shapePropStroke.value = colorMatch ? colorMatch[1] : '#0f172a';
+                    shapePropStrokeHex.value = colorMatch ? colorMatch[1] : '#0f172a';
+                    shapePropStrokeWidth.value = widthMatch ? parseInt(widthMatch[1]) : 2;
+                } else {
+                    shapePropFill.value = selectedElement.style.backgroundColor || '#2563eb';
+                    shapePropFillHex.value = selectedElement.style.backgroundColor || '#2563eb';
+                    
+                    const border = selectedElement.style.border || '';
+                    const widthMatch = border.match(/^(\d+)px/);
+                    const colorMatch = border.match(/solid (#[0-9A-Fa-f]+)/);
+                    
+                    shapePropStroke.value = colorMatch ? colorMatch[1] : '#0f172a';
+                    shapePropStrokeHex.value = colorMatch ? colorMatch[1] : '#0f172a';
+                    shapePropStrokeWidth.value = widthMatch ? parseInt(widthMatch[1]) : 2;
+                }
+            }
+        }
+        
+        // 更新元素位置
+        function updateElementPosition() {
+            if (selectedElement) {
+                selectedElement.style.left = `${parseInt(positionX.value) || 0}px`;
+                selectedElement.style.top = `${parseInt(positionY.value) || 0}px`;
+                saveState();
+            }
+        }
+        
+        // 更新元素大小
+        function updateElementSize() {
+            if (selectedElement) {
+                const width = parseInt(elementWidth.value) || 0;
+                const height = parseInt(elementHeight.value) || 0;
+                
+                selectedElement.style.width = `${width}px`;
+                selectedElement.style.height = `${height}px`;
+                
+                // 特殊处理三角形和线条
+                if (selectedElement.dataset.type === 'shape') {
+                    const shapeType = selectedElement.dataset.shape;
+                    if (shapeType === 'triangle') {
+                        selectedElement.style.borderLeft = `${width/2}px solid transparent`;
+                        selectedElement.style.borderRight = `${width/2}px solid transparent`;
+                        selectedElement.style.borderBottom = `${height}px solid ${shapePropFill.value}`;
+                    } else if (shapeType === 'line') {
+                        selectedElement.style.width = `${width}px`;
+                    } else if (shapeType === 'diamond') {
+                        // 保持菱形的比例
+                        selectedElement.style.left = `calc(50% - ${width/2 * 0.707}px)`;
+                        selectedElement.style.top = `calc(50% - ${height/2 * 0.707}px)`;
+                    }
+                }
+                
+                saveState();
+            }
+        }
+        
+        // 更新元素旋转
+        function updateElementRotation() {
+            if (selectedElement) {
+                const angle = parseInt(rotationAngle.value) || 0;
+                
+                // 保留其他变换（如菱形的旋转）
+                let transform = selectedElement.style.transform || '';
+                if (transform.includes('rotate')) {
+                    transform = transform.replace(/rotate\(\d+deg\)/, `rotate(${angle}deg)`);
+                } else if (transform) {
+                    transform += ` rotate(${angle}deg)`;
+                } else {
+                    transform = `rotate(${angle}deg)`;
+                }
+                
+                selectedElement.style.transform = transform;
+                saveState();
+            }
+        }
+        
+        // 更新元素透明度
+        function updateElementOpacity() {
+            if (selectedElement) {
+                const opacity = parseInt(opacityValue.value) / 100 || 1;
+                selectedElement.style.opacity = opacity;
+                saveState();
+            }
+        }
+        
+        // 更新元素颜色
+        function updateElementColor() {
+            if (selectedElement) {
+                const color = elementColor.value;
+                
+                if (selectedElement.dataset.type === 'icon') {
+                    const icon = selectedElement.querySelector('i');
+                    icon.style.color = color;
+                } else if (selectedElement.dataset.type === 'text') {
+                    selectedElement.style.color = color;
+                } else if (selectedElement.dataset.type === 'custom-svg') {
+                    const svg = selectedElement.querySelector('svg');
+                    // 尝试设置SVG的颜色
+                    svg.style.color = color;
+                    // 对于填充的SVG元素，也尝试设置fill
+                    Array.from(svg.querySelectorAll('[fill]')).forEach(el => {
+                        if (el.getAttribute('fill') !== 'none') {
+                            el.setAttribute('fill', color);
+                        }
+                    });
+                }
+                
+                saveState();
+            }
+        }
+        
+        // 更新文本内容
+        function updateTextContent() {
+            if (selectedElement && selectedElement.dataset.type === 'text') {
+                selectedElement.textContent = textContent.value;
+                saveState();
+            }
+        }
+        
+        // 更新文本字体
+        function updateTextFont() {
+            if (selectedElement && selectedElement.dataset.type === 'text') {
+                selectedElement.style.fontFamily = textFontFamily.value;
+                saveState();
+            }
+        }
+        
+        // 更新文本大小
+        function updateTextSize() {
+            if (selectedElement && selectedElement.dataset.type === 'text') {
+                selectedElement.style.fontSize = `${parseInt(textFontSize.value) || 24}px`;
+                saveState();
+            }
+        }
+        
+        // 更新文本样式
+        function updateTextStyle() {
+            if (selectedElement && selectedElement.dataset.type === 'text') {
+                selectedElement.style.fontWeight = textBold.classList.contains('bg-gray-200') ? 'bold' : 'normal';
+                selectedElement.style.fontStyle = textItalic.classList.contains('bg-gray-200') ? 'italic' : 'normal';
+                selectedElement.style.textDecoration = textUnderline.classList.contains('bg-gray-200') ? 'underline' : 'none';
+                saveState();
+            }
+        }
+        
+        // 更新文本对齐
+        function updateTextAlignment(alignment) {
+            if (selectedElement && selectedElement.dataset.type === 'text') {
+                selectedElement.style.textAlign = alignment;
+                
+                // 更新按钮状态
+                textAlignLeft.classList.remove('bg-gray-200');
+                textAlignCenter.classList.remove('bg-gray-200');
+                textAlignRight.classList.remove('bg-gray-200');
+                
+                if (alignment === 'left') {
+                    textAlignLeft.classList.add('bg-gray-200');
+                } else if (alignment === 'center') {
+                    textAlignCenter.classList.add('bg-gray-200');
+                } else if (alignment === 'right') {
+                    textAlignRight.classList.add('bg-gray-200');
+                }
+                
+                saveState();
+            }
+        }
+        
+        // 更新形状填充
+        function updateShapeFill() {
+            if (selectedElement && selectedElement.dataset.type === 'shape') {
+                const shapeType = selectedElement.dataset.shape;
+                const color = shapePropFill.value;
+                
+                if (shapeType === 'triangle') {
+                    selectedElement.style.borderBottom = selectedElement.style.borderBottom.replace(/#[0-9A-Fa-f]+/, color);
+                } else if (!['line'].includes(shapeType)) {
+                    selectedElement.style.backgroundColor = color;
+                }
+                
+                saveState();
+            }
+        }
+        
+        // 更新形状边框
+        function updateShapeStroke() {
+            if (selectedElement && selectedElement.dataset.type === 'shape') {
+                const shapeType = selectedElement.dataset.shape;
+                const color = shapePropStroke.value;
+                
+                if (shapeType === 'line') {
+                    selectedElement.style.borderTop = selectedElement.style.borderTop.replace(/#[0-9A-Fa-f]+/, color);
+                } else if (!['triangle'].includes(shapeType)) {
+                    const borderWidth = parseInt(shapePropStrokeWidth.value) || 2;
+                    selectedElement.style.border = `${borderWidth}px solid ${color}`;
+                }
+                
+                saveState();
+            }
+        }
+        
+        // 更新形状边框宽度
+        function updateShapeStrokeWidth() {
+            if (selectedElement && selectedElement.dataset.type === 'shape') {
+                const shapeType = selectedElement.dataset.shape;
+                const width = parseInt(shapePropStrokeWidth.value) || 0;
+                const color = shapePropStroke.value;
+                
+                if (shapeType === 'line') {
+                    selectedElement.style.borderTop = `${width}px solid ${color}`;
+                } else if (!['triangle'].includes(shapeType)) {
+                    selectedElement.style.border = `${width}px solid ${color}`;
+                }
+                
+                saveState();
+            }
+        }
+        
+        // 移到顶层
+        function bringToFront() {
+            if (selectedElement) {
+                // 找到当前最大的z-index
+                let maxZIndex = 0;
+                document.querySelectorAll('.design-element').forEach(el => {
+                    const zIndex = parseInt(el.style.zIndex) || 0;
+                    if (zIndex > maxZIndex) {
+                        maxZIndex = zIndex;
+                    }
+                });
+                
+                // 设置为比最大z-index大1
+                selectedElement.style.zIndex = maxZIndex + 1;
+                saveState();
+            }
+        }
+        
+        // 移到底层
+        function sendToBack() {
+            if (selectedElement) {
+                // 设置为0，会被其他元素覆盖
+                selectedElement.style.zIndex = 0;
+                saveState();
+            }
+        }
+        
+        // 删除选中的元素
+        function deleteSelectedElement() {
+            if (selectedElement) {
+                const index = elements.indexOf(selectedElement);
+                if (index !== -1) {
+                    elements.splice(index, 1);
+                }
+                
+                canvas.removeChild(selectedElement);
+                deselectElement();
+                saveState();
+            }
+        }
+        
+        // 清空画布
+        function clearCanvas() {
+            // 移除所有元素
+            document.querySelectorAll('.design-element').forEach(el => {
+                canvas.removeChild(el);
+            });
+            
+            elements = [];
+            deselectElement();
+        }
+        
+        // 保存状态到历史记录
+        function saveState() {
+            // 移除当前状态之后的历史
+            if (historyIndex < history.length - 1) {
+                history = history.slice(0, historyIndex + 1);
+            }
+            
+            // 保存当前画布状态
+            const canvasState = canvas.innerHTML;
+            history.push(canvasState);
+            historyIndex = history.length - 1;
+            
+            // 限制历史记录数量
+            if (history.length > 50) {
+                history.shift();
+                historyIndex--;
+            }
+        }
+        
+        // 撤销
+        function undo() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                restoreState(history[historyIndex]);
+            }
+        }
+        
+        // 重做
+        function redo() {
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                restoreState(history[historyIndex]);
+            }
+        }
+        
+        // 恢复状态
+        function restoreState(state) {
+            // 清空当前画布
+            clearCanvas();
+            
+            // 恢复状态
+            canvas.innerHTML = state;
+            
+            // 重新获取元素列表
+            elements = Array.from(document.querySelectorAll('.design-element'));
+            
+            // 取消选择
+            deselectElement();
+        }
+        
+        // 保存当前设计
+        function saveCurrentDesign() {
+            const designData = {
+                canvasState: canvas.innerHTML,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('savedDesign', JSON.stringify(designData));
+        }
+        
+        // 导出功能
+        function exportAs(format) {
+            // 创建一个临时SVG用于导出
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', canvas.clientWidth);
+            svg.setAttribute('height', canvas.clientHeight);
+            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            
+            // 添加背景
+            const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            bg.setAttribute('width', '100%');
+            bg.setAttribute('height', '100%');
+            bg.setAttribute('fill', '#ffffff');
+            svg.appendChild(bg);
+            
+            // 复制所有元素到SVG
+            document.querySelectorAll('.design-element').forEach(el => {
+                const clone = el.cloneNode(true);
+                
+                // 处理位置和大小
+                const x = parseFloat(el.style.left) || 0;
+                const y = parseFloat(el.style.top) || 0;
+                const width = parseFloat(el.style.width) || el.offsetWidth;
+                const height = parseFloat(el.style.height) || el.offsetHeight;
+                
+                // 创建SVG组元素
+                const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                g.setAttribute('transform', `translate(${x}, ${y}) ${el.style.transform || ''}`);
+                
+                // 根据元素类型处理
+                if (el.dataset.type === 'icon' || el.dataset.type === 'text') {
+                    // 对于图标和文本，创建foreignObject
+                    const foreignObj = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
+                    foreignObj.setAttribute('width', width);
+                    foreignObj.setAttribute('height', height);
+                    
+                    // 创建HTML内容
+                    const div = document.createElement('div');
+                    div.innerHTML = clone.innerHTML;
+                    
+                    // 应用样式
+                    if (el.dataset.type === 'icon') {
+                        const icon = div.querySelector('i');
+                        if (icon) {
+                            icon.style.fontSize = `${width}px`;
+                            icon.style.color = el.querySelector('i').style.color || '#333333';
+                        }
+                    } else if (el.dataset.type === 'text') {
+                        div.style.fontSize = el.style.fontSize;
+                        div.style.fontFamily = el.style.fontFamily;
+                        div.style.fontWeight = el.style.fontWeight;
+                        div.style.fontStyle = el.style.fontStyle;
+                        div.style.textDecoration = el.style.textDecoration;
+                        div.style.color = el.style.color || '#333333';
+                        div.style.textAlign = el.style.textAlign || 'left';
+                        div.style.width = '100%';
+                        div.style.height = '100%';
+                        div.style.display = 'flex';
+                        div.style.alignItems = 'center';
+                    }
+                    
+                    foreignObj.appendChild(div);
+                    g.appendChild(foreignObj);
+                } else if (el.dataset.type === 'shape') {
+                    // 对于形状，创建对应的SVG元素
+                    const shapeType = el.dataset.shape;
+                    let shapeElement;
+                    
+                    switch(shapeType) {
+                        case 'rectangle':
+                        case 'diamond':
+                            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                            shapeElement.setAttribute('width', width);
+                            shapeElement.setAttribute('height', height);
+                            shapeElement.setAttribute('rx', shapeType === 'rectangle' ? 4 : 0);
+                            shapeElement.setAttribute('ry', shapeType === 'rectangle' ? 4 : 0);
+                            if (shapeType === 'diamond') {
+                                // 菱形需要额外旋转
+                                g.setAttribute('transform', `translate(${x + width/2}, ${y + height/2}) rotate(45) translate(${-width/2}, ${-height/2})`);
+                            }
+                            break;
+                        case 'circle':
+                            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                            shapeElement.setAttribute('cx', width / 2);
+                            shapeElement.setAttribute('cy', height / 2);
+                            shapeElement.setAttribute('r', width / 2);
+                            break;
+                        case 'triangle':
+                            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                            shapeElement.setAttribute('points', `0,${height} ${width/2},0 ${width},${height}`);
+                            break;
+                        case 'line':
+                            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                            shapeElement.setAttribute('x1', 0);
+                            shapeElement.setAttribute('y1', 0);
+                            shapeElement.setAttribute('x2', width);
+                            shapeElement.setAttribute('y2', 0);
+                            break;
+                        case 'star':
+                            shapeElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                            // 星形路径
+                            const starPath = 'M50,0 L61,35 L98,35 L68,57 L79,91 L50,70 L21,91 L32,57 L2,35 L39,35 Z';
+                            shapeElement.setAttribute('d', starPath);
+                            shapeElement.setAttribute('transform', 'scale(0.01) translate(-50, -91)');
+                            break;
+                    }
+                    
+                    // 应用样式
+                    if (shapeElement) {
+                        if (shapeType === 'line') {
+                            shapeElement.setAttribute('stroke', el.style.borderTopColor || '#0f172a');
+                            shapeElement.setAttribute('stroke-width', el.style.borderTopWidth || '2px');
+                        } else {
+                            shapeElement.setAttribute('fill', el.style.backgroundColor || '#2563eb');
+                            shapeElement.setAttribute('stroke', el.style.borderColor || '#0f172a');
+                            shapeElement.setAttribute('stroke-width', el.style.borderWidth || '2px');
+                        }
+                        g.appendChild(shapeElement);
+                    }
+                } else if (el.dataset.type === 'custom-svg') {
+                    // 对于自定义SVG，直接复制
+                    const svgContent = el.innerHTML;
+                    const parser = new DOMParser();
+                    const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
+                    const customSvg = svgDoc.querySelector('svg');
+                    
+                    if (customSvg) {
+                        customSvg.setAttribute('width', width);
+                        customSvg.setAttribute('height', height);
+                        g.appendChild(customSvg);
+                    }
+                }
+                
+                svg.appendChild(g);
+            });
+            
+            // 创建SVG字符串
+            const serializer = new XMLSerializer();
+            let svgString = serializer.serializeToString(svg);
+            
+            // 添加XML声明
+            svgString = '<?xml version="1.0" standalone="no"?>\r\n' + svgString;
+            
+            // 创建Blob
+            const blob = new Blob([svgString], {type: 'image/svg+xml;charset=utf-8'});
+            const url = URL.createObjectURL(blob);
+            
+            if (format === 'svg') {
+                // 导出为SVG
+                downloadFile(url, 'luhui-logo.svg');
+            } else {
+                // 对于其他格式，使用canvas转换
+                const image = new Image();
+                image.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = this.width;
+                    canvas.height = this.height;
+                    
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(this, 0, 0);
+                    
+                    let mimeType, extension;
+                    if (format === 'png') {
+                        mimeType = 'image/png';
+                        extension = 'png';
+                    } else if (format === 'jpeg') {
+                        mimeType = 'image/jpeg';
+                        extension = 'jpg';
+                    } else if (format === 'dataurl') {
+                        // 导出为Data URL
+                        const dataUrl = canvas.toDataURL('image/png');
+                        // 创建一个文本区域用于复制
+                        const textarea = document.createElement('textarea');
+                        textarea.value = dataUrl;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        showToast('Data URL已复制到剪贴板');
+                        URL.revokeObjectURL(url);
+                        return;
+                    }
+                    
+                    const dataUrl = canvas.toDataURL(mimeType);
+                    downloadFile(dataUrl, `luhui-logo.${extension}`);
+                    
+                    // 释放资源
+                    URL.revokeObjectURL(url);
+                };
+                image.src = url;
+            }
+            
+            // 显示成功提示
+            showToast(`已成功导出为${format.toUpperCase()}格式`);
+        }
+        
+        // 下载文件
+        function downloadFile(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // 显示提示消息
+        function showToast(message, type = 'success') {
+            exportMessage.textContent = message;
+            exportToast.className = `fixed bottom-4 right-4 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white px-4 py-2 rounded shadow-lg transform translate-y-0 opacity-100 transition-all duration-300 flex items-center`;
+            
+            setTimeout(() => {
+                exportToast.className = `fixed bottom-4 right-4 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white px-4 py-2 rounded shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center`;
+            }, 3000);
+        }
+        
+        // 初始化应用
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

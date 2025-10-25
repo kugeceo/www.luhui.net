@@ -1,0 +1,38 @@
+视频剪辑需要学习哪些软件?→
+
+
+鲁虺/撰稿
+
+
+
+面向新手，优先学一款主力剪辑软件，再根据方向扩展调色、音频、特效与屏幕录制。主流路径是：剪映入门→达芬奇进阶调色；或 Premiere Pro+AE 走“剪辑+特效”；Mac 用户可选 Final Cut Pro X 提效。
+
+---
+
+### 入门必学（先精通一款）
+- 剪映/CapCut：上手最快，模板与素材多，适合短视频与日常剪辑。
+- Adobe Premiere Pro：行业通用，生态强，适合进阶与商单。
+- Final Cut Pro X：Mac 高效之选，适合长片与团队流程。
+- DaVinci Resolve：剪辑+调色一体，免费版功能全，好莱坞常用。
+
+### 按方向扩展（学有余力再叠加）
+- 调色：DaVinci Resolve（节点式调色、Fusion 特效）。
+- 音频：Adobe Audition（降噪、混音、EQ）。
+- 特效/合成：Adobe After Effects（MG 动画、跟踪、粒子）。
+- 屏幕录制/教程：Camtasia（录制+标注+剪辑一体）。
+- 移动端：剪映/CapCut、LumaFusion（iOS 专业）。
+- 开源/轻量：Shotcut、OpenShot（低门槛、跨平台）。
+
+---
+
+### 学习路径建议
+1. 0–2周：用剪映完成3条完整短视频，跑通“粗剪→精剪→字幕/BGM→导出”。
+2. 2–8周：过渡到 Premiere Pro 或 DaVinci，学习多轨道、快捷键与基础调色。
+3. 8周+：按方向深钻——调色走达芬奇；动效/包装走 AE+Audition；Mac 生态用 FCPX。
+
+---
+
+### 选择要点
+- 设备与预算：低配/Windows 优先剪映或达芬奇免费版；Mac 优先 FCPX。
+- 目标与场景：短视频/教程用剪映/Camtasia；商单/团队协作选 Premiere Pro+AE；电影感调色选达芬奇。
+- 生态与学习资源：Adobe 生态资料多；达芬奇社区活跃、免费可用；FCPX 在 Mac 上效率高。
