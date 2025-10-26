@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <title>聆音鲁虺文化网白噪音模拟器 luhui white noise 鲁虺白噪声模拟器使你放松的在线,白噪音大全,深度催眠消除疲劳,环境自然声在线白噪音生成器，可以生成指定秒数长度的白噪音，可以在线播放及下载保存音频文件。提供优质的助眠、疗愈类的白噪音、音乐服务。</title>
+<meta name="keywords" content="鲁虺白噪音模拟器,鲁虺白噪声模拟器,luhui white noise,白噪声科学研究,鲁虺白噪声音频设备测试,白噪音,Digital Music,白噪音助眠仪,精选白噪音在线收听大自然声音,白噪音,大自然录音师鲁虺,大自然录音师,自然疗愈,冥想,瑜伽,放松,减压,钵,钵音疗愈,助眠,减压,深睡眠,解决失眠,改善睡眠,雨声,水声,流水声,山谷里的声音" />
+<meta name="description" content="鲁虺白噪音模拟器，提供优质的助眠、疗愈类的白噪音、音乐服务。白噪声是一种功率谱密度为常数的随机信号或随机过程。即此信号在各个频段上的功率一致。由于白光是由各种频率的单色光混合而成，因而此信号的平坦功率谱性质称为“白色”，此信号也因此得名为白噪声。相对的，其他不具有这一性质的噪声信号则称为有色噪声。理想的白噪声具有无限带宽，因而其能量是无限大，这在现实世界是不可能存在的。白噪声是一种具有均匀频谱分布的随机信号。它包含了各种频率的信号，且每个频率的强度相等。由于其特性，白噪声在许多领域都有应用。在音频领域，白噪声被用作一种环境背景音，可以屏蔽其他噪声，提供专注和放松的环境。很多人会在睡眠或者工作时使用白噪声来减少干扰。此外，白噪声还在科学研究、工程测试和通信系统中有广泛应用。它被用来测试音频设备的频率响应、调试电子电路、提供加密通信中的随机性等。" />
+<meta name="generator" content="luhui white noise" />
+<meta name="author" content="www.luhui.net" />
+<meta name="copyright" content="luhui.net." />
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <canvas id="bg"></canvas>
+    
+    <span class="setup active"></span>
+    
+    <nav id="menu" class="visible">
+        <div class="row">
+            <div class="col"><span class="icon icon-volume"></span></div>
+            <div class="col"></div>
+            <div class="col"><span class="icon icon-list"></span></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"><span class="icon icon-logo"></span></div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <span class="icon icon-timer"></span>
+                <section class="timer"><span class="minute">30</span>:<span class="second">00</span></section>
+            </div>
+            <div class="col"></div>
+            <div class="col"><span class="icon icon-exit"></span></div>
+        </div>
+        
+        <div class="line-group">
+            <div class="line-1"></div>
+            <div class="line-2"></div>
+            <div class="line-3"></div>
+            <div class="line-4"></div>
+        </div>
+    </nav>
+
+    <section class="side-bar">
+        
+        <div class="mask"></div>
+
+        <ul id="sound-list">
+            <li data-sound="rain">
+                <div class="sound-icon">
+                    <span class="icon icon-rain"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">雨声<small>Rain</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/rain.ogg">
+                    <source type="audio/mpeg" src="./sound/rain.mp3">
+                </audio>
+            </li>
+
+            <li data-sound="thunder">
+                <div class="sound-icon">
+                    <span class="icon icon-thunder"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">雷声<small>Thunder</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/thunder.ogg">
+                    <source type="audio/mpeg" src="./sound/thunder.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="farm">
+                <div class="sound-icon">
+                    <span class="icon icon-farm"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">农场<small>Farm</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/farm.ogg">
+                    <source type="audio/mpeg" src="./sound/farm.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="night">
+                <div class="sound-icon">
+                    <span class="icon icon-night"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">夜晚<small>Night</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/night.ogg">
+                    <source type="audio/mpeg" src="./sound/night.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="forest">
+                <div class="sound-icon">
+                    <span class="icon icon-forest"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">森林<small>Forest</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/forest.ogg">
+                    <source type="audio/mpeg" src="./sound/forest.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="leaves">
+                <div class="sound-icon">
+                    <span class="icon icon-leaves"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">落叶<small>Leaves</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/leaves.ogg">
+                    <source type="audio/mpeg" src="./sound/leaves.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="river">
+                <div class="sound-icon">
+                    <span class="icon icon-river"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">河流<small>River</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/river.ogg">
+                    <source type="audio/mpeg" src="./sound/river.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="fire">
+                <div class="sound-icon">
+                    <span class="icon icon-fire"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">篝火<small>Fire</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/fire.ogg">
+                    <source type="audio/mpeg" src="./sound/fire.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="seaside">
+                <div class="sound-icon">
+                    <span class="icon icon-seaside"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">海边<small>Seaside</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/seaside.ogg">
+                    <source type="audio/mpeg" src="./sound/seaside.mp3">
+                </audio>
+            </li>
+ 
+
+
+            
+            <li data-sound="bubbles">
+                <div class="sound-icon">
+                    <span class="icon icon-bubble"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">水母<small>bubbles</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/bubbles.ogg">
+                    <source type="audio/mpeg" src="./sound/bubbles.mp3">
+                </audio>
+            </li>
+
+
+
+ 
+            <li data-sound="yacht">
+                <div class="sound-icon">
+                    <span class="icon icon-yacht"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">帆船<small>Yacht</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/yacht.ogg">
+                    <source type="audio/mpeg" src="./sound/yacht.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="coffee">
+                <div class="sound-icon">
+                    <span class="icon icon-coffee"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">咖啡厅<small>Coffee</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/coffee.ogg">
+                    <source type="audio/mpeg" src="./sound/coffee.mp3">
+                </audio>
+            </li>
+            
+            <li data-sound="train">
+                <div class="sound-icon">
+                    <span class="icon icon-train"></span>
+                </div>
+
+                <div class="control-block">
+                    <h4 class="title">火车<small>Train</small></h4>
+                    <div class="control-bar">
+                        <span class="slider"></span>
+                    </div>
+                </div>
+
+                <audio preload="none" loop>
+                    <source type="audio/ogg" src="./sound/train.ogg">
+                    <source type="audio/mpeg" src="./sound/train.mp3">
+                </audio>
+            </li>
+        </ul>
+    </section>
+
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+
+            var lastTime = 0, vendors = ['ms', 'moz', 'webkit', 'o'], i;
+
+            for (i = 0; i < vendors.length && !window.requestAnimationFrame; ++i) {
+
+                window.requestAnimationFrame = window[vendors[i] + 'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[i] + 'CancelAnimationFrame'] || window[vendors[i] + 'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame) {
+
+                window.requestAnimationFrame = function (callback) {
+
+                    var currTime = new Date().getTime(),
+                        timeToCall = Math.max(0, 16 - (currTime - lastTime)),
+                        id = window.setTimeout(function () {
+                                callback(currTime + timeToCall);
+                            }, timeToCall);
+
+                    lastTime = currTime + timeToCall;
+
+                    return id;
+                };
+            }
+
+            if (!window.cancelAnimationFrame) {
+
+                window.cancelAnimationFrame = function (id) {
+                    clearTimeout(id);
+                };
+            }
+        })(window, document);
+    </script>
+    <script src="./javascripts/bg.js"></script>
+    <script src="./javascripts/sound.js"></script>
+</body>
+</html>
