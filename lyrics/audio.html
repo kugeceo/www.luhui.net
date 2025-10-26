@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<base href="/wap/">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />	
+	<link rel="stylesheet" href="./assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<meta name="author" content="viggo" />
+	<title>鲁虺文化网 http://www.luhui.net 鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。</title>
+	<link href="http://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="http://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<meta name="keywords"
+	  content="AI助手, ChatGPT Prompts, AI调教, AI实时热点, AI编程, AI快捷指令,  ChatGPT, 机器学习, 自然语言处理, AI工具导航, AI工具菜单, 机器学习工具, AI辅助工具, aimappro">
+	<meta name="description"
+	  content="鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。">
+	<meta property="og:title"
+	content="鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。">
+	<meta property="og:description"
+	content="鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。">
+	<meta property="og:image"
+	content="./assets/images/AiMapProOg.jpg">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://www.luhui.net">
+	<meta property="og:site_name" content="鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。">
+	
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。">
+	<meta name="twitter:description"
+	content="鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。">
+	<meta name="twitter:image" content="./assets/images/AiMapProOg.jpg">
+	<link rel="shortcut icon" href="./assets/images/favicon.png">
+	<link rel="stylesheet" href="./assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="./assets/css/bootstrap.css">
+	<link rel="stylesheet" id="theme-css" href="./assets/css/xenon-core.css">
+	<link rel="stylesheet" href="./assets/css/xenon-components.css">
+	<link rel="stylesheet" href="./assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="./assets/css/prompts.css">
+	<script src="./assets/js/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body class="page-body">
+	<!-- skin-white -->
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed" id="sidebar-top" style="height: 60px">
+			<div class="sidebar-menu-inner">
+				<header class="logo-env">
+					<!-- logo -->
+					<div class="logo">
+						<a href="index.html" class="logo-expanded">
+							<img src="./assets/images/logo_dark@2x.png" width="100%" alt="" />
+						</a>
+						<a href="index.html" class="logo-collapsed">
+							<img src="./assets/images/logo-collapsed@2x.png" width="40" alt="" />
+						</a>
+					</div>
+					<button class="menu-toggle" style="border: none; background-color: transparent;">
+					    <i class="fas fa-bars"></i>
+					</button>							
+				</header>
+				<ul id="main-menu" class="main-menu">
+					<li>
+						<a href="cultural.html">
+							<i class="linecons-desktop"></i>
+							<span class="tooltip-blue">文化传媒</span>
+						</a>
+					</li>
+					<li class="active">
+						<a  href="/lyrics/">
+							<i class="linecons-search"></i>
+							<span class="tooltip-blue">录音剪辑</span>
+						</a>
+					</li>
+					<li>
+						<a href="artificialemotions.html">
+							<i class="linecons-photo"></i>
+							<span class="tooltip-blue">人工情感</span>
+						</a>
+					</li>
+					<li>
+						<a href="designIntelligence.html">
+							<i class="linecons-tag"></i>
+							<span class="tooltip-blue">设计智造</span>
+						</a>
+					</li>
+					<li>
+						<a href="ultimateevolution.html">
+							<i class="linecons-doc"></i>
+							<span class="tooltip-blue">终极进化</span>
+						</a>
+					</li>
+					<li>
+						<a href="lifeservices.html">
+							<i class="linecons-calendar"></i>
+							<span class="tooltip-blue">生活服务</span>
+						</a>
+					</li>
+					<li>
+						<a href="searchengines.html">
+							<i class="linecons-params"></i>
+							<span class="tooltip-blue">搜索引擎</span>
+						</a>
+					</li>
+					<li>
+						<a href="about.html">
+							<i class="linecons-user"></i>
+							<span class="tooltip-blue">关于我们</span>
+						</a>
+					</li>
+				</ul>
+					</div>
+				</div>
+				
+				<div class="sidebar-wrapper">
+					<div id="sidebar">
+						<div class="sidebar-header">
+							<button class="close"><i class="fas fa-times"></i></button>
+						</div>
+						<ul id="main-menu" class="main-menu">
+							<li>
+								<a href="cultural.html">
+									<i class="linecons-desktop"></i>
+									<span class="tooltip-blue">文化传媒</span>
+								</a>
+							</li>
+							<li class="active">
+								<a  href="/lyrics/">
+									<i class="linecons-search"></i>
+									<span class="tooltip-blue">录音剪辑</span>
+								</a>
+							</li>
+							<li>
+								<a href="artificialemotions.html">
+									<i class="linecons-photo"></i>
+									<span class="tooltip-blue">人工情感</span>
+								</a>
+							</li>
+							<li>
+								<a href="designIntelligence.html">
+									<i class="linecons-tag"></i>
+									<span class="tooltip-blue">设计智造</span>
+								</a>
+							</li>
+							<li>
+								<a href="ultimateevolution.html">
+									<i class="linecons-doc"></i>
+									<span class="tooltip-blue">终极进化</span>
+								</a>
+							</li>
+							<li>
+								<a href="lifeservices.html">
+									<i class="linecons-calendar"></i>
+									<span class="tooltip-blue">生活服务</span>
+								</a>
+							</li>
+							<li>
+								<a href="searchengines.html">
+									<i class="linecons-params"></i>
+									<span class="tooltip-blue">搜索引擎</span>
+								</a>
+							</li>
+							<li>
+								<a href="about.html">
+									<i class="linecons-user"></i>
+									<span class="tooltip-blue">关于我们</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+		<div class="main-content">
+			<div id="main-contents">
+				<div class="topbar">
+
+					<div class="slideshow-hi-wrapper">
+					    <i class="fa fa-search"></i>
+					    <input type="text" id="search-input" placeholder="搜索">
+					</div>
+
+
+
+					<!-- 公告轮动 -->
+					<div id="announcement-container"></div>
+
+
+
+
+				</div>
+				<!-- 推荐 -->
+				
+				
+
+
+
+				
+				
+				
+				
+				
+				
+			
+                        <h3 class="text-gray">🧭 鲁虺AI语音合成</h3>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+  </tr>
+
+				<div class="category-buttons-container">
+				  <button class="category-button active" data-label="所有工具">所有资源</button>
+				  <button class="category-button" data-label="录音剪辑">录音剪辑</button>
+				  <button class="category-button" data-label="语音合成">语音合成</button>
+				  <button class="category-button" data-label="音频软件">音频软件</button>
+				  <button class="category-button" data-label="视频剪辑">视频剪辑</button>
+				  <button class="category-button" data-label="视频软件">视频软件</button>
+				  <button class="category-button" data-label="动画制作">动画制作</button>
+				  <button class="category-button" data-label="播放器">播放器</button>
+				  <button class="category-button" data-label="文案">文案</button>
+				  <button class="category-button" data-label="热门">热门</button>
+				</div>
+				
+				
+<div style="display: none">
+<svg>
+    <symbol viewbox="0 0 24 24" id="readyVoiceIcon">
+        <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z">
+        </path>
+    </symbol>
+    <symbol viewbox="0 0 20 20" id="pauseVoiceIcon">
+        <path stroke="currentColor" stroke-width="2.4" d="M6 3v14M14 3v14"></path>
+    </symbol>
+    <symbol viewbox="0 0 16 16" id="resumeVoiceIcon">
+        <path fill="currentColor" d="M4 3L4 13L12 8Z"></path>
+    </symbol>
+    <symbol viewbox="0 0 24 24" id="stopResIcon">
+        <path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10zm0-2a8 8 0 1 0 0-16a8 8 0 0 0 0 16zM9 9h6v6H9V9z">
+        </path>
+    </symbol>
+    <symbol viewbox="0 0 24 24" id="stopIcon">
+        <path fill="currentColor" d="M6 5h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+    </symbol>
+</svg>
+</div>
+<div class="am-g am-container am-margin-top-lg am-margin-bottom-lg">
+    <div class="am-u-lg-12">
+        <div class="am-cf ">
+            <h2 class="tool-title am-fl  am-text-xl" >语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。</h2>
+            
+        </div>
+        <form class="am-form am-margin-top-sm ">
+            <div class="am-form-group">
+                <label >声音选择</label>
+                <select id="preSetSpeech">
+                </select>
+                <span class="am-form-caret"></span>
+            </div>
+            <div class="am-form-group">
+                <label>请输入需要合成音频文字</label>
+                <textarea id="audio">你好，很高兴认识你。</textarea>
+            </div>
+            <div class="am-form-group">
+                <label>音量</label>
+                <input type="range" id="voiceVolume" min="0" max="1" value="1" step="0.1" >
+                <div class="selectDef">
+                    <span>低</span>
+                    <span>高</span>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label>语速</label>
+                <input type="range" id="voiceRate" min="0.1" max="2" value="1" step="0.1" />
+                <div class="selectDef">
+                    <span>慢</span>
+                    <span>快</span>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label>音调</label>
+                <input type="range" id="voicePitch" min="0" max="2" value="1" step="0.1" />
+                <div class="selectDef">
+                    <span>平淡</span>
+                    <span>起伏</span>
+                </div>
+            </div>
+<!--            <p id="msg" >-->
+<!--                <button type="button" class="am-btn am-btn-success btn-loading-example" data-am-loading="{spinner: 'circle-o-notch', loadingText: '加载中...'}" id="audioQuery">合成</button>-->
+<!--            </p>-->
+
+            <div class="am-form-group">
+                <label>试听操作</label>
+                <div class="justSetLine readyTestVoice" id="testVoiceBtn" style="margin-top: 6px;">
+                    <div class="justSetBtn" onclick="startTestVoice()">
+                        <svg width="18" height="18">
+                            <use xlink:href="#readyVoiceIcon"></use>
+                        </svg>
+                        <span>播放试听</span>
+                    </div>
+                    <div class="justSetBtn" onclick="pauseTestVoice()">
+                        <svg width="18" height="18">
+                            <use xlink:href="#pauseVoiceIcon"></use>
+                        </svg>
+                        <span>暂停试听</span>
+                    </div>
+                    <div class="justSetBtn" onclick="resumeTestVoice()">
+                        <svg width="18" height="18">
+                            <use xlink:href="#resumeVoiceIcon"></use>
+                        </svg>
+                        <span>恢复试听</span>
+                    </div>
+                    <div class="justSetBtn" style="margin-right: 130px" onclick="stopTestVoice()">
+                        <svg width="18" height="18">
+                            <use xlink:href="#stopIcon"></use>
+                        </svg>
+                        <span>停止试听</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <label>下载操作</label>
+                <div>
+                    <button type="button" class="am-btn am-btn-primary" onclick="downloadAudio()">
+                        下载音频
+                        <i class="am-icon-cloud-download"></i>
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+    <div class="am-u-lg-12">
+        <h2 class="tool-title">相关知识</h2>
+        <p>
+            鲁虺在线免费AI语音合成，外面都是收费的在这里就是免费使用。AI语音合成也被称为文本到语音（Text-To-Speech）技术，是人工智能领域的一个重要入口。它的基本功能是将机器内部的文字信息转变为可听懂且流利的语言输出。这一过程可以类比为人类的嘴巴，通过不同的音色说出想表达的内容。在语音合成技术的实现过程中，主要分为两个关键部分：语言分析部分和声学系统部分。更具体地说，这个过程经历了三个步骤：首先，进行文本分析；然后转换为音素序列；最后，生成波形并合成为语音。目前，一些研究机构和企业，如微软亚洲研究院，正在致力于构建高自然度的语音合成系统。这种技术已经被广泛应用在各种场景中，例如智能客服、智能家居等。
+			
+            <strong>注意：测试过不能用中文文字选择英文发音输出!</strong>
+        </p>
+    </div>
+	
+	
+	
+    <link rel="stylesheet" href="http://www.dog886.com/static/assets/aplayer/APlayer.min.css?v=1700190180909">	
+	
+<script src="http://www.dog886.com/static/assets/js/tool/audio.js?v=1700190180909"></script>
+	
+<link rel="stylesheet" href="http://www.dog886.com/static/assets/css/amazeui.min.css?v=1700190180909"/>
+	
+
+					
+				
+				
+				
+				
+				
+				
+				
+				
+				<div id="recommendations-container" class="row">
+				    <!-- 推荐卡片会在这里动态生成 -->
+				</div>
+				
+				
+				<nav style="margin-top: 30px;">
+				  <div class="d-flex justify-content-center d-none d-xl-flex">
+				        <div class="d-flex align-items-center pagination-container w-100">
+				            <div class="d-flex justify-content-center align-items-center w-100">
+				                <div>
+				                    <span id="page-info" class="mx-2"></span>
+				                </div>
+				                <div class="mx-2">
+				                    <input type="text" id="page-input" class="form-control form-control-sm text-center" autocomplete="off">
+				                </div>
+				                <div class="d-flex align-items-center">
+				                    <button id="first-page-button" class="btn btn-primary btn-sm">首页</button>
+				                    <ul id="pagination" class="pagination justify-content-center">
+				                        <!-- 分页按钮将在这里动态生成 -->
+				                    </ul>
+				                    <button id="last-page-button" class="btn btn-primary btn-sm">尾页</button>
+				                </div>
+				
+				            </div>
+				        </div>
+				    </div>
+				</nav>
+				
+				
+				
+				
+				<div id="mobile-pagination" class="d-flex align-items-center justify-content-center d-block d-xl-none">
+				    <button id="mobile-prev-page-button" class="btn btn-primary btn-sm">上一页</button>
+				    <input type="text" id="mobile-page-info" class="form-control form-control-sm text-center" autocomplete="off">
+				    <button id="mobile-next-page-button" class="btn btn-primary btn-sm">下一页</button>
+				</div>
+				
+
+				<br />
+
+				<div class="footer-inner">	
+
+
+
+				<p align="center"> Copyright&nbsp;  &#169; 2004-01-11&nbsp;<a href="http://luhui.net" title="鲁虺文化网" target="_top">luhui.net</a>&nbsp;all rights reserved.</p>
+
+
+
+					<div id="back-to-top-btn" style="display:none;">
+ <i class="fas fa-angle-double-up" style="font-size: 25px;"></i>
+					</div>
+
+					<div class="footer-inner">
+					    <div id="back-to-top-btn" style="display:none;">
+					        <i class="fas fa-angle-double-up" style="font-size: 25px;"></i>
+					    </div>
+					
+					    <div id="share-switcher-btn">
+					        <i class="fa-brands fa-weixin"></i>
+					    </div>
+					
+					    <div id="share-popup" class="share-popup">
+					        <div class="share-popup-content">
+					            <img id="qrcode" src="./assets/images/flags/weixin.png" alt="二维码" />
+					        </div>
+					        <div class="copy-btn-container">
+					            <button id="copy-btn" class="share-popup-copy-btn">扫码入群</button>
+					        </div>
+					    </div>
+					</div>
+					
+					<div id="color-switcher-btn">
+					    <i class="sun-icon fas fa-sun"></i>
+					    <i class="moon-icon fas fa-moon"></i>
+					</div>
+
+					<div id="language-switcher-btn">
+						<i class="fas fa-language"></i>
+					</div>
+					
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="./assets/js/neuralnetwork.js"></script>
+	<script src="./assets/js/news.js"></script>	
+	
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Google tag (gtag.js) -->
+	
+
+	
+	<script>
+		document.addEventListener('contextmenu', function(event) {
+		  event.preventDefault();
+		});
+	
+		
+	</script>
+	
+	<script src="./assets/js/color.js"></script>
+	<script src="./assets/js/lozad.js"></script>
+</body>
+
+</html>
