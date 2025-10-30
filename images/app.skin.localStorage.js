@@ -1,0 +1,1 @@
+(function(e,t){typeof exports=="object"?module.exports=t():typeof define=="function"&&define.amd?define([],t):e.MODULE_A=t()})(this,function(){return So.web.storage})
