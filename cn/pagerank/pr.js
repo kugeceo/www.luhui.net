@@ -1,0 +1,13 @@
+var referer = new String(document.location).toLowerCase();
+var cStr = "<div id=\"cfswfc\" class=\"meta-button\" ></div><div id=\"prswfc\" class=\"meta-button\" ></div><div id=\"axswfc\" class=\"meta-button\" ></div>";
+cStr += "<s"+"cript type=\"text/jav"+"as"+"cript\">";
+cStr += "var prswf = new FlashObject(\"PageRank/prchecker.swf\", \"prswf\", \"80\", \"15\", \"7\", \"#FFFFFF\");";
+cStr += "prswf.addParam(\"menu\", \"false\");";
+cStr += "prswf.addVariable(\"referer\"," + "\"" + referer + "\");";
+cStr += "prswf.write(\"prswfc\");";
+cStr += "var axswf = new FlashObject(\"PageRank/alexa.swf\", \"axswf\", \"80\", \"15\", \"7\", \"#FFFFFF\");";
+cStr += "axswf.addParam(\"menu\", \"false\");";
+cStr += "axswf.addVariable(\"oururl\",\"www.awflasher.com\");";
+cStr += "axswf.write(\"axswfc\");";
+cStr += "</sc"+"ript>";
+document.write(cStr);
