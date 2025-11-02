@@ -117,7 +117,7 @@ document.writeln("	</tr>");
 
 
 document.writeln("	<tr>");
-document.writeln("		<td style=\'border-style: none; border-width: medium\'><a title='文化传媒'  href=\'http://www.luhui.net/cn/Newintermediary\'><font color=\'#9933CC\'>文化传媒</font></a></td>");
+document.writeln("		<td style=\'border-style: none; border-width: medium\'><a title='文化传媒'  href=\'http://www.luhui.net/cn/newintermediary/\'><font color=\'#9933CC\'>文化传媒</font></a></td>");
 
 document.writeln("		<td style=\'border-style: none; border-width: medium\'><a title='人文社区'  href=\'http://www.luhui.net/cn/club/\'><font color=\'#FF00FF\'>人文社区</font></a></td>");
 
