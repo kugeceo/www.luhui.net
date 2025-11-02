@@ -1,0 +1,7 @@
+.dvwnd{border:1px #E4660B solid;font-size:12px;background-color:white;font-family:verdana;width:300px;height:auto;position:absolute;z-index:99999}
+.dvwndcanvas{z-index:99998;background-color:#ffffff;left:0;top:0;margin:0;padding:0;position:fixed!important;/*FF IE7*/position:absolute;filter:alpha(opacity=10);opacity:0.1;}
+.dvwndtitle{background:#EEF7FC url("2008/title_bg.gif"); line-height:32px;height:32px; cursor:move; font-weight:bold; color:#fff;padding-left:10px;padding-right:10px; }
+.dvwndfocus{background-color:white; cursor:move; font-weight:bold; color:white; padding:8px;}
+.dvwndchild{padding:0px;}
+a.dvwndclose{background-color:#cc0000;color:white;text-decoration: none;font-size:12px;}
+a:hover.dvwndclose{background-color:#ff0000;color:white;text-decoration: none;font-size:12px;}
