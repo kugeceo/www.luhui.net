@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>鲁虺卫星地图地形生成器 luhuiTerrain3D - 鲁虺3D地形生成器 | 鲁虺文化网</title>
+	<meta name="Keywords" content="鲁虺卫星地图地形生成器、luhuiTerrain3D、鲁虺3D地形生成器、luhui 3D Map Generator Atlas、AAA级程序化地形景观生成器"/>
+<meta name="Description" content="鲁虺卫星地图地形生成器,luhuiterrain3d是一个免费的在线3d地形生成器-只需指定地球上的坐标-就可以自动生成附近区域的3d地形同时叠加卫星影像-并且可以导出gltf格式的3d地形模型.luhui 3D Map Generator Atlas,鲁虺卫星地图地形生成器是一款使用卫星地图生成高度地图，也可以绘制地形，并生成3d模型，自带有植物，云层，飞鸟等素材，可以快速完成精美的地形素材图。"/>
+    <link rel="stylesheet" href="./leaflet.css" />
+    <link rel="stylesheet" href="./assets/css/leaflet.css" />
+    <style type="text/css"> 
+      html,body { margin: 0; overflow:hidden; height:100%;} 
+      bento-youtube { height: 320px; width: 100%; } 
+      #links-wrapper { position:absolute; left:0px; bottom:10px; text-align:center;width:100%; color: white;}
+      #links-wrapper a{ text-decoration:none; color: white;}
+    </style>
+</head>
+<body>
+    <canvas id="viewer" style="width: 100%; height: 100%;"></canvas>
+
+    <div id="map-wrapper" style="position: absolute; z-index: 100;
+        width: 520px; height: 320px; top: 0px; left: 0px;">
+        <div id="map" style="height: 100%;"></div>
+    </div>
+    <div id="media-wrapper" style="position: absolute; z-index: 100; display: none; background: #424242;
+        width: 520px; height: 320px; top: 320px; left: 0px;">
+        <div id="media" style="height: 100%;"></div>
+    </div>
+
+    <div id="links-wrapper">
+      <a href="http://3d.luhui.net" target="_blank">3D场景设计器</a> |
+      <a href="http://cad.luhui.net" target="_blank">WebCad中文版</a> |
+      <a href="http://vi.luhui.net" target="_blank">品牌设计</a> |
+      <a href="http://soft.luhui.net" target="_blank">鲁虺软件</a>
+ 
+<p align="center"> Copyright&nbsp;  &#169; 2004-01-11&nbsp;<a href="http://luhui.net" title="鲁虺文化网" target="_top">luhui.net</a>&nbsp;all rights reserved.</p> 
+
+    </div>
+
+    <script src="./deps/three/build/three.min.js"></script>
+    <script src="./deps/three/examples/js/controls/OrbitControls.js"></script>
+    <script src="./deps/three/examples/js/exporters/GLTFExporter.js"></script>
+    <script type="module">
+        import App from './app.esm.js';
+        const _ = new App();
+    </script>
+	
+</body>
+</html>
