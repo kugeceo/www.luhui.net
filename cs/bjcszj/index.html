@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>电子包浆 图片做旧工具 赛博包浆虚拟器 - 神奇海螺实验室</title>
+<meta name="discription" content="电子包浆 图片绿化器 - 电子包浆生成器、图片虚拟做旧工具、图片绿化器、包浆生成、赛博做旧 - 神奇海螺实验室">
+<link rel="stylesheet" href="document.css">
+<meta name="viewport" content="width=device-width,user-scalable=0">
+<div class="app" :data-runing="runing">
+    <header>
+        <h1>电子包浆 图片赛博做旧</h1>
+        <p>给表情赋予年份</p>
+    </header>
+    <div class="output-box" :data-direction="direction">
+        <img class="source-image" :src="src" ref="img" @load="load()" :data-width="`${width}px`">
+        <img class="output-image" :src="output" v-if="output" :data-width="`${width}px`">
+    </div>
+
+    <div class="ctrl-box" v-if="config" v-cloak>
+        <div class="input-box">
+            <button @click="chooseFileAndSetImageSrc">选择或粘贴拖拽图片</button>
+            <button @click="save">保存图片</button>
+        </div>
+        <div class="input-box" style="padding:10px 0;">
+            <label>
+                <input type="checkbox" v-model="config.green">
+                绿图
+            </label>
+            <label>
+                <input type="checkbox" v-model="config.watermark">
+                水印
+            </label>
+            <label>
+                <input type="checkbox" v-model="config.isPop">
+                波普
+            </label>
+            <span v-if="current" style="display:inline-block;width:5em;text-align:right">{{current}}/{{config.isPop?config.pop*config.pop:config.round}}</span>
+            <input type="range" min=1 max=100 step="1" v-model.number="config.green"> {{config.green}} 
+        </div>
+
+        <div class="input-box" v-if="config.isPop">
+            <h4>波普</h4>
+            <input type="range" min=1 :max="superMode?50:12" step="1" v-model.number="config.pop"> {{config.pop}}*{{config.pop}}
+        </div>
+        
+        <div class="input-box" v-else>
+            <h4>做旧年份</h4>
+            <input type="range" min=1 :max="superMode?1000:100" step="1" v-model.number="config.round"> {{config.round}}
+        </div>
+
+        <div class="input-box">
+            <h4>画质</h4>
+            <input type="range" min=0 max="100" step="1" v-model.number="config.quality"> {{config.quality}}%
+        </div>
+
+
+        <div class="input-box" style="padding:10px 0;">
+            <label>
+                <input type="checkbox" v-model="debug">
+                高级选项
+            </label>
+        </div>
+        <div class="debug-box" v-if="debug">
+            <div class="input-box" style="padding:5px 0;">
+               <button @click="patina()" :disabled="runing">更新</button> 
+                <button @click="reset">恢复默认选项</button>
+                <button @click="createCanvas()">createCanvas</button> 
+            </div>
+
+            <div class="input-box" style="padding:5px 0;">
+                <label>
+                    <input type="checkbox" v-model="config.rand">
+                    随机
+                    <small>多维度提升劣化效果</small>
+                </label>
+            </div>
+
+            <div class="input-box" style="padding:5px 0;">
+                <label>
+                    <input type="checkbox" v-model="config.preview">
+                    缩略图模式
+                    <small>关闭对性能影响极大，谨慎使用</small>
+                </label>
+            </div>
+            <fieldset class="input-box" :disabled="!config.preview" v-if="config.preview">
+                <h4>略缩图最大长边</h4>
+                <input type="range" min=200 max=1200 step="100" v-model.number="config.maxWidth">
+                <span>{{config.maxWidth}}px</span>
+            </fieldset>
+
+            <div class="input-box" style="padding:5px 0;">
+                <label>
+                    <input type="checkbox" v-model="superMode">
+                    超强模式
+                    <small>部分选项最大值乘十，极度影响渲染时间</small>
+                </label>
+            </div>
+            <div class="input-box">
+                <h4>模糊 <small>高效率</small></h4>
+                <input type="range" min=1 max=20 step="0.1" v-model.number="config.mix"> 
+                <span>{{config.mix}}</span>
+            </div>
+            <div class="input-box">
+                <h4>噪点</h4>
+                <input type="range" min=1 max=125 step="1" v-model.number="config.lightNoise"> 
+                <span>{{config.lightNoise}}</span>
+            </div>
+            <hr>
+
+            <div class="input-box">
+                <h4>偏移</h4>
+                <input type="range" min=-20 max=20 step="1" v-model.number="config.shiftx"> {{config.shiftx}}px
+                <br>
+                <input type="range" min=-20 max=20 step="1" v-model.number="config.shifty"> {{config.shifty}}px
+            </div>
+            <div class="input-box">
+                <h4>对比度</h4>
+                <input type="range" min=0 max=2 step="0.1" v-model.number="config.contrast"> {{config.contrast}}
+            </div> 
+            <div class="input-box">
+                <label>
+                    <input type="checkbox" v-model="config.watermark">
+                    虚拟水印
+                </label>
+            </div>
+            <fieldset v-if="config.watermark">
+                <div class="input-box">
+                    <h4>水印尺寸</h4>
+                    <input type="range" min=.5 max=1.5 step="0.1" v-model.number="config.watermarkSize"> *{{config.watermarkSize}}
+                </div>
+                <div class="input-box">
+                    <h4>水印阴影透明度</h4>
+                    <input type="range" min=.1 max=1 step="0.1" v-model.number="config.watermarkShadowAlpha"> {{config.watermarkShadowAlpha}}
+                </div>
+                <div class="input-box">
+                    <h4>水印位置</h4>
+                    <label>
+                        <input type="radio" v-model="config.watermarkPlan" :value="2">
+                        右下中
+                    </label>
+                    <label>
+                        <input type="radio" v-model="config.watermarkPlan" :value="1">
+                        右下
+                    </label>
+                    <label>
+                        <input type="radio" v-model="config.watermarkPlan" :value="0">
+                        右
+                    </label>
+                </div>
+                <div class="input-box">
+                    <h4>水印用户名们<small>换行分割，光标移出生效；<code>0000</code>替代随机数字、<code>_</code>半角下划线替代<code>-_+~!^&、.。”“"'|</code>随机字符</small></h4>
+                    <textarea v-model.lazy="userNamesText" cols="30" rows="10"></textarea>
+                </div>
+            </fieldset>
+            <hr>
+            <div class="input-box">
+                <h4>相对原图尺寸缩放</h4>
+                <input type="range" min=1 max=100 step="0" v-model.number="config.zoom"> {{config.zoom}}%
+            </div>
+            <div class="input-box">
+                <h4>亮度</h4>
+                <input type="range" min=-1 max=1 step="0.1" v-model.number="config.light"> {{config.light}}
+            </div>
+            <div class="input-box">
+                <h4>yuv造假绿化 <small>和真实多次效果有差距</small></h4>
+                <input type="range" min=-20 max=20 step="1" v-model.number="config.g"> {{config.g}}
+                <br>
+                <input type="range" min=-2 max=2 step=".1" v-model.number="config.gy"> y*={{config.gy}}
+            </div>
+            <div class="input-box">
+                <h4>颗粒</h4>
+                <input type="range" min=1 max=125 step="1" v-model.number="config.darkNoise"> {{config.darkNoise}}
+            </div>
+            <div class="input-box">
+                <h4>卷积 <small>convolute</small></h4>
+                <label>
+                    <input type="radio" v-model="config.convoluteName" :value="null">
+                    无
+                </label>
+                <label v-for="convoluteName in convoluteNames" :key="convoluteName">
+                    <input type="radio" v-model="config.convoluteName" :value="convoluteName">
+                    {{convoluteName}}
+                </label>
+            </div>
+            <pre>{{JSON.stringify(config,0,4)}}</pre> 
+        </div>
+
+    </div>
+    <blockquote>
+        <h2>「电子包浆」 图片做旧工具，赛博包浆虚拟器🤢</h2>
+        <p>&nbsp;</p>
+        <p>支持 <b>图片绿化</b>、<b>虚拟水印</b>、<b>虚拟传播年份</b>、<b>高效率模糊</b>、<b>浮雕锐化</b>、<b>噪点颗粒</b>、<b>像素不对齐</b>、<b>作假多次包浆绿化</b> 和 基础 <b>对比度</b>、<b>亮度</b>调整 以及 <b>波普重复</b>功能😈</p>
+        <p>&nbsp;</p>
+        <p>水印用户名可自定义</p>
+        <p>
+            可选择原尺寸输出图片
+            <label v-if="config">
+                <input type="checkbox" v-model="config.preview">
+                缩略图
+                <small>关闭即输出原图</small>
+            </label>
+        </p>
+    </blockquote>
+    <div class="post-box">
+        <p>图片<b>不会上传到服务器</b>，请安心利用~</p>
+        <p>无法正常选择图片请尝试使用自带浏览器！</p>
+        <p>无法正常保存图片请<b>尝试使用自带浏览器！</b></p>
+        <p>年份不够用的情况可以页面内拖拽输出图像再次包浆</p>
+    </div>
+    <footer>
+        <div class="copyright">
+            <br>
+            <a href="https://weibo.com/1197780522/Lmoup2eDs" target="_blank">转发到微博</a>
+            <br>
+            全做：<a href="https://weibo.com/reiove" target="_blank">@卜卜口</a>
+            <hr>
+            反馈：<a href="https://github.com/itorr/patina" target="_blank">GitHub</a>
+            <hr>
+            QQ群 <span>335766065</span>
+            <br>
+            <a href="https://lab.magiconch.com/">神奇海螺实验室</a>
+            <hr>
+            打赏：<a href="https://lab.magiconch.com/nbnhhsh/sponsor.png" target="_blank">二维码</a>
+        </div>
+    </footer>
+
+    <div class="tip-box">
+        <h3>相关项目</h3>
+        <ul>
+            <li>
+                <h4>「 蒸 気 機 」虚拟信号蒸汽波风格化影像后期工具</h4>
+                <a href="https://lab.magiconch.com/vaporwave/?from=patina" target="_blank">lab.magiconch.com/vaporwave</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tip-box">
+        <h3>利用</h3>
+        <ul>
+            <li>
+                <h4>最像素 Zpix - 一个支持中日英文的像素字体</h4>
+                <a href="https://github.com/SolidZORO/zpix-pixel-font" target="_blank">github.com/SolidZORO/zpix-pixel-font</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tip-box">
+        <h3>参考</h3>
+        <ul>
+            <li>
+                <h4>梗图生成器 - 所见即所得的梗图生成器、支持电子包浆等功能</h4>
+                <a href="http://x.magiconch.com/" target="_blank">x.magiconch.com</a>
+            </li>
+            <li>
+                <h4>JPEGreen Simulator</h4>
+                <a href="https://m13253.github.io/JPEGreen/" target="_blank">m13253.github.io/JPEGreen</a>
+            </li>
+            <li>
+                <h4>Use libjpeg-turbo for YUV->RGB conversion in jpeg encoder</h4>
+                <a href="https://github.com/google/skia/commit/c7d01d3e1d3621907c27b283fb7f8b6e177c629d" target="_blank">github.com/google/skia/commit/c7d01d3e1d3621907c27b283fb7f8b6e177c629d</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="vue.2.6.11.min.js"></script>
+<script src="patina.js"></script>
+<script src="document.js"></script>
