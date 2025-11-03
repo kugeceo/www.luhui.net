@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />	
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>鲁虺3721图解计算器鲁虺3d图形绘制计算器鲁虺交互式3d函数GraphyCalc - luhui 3d Graphing Calculator</title>
+<meta name="description" content="鲁虺3721图解计算器鲁虺3d图形绘制计算器鲁虺交互式3d函数luhui GraphyCalc is a 3d graphing calculator, allowing you to interactively explore graphs of 3-dimensional functions/formulas." />
+<link rel="icon" type="image/png" href="/favicon.ico" />
+<style>
+  body {
+    background-color: #f8f8f8;
+    margin: 0px 0px 0px 0px;
+  }
+  body * {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #444;  /* Soften the text a bit. */
+  }
+  input#equationinput {
+    margin-bottom: 5px;
+    padding: 1px 1px 1px 1px;
+    width: 344px;
+    border: solid 1px #e0e0e0;
+    color: black; /* Make the input most prominent. */
+  }
+  div#sidebar {
+    float: left;
+    width: 348px; /* 348 / 2 = 174  348 / 4 = 87  348 / 3 = 116 */
+    margin-right: 20px;
+  }
+  div#sidebar img {
+    display: block; /* Grr, descender space under it normally when inline. */
+    margin-left: 1px;  /* The logo is 346, center it within 348. */
+    border: 0px;
+  }
+  span.xyRadios {
+    display: inline-block;
+    width: 58px;  /* 174 / 3 */
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 5px; /* kinda dirty, should put it on the div. */
+  }
+  span.xyRadios label {
+    margin-left: 3px;
+  }
+  span.sidebarHalfCell {
+    display: inline-block;
+    margin-left: 3px; /* Match the radios margin. */
+    width: 171px;
+  }
+  span.sidebarLinkbar {
+    display: inline-block;
+    margin-right: 3px; /* Match sidebarHalfCell. */
+    width: 345px;
+    text-align: right;
+  }
+  span.sidebarLinkbar a {
+    font-size: 10pt;
+  }
+  div#help {
+    display: none;
+    padding: 0 5px;
+    border: dashed 1px #e0e0e0;
+    margin-bottom: 10px;
+  }
+  div#help * {
+    font-size: 10pt;
+  }
+  canvas#canvas, div#nocanvas {
+    border: solid 1px #e0e0e0;
+  }
+  div#nocanvas {
+    width: 800px;
+    height: 600px;
+    display: inline-block;
+  }
+  div#nocanvas a {
+    margin-left: 10px;
+  }
+  div.centeredText {
+    text-align: center;
+  }
+  p.centeredBlock {
+    margin-left: auto;
+    margin-right: auto;
+    width: 34em;
+  }
+  div.footer, div.footer a {
+    clear: both;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  div#mainContent {
+    margin: 8px 8px 8px 8px;
+  }
+</style>
+
+</head>
+
+<body>
+
+<div id="mainContent">
+<div id="sidebar">
+<div><a href="/en/graphycalc"><img src="static/picture/graphycalc.png" width="346" height="75" alt="GraphyCalc" /></a></div>
+<div><span class="sidebarLinkbar"><a href="#" id="helplink">使用帮助</a></span></div>
+<div><input id="equationinput" value="Loading..." /></div>
+<div><span class="sidebarHalfCell"><input id="smoothcheck" type="checkbox" /><label for="smoothcheck">平滑曲线</label></span><span class="xyRadios"><input type="radio" id="radio_xy" name="xyradios" /><label for="radio_xy">xy</label></span><span class="xyRadios"><input type="radio" id="radio_x" name="xyradios" /><label for="radio_x">x</label></span><span class="xyRadios"><input type="radio" id="radio_y" name="xyradios" /><label for="radio_y">y</label></span></div>
+<div id="help"><p>鲁虺三七二一图形计算器是一款3d函数图解绘制计算工具，可让您以交互方式探索 3D 函数图形化。</p>
+<p><b>实例</b>:
+<a href="#" id="ex_sinc">正弦sinc</a>
+<a href="#" id="ex_exp">指数函数exp</a>
+<a href="#" id="ex_dome">穹顶dome</a>
+</p>
+<p>板书详述: 您提供的公式计算高度<i>z</i> 从变量 <i>x</i> 和 <i>y</i> 之间 <i>-1</i> 和 <i>1</i>. 公式由算术运算符组成 (<i style="white-space: nowrap">+ - * / ^</i>), 内置函数 (<i>abs acos asin atan ceil cos exp floor log round sin sinc sqrt tan</i>), 以及常数 (<i>E PI</i>).</p>
+</div>
+
+</div>
+
+<div class="canvasDiv">
+<canvas id="canvas" width="800" height="600">
+  <div id="nocanvas">
+    <p class="centeredBlock" style="margin-top: 10em">
+    GraphyCalc是一个3d图形计算器，允许您交互
+探索三维函数图。这种体验是使用一些现代的
+不幸的是您的浏览器不支持的Web技术。但不要
+放弃吧，你有几个很好的方法可以加入最前沿。
+    <br /><br />
+    <a href="http://www.google.com/chrome">Google Chrome</a><br />
+    <a href="http://www.apple.com/safari/">Apple Safari</a><br />
+    <a href="http://www.mozilla.com/firefox/">Mozilla Firefox</a><br />
+    <a href="http://www.opera.com/">Opera</a><br />
+    </p>
+  </div>
+</canvas>
+</div>
+
+
+<div class="footer">Copyright&nbsp;  &#169; 2004-01-11&nbsp;<a href="http://luhui.net" title="鲁虺文化网" target="_top">luhui.net</a>&nbsp;all rights reserved.</p></div>
+
+</div>
+
+<script src="static/js/pre3d.js"></script>
+<script src="static/js/demo_utils.js"></script>
+<script src="static/js/graphycalculator.js"></script>
+<script src="static/js/graphycalc.js"></script>
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_trackPageview']);
+
+window.addEventListener('load', function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(ga, s);
+
+  start3d();
+}, false);
+</script>
+
+
+</body>
+</html>
