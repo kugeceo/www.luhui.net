@@ -1,0 +1,32 @@
+body,td,th {
+	font-size: 12px;
+	font-family: ËÎÌו;
+}
+body {
+	background-color: #FFFFFF;
+	margin-left: 0px;
+	margin-top: 0px;
+	align="center"
+}
+a {
+	font-size: 12px;
+}
+a:link {
+	color: #286397;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #FF6600;	
+}
+a:visited {
+	text-decoration: none;
+	color: #286397;
+}
+a:active {
+	text-decoration: none;
+	color: #FF6600;	
+}
+body,td,th {
+	color: #286397;
+}
