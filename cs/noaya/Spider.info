@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>诺雅搜索-诺雅の窝窝</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="images/search.css" type=text/css rel=stylesheet>
+<SCRIPT language=javascript src="images/jquery.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT language=javascript src="images/form.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT language=javascript src="images/search_packed.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT language=javascript src="images/jquery.tooltip.js" 
+type=text/javascript></SCRIPT>
+
+<META content="MSHTML 6.00.2900.3086" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=container>
+<DIV class=top_site_nav><A href="http://www.chinavisual.com/">首页</A> | <A 
+href="http://creative.chinavisual.com/">创意信息平台</A> | <A 
+href="http://digital.chinavisual.com/">创意数码平台</A> | <A 
+href="http://industry.chinavisual.com/EPS/index_cyfw">产业服务平台</A> | <A 
+href="http://event.chinavisual.com/">会展服务平台</A> | <A 
+href="http://forum.chinavisual.com/">视觉社区</A> </DIV>
+<DIV id=search_logo><IMG src="images/search-logo.gif"> </DIV>
+<DIV class=search_box id=tab_container>
+<UL>
+  <LI class=on><A href="#search_news">资讯</A> 
+  <B></B></LI>
+  <LI><A href="#search_img">图片</A> <B></B></LI>
+  <LI><A href="#search_bbs">论坛</A> <B></B></LI></UL>
+<FORM id=search_form action=/s.asp><INPUT id=search_news_action 
+type=hidden value=/s.asp> <INPUT id=search_img_action type=hidden 
+value=/s.asp> <INPUT id=search_bbs_action type=hidden 
+value=/s.asp> <LABEL><INPUT class=keyword size=41 
+name=keywords></LABEL> <INPUT class=submit type=submit value=搜索> <INPUT 
+type=hidden value=1 name=page> 
+<DIV class=search_tab id=search_news><LABEL><INPUT type=radio CHECKED value=all 
+name=field>文章全文</LABEL> <LABEL><INPUT type=radio value=title 
+name=field>文章标题</LABEL> <LABEL><INPUT title="" type=radio value=tag 
+name=field>Tag</LABEL> 
+<DIV class=search_hotspot>今日热门: <A 
+href="http://search.chinavisual.com/app.site/search/news/keywords/Ь#search_news" 
+target=_blank>Ь</A> <A 
+href="http://search.chinavisual.com/app.site/search/news/keywords/&auml;&sup1;&brvbar;&ccedil;±&#141;#search_news" 
+target=_blank>&auml;&sup1;&brvbar;&ccedil;±&#141;</A> <A 
+href="http://search.chinavisual.com/app.site/search/news/keywords/è&reg;&frac34;è&reg;&iexcl;#search_news" 
+target=_blank>è&reg;&frac34;è&reg;&iexcl;</A> <A 
+href="http://search.chinavisual.com/app.site/search/news/keywords/&auml;&sup1;&brvbar;&ccedil;±#search_news" 
+target=_blank>&auml;&sup1;&brvbar;&ccedil;±</A> <A 
+href="http://search.chinavisual.com/app.site/search/news/keywords/设计#search_news" 
+target=_blank>设计</A> <A 
+href="http://search.chinavisual.com/app.site/search/news/keywords/&aring;&#338;…è&pound;…#search_news" 
+target=_blank>&aring;&#338;…è&pound;…</A> </DIV></DIV>
+<DIV class=search_tab id=search_img style="DISPLAY: none"><LABEL><INPUT 
+type=radio CHECKED value="" name=size>所有图片</LABEL> <LABEL><INPUT type=radio 
+value=big name=size>大图</LABEL> <LABEL><INPUT type=radio value=middle 
+name=size>中图</LABEL> <LABEL><INPUT type=radio value=small name=size>小图</LABEL> 
+</DIV>
+<DIV class=search_tab id=search_bbs style="DISPLAY: none"><LABEL><INPUT 
+type=radio CHECKED value=message name=bbs_field>帖子全文</LABEL> <LABEL><INPUT 
+type=radio value=title name=bbs_field>帖子标题</LABEL> <LABEL><INPUT type=radio 
+value=author name=bbs_field>帖子作者</LABEL> 
+<DIV class=search_hotspot>今日热门: <A 
+href="http://search.chinavisual.com/app.site/search/bbs/keywords/我的#search_bbs" 
+target=_blank>我的</A> <A 
+href="http://search.chinavisual.com/app.site/search/bbs/keywords/我#search_bbs" 
+target=_blank>我</A> <A 
+href="http://search.chinavisual.com/app.site/search/bbs/keywords/是我#search_bbs" 
+target=_blank>是我</A> <A 
+href="http://search.chinavisual.com/app.site/search/bbs/keywords/http#search_bbs" 
+target=_blank>http</A> <A 
+href="http://search.chinavisual.com/app.site/search/bbs/keywords/是三#search_bbs" 
+target=_blank>是三</A> <A 
+href="http://search.chinavisual.com/app.site/search/bbs/keywords/三每#search_bbs" 
+target=_blank>三每</A> <A 
+href="http://search.chinavisual.com/app.site/search/bbs/keywords/1#search_bbs" 
+target=_blank>1</A> </DIV></DIV></FORM>
+<DIV id=search_tip style="DISPLAY: none"><IMG src="images/ajax-loader.gif"> 
+<SPAN>正在搜索....</SPAN> </DIV></DIV>
+<DIV id=search_result></DIV>
+<DIV class=footer><A 
+href="http://www.chinavisual.com/static/aboutcv/aboutus.shtml" 
+target=_blank>关于我们</A> | <A 
+href="http://www.chinavisual.com/static/aboutcv/contact.shtml" 
+target=_blank>联系热线</A> | <A 
+href="http://www.chinavisual.com/static/onlinead/index.shtml" 
+target=_blank>广告刊登</A> | <A 
+href="http://www.chinavisual.com/static/onlineac/index.shtml" 
+target=_blank>战略联盟理事会</A> | <A 
+href="http://www.chinavisual.com/static/aboutcv/cooperator.shtml" 
+target=_blank>合作伙伴</A> | <A 
+href="http://www.chinavisual.com/static/aboutcv/link.shtml" 
+target=_blank>友情链接</A> | <A 
+href="http://www.chinavisual.com/static/aboutcv/sitemap.shtml" 
+target=_blank>站点地图</A> | <A 
+href="http://www.chinavisual.com/static/aboutcv/help.shtml" 
+target=_blank>帮助</A><BR>&copy;2001-2007 视觉中国(ChinaVisual.com) </DIV>
+
+
+<SCRIPT type=text/javascript>
+    _uacct = "UA-249530-1";
+    try{
+        urchinTracker();
+    }catch(e){};
+    </SCRIPT>
+</DIV><!-- Action calling and page rendering took 0.038116216659546 ms --></BODY></HTML>

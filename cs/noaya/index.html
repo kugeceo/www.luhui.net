@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>ÅµÑÅËÑË÷-ÅµÑÅ¤ÎÎÑÎÑ¶àÖØËÑË÷ÒýÇæ</title>
+	<link rel="search" type="application/opensearchdescription+xml" href="search.xml" title="ÅµÑÅËÑË÷-ÅµÑÅ¤ÎÎÑÎÑ¶àÖØËÑË÷ÒýÇæ" />
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/custom.css" />
+
+	<script type="text/javascript" src="js/func.js"></script>
+	<script type="text/javascript" src="js/gb2312.js"></script>
+
+	<script type="text/javascript" src="Search.js"></script>
+	<script type="text/javascript" src="Search.lang.js"></script>
+	<script type="text/javascript" src="Search.config.js"></script>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- header -->
+  <div class="header">
+	<div class="innerHeader">
+
+		<div class="title">		  <img src="images/search-logo.gif" alt="ÅµÑÅËÑË÷-ÅµÑÅ¤ÎÎÑÎÑ¶àÖØËÑË÷ÒýÇæ" border="0" /> </div>
+
+		<div class="menu">
+		</div>
+
+		<div class="search">
+
+			<div class="categories">
+				<span id="categories"></span>
+			</div>
+
+			<div>
+				<input type="text" id="keyword" class="text searchBox" value="" />
+				<a href="javascript:;" id="btn_go"><img src="images/btn_go.png" onmousemove="this.src='images/btn_go_hover.png'" onmouseout="this.src='images/btn_go.png'" /></a>
+				&nbsp;&nbsp;
+				<span id="btn_history_wrapper">
+				<a href="javascript:;" id="btn_history" onclick="this.blur()"></a>
+				&nbsp;
+				</span>
+				<a href="javascript:;" id="btn_options" onclick="this.blur()"></a>
+				<span id="btn_custom_prefer_wrapper">
+				&nbsp;
+				<a href="javascript:;" id="btn_custom_prefer" onclick="this.blur()" style="font-weight: bold;"></a>
+				</span>
+				&nbsp;
+			</div>
+
+		</div>
+
+  </div>
+	</div>
+  <!-- end header -->
+
+	<!-- history menu -->
+	<div id="history" class="history" style="position:absolute;visibility:hidden;"></div>
+
+  <!-- nav -->
+	<div class="navPanel">
+		<div class="innerNavPanel">
+			<div class="buttons" id="searches">
+			<a href="#">Initialization...</a>
+			</div>
+		</div>
+	</div>
+  <!-- end nav -->
+
+	<div class="shadowStrip">&nbsp;</div>
+
+  <!-- options wrapper -->
+	<div id="options" class="options" style="display:none;">
+
+		<div id="opt_sec_setup">
+
+			<h3><strong><span id="txt_options_header">Options</span></strong></h3>
+
+			<p>
+				<span id="txt_opt_lang">Interface Language</span>:
+				&nbsp;&nbsp;
+				<select id="opt_lang"></select>
+			</p>
+			<p><input id="opt_save_history" type="checkbox" value="1" checked="checked"/><label for="opt_save_history"> <span id="txt_opt_save_history">Save Keyword History</span></label></p>
+			<p><input id="opt_load_all" type="checkbox" value="1" /><label for="opt_load_all"> <span id="txt_opt_load_all">Load All Tabs at Once</span></label></p>
+
+		</div>
+
+		<div id="opt_sec_list">
+
+			<h3><span id="txt_options_list">Customize Prefered Search List</span></h3>
+
+			<table width="100%" cellpadding="0" cellspacing="4" border="0" class="prefer-list">
+				<tr>
+					<td width="50%">
+						<span style="float:right;">
+							<a id="btn_list_default" href="javascript:;"><span id="txt_list_default">Restore Default</span></a>
+							&nbsp;&nbsp;
+							<a href="javascript:;" onclick="Search.options.list.moveItem(-1)"><img width="16" height="16" src="images/btn_up.png" alt="Move Up"/></a>
+							<a href="javascript:;" onclick="Search.options.list.moveItem(1)"><img width="16" height="16" src="images/btn_down.png" alt="Move Down"/></a>
+						</span>
+						<strong id="txt_list_current_prefered">Current Prefered List</strong>
+					</td>
+					<td width="50%" align="right">
+						<span id="txt_list_add_text">Click to Add or</span><a id="btn_add_new" href="javascript:;"><span id="txt_list_i_new">Add Custom</span></a>
+					</td>
+				</tr>
+				<tr>
+					<td width="50%" valign="top"><div id="list_prefered" class="list-hot"></div></td>
+					<td width="50%" valign="top"><div id="list_all" class="list"></div></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+
+					<div id="opt_edit_table">
+					<table width="100%" cellpadding="8" cellspacing="0" border="0" class="list-edit-table">
+						<tr>
+							<td class="list-row-header"><span id="txt_list_i_name">Display Name</span>:</td>
+							<td>
+								<input id="i_name" type="text" value="" class="text" style="width:300px;"/>
+								&nbsp;
+								<span id="i_note_internal" class="comment">Can not delete internal item</span>
+								<span id="i_note_edit"> class="comment"Use {keyword} in search string</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="list-row-header"><span id="txt_list_i_url">Search URL</span>:</td>
+							<td><input id="i_url" type="text" value="" class="text" style="width:99%;" /></td>
+						</tr>
+						</table>
+						</div>
+
+					</td>
+				</tr>
+			</table>
+
+		</div>
+
+
+		<p>
+			<input id="btn_opt_save" type="button" class="button" value=" Save "/>
+			&nbsp;
+			<input id="btn_opt_cancel" type="button" class="button" value=" Cancel "/>
+		</p>
+
+		<p>&nbsp;</p>
+
+	</div>
+
+  <!-- content wrapper -->
+	<div id="content"></div>
+
+  <!-- note wrapper -->
+	<div id="note" class="note" style="display:none;">
+	</div>
+
+  <!-- end content wrapper -->
+
+<!-- end global wrapper -->
+</div>
+
+<script type="text/javascript">Search.init();</script>
+<div id="StatCounter" style="display:none;">
+
+
+</div>
+</body>
+</html>
+
