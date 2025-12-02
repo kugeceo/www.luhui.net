@@ -1,0 +1,975 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>::::鲁虺文化网http://www.luhui.net        软件站http://www.luhui.870.com:::::::::</title>
+
+
+
+
+<script language="JavaScript">
+var boodschap = 'Copyright 2001-05-20 || 鲁虺文化网 http://www.luhui.net || 鲁虺网络虺客文化传媒 ||all rights reserved.'; 
+function dgstatus()
+{
+      window.status = boodschap;
+ timerID= setTimeout("dgstatus()", 80);
+}
+</script>
+
+<STYLE type=text/css>BODY {
+	SCROLLBAR-FACE-COLOR: #878c91; SCROLLBAR-HIGHLIGHT-COLOR: #999999; CURSOR: default; SCROLLBAR-SHADOW-COLOR: #878c91; SCROLLBAR-3DLIGHT-COLOR: #cccccc; SCROLLBAR-ARROW-COLOR: #ffe779; SCROLLBAR-TRACK-COLOR: #ffe779; SCROLLBAR-DARKSHADOW-COLOR: #878c91
+}
+</STYLE>
+<title>鲁虺文化网国际站点推荐即时翻译系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link rel=stylesheet href= style.css>
+<script language="javascript">
+<!--
+
+var lanName = new Array();
+lanName[0] = new Array('英语', 1);
+lanName[1] = new Array('简体中文', 2);
+lanName[2] = new Array('繁体中文', 6);
+lanName[3] = new Array('日语', 6);
+lanName[4] = new Array('俄语', 2);
+lanName[5] = new Array('德语', 2);
+var relTrans = new Array();
+relTrans[0] = new Array('', '1', '1');
+relTrans[1] = new Array('1', '', '1','1');
+relTrans[2] = new Array('1', '1', '','1');
+relTrans[3] = new Array('', '1', '1','');
+relTrans[4] = new Array('', '1','1');
+relTrans[5] = new Array('', '1','1');
+
+function getlan(i,j){
+	if(i==0 && j==1)
+		return 1;
+	if(i==0 && j==2)
+		return 2;
+	if(i==1 && j==0)
+		return 3;
+	if(i==2 && j==0)
+		return 4;
+	if(i==3 && j==1)
+		return 5;
+	if(i==3 && j==2)
+		return 6;
+	if(i==1 && j==3)
+		return 7;
+	if(i==2 && j==3)
+		return 8;
+	if(i==4 && j==1)
+		return 9;
+	if(i==4 && j==2)
+		return 10;
+	if(i==5 && j==1)
+		return 11;
+	if(i==5 && j==2)
+		return 12;
+	if(i==1 && j==2)
+		return 15;
+	if(i==2 && j==1)
+		return 16;	
+}
+
+function selCharset(sel){
+	var tmpCharset;
+	switch(sel){
+		case '0':
+		case '1':
+			tmpCharset="gb2312";
+			break;
+		case '2':
+			tmpCharset="big5";
+			break;
+		case '3':
+			tmpCharset="Shift-JIS";
+			break;
+		case '4':
+			tmpCharset="windows-1251";
+			break;
+		case '5':
+			tmpCharset="iso-8859-1";
+			break;
+		default:
+			tmpCharset="gb2312";
+			break;
+		
+	}
+	document.charset=tmpCharset;
+	Select_Lang_ID();
+}
+
+function Select_Lang_ID()
+{
+	
+	var CurSourceLang;
+	CurSourceLang=trans.select_srclan.value;
+	for (var i = trans.select_objlan.options.length-1; i >= 0; i--)
+		trans.select_objlan.options[i] = null;
+	if (CurSourceLang==-1)
+	{
+		trans.select_objlan.options[trans.select_objlan.options.length] = new Option("Select Language",-1);
+		trans.select_objlan.value=-1;
+		return;
+	}
+	for (j=0;j<relTrans[CurSourceLang].length;j++)
+	{
+		relSet=relTrans[CurSourceLang][j];
+		if (relSet != '')
+			trans.select_objlan.options[trans.select_objlan.options.length] = new Option(lanName[j][0],j);
+	}
+} 
+
+
+function checkform(form){
+	if(form.content.value.length>5000){
+ 	       alert("out of range!(<5k)");
+ 	       form.content.value="";
+ 	       return false;
+	}
+	form.language.value=getlan(form.select_srclan.value,form.select_objlan.value);
+	return true;
+}
+//-->
+</script>
+<base target="_parent">
+</head>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="800" id="AutoNumber1" align="center" background="luhuisofttop.gif">
+  <tr>
+    <td width="77" height="24" style="font-size: 12px;padding-left:15px">
+      <p><font size="2" color="#00FF00"><u><a style="color: #00FFFF">鲁虺软件</a></u></font></td>
+    <td width="731" style="font-size: 12px">　</td>
+  </tr>
+</table>
+<!--#include file=top.asp -->
+
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" height="35">
+  <tr> 
+    <td colspan="2" height="1" width="800"> 
+      <table width="800" border="0" cellspacing="0" cellpadding="0">
+        <tr><td width="808">
+<iframe frameborder=0 height=180 marginheight=0 marginwidth=0 scrolling=no src="/cn/pop/luhuicaidan.htm" width=800> </iframe> 
+<IFRAME frameBorder=0 height=90 marginHeight=0 marginWidth=0 scrolling=no src="/cn/pop/pop_02.htm" width=800></IFRAME>
+
+</td></table>
+</table>
+
+<div align="center">
+<IFRAME frameBorder=0 height=30 marginHeight=0 marginWidth=0 scrolling=no src="  luhuiloginmail.htm" width=800></IFRAME>
+</div>
+<TABLE cellSpacing=0 cellPadding=0 width=727 border=0 align="center" height="111">
+  <TBODY> 
+  <TR vAlign=top>
+    <TD width=1 bgColor=#ffcc00 rowSpan=13 height="111"><BR></TD>
+    <TD width=370 height="111" rowspan="10"><!--begin searchengine-->              
+      <SCRIPT language=Javascript>              
+<!--              
+function urlencode(str) {              
+	var ns = (navigator.appName=="Netscape") ? 1 : 0;              
+	if (ns) { return escape(str); }              
+	var ms = "%25#23 20+2B?3F<3C>3E{7B}7D[5B]5D|7C^5E~7E`60";              
+	var msi = 0;              
+	var i,c,rs,ts ;              
+	while (msi < ms.length) {              
+		c = ms.charAt(msi);              
+		rs = ms.substring(++msi, msi +2);              
+		msi += 2;              
+		i = 0;              
+		while (true)	{               
+			i = str.indexOf(c, i);              
+			if (i == -1) break;              
+			ts = str.substring(0, i);              
+			str = ts + "%" + rs + str.substring(++i, str.length);              
+		}              
+	}              
+	return str;              
+}              
+//-->              
+</SCRIPT>              
+              
+        <!--end searchengine-->                
+        <!--begin sms-->                
+        <SCRIPT>                
+function sendsms() {                
+                
+//var url="http://mysms.163.com:8888/homesms.php?to_phone=" + sms.num.value + "&code=" + sms.msg.value;                
+//window.open(url, "sms", "height=390, width=420, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");                
+//var url="http://sms3.163.com/sms4all/sms4all_n.php?title=短信拜年&phone=" + sms.num.value + "&content=" + sms.msg.value;                
+//window.open(url, "sms", "height=390, width=420, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");                
+window.open('http://popme.163.com/sms/2003.html','sde','width=470,height=400');                
+return true;                
+}                
+</SCRIPT>                
+                
+      <SCRIPT language=javascript>                
+<!--                
+function ring(search) {window.open("http://sms.163.com/service/ring_search.php?searchs="+search,"","width=530 height=300,scrollbars=yes");}                
+function send_ring(code) {window.open('http://sms.163.com/service/ring_send.php?code='+code, '', "width=400,height=235,resizable=yes");}                
+function send_logo(code) {window.open('http://sms.163.com/service/logo_send.php?code='+code, '', "width=400,height=235,resizable=yes");}                
+function send_yy_b(code) {window.open('http://sms.163.com/service/yycq_blink_send.php?code='+code, '', "width=400,height=235,resizable=yes");}                
+                
+logo = new Array();                
+                
+                
+logo[0]=["33135","n33135.png"];                
+logo[1]=["33121","n33121.png"];                
+logo[4]=["49160","n49160.png"];                
+logo[5]=["49181","n49181.png"];                
+logoB = new Array();                
+logoB[0]=["33127","npb33127.png"];                
+logoB[1]=["33188","npb33188.png"];                
+la="<a href=http://sms.163.com/service/logogp.php target=_top onclick=\"window.open(\'http://sms.163.com/service/logo_send.php?code=";                
+                
+ccb="&img=http://pimg.163.com/sms/logo/commend/";                
+                
+lc="',\'\',\'height=240,width=400,resizable=yes\');\"><img src=http://pimg.163.com/sms/logo/commend/";                
+ld=" style='border: 1px solid #999999;' vspace=1 hspace=2></a>";                
+-->                
+</SCRIPT>                
+                
+      <TABLE cellSpacing=0 cellPadding=1 width="100%" border=0 height="195">                
+        <TBODY>                
+        <TR vAlign=top>                
+            <TD height="193">                
+              <table cellspacing=0 cellpadding=0 width="450" border=0 height="190">                
+                <tbody>                 
+                <tr bgcolor=#fff7c7>                 
+                  <td colspan=2 height=21 width="402" bgcolor="#9999CC">&nbsp;<b><font color="#FFFF00" size="4">鲁虺常用工具下载</font></b><font color="black">（</font><font color="#00FF00">最实用软件</font><font color="black">）</font></td>                
+                </tr>                
+                <tr>                 
+                  <td height=18 width="201"> <script language=JavaScript>
+var index = 27
+text = new Array(27); 
+text[0] ='　<div align="center"><font  color="#0000FF" size="2"><b>我......</b></font></div>' 
+text[1] ='　<font color="#0000FF" size="2">在岁月的长河中</font>' 
+text[2] ='　<font color="#0000FF" size="2">我摆一叶轻舟</font>' 
+text[3] ='　<font color="#0000FF" size="2">从我生命的源头起航</font>' 
+text[4] ='　<font color="#0000FF" size="2">我不理解生命的定义</font>' 
+text[5] ='　<font color="#0000FF" size="2">只好继续在河流中起航漂泊</font>'
+text[6] ='　<font color="#0000FF" size="2">到天涯海角去观赏日出日落</font>'  
+text[7] ='　<font color="#0000FF" size="2">以平息生命中的曲折</font>' 
+text[8] ='　<font color="#0000FF" size="2">每天,在河流上拼搏</font>' 
+text[9] ='　<font color="#0000FF" size="2">每天,在细嚼生命</font>' 
+text[10] ='　<font color="#0000FF" size="2">每天,活在日出日落之间</font>' 
+text[11] ='　<font color="#0000FF" size="2">每天,然后又每天......</font>' 
+text[12] ='　<font color="#0000FF" size="2">岁月的长河被舞得惊   涛骇浪</font>' 
+text[13] ='　<font color="#0000FF" size="2">而我仍摆一叶轻舟</font>' 
+text[14] ='　<font color="#0000FF" size="2">冲破浪头,驶向前方</font>' 
+text[15] ='　<font color="#0000FF" size="2">我这一生都在不停地--追寻</font>' 
+text[16] ='　<font color="#0000FF" size="2">追寻理想,爱情......</font>' 
+text[17] ='　<font color="#0000FF" size="2">从未退缩, 更未歇停</font>' 
+text[18] ='　<font color="#0000FF" size="2">我不停地, 追寻, 追寻......</font>' 
+text[19] ='　<font color="#0000FF" size="2">爱情的伤害, 不能拖拉我的脚步</font>' 
+text[20] ='　<font color="#0000FF" size="2">生活的挫折, 没有击垮我的自信</font>' 
+text[21] ='　<font color="#0000FF" size="2">赤道的阳光, 燃烧不尽我的意志</font>'
+text[22] ='　<font color="#0000FF" size="2">南极的冰川, 冰冻不住我的热情......</font>'  
+text[23] ='　<font color="#0000FF" size="2">汗, 浸湿了身上的衣服</font>' 
+text[24] ='　<font color="#0000FF" size="2">血, 染红了脚下的土地</font>' 
+text[25] ='　<font color="#0000FF" size="2">泪, 却从未流出过我的眼睛</font>' 
+text[26] ='　<font color="#0000FF" size="2">步,  一个脚印,向前延伸</font>'
+text[27] ='　<font color="#0000FF" size="2">我,  一直不停地,追寻......</font>'  
+document.write ("<marquee scrollamount='1' scrolldelay='40' direction= 'UP' width='60% ' id=xiaoqing height='40' onmouseover=xiaoqing.stop() onmouseout=xiaoqing.start()>"); 
+for (i=0;i<index;i++)
+{ 
+document.write ("<font color=#DO3000>");
+document.write (text[i] + "</font><br><br>"); 
+}                                                                      
+document.write ("</marquee>")
+                
+</script></td>                
+                  <td height=18 width="201"> <a href="http://luhui.net/cn/soft/Downloads/Xara3D5.0简体中文版.rar" target="_blank">Xara3D5.0简体中文版</a><font color="#0000cc"> 
+                    <a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=Linux&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">Linux</a>                    
+                    </font><font color="#BC51C8"><a href="http://www.chinaitlab.com/www/news/article_catalog.asp?id=49">IBM相关</a></font></td>                                   
+                </tr>                                   
+                <tr bgcolor=#ffffee>                                    
+                  <form name=fring                                    
+                onSubmit="ring(document.fring.search.value); return false;"></form>                               
+                </tr>                               
+                <script language=JavaScript>                      
+<!--                      
+function checkform_fastchannel(fm) {                      
+	url="http://sms.163.com/sub/nologin_sub.php?services=";                   
+	if(fm.cb0.checked){ url=url+"1001and";}                   
+	window.open(url,'','width=400 height=235,resizable=yes');                   
+	return false;                   
+}                      
+//-->                      
+</script>                   
+                <tr bgcolor=#ffffee>                    
+                  <td class=p2 align=left height="18" width="209"><a href="http://www.nhzj.com/homepage/soft1/photoshop6_cn.rar" target="_blank">Photoshop6.0中文版</a>                                
+                  </td>                   
+                  <td class=p2 align=left height="18" width="193"><font size="2"><a href="http://218.30.21.125:8084/filemanage/compress/rar/wrar32b5sc.exe" target="_blank">WinRARV3.20Beta5简体中文版</a> </font><a href="http://61.243.111.253:8089/filemanage/compress/rar/wrar32b5sc.exe"><font size="2">2</font></a></td>                                             
+                </tr>                                             
+                <tr>                                             
+                  <td class=p2 align=left height="18" width="155"><a title="网际快车 FlashGet" href="http://www.520play.com/play/tools/flashget.exe" target="_blank">网际快车</a>                    
+                    <a href="http://luhui.net/cn/soft/Downloads/东方自由主机.rar" target="_blank">自由主机</a></td>                                           
+                  <td class=p2 align=left height="18" width="247"><font size="2"><a href="http://218.30.21.125:8084/systool/sysenhance/setup/magicset53.exe">魔法设置Magic&nbsp;Set&nbsp;5.3</a>&nbsp;                                                           
+                      <a href="http://tjhb.onlinedown.net/down/magicset53.exe">2</a>&nbsp;                                                           
+                      <a href="http://61.243.111.253:8089/systool/sysenhance/setup/magicset53.exe">3</a></font></td>                                             
+                </tr>                                             
+                <tr>                                             
+                  <td class=p2 align=left height="18" width="155"><a title="播放mpg4必需的插件,如果在线播放有声音没有图像，请安装该插件。" href="http://www.520play.com/play/tools/mpeg4.exe">mpeg4插件</a></td>                                             
+                  <td class=p2 align=left height="18" width="247"><a href="http://218.30.21.125:8084/internet/chat/msn6Setup_cs6.0.EXE"><font size="2">MSN&nbsp;Messenger&nbsp;6.0&nbsp;beta&nbsp;简体中文版</font></a></td>                                             
+                </tr>                                             
+                <tr>                                             
+                  <td class=p2 align=left height="18" width="155"><a title="播放mpg4必需的插件,如果在线播放有声音没有图像，请安装该插件。" href="http://www.520play.com/play/tools/divx.exe">Divx插件</a>                    
+                    <a href="http://luhui.net/cn/soft/Downloads/Xlight%20FTP%20服务器.rar" target="_blank">FTP服务器</a></td>                                            
+                  <td class=p2 align=left height="18" width="247"><a title="BitTorrent（简称BT，俗称BT下载、变态下载）是一个多点下载的源码公开的P2P软件，使用非常方便，就像一个浏览器插件，很适合新发布的热门下载。其特点简单的说就是：下载的人越多，速度越快。" href="http://www.520play.com/play/tools/BT.EXE">BT下载</a>                                                         
+                    邮件群发软件（试用版)                                                         
+                  </td>                                            
+                </tr>                                            
+                <tr>                                            
+                  <td class=p2 align=left height="18" width="155"><a title="RealOne Player,播放rm,rmvb工具" href="http://www.520play.com/play/tools/RealOnePlayer.exe">RealOne                                                           
+                      Player</a></td>                                             
+                  <td class=p2 align=left height="18" width="247"><a title="Net Transport,下载流媒体、http/ftp的工具" href="http://www.520play.com/play/tools/NetTransport.EXE">网络传送带</a>                                
+                    <a href="http://www.chinemail.net/download/mobile.rar">手机短信群发软件</a></td>                                            
+                </tr>                                            
+                <tr>                                            
+                  <td class=p2 align=left height="18" width="155"><a title="Windows Media Player,用于 Windows XP,播放asf,wmv,avi工具" href="http://www.520play.com/play/tools/wmp_xp.exe"><font size="2">微软媒体播放器9.0                                                           
+                      XP 版</font></a></td>                                             
+                  <td class=p2 align=left height="18" width="247"><a title="Streambox VCR V1.0 汉化版,下载流媒体工具" href="http://www.520play.com/play/tools/StreamboxVCR.exe">Streambox                                                           
+                      VCR</a></td>                                             
+                </tr>                                             
+                <tr>                                             
+                  <td class=p2 align=left height="21" width="155">                                                          
+                      ·<a title="Quick Time,播放mov工具" href="http://www.520play.com/play/tools/QuickTime.exe">QuickTime</a></td>                                             
+                  <td class=p2 align=left height="21" width="247"><a href="http://www.chinemail.net/download/QQqf.rar"><font color="#ff0000">QQ信息群发软件</font></a><font color="#ff0000">&nbsp;&nbsp;</font></td>                                           
+                </tr>                                           
+                <tr>                                           
+                  <td class=p2 align=left height="1" width="155"><a title="Windows Media Player,用于 Windows 98 SE、Me 和 2000，播放asf,wmv,avi工具" href="http://www.520play.com/play/tools/wmp.exe"><font size="2">微软媒体播放器9.0普通版</font></a></td>                                           
+                  <td class=p2 align=left height="1" width="247"><a title="网络蚂蚁(NetAnts)" href="http://luhui.net/cn/soft/Downloads/办公自动化题苑及上机指导(2004春版).rar" target="_blank">OA题苑及上机指导(2004春版)</a></td>                                          
+                </tr>                                          
+                <tr>                                          
+                  <td class=p2 align=left height="1" width="155"><a href="http://www.nhzj.com/homepage/soft1/flash_mx_60.rar">Flash_mx_6.0</a></td>                                          
+                  <td class=p2 align=left height="1" width="247"><a href="http://www.chinemail.net/download/ipmessage.rar"><font color="#ff0000">IP信使中文试用版</font></a></td>                                          
+                </tr>                                          
+                <tr>                                          
+                  <td class=p2 align=left height="1" width="155"><a href="http://www.nhzj.com/homepage/soft1/macromediafireworks.zip">Fireworks&nbsp;4.0</a></td>                                          
+                  <td class=p2 align=left height="1" width="247"><a href="http://www.chinemail.net/download/WINRAR.exe">winRAR中文版</a>&nbsp;<a href="http://luhui.net/cn/soft/Downloads/鲁虺网络视窗.rar" target="_blank">鲁虺网络视窗.rar</a></td>                                          
+                </tr>                                          
+                <tr>                                          
+                  <td class=p2 align=left height="1" width="155"><a href="http://www.nhzj.com/homepage/soft1/MacromediaDreamweaver403CS.ZIP">Dreamweaver&nbsp;4.03CS</a></td>                                          
+                  <td class=p2 align=left height="1" width="247"><span lang="zh-cn"><a href="http://china88.myrice.com/game/saiche/weilaijisu.swf" target="_blank">未来极速(赛车游戏)</a></span></td>                                         
+                </tr>                                         
+                <tr>                                         
+                  <td class=p2 align=left height="1" width="155"><a title="播放mpg4必需的插件,如果在线播放有声音没有图像，请安装该插件。" href="http://www.aosky.net/download/jspghost.exe">网页特效精灵3.6版</a></td>                                         
+                  <td class=p2 align=left height="1" width="247"><span lang="zh-cn"><a href="http://china88.myrice.com/game/xiuxian/dan.swf" target="_blank">送蛋(休闲游戏)</a></span></td>                                         
+                </tr>                                         
+                <tr>                                         
+                  <td class=p2 align=left height="1" width="155"><a href="http://91xz.cx001.com/down/SoftDown.asp?ID=375" target="_blank">硕思闪客巫师&nbsp;2001a</a></td>                                         
+                  <td class=p2 align=left height="1" width="247"><a href="http://china88.myrice.com/game/zhili/sanguocha.swf" target="_blank">三国找碴(智力游戏)</a></td>                                         
+                </tr>                                         
+                <tr>                                         
+                  <td class=p2 align=left height="1" width="155"><a href="http://luhui.net/cn/soft/Downloads/鲁虺播放器.rar" target="_blank">鲁虺播放器.rar</a>                                                         
+                  </td>                                            
+                  <td class=p2 align=left height="1" width="247"><a href="http://china88.myrice.com/game/xiuxian/kaorou.swf" target="_blank">烤肉训练班<span lang="zh-cn">(休闲游戏)</span></a></td>                                           
+                </tr>                                           
+                <tr>                                           
+                  <td class=p2 align=left height="1" width="155"><a href="http://china88.myrice.com/game/zhili/5.swf" target="_blank">五子棋(智力游戏)</a>                                                        
+                  </td>                                           
+                  <td class=p2 align=left height="1" width="247"><a href="http://china88.myrice.com/game/zhili/4.swf" target="_blank">四子连环(智力游戏)</a></td>                                           
+                </tr>                                           
+                <tr bgcolor=#ffffee>                                            
+                  <td class=p2 align=middle height="18" width="155"><font color="#0000cc"><a href="http://www.luhui.net/cn/soft/Downloads/自由之门.zip" target="_blank">自由之门</a>                    
+                    </font><a href="http://download.chinaitlab.com/sort/16_1.htm" target="_blank"><font color="#FF0000">ComPITA</font></a></td>                                           
+                  <td class=p2 align=left height="18" width="247"><a title="Quick Time,播放mov工具" href="http://218.30.21.125:8084/image/view/acdc/acdsee5.exe" target="_blank"><font size="2">ACDSee                                                         
+                      5.0 迷你中文版</font></a><font size="2"> <a href="http://gz2.onlinedown.net/down/acdsee5.exe">2</a>&nbsp;                                         
+                    <a href="http://61.243.111.253:8089/image/view/acdc/acdsee5.exe">3</a></font></td>                                            
+                </tr>                                            
+                <tr bgcolor=#ffffee>                                             
+                  <td class=p2 align=middle height="4" width="155"><a href="http://cjinfo.net/wwuse/superdown/psoft0/cn-HysnapDx.rar" target="_blank"><font color="#FF0000">抓图软件</font></a>                    
+                    <a href="http://www.chinemail.net/download/ipmessage.rar" target="_blank"><font color="#0000FF">IP信使中文</font></a></td>                                          
+                  <td class=p2 align=left height="4" width="247"><a href="http://luhui.net/cn/soft/Downloads/Sime2002.rar" target="_blank">《縱橫漢字輸入法》</a></td>                                         
+                </tr>                                         
+                </tbody>                                          
+              </table>                                         
+            </TD>                                         
+          </TR></TBODY></TABLE><!--end sms--></TD>                                         
+    <TD width=1 height="111" rowspan="10"></TD>                                         
+    <TD width=289 height="37"><!--begin hot-->                                         
+        <TABLE cellSpacing=0 cellPadding=0 width="356" border=0 bgcolor="#66CCFF">                                         
+          <TBODY>                                          
+          <TR bgColor=#989898>                                         
+            <TD width=266 bgcolor="#9999CC">&nbsp;<b><font size="4" color="#FFFF00">鲁虺软件公告</font></b></TD>                                         
+          </TR></TBODY></TABLE>                                         
+        <!--end hot--><font face="宋体"><textarea tabindex=1 name=S1 rows=8 cols=48>大家好:
+    　　欢迎您来到鲁虺文化网，就着对电脑的爱好，鲁虺制作了自己的网页。
+　　    
+        本网站软件很好，
+    每个都是精品，全都是
+    站主精挑细选出来常用的，
+    并且都是最新注册版。
+        
+      娱乐频道也非常棒
+    ，提供全方位的娱乐资
+    迅。并可查询游戏攻略
+    密技。
+        
+        全方位的搜索查询
+    引擎，令您在互联网无
+    所不能。
+        
+        给大家带来许多宝
+    贵资源，如果您觉得还
+    好的话，可以在留言板
+    、论谈、或是发邮件给
+    鲁虺。
+         
+不是鲁虺随便夸 这里的确是不差 
+
+鲁虺文化多精彩 浅酌细品味自佳 
+情感喧泄上舞台 鲁虺社区赏百花 
+
+以文会友品艺术 二十四时偿酸辣 
+宽带视听怡心智 网络生存帮大家 
+
+轻松一刻可撒野 歪谈乱侃评天下 
+无聊可以玩游戏 寂寞给您解忧愁 
+
+鲁网虽然不算大 待客有道可称雅 
+引来无数奇男女 都把这儿当成家 
+
+有事无事来坐坐 轻点指尖话人生        
+                  站主：鲁虺</textarea>                                         
+      </font>                                         
+    </TD>                                                     
+    </TR>                        
+  <TR vAlign=top>                       
+    <TD width=289 height="8">                                         
+    <a href="http://www.chinemail.net/download/ipmessage.rar"><font color="#ff0000">Cisco网络</font></a><font color="#ff0000">                    
+    </font><a href="http://www.chinemail.net/download/ipmessage.rar"><font color="#BC51C8">j</font></a><a href="http://www.chinemail.net/download/ipmessage.rar"><font color="#BC51C8">ava编程技术</font></a><font color="#ff0000">                    
+    </font><a href="http://www.chinemail.net/download/ipmessage.rar"><font color="#ff0000"></font></a><a title="网络蚂蚁(NetAnts)" href="http://www.520play.com/play/tools/netants.zip">CIW黑客技术</a>                                         
+    </TD>                                                     
+    </TR>                        
+  <TR vAlign=top>                       
+    <TD width=289 height="8">                                         
+    <font color="#ff0000">[Cisco]</font><font color="#0000cc"><a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CCIE&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">CCIE</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CCNP&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">CCNP</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CCDP&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">CCDP</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CCNA&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">CCNA</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CCDA&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">CCDA</a></font>                      
+    </TD>                                  
+    </TR>     
+  <TR vAlign=top>    
+    <TD width=289 height="7">                      
+    【印度NIIT】【Juniper】【UML认证】                      
+    </TD>                                  
+    </TR>     
+  <TR vAlign=top>    
+    <TD width=289 height="7">                      
+    <font color="#ff0000">[数据库]</font><font color="#0000cc"><a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=Oracle&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">Oracle</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=SQL&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">SQL 
+    Server</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=sybase&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">Sybase</a></font>                      
+    </TD>                                  
+    </TR>     
+  <TR vAlign=top>    
+    <TD width=289 height="7">                      
+    <font color="#BC51C8">| <a href="http://www.chinaitlab.com/www/news/article_catalog.asp?id=134">Juniper相关</a>                    
+    |<a href="http://www.chinaitlab.com/www/news/article_catalog.asp?id=8">Check                    
+    Point相关</a></font>                                         
+    </TD>                                                     
+    </TR>                        
+  <TR vAlign=top>                       
+    <TD width=289 height="10">                                         
+    <font color="#BC51C8"><a href="http://www.chinaitlab.com/www/news/article_catalog.asp?id=4">Oracle相关</a>                    
+    | <a href="http://www.chinaitlab.com/www/news/article_catalog.asp?id=7">HP-UNIX相关</a>                    
+    | <a href="http://www.chinaitlab.com/www/news/article_catalog.asp?id=48">Linux相关</a></font>                                         
+    </TD>                                                     
+    </TR>                        
+  <TR vAlign=top>                       
+    <TD width=289 height="9">                                         
+    <font color="#ff0000">[微软</font><font color="#ff0000">]</font><font color="#0000cc"><a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CIW&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank"></a></font><font color="#ff0000"><font color="#0000ff"><a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=MCSE&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">MCSE</a></font>                    
+    </font><font color="#0000cc"><a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=MCDBA&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">MCDBA</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=MCAD&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">MCAD</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=MCSD&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">MCSD</a>　<a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=vb&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">.NET</a></font><font color="#BC51C8">&nbsp;</font>                      
+    </TD>                                  
+    </TR>     
+  <TR vAlign=top>    
+    <TD width=289 height="9">                      
+    <font color="#ff0000">[其他]</font><font color="#0000cc"><a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CIW&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">CIW</a> 
+    <a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=CISSP&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">CISSP</a> 
+    <a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=Java&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">Java</a> 
+    <a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=Linux&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">Linux</a> 
+    </font><font color="#BC51C8"><a href="http://www.chinaitlab.com/www/news/article_catalog.asp?id=49">IBM相关</a></font>                      
+    </TD>                                  
+    </TR>     
+  <TR vAlign=top>    
+    <TD width=289 height="9">                      
+    <font color="#ff0000">[其他]</font><font color="#0000cc">Juniper&nbsp;&nbsp; 
+    <a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=Java&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">Java</a> 
+    <a href="http://www.chinaitlab.com/www/search/itview.asp?keywords=Linux&amp;city=&amp;Submit=%CB%D1%CB%F7" target="_blank">Linux</a> 
+    </font><a href="http://download.chinaitlab.com/../sort/14_1.htm">ISC2</a>&nbsp;&nbsp;                    
+    <a href="http://download.chinaitlab.com/sort/31_1.htm" target="_blank"><font color="#0000FF">PHP源码</font></a><font color="#0000cc">                    
+    </font><a href="http://download.chinaitlab.com/sort/32_1.htm"><font color="#FF0000">JSP源码</font></a><font color="#0000cc">                    
+    </font><a href="http://download.chinaitlab.com/sort/33_1.htm" target="_blank"><font color="#000000">CGI源码</font></a><font color="#0000cc">                    
+    </font><a href="http://download.chinaitlab.com/sort/34_1.htm"><font color="#000000">.NET源码</font></a><font color="#0000cc">                    
+    </font><a href="http://download.chinaitlab.com/sort/35_1.htm"><font color="#000000">VB</font></a><font color="#000000">                    
+    </font><a href="http://download.chinaitlab.com/sort/36_1.htm"><font color="#FF0000">Delphi</font></a><font color="#0000cc">&nbsp;                    
+    </font><a href="http://download.chinaitlab.com/sort/38_1.htm"><font color="#BC51C8">PowerBuilder</font></a><font color="#0000cc">                    
+    </font><a href="http://download.chinaitlab.com/sort/39_1.htm"><font color="#000000">VC++</font></a><font color="#0000cc">                    
+    </font><a href="http://download.chinaitlab.com/sort/30_1.htm"><font color="#FF0000">ASP源码</font></a>                                         
+    </TD>                                                     
+    </TR></TBODY></TABLE>                                                     
+  <table cellspacing=0 cellpadding=0 width=800 border=0 align="center" height="1">                                                     
+  <tbody>                                                      
+  <tr valign=top>                                                      
+      <td width=302 height="1" rowspan="13">                                                          
+        <!--end news-->                                                          
+        <table cellspacing=0 cellpadding=0 width="466" border=0 height="251">                                                          
+          <tbody>                                                           
+          <tr>                                                           
+            <td height="21" width="464" bgcolor="#9999CC" colspan="2">                                                          
+              <font size="4" color="#FFFF00"><b>网络搜索</b></font>                                                         
+            </td>                                                         
+          </tr>                                                         
+          <tr>                                      
+                  <td height="71" width="394" colspan="2">                                                          
+                    <form name=form1 onSubmit="return CheckInput(this);"                                                           
+                  action=http://www.luhui.net/search/index.asp?ibox method=get                                                           
+                  target=_blank>                                                          
+                      <table width="424" border=0 align=center cellpadding=0 cellspacing=5 height="56">                                                          
+                        <tbody>                                                           
+                        <tr align=middle>                                                           
+                          <td width="160" height="21">                                                           
+                            <input id=keyword size=39 name=keyword>                                                          
+                          </td>                                                          
+                          <td width="101" height="21">                                                           
+                            <p align="right">                                                           
+                            <input type=submit value=网络搜索 name=submit2><script language=JavaScript type=text/JavaScript>                                                           
+function CheckInput(myform)                                                           
+{                                                           
+   if(myform.lei.value==0)                                                           
+   {                                                           
+      alert("请选择搜索类型");                                                           
+      return false;                                                           
+   }                                                           
+   if(myform.keyword.value=="" || myform.keyword.value=="关键字")                                                           
+   {                                                           
+      alert("请输入查询内容！");                                                           
+      return false;                                                           
+   }                                                           
+   return true;                                                           
+}                                                           
+</script>                                                           
+                            </p>                                      
+                          </td>                                                           
+                        </tr>                                                           
+                        <tr align=middle>                                                            
+                          <td height="23" colspan="3" width="410">                                                            
+                            <table width="451" border="0" cellpadding="0" cellspacing="0">                                                           
+                              <tr>                                                            
+                                <td width="57">                                                            
+                                  <input type=radio CHECKED value=site name=lei>网站</td>                                                         
+                                <td width="54">                                                          
+                                  <input type=radio value=web name=lei>网页</td>                                                         
+                                <td width="53">                                                          
+                                  <input type=radio value=sofe name=lei>软件</td>                                                         
+                                <td width="46">                                                          
+                                  <input type=radio value=ftp name=lei><font size="1">                                                        
+                                  文件</font></td>                                                        
+                                <td width="33">                                                         
+                                  <input type=radio value=mp3 name=lei>mp3</td>                                                        
+                                <td width="73">                                                         
+                                  <input type=radio value=pic name=lei>                                                        
+                                  图片</td>                                                            
+                                <td width="65">                                                              
+                                  <input type="radio" name="lei" value="info">                                                            
+                                  信息 </td>                                                            
+                              </tr>                                                            
+                            </table>                                                            
+                          </td>                                                            
+                        </tr>                                                            
+                        </tbody>                                                             
+                      </table>                                                            
+                    </form>                                                            
+                  </td>                                                            
+          </tr>                                         
+          <tr>                                                              
+            <td height="18" width="232">                                                             
+            <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17702653&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">免费域名</a>&nbsp;                                         
+            <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17868152&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">免费信箱</a>&nbsp;                                         
+            <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17868212&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">免费祈愿</a>                                                            
+            </td>                                                           
+            <td height="18" width="232">                                                            
+              <a href="http://www.onlinedown.net/soft/4878.htm" target="_blank">IE防火墙V5.7</a>                                                          
+            </td>                                                          
+          </tr>                                                          
+          <tr>                                                            
+            <td height="18" width="232">                                                           
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17868256&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">免费投票</a>&nbsp;<a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17702657&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">免费空间</a>&nbsp;                                                            
+            </td>                                                           
+            <td height="18" width="232">                                                            
+              <a href="http://www.onlinedown.net/soft/2009.htm" target="_blank">V2Comm2.1.0</a>                                                              
+                -可与QQ辟美                                                             
+            </td>                                                             
+          </tr>                                                             
+          <tr>                                                               
+            <td height="18" width="232">                                                              
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17748935&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">实用手册</a>                                         
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17868360&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">免费留言本</a>                                                             
+            </td>                                                            
+            <td height="18" width="232">                                                             
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17701425&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">让鼠标打扮起来</a>                                                            
+            </td>                                                            
+          </tr>                                                            
+          <tr>                                                              
+            <td height="18" width="232">                                                             
+      <a href="http://www.cn51.net/soft/soft.asp?id=3591" target="_blank">无名小兵                                                         
+                V2.47</a>                                                               
+                + <a href="http://www.cn51.net/soft/soft.asp?id=5207" target="_blank">注册机</a>                                                             
+            </td>                                                            
+            <td height="18" width="232">                                                             
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17950022&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">多媒体页面</a>                    
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17868293&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">免费调查系统</a>                                                            
+            </td>                                                           
+          </tr>                                                           
+          <tr>                                                             
+            <td height="18" width="232">                                                            
+      <a href="http://soft.skkk.net/test/soft/866.htm" target="_blank">金山快译2003专业版+注册机</a>                                                            
+            </td>                                                          
+            <td height="18" width="232">                                                           
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17699066&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">一键排版好轻松</a>                                                            
+            </td>                                                           
+          </tr>                                                           
+          <tr>                                                             
+            <td height="15" width="232">                                                            
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17950285&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">精心设计你的网站域名</a>                                                            
+            </td>                                                           
+            <td height="15" width="232">                                                            
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17718562&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">常用工具下载（外站）</a>                                                            
+            </td>                                                           
+          </tr>                                                           
+          <tr>                                                             
+            <td height="18" width="232">                                                            
+            <a href="http://luhui.net/cn/soft/Downloads/Serv-U.5.04.rar" target="_blank">ftp</a>                  
+            <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17950253&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">命令大全</a>                                                           
+            <a href="http://luhui.net/cn/soft/Downloads/动影音软件.rar" target="_blank">动影音软件</a>                                                            
+            </td>                                                           
+            <td height="18" width="232">                                                            
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17700185&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">可以免费挣钱但不花什么时间</a>                                                            
+            </td>                                                           
+          </tr>                                                           
+          <tr>                                                             
+            <td height="18" width="232">                                                            
+            <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17699098&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">网络基本知识--WWW简介</a>                                                            
+            </td>                                                           
+            <td height="18" width="232">                                                            
+              <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17701425&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">让鼠标打扮起来</a>                                                            
+            </td>                                                           
+          </tr>                                                           
+          <tr>                                                             
+            <td height="18" width="232">                                                            
+            <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17717776&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">GIF                                         
+            Movie Gear试用手记</a>                                                             
+            </td>                                                            
+            <td height="18" width="232">                                                             
+            <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17949930&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">全国天气预报分省分市代码</a>                                                             
+            </td>                                                            
+          </tr>                                                            
+          </tbody>                                                             
+        </table>                                                            
+      </td>                                                            
+      <td width=326 height="1">                                                             
+        <!--end logo-->                                                            
+        <!--begin adtext-->                                                            
+        <table cellspacing=0 cellpadding=0 width="100%" border=0>                                                            
+          <tbody>                                                             
+          <tr bgcolor=#FFCC99>                                                             
+            <td height=3 bgcolor="#9999CC"><font color="#FFFF00"><spacer type="block" height="1"><b><font color="#FFFF00" size="4">最新注册下载</font></b></font></td>                                                          
+          </tr>                                                          
+          </tbody>                                                            
+        </table>                                                           
+        <!--b sad--><!--e sad-->                                                            
+      </td>                                                            
+    </tr>                                                            
+  <tr valign=top>                                                       
+      <td width=326 height="0">                                                           
+      <a href="http://www.90du.com/soft/1831.htm" target="_blank">WinRAR v3.20                                                         
+                正式版汉化破解版</a>                                                              
+      </td>                                                              
+    </tr>                                                              
+  <tr valign=top>                                                         
+      <td width=326 height="0">                                                             
+      <a href="http://soft.winzheng.com/SoftView/SoftView_3927.htm" target="_blank">中华搜索宝                                                         
+                2003b + 破解补丁</a>                                                              
+      </td>                                                              
+    </tr>                                                              
+  <tr valign=top>                                                         
+      <td width=326 height="0">                                                             
+      <a href="http://soft.winzheng.com/SoftView/SoftView_12628.htm" target="_blank">腾讯QQ2003AllInOneBeta3v2.0</a>                                                             
+      </td>                                                             
+    </tr>                                                             
+  <tr valign=top>                                                        
+      <td width=326 height="0">                                                            
+      <a href="http://www.skycn.com/soft/3541.html" target="_blank">PartitionMagicV8.0简装汉化版</a>                                                             
+      </td>                                                             
+    </tr>                                                             
+  <tr valign=top>                                                        
+      <td width=326 height="0">                                                            
+      <a href="http://www.skycn.com/soft/4108.html" target="_blank">五笔加加 V0.1</a>：站长在用                                                             
+      </td>                                                              
+    </tr>                                                              
+  <tr valign=top>                                                         
+      <td width=326 height="0">                                                             
+      <a href="http://soft.winzheng.com/SoftView/SoftView_12153.htm" target="_blank">ICQ                                                         
+                Lite alpha Build #1211 汉化版</a>                                                              
+      </td>                                                              
+    </tr>                                                              
+  <tr valign=top>                                                         
+      <td width=326 height="0">                                                             
+      <a href="http://soft.skkk.net/test/soft/1038.htm" target="_blank">金山词霸2003+专业版+注册机</a>                                                             
+      </td>                                                             
+    </tr>                                                             
+  <tr valign=top>                                                        
+      <td width=326 height="0">                                                            
+      <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17748861&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">上千个正版软件序列注册码</a>                                                           
+      </td>                                                            
+    </tr>                                                            
+  <tr valign=top>                                                       
+      <td width=326 height="0">                                                           
+      <a href="http://luhui.net/cn/soft/Downloads/超级兔子魔法设置2004.5.53完全版-附注册码.rar" target="_blank">超级兔子魔法设置2004.5.53完全版-附注册码</a>                                                            
+      </td>                                                            
+    </tr>                                                            
+  <tr valign=top>                                                       
+      <td width=326 height="0">                                                           
+      <a href="http://luhui.net/cn/soft/Downloads/搜索引擎工厂%20(Search%20Engine%20Builder)%20Pro%20v1.63%20注册版.ace" target="_blank">搜索引擎工厂 Pro v1.63 注册版.ace</a>                                                             
+      </td>                                                             
+    </tr>                                                             
+  <tr valign=top>                                                        
+      <td width=326 height="0">                                                            
+      <a href="http://soft.winzheng.com/SoftView/SoftView_6331.htm" target="_blank">金锋文件加密器                                                         
+                v4.3+注册机</a>                                                              
+      </td>                                                              
+    </tr>                                                              
+  <tr valign=top>                                                         
+      <td width=326 height="0">                                                             
+      <a href="http://free.activeclub.net/script/login/redirect_for_not_login.asp?article_id=17699637&amp;board_id=390067&amp;community_id=171097&amp;action=view_article" target="_blank">在线免费检测你的网络系统是否安全</a>                                                            
+      </td>                                                             
+    </tr>                                                             
+    </tbody>                                                            
+  </table>                                                            
+                                              
+<TABLE cellSpacing=0 cellPadding=0 width=800 border=0 align="center">                                                      
+<IFRAME frameBorder=0 height=90 marginHeight=0 marginWidth=0 scrolling=no src="pop_03.htm" width=800></IFRAME>                                         
+</table>                                       
+<div align="center">                                      
+  <center>                                      
+                                      
+                                      
+<table width="800" height="178">                                      
+                                      
+                                      
+  <tr>                                       
+    <td width="180" valign="top" align="center" height="174">                                       
+      <table width="185" border="0" cellspacing="0" cellpadding="0" height="248">                                      
+        <tr>                                       
+          <td width="194" height="14"><font size="4"><b>请输入要翻译的内容：</b></font></td>                                     
+        </tr>                                     
+        <form action=http://211.94.207.99:7777/*0 method=post target=_blank name=trans onSubmit="return checkform(this)">                                     
+          <tr>                                      
+            <td height="155" width="194">                                      
+              <div align="left">                                      
+                <textarea name="content" rows="9" clos="10" cols="25"></textarea>                                     
+              </div>                                     
+            </td>                                     
+          </tr>                                     
+          <tr>                                      
+            <td width="194" align="right" height="25"> <image src=" srclan.jpg" alt="原文语种">                                      
+              <select name="select_srclan" onChange="selCharset(this.value)">                                     
+                <option value="-1"selected>语种选择</option>                                     
+                <option value="0">英语</option>                                     
+                <option value="1">简体中文</option>                                     
+                <option value="2">繁体中文</option>                                     
+                <option value="3">日语</option>                                     
+                <option value="4">俄语</option>                                     
+                <option value="5">德语</option>                                     
+              </select>                                     
+            </td>                                     
+          </tr>                                     
+          <tr>                                      
+            <td width="194" align="right" height="25"> <image src="objlan.jpg" alt="译文语种">                                      
+              <select name="select_objlan">                                     
+                <option value="-1">语种选择</option>                                     
+              </select>                                     
+              <input type=hidden name=language>                                      
+            </td>                                      
+          </tr>                                      
+          <tr>                                       
+            <td width="194" align="right" height="15"> </td>                                      
+          </tr>                                      
+          <tr>                                       
+            <td width="194" align="right" height="14"><button type=submit value="translate">                                       
+              <image border="0" src="btn_trans.jpg" alt="开始翻译"> </button>                                       
+            </td>                                      
+          </tr>                                      
+        </form>                                      
+      </table>                                      
+    </td>                                      
+    <td width="600" valign="top" height="174">                                  
+      <h3 align="center"><b><font size="5">欢迎使用鲁虺推荐的国际即时翻译系统</font></b></h3>                      
+      <p><span class="p2">功能说明：</span></p>                      
+      <p>　　即时翻译功能的最大特点是迅速和便捷，您只要输入所需翻译的内容，马上就能得到翻译结果，是翻译短小文章的最佳选择。                       
+      如果您所要翻译的内容很多，建议您使用专业翻译软件<a href="http://download.enet.com.cn/oload1.php?fname=030272002012902&amp;url=http://ftp3.enet.com.cn/pub/utility/translator/FTShare2002.exe"><font color="#FF0000">FTShare2002</font></a>进行翻译。翻译的译文结果具有对应于原文的清晰段落。</p>                      
+      <p class="p2">使用步骤：                      
+      <p>　　请在文本框内输入您需要翻译的内容，然后选择翻译要求（如点击选按中“英汉”，表示输入的内容为英文，需要翻译成中文），然后点击“开始翻译”，您便能马上得到翻译结果。“原文语种”指在文本框中输入的内容的语种类型，有简体中文、繁体中文、英语、日语、俄语、德语可以选择，“译文语种”指将要把输入的内容翻译成结果的语种类型。</p>
+  </center>        
+    <p align="right">&nbsp;&nbsp;&nbsp; 注意：短文翻译只限5K以内，超过5K请使用上载翻译。更多网络翻译请点这里<a href="fayiluhui.htm" target="_blank"><b><font face="Wingdings" size="5">F<font color="#FF0000">X</font>E</font></b></a>                           
+</td>                               
+  </tr>                               
+  <center>                                     
+                                     
+                                     
+<script src="http://www.165net.com:8078/counter/?key=instant.htm" ></script>                                
+  <TBODY>                                              
+  </TBODY></TABLE>                                                   
+  </center>                              
+</div>                              
+  <u> </u>                                                         
+<div align="center">                                     
+  <center>                                          
+<table width="800">                                         
+  <tr>                                         
+    <td width="800">                                         
+      <table cellSpacing="0" cellPadding="0" width="800" align="center" border="0" height="1">                                         
+        <tr>                                         
+          <td height="1" width="782">                                         
+            <p style="margin-top: -4; margin-bottom: -5">　              
+            <table width="86%" border="0" cellspacing="0" cellpadding="0" align="center">              
+              <tr>              
+                <td width="762">             
+<IFRAME frameBorder=0 height=80 marginHeight=0 marginWidth=0 scrolling=no src="/cn/Self-servicechain/logo.htm" width=800></IFRAME>              
+<IFRAME frameBorder=0 height=250 marginHeight=0 marginWidth=0 scrolling=yes src=" /cn/Netchain/" width=800></IFRAME>              
+              <tr>              
+                <td>              
+                  <div align="center">              
+                    <table align="center" border="0" cellPadding="0" cellSpacing="0" height="10" width="418">              
+                      <tbody>              
+                        <tr>              
+                          <td align="middle" height="38" width="782">              
+                            <table border="1" height="1" width="762" bordercolor="#FFFFFF" bgcolor="#FFFFFF">              
+                              <u>              
+                              <tbody>              
+                              </u>              
+                              <tr>              
+                                <td align="middle" height="32" width="868" bgcolor="#FFFFFF" bordercolor="#FFFFFF">              
+                                  <table align="center" border="0" cellPadding="0" cellSpacing="0" height="10" width="521">              
+                                    <tr>              
+                                      <td height="38" width="782" align="center">              
+                                        <table border="0" height="1" width="778">              
+                                          <u>              
+                                          <tr>              
+                                            <td align="middle" bgColor="#BC51C8" height="1" width="994">              
+                                              <p align="center"><span class="myfont"><b><font face="宋体" color="#FFFF00" size="2">鲁虺原创梦功坊版权所有,未经授权禁止复制或建立镜像,CopyRight2001-05-20                                          
+                                              All rights reserved.</font></b></span></p>                                         
+                                            </td>                                         
+                                          </tr>                                         
+                                          </u>                                         
+                                          <tr>                                         
+                                            <td align="left" height="1" width="994">                                         
+                                              <table border="0" height="38" width="749">                                         
+                                                <tr>                                         
+                                                  <u>                                         
+                                                  <td align="middle" height="34" width="60">                                         
+                                                    <table bgColor="#00aa00" border="0" cellPadding="0" cellSpacing="0" height="27">                                         
+                                                      <tr>                                         
+                                                        <td align="middle" bgColor="#ff0000" height="18" vAlign="center"><span class="myfont"><a href="http://huike.luhui.net"><cite><blink><font face="宋体" color="#FFFFFF" size="3">虺</font></blink></cite></a></span></td>                                         
+                                                        <u><font color="#0000ff">                                         
+                                                        <td align="middle" bgColor="#00ee00" height="18" vAlign="center"><span class="myfont"><b><font size="3">认</font></b></span></td>                                         
+                                                        </font></u>                                         
+                                                      </tr>                                         
+                                                      <tr>                                         
+                                                        <td align="middle" bgColor="#777777" height="9" vAlign="center">                                         
+                                                          <p align="center"><span class="myfont"><b><font face="宋体" color="#FFFF00" size="3">客</font></b></span></p>                                         
+                                                        </td>                                         
+                                                        <td align="middle" bgColor="#0000ff" height="9" vAlign="center"><span class="myfont"><font color="#FFFFFF" size="3">证</font></span></td>                                         
+                                                      </tr>                                         
+                                                    </table>                                         
+                                                  </td>                                         
+                                                  </u>                                         
+                                                  <td align="middle" height="34" width="687">                                         
+                                                    <table height="1" width="732">                                         
+                                                      <tbody>                                         
+                                                        <tr>                                         
+                                                          <td height="1" width="724">                                         
+                                                            <div align="center">                                         
+                                                              <font color="#ff00ff"><blink><b><font size="1"><script>var message="您对本主页有何意见和看法请联系鲁虺战略文化联盟网站站长：鲁虺QQ:63625244站长信箱：kugeceo@sohu.com"                                                                  
+var n=0;                                                                  
+if (document.all){                                                                  
+document.write('<font size="12px" color="#006666">')                                                                  
+for (m=0;m<message.length;m++)                                                                  
+document.write('<span id="neonlight" style="font-size:12px">'+message.charAt(m)+'</span>')                                                                  
+document.write('</font>')                                                                  
+var tempref=document.all.neonlight                                                                  
+}                                                                  
+else                                                                  
+document.write(message)                                                                  
+function neon(){                                                                  
+if (n==0){                                                                  
+for (m=0;m<message.length;m++)                                                                  
+tempref[m].style.color="green"                                                                  
+}                                                                  
+tempref[n].style.color="yellow"                                                                  
+if (n<tempref.length-1)                                                                  
+n++                                                                  
+else{                                                                  
+n=0                                                                  
+clearInterval(flashing)                                                                  
+setTimeout("beginneon()",1500)                                                                  
+return                                                                  
+}                                                                  
+}                                                                  
+function beginneon(){                                                                  
+if (document.all)                                                                  
+flashing=setInterval("neon()",23)                                                                  
+}                                                                  
+beginneon()                                                                  
+</script>                                         
+                                                              </font></b></blink></font>                                         
+                                                            </div>                                         
+                                                            <p align="center">　</p>                                         
+                                                          </td>                                         
+                                                        </tr>                                         
+                                                      </tbody>                                         
+                                                    </table>                                         
+                                                  </td>                                         
+                                                </tr>                                         
+                                              </table>                                         
+                                            </td>                                         
+                                          </tr>                                         
+                                        </table>                                         
+                                      </td></tr>                                         
+                                  </table>                                         
+                                  <p align="center">                                        
+                                您是鲁虺文化网的第<IFRAME frameBorder='0' height='10' marginHeight='0' marginWidth='0' scrolling='no' src='http://cgi.f1.com.tw/cgi-bin/counter/counter.cgi?id=134198' width='70'>                                        
+                                  </IFRAME>                                         
+                                  位友好访问者                                         
+                                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="794" id="AutoNumber1" height="81">                                         
+                                    <tr>                                         
+                                      <td width="792" height="27">                                         
+                                        <p align="center"><font size="2">特别声名:未经鲁虺文化网络的明确书面特别授权，任何人不得利用鲁虺文化网的局部或全部的内容或服务或在非鲁虺文化网所属的服务器上作镜像，否则以侵权论，依法追究法律责任。为了维护您和我们的权益请仔细阅读<a target="_blank" href="/cn/Works/luhuishengming.htm"><font color="#FF0000">《鲁虺文化网版权声明》</font></a>注意事项后再确认服务。</font></td>                                        
+                                    </tr>                                        
+                                    <tr>                                        
+                                      <td width="792" height="15">                                        
+                                        <p align="center"><b><font size="2" color="black">鲁虺网络虺客文化传媒www.luhui.net鲁虺文化网@2001-05-20</font></b></p>                                        
+                                      </td>                                        
+                                    </tr>                                        
+                                    <tr>                                        
+                                      <td align="center" width="792" height="18">建议使用IE4.0浏览器800*600以上荧屏分辩率浏览最佳</td>                                        
+                                    </tr>                                        
+                                    <tr>                                        
+                                      <td background="  it_01.gif" align="center" width="792" height="21"><font size="4" face="华文彩云" color="#339933">鲁虺原创梦功坊激情奉献</font></td>                                        
+                                    </tr>                                        
+                                  </table>                                        
+                                </td>                                        
+                              </tr>                                        
+                            </table>                                        
+                    </table>                                        
+                  </div>                                        
+            </table>                                        
+          </td>                                        
+        </tr>                                        
+      </table>                                        
+</table>                                        
+  </center>                                    
+</div>                                    
+<TABLE cellSpacing=0 cellPadding=0 width=755 border=0 align="center">                                          
+  <TBODY>                                           
+</table>       
+  <p>　</p>       
+

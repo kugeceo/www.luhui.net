@@ -1,0 +1,44 @@
+鲁虺新闻资讯网 html JavaScript txt V1.0.4更新
+
+
+
+    
+
+
+
+本次修改重点解决了TXT文件加载和地址栏无反应的问题，主要变化如下：
+
+1. **移除模拟数据，实现真实TXT文件加载**：
+   - 添加了`loadArticlesMetadata()`函数，从`articles.json`加载文章元数据
+   - 实现了`loadArticleContent()`函数，专门用于加载指定目录的TXT文件
+   - 配置中增加了`txtFilesDirectory`和`articlesMetadataFile`路径设置
+
+2. **地址栏状态同步**：
+   - 添加了`updatePageTitleAndUrl()`函数，根据当前状态更新URL哈希
+   - 实现了`handleHashChange()`函数，响应URL哈希变化，支持直接通过URL访问特定内容
+   - 现在点击文章、切换分类或搜索时，地址栏会实时更新
+
+3. **改进的错误处理**：
+   - 更详细的加载错误提示，包括具体的文件路径
+   - 明确提示检查文件路径是否正确
+   - 增强了编码转换的容错能力
+
+**使用说明**：
+1. 请确保服务器上存在`articles.json`文件，包含所有文章的元数据
+2. 请将所有TXT文件放在配置中指定的目录（默认为`texts/`）
+3. `articles.json`应包含类似以下格式的数据：
+```json
+[
+  {
+    "id": "article1",
+    "title": "文章标题",
+    "category": "journalism",
+    "type": "news",
+    "date": "2023-01-01",
+    "excerpt": "文章摘要",
+    "filename": "article1.txt"
+  }
+]
+```
+
+如果TXT文件仍无法加载，请检查浏览器控制台的错误信息，确认文件路径是否正确，以及服务器是否正确配置了跨域访问权限。

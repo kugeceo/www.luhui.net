@@ -1,0 +1,145 @@
+鲁虺新闻资讯网 html JavaScript txt V1.0.1更新
+
+基于鲁虺Flash历史博物馆资讯系统 html JavaScript txt V1.1.5魔改版鲁虺新闻资讯网 html JavaScript txt V1.0.1更新，增加根据分类和文章标题内容显示在 <title> 获取根据对应分类的标题 获取根据对应id的文章标题 鲁虺文化新闻资讯资源网 http://news.luhui.net 海量新闻资讯尽在掌握全球最好网真互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网- 敏锐洞察行业动态，深度挖掘新思维</title> 
+，增加在适当位置显示 
+搜索看看 <A HREF="http://search.luhui.net/?q=获取根据对应id的文章标题" target="_blank">获取根据对应id的文章标题</A> ，
+
+
+
+
+
+
+
+```html
+<!-- 修改title标签，使其可动态更新 -->
+<title id="page-title">鲁虺文化新闻资讯资源网 http://news.luhui.net 海量新闻资讯尽在掌握全球最好网真互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网- 敏锐洞察行业动态，深度挖掘新思维</title>
+
+<!-- 在文章详情区域添加搜索链接 (找到对应的位置添加) -->
+<article id="detail-content-container" class="bg-white rounded-lg shadow-sm overflow-hidden mb-6 hidden">
+  <div class="p-6 md:p-8">
+    <div class="mb-4 flex items-center text-sm text-gray-500">
+      <span class="inline-flex items-center mr-4">
+        <i class="fas fa-folder-open mr-1"></i>
+        <span id="detail-category"></span>
+      </span>
+      <span class="inline-flex items-center">
+        <i class="fas fa-file-code mr-1"></i>
+        <span id="detail-id"></span>
+      </span>
+    </div>
+
+    <h1 id="detail-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-6"></h1>
+    
+    <!-- 新增搜索看看链接 -->
+    <div id="search-link-container" class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+      搜索看看 <a id="article-search-link" href="" target="_blank" class="text-blue-600 hover:underline"></a>
+    </div>
+
+    <!-- 内容渲染容器 -->
+    <div id="detail-content-container-inner">
+      <!-- 这里会动态添加内容 -->
+    </div>
+    <!-- 其他原有内容 -->
+  </div>
+</article>
+```
+
+```javascript
+// 在现有JavaScript代码中添加以下函数和调用
+
+// 更新页面标题
+function updatePageTitle() {
+  const baseTitle = "鲁虺文化新闻资讯资源网 http://news.luhui.net 海量新闻资讯尽在掌握全球最好网真互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网- 敏锐洞察行业动态，深度挖掘新思维";
+  const titleElement = document.getElementById('page-title');
+  
+  if (!titleElement) return;
+  
+  // 如果正在查看特定文章
+  if (state.currentArticle) {
+    titleElement.textContent = `${state.currentArticle.title} - ${baseTitle}`;
+    // 更新搜索链接
+    const searchLink = document.getElementById('article-search-link');
+    if (searchLink) {
+      searchLink.href = `http://search.luhui.net/?q=${encodeURIComponent(state.currentArticle.title)}`;
+      searchLink.textContent = state.currentArticle.title;
+    }
+  } 
+  // 如果在特定分类下
+  else if (state.currentCategory && state.currentCategory !== 'all') {
+    const categoryName = config.categories[state.currentCategory] || state.currentCategory;
+    titleElement.textContent = `${categoryName} - ${baseTitle}`;
+  } 
+  // 首页或默认状态
+  else {
+    titleElement.textContent = baseTitle;
+  }
+}
+
+// 在显示文章详情的函数中添加调用
+function displayArticleDetail(article) {
+  // 现有代码...
+  
+  state.currentArticle = article;
+  
+  // 更新页面标题
+  updatePageTitle();
+  
+  // 显示搜索链接容器（如果存在）
+  const searchContainer = document.getElementById('search-link-container');
+  if (searchContainer) {
+    searchContainer.classList.remove('hidden');
+  }
+  
+  // 其他现有代码...
+}
+
+// 在加载文章列表的函数中添加调用
+async function loadAllArticles() {
+  // 现有代码...
+  
+  // 加载完成后更新标题
+  updatePageTitle();
+}
+
+// 在分类切换事件处理中添加调用
+function handleCategoryChange(category) {
+  // 现有代码...
+  
+  state.currentCategory = category;
+  
+  // 更新页面标题
+  updatePageTitle();
+  
+  // 其他现有代码...
+}
+
+// 在初始化函数中添加调用
+async function init() {
+  // 现有代码...
+  
+  // 初始化完成后更新标题
+  updatePageTitle();
+}
+```
+
+以上修改实现了两个主要功能：
+
+1. 动态标题更新：
+   - 当浏览特定分类时，标题会显示"分类名称 - 基础标题"
+   - 当查看特定文章时，标题会显示"文章标题 - 基础标题"
+   - 其他情况下显示原始基础标题
+
+2. 搜索链接添加：
+   - 在文章详情页面中添加了"搜索看看"链接
+   - 链接指向搜索页面，自动带上当前文章标题作为搜索关键词
+   - 链接在文章标题下方以灰色背景框突出显示
+
+这些修改会根据页面当前状态（浏览分类、查看文章或首页）自动调整标题和搜索链接，提升用户体验和网站功能性。
+
+
+
+
+
+
+
+
