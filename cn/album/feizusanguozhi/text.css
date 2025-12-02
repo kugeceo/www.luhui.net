@@ -1,0 +1,28 @@
+a:link{text-decoration:none;color:white}
+a:visited{text-decoration:none;color:white}
+a:hover{text-decoration:none;color:yellow}
+a:active{text-decoration:none;color:white}
+BODY{font-family:"宋体";font-size:9pt;color:black}
+TABLE{table-layout:fixed;border-collapse:collapse}
+H3{margin:15,100;font-family:"宋体";font-size:10.5pt;font-weight:bold;color:darkred;text-align:center;line-height:20pt}
+em{margin:0,3;font-family:"宋体";font-size:9pt;font-style:normal;color:#804080;font-weight:normal;line-height:10pt}
+th{background-color:#c0c0c0;font-family:"宋体";font-size:9pt;font-weight:normal}
+.pn00{font-family:"宋体";font-size:10.5pt}
+.pn01{font-family:"宋体";font-size:9pt}
+.pn02{font-family:"Tahoma";font-size:9pt;color:gray}
+.pn03{font-family:"宋体";font-size:9pt;color:white}
+.pb00{font-family:"宋体";font-size:10.5pt;font-weight:bold;color:black}
+.pb01{font-family:"宋体";font-size:9pt;font-weight:bold;color:black}
+.pb02{font-family:"Tahoma";font-size:8pt;font-weight:bold;color:gray}
+.s0{margin-top:0;margin-bottom:0}
+.s1{margin-top:5;margin-bottom:5}
+.hzk{width:20;height:20;border-width:0;FILTER: Chroma(color:white)}
+.hzks{width:18;height:18;border-width:0;FILTER: Chroma(color:white)}
+.t0{border:2px outset gray; border-collapse:collapse}
+.t1{background-color:white;border:1px solid black;border-collapse:collapse}
+.t2{border:1px solid gray;background-color:#eeeeee;margin:5,0; }
+.t3{border:1px solid black;background-color:#606060;border-collapse:collapse; padding-left:10; padding-right:10; padding-top:3; padding-bottom:3}
+.p0{padding:5}
+.p1{padding-left:10;padding-right:10}
+.sd0 {FILTER: DropShadow(color:black,offX=1, offY=1, Positive=1); WIDTH: 100%; POSITION: relative}
+.sc0 {border-width:0;FILTER: Chroma(color:white)}

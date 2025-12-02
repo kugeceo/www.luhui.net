@@ -1,0 +1,15 @@
+document.write('</td></tr>');
+document.write('<tr><td>');
+document.write('<table width=100% cellspacing=0 border=0 class=t3 cellpadding=5>');
+document.write('<colgroup span=2 class="pn03 p1"></colgroup>');
+document.write('<tr>');
+document.write('<td>鲁虺文化网 中文书库版权所有，如需引用，请注明来源。</td>');
+document.write('<td align=right width=140>');
+if (pgprev.length>0) document.write('　<a href='+pgprev+'>上一页</a>');
+if (pgnext.length>0) document.write('　<a href='+pgnext+'>下一页</a>');
+document.write('</td>');
+document.write('</tr>');
+document.write('</table>');
+document.write('</td></tr></table>');
+document.write('<p class="s1 pn02" align=center>鲁之虺扫描，黄冠富校对');
+document.write('<script language="JavaScript"src="/style/copyright.js"></script></BODY>');

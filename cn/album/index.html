@@ -1,0 +1,276 @@
+
+<!doctype html>
+<html>
+	<head>
+		<title>luhui Checkbox Painter –鲁虺复选框绘画器 Kill Your Boredom With Art</title>
+	<meta name="keywords"
+	  content="luhui Checkbox painter allows you to create amazing pieces of art. It will also totally kill your boredom by letting you put small ticks into small boxes, it’s as simple as that,  Bring out your inner artist today and do something amazing!">
+	<meta name="description"
+	  content="luhui Checkbox painter allows you to create amazing pieces of art. It will also totally kill your boredom by letting you put small ticks into small boxes, it’s as simple as that,  Bring out your inner artist today and do something amazing!">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<style type="text/css">
+
+			body {
+
+				font-size: 12px;
+				color: #787878;
+				background-color: #ffffff;
+				margin: 0px;
+				overflow: hidden;
+
+			}
+
+			#instructions {
+
+				width: 100%;
+				padding: 10px;
+				font-family: "Georgia";
+				font-style: italic;
+				text-align: center;
+
+			}
+
+		</style>
+	</head>
+	<body>
+<script src="/js/header.js#/search/js/link.js"></script>
+		<div id="instructions">
+			<strong>Checkbox Painter</strong><span style="margin-left:40px;"> <strong><a href="i.htm" title="鲁虺文化网" target="_top">搜图</a>  Draw:</strong> Click and drag.</span>
+			<span style="margin-left:20px;"><strong>Erase:</strong> [Shift] + Click and drag.</span>
+			<span style="margin-left:20px;"><strong>Share:</strong> Copy the URL.</span></div>
+		<div id="container"></div>
+
+		<script type="text/javascript">
+
+			var elementWidth, elementHeight;
+			var canvasWidth, canvasHeight;
+			var elements = [];
+
+			var mouseX, mouseY;
+
+			var container = document.getElementById( 'container' );
+
+			var isMouseDown, isEraseMode;
+
+			var i = 0;
+
+			init();
+			createGrid();
+
+			window.addEventListener( 'resize', onWindowResize, false );
+			document.addEventListener( 'mousedown', onWindowMouseDown, false );
+			document.addEventListener( 'mouseup', onWindowMouseUp, false );
+			document.addEventListener( 'mousemove', onWindowMouseMove, false );
+			document.addEventListener( 'keydown', onWindowKeyDown, false );
+			document.addEventListener( 'keyup', onWindowKeyUp, false );
+
+			function init() {
+
+				while( i < 2 ) {
+
+					elements[ i ] = document.createElement( 'input' );
+					elements[ i ].type = 'checkbox';
+					elements[ i ].addEventListener( 'click', function( event ) { event.preventDefault(); }, false );
+					container.appendChild( elements[ i ] );
+					i++;
+
+				}
+
+				elementOffsetTop = elements[ 0 ].offsetTop;
+
+				elementWidth = elements[ 1 ].offsetLeft - elements[ 0 ].offsetLeft;
+				elements[ 1 ].style.display = 'block';
+
+				elementHeight = elements[ 1 ].offsetTop - elements[ 0 ].offsetTop;
+				elements[ 1 ].style.display = 'inline';
+			}
+
+			function createGrid() {
+
+				canvasWidth = Math.floor( window.innerWidth / elementWidth );
+				canvasHeight = Math.floor( (window.innerHeight - elementOffsetTop) / elementHeight );
+
+				if (elements.length < canvasWidth * canvasHeight) {
+
+					while( i < canvasWidth * canvasHeight) {
+
+						element = elements[i] = document.createElement( 'input' );
+						element.type = 'checkbox';
+						element.addEventListener( 'click', function( event ) { event.preventDefault(); }, false );
+						container.appendChild( element );
+						i++;
+
+					}
+
+				}
+
+				if (window.location.hash) {
+
+					drawImage();
+
+				}
+			}
+
+			function onWindowMouseDown( event ) {
+
+				event.preventDefault();
+				event.stopPropagation();
+
+				isMouseDown = true;
+
+				mouseX = Math.floor( event.clientX / elementWidth );
+				mouseY = Math.floor( ( event.clientY - elementOffsetTop ) / elementHeight );
+
+				drawPixel( mouseX, mouseY, !isEraseMode );
+
+			}
+
+			function onWindowMouseUp( event ) {
+
+				event.preventDefault();
+				event.stopPropagation();
+
+				isMouseDown = false;
+				window.location.hash = hashGridSize() + ";" + hashData();
+
+			}
+
+			function onWindowMouseMove( event ) {
+
+				if ( !isMouseDown ) {
+
+					return;
+
+				}
+
+				mouseX = Math.floor( event.clientX / elementWidth );
+				mouseY = Math.floor( ( event.clientY - elementOffsetTop ) / elementHeight );
+
+				drawPixel( mouseX, mouseY, !isEraseMode );
+			}
+
+			function onWindowKeyDown( event ) {
+
+				if ( event.keyCode == 16 ) { // Shift
+
+					isEraseMode = true;
+
+				}
+
+			}
+
+			function onWindowKeyUp( event ) {
+
+				if ( event.keyCode == 16 ) { // Shift
+
+					isEraseMode = false;
+
+				}
+
+			}
+
+			function drawPixel(x, y, visible) {
+
+				if (x + (y * canvasWidth) < elements.length) {
+
+					elements[x + (y * canvasWidth)].checked = visible;
+
+				}
+
+			}
+
+			function drawImage() {
+
+				clear();
+
+				var i = 0;
+
+				var hash = window.location.hash.split( ';' );
+
+				hash[ 0 ] = hash[ 0 ].substr( 1 );
+
+				var drawingWidth = hash[ 0 ].split( ',' )[ 0 ];
+				var drawingHeight = hash[ 0 ].split( ',' )[ 1 ];
+
+				var offsetWidth = canvasWidth - drawingWidth;
+				var offsetHeight = canvasHeight - drawingHeight;
+
+				var value = hash[ 1 ] == '1';
+
+				var data = hash[ 2 ].split( ',' );
+
+				for ( var j = 0, jl = data.length; j < jl; j++ ) {
+
+					for( var k = 0, kl = parseInt( data[ j ] ); k < kl; k++ ) {
+
+						drawPixel( i % drawingWidth, Math.floor( i / drawingWidth ), value );
+						i++;
+
+					}
+
+					value = !value;
+				}
+			}
+
+			function onWindowResize() {
+
+				createGrid();
+
+			}
+
+			function hashGridSize() {
+
+				return canvasWidth + ',' + canvasHeight;
+
+			}
+
+			function hashData() {
+
+				var i = 0;
+				var count = 0;
+				var value = elements[0].checked;
+				var string = (value ? 1 : 0) + ';';
+
+				while ( i < canvasWidth * canvasHeight ) {
+
+					if (value == elements[i].checked) {
+
+						count++;
+
+					} else {
+
+						string += count + ","
+						value = !value;
+						count = 1;
+
+					}
+
+					i++;
+
+				}
+
+				string += count;
+
+				return string;
+			}
+
+			function clear() {
+
+				for ( var i = 0, l = element.length; i < l; i++ ) {
+
+					elements[i].checked = false;
+
+				}
+			}
+
+		</script>
+		<script src="/js/tongji.js"></script>	
+
+<div class="footer-inner">
+<p align="center"> Copyright&nbsp;  &#169; 2004-01-11&nbsp;<a href="http://luhui.net" title="鲁虺文化网" target="_top">luhui.net</a>&nbsp;all rights reserved.</p>	
+</div>
+</body>
+</html>
