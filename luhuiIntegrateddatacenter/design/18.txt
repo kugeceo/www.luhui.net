@@ -1,0 +1,7 @@
+solidworks导出cad+solidworks就关闭？
+
+
+
+在SolidWorks中导出CAD文件时，程序不应该关闭。导出操作只是在将SolidWorks模型保存为CAD格式的同时，将该模型从SolidWorks的工作区中删除，但SolidWorks程序仍然在运行，并保持打开状态。
+
+如果在导出过程中SolidWorks程序关闭了，则可能是由于其他原因导致程序崩溃或出现错误。这种情况下，请尝试重新启动SolidWorks并执行导出操作。如果问题仍然存在，可以尝试在SolidWorks社区或技术支持中心寻求帮助。
