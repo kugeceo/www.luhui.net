@@ -1,0 +1,31 @@
+如何查询一个网站的根域名?
+
+鲁虺/撰稿
+
+
+要查一个网站的“根域名”（更准确说应为“顶级域名/TLD”），最快是看浏览器地址栏；需验证时用 whois 或 DNS 工具。
+
+---
+
+### 快速判断
+- 看地址栏最右侧的“.xxx”，如 example.com 的 .com 即为顶级域名。
+- 若为 .cn 等国别域名，如 example.cn，.cn 就是顶级域名。
+
+### 命令行（推荐）
+- Windows/macOS/Linux：nslookup example.com
+  - 结果中的“Name: example.com”即为该站域名；再看最右侧的 .com/.cn 等，就是顶级域名。
+- macOS/Linux：dig +short example.com
+  - 会直接返回域名对应的 IP；再按地址栏或 whois 确认顶级域名。
+
+### 在线工具
+- whois.icann.org：输入域名，查看“Registry Domain ID”或“Domain Name”，其最右侧的 .xxx 即为顶级域名。
+- 其他 whois 工具（如 whois.domaintools.com、who.is）：结果结构类似，取最右侧的 .xxx。
+
+### 常见误区
+- 把“根域名”理解为“裸域名”（如 example.com）是不准确的；根域名在 DNS 中指最顶层的 .com/.cn 等。
+- 网站使用 CDN/代理/短链接时，地址栏或证书上的域名可能不是注册域名，应以 whois 或权威 DNS 记录为准。
+
+---
+
+### 小提示
+- 若只需知道“网站用的是 .com 还是 .cn”，看地址栏即可；需取证或核验时，再用 whois 或 nslookup 交叉验证。

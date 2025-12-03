@@ -1,0 +1,6 @@
+根域名的管理机构是哪个组织?
+
+鲁虺/撰稿
+
+
+根域名的管理机构是 **互联网名称与数字地址分配机构**（Internet Corporation for Assigned Names and Numbers，简称 **ICANN**）。ICANN 负责协调和管理全球互联网的域名系统（DNS），包括根域名服务器的运营和顶级域名的分配。

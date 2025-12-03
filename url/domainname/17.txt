@@ -1,0 +1,210 @@
+域名系统安全扩展DNSSEC密钥轮换
+
+鲁虺/撰稿
+
+DNSSEC（域名系统安全扩展）密钥轮换是维护信任链和确保DNS安全的关键过程，旨在定期更新**ZSK（区域签名密钥）**和**KSK（密钥签名密钥）**，以降低私钥泄露风险、适应加密算法升级或应对安全威胁。密钥轮换必须谨慎执行，以避免信任链中断导致DNS解析失败。以下是DNSSEC密钥轮换的详细技术说明，包括流程、类型、注意事项和最佳实践。
+
+### 1. **密钥轮换概述**
+- **目的**：
+  - **安全性**：定期更换密钥，防止私钥被破解或泄露。
+  - **合规性**：适应加密标准更新（如从RSA到ECDSA）。
+  - **应急响应**：应对密钥泄露或算法漏洞。
+- **密钥类型**：
+  - **ZSK（Zone Signing Key）**：签署区域内DNS记录（如A、CNAME），生成RRSIG记录，轮换频繁（每月至每季度）。
+  - **KSK（Key Signing Key）**：签署ZSK的DNSKEY记录，连接信任链，轮换较少（每年或更长）。
+- **信任链影响**：
+  - ZSK轮换仅影响本区域，较简单。
+  - KSK轮换需更新父区域的DS记录，涉及跨区域协调。
+- **风险**：轮换错误（如DS记录未同步、签名过期）可能导致解析失败（SERVFAIL）。
+
+### 2. **ZSK轮换流程**
+ZSK轮换用于更新区域内记录的签名，常见方法是**双签名法（Double Signing）**，确保无缝过渡。
+
+#### 流程：
+1. **生成新ZSK**：
+   - 使用工具（如`dnssec-keygen`、OpenDNSSEC）生成新ZSK对（公钥和私钥）。
+   - 示例（BIND）：
+     ```bash
+     dnssec-keygen -a ECDSAP256SHA256 -n ZONE example.com
+     ```
+2. **发布新ZSK**：
+   - 将新ZSK的公钥添加到区域的DNSKEY记录，与旧ZSK共存。
+   - 示例DNSKEY：
+     ```text
+     example.com. IN DNSKEY 256 3 13 [旧ZSK公钥]
+     example.com. IN DNSKEY 256 3 13 [新ZSK公钥]
+     ```
+3. **重新签名区域**：
+   - 用新ZSK私钥签署区域内所有记录，生成新RRSIG记录。
+   - 旧ZSK的RRSIG仍保留，允许解析器使用任一ZSK验证。
+4. **等待TTL传播**：
+   - 等待DNSKEY记录的TTL（通常1-2天）过期，确保解析器缓存新ZSK。
+5. **移除旧ZSK**：
+   - 从DNSKEY记录中删除旧ZSK及其RRSIG。
+   - 示例命令（BIND）：
+     ```bash
+     dnssec-signzone -o example.com example.com.db
+     ```
+6. **验证**：
+   - 使用`dig`或DNSViz检查新ZSK是否生效，无解析错误。
+   - 示例：
+     ```bash
+     dig example.com DNSKEY +dnssec
+     ```
+
+#### 特点：
+- **无需父区域干预**：ZSK由KSK签名，轮换不影响DS记录。
+- **时间**：通常需TTL时长（1-2天）完成过渡。
+- **频率**：推荐每1-3个月轮换，视区域敏感性而定。
+
+### 3. **KSK轮换流程**
+KSK轮换更复杂，需更新父区域的DS记录，常用方法是**预发布法（Pre-Publication）**。
+
+#### 流程：
+1. **生成新KSK**：
+   - 生成新KSK对（公钥和私钥）。
+   - 示例（BIND）：
+     ```bash
+     dnssec-keygen -a ECDSAP256SHA256 -n ZONE -f KSK example.com
+     ```
+2. **发布新KSK**：
+   - 将新KSK公钥添加到DNSKEY记录，与旧KSK共存。
+   - 示例：
+     ```text
+     example.com. IN DNSKEY 257 3 13 [旧KSK公钥]
+     example.com. IN DNSKEY 257 3 13 [新KSK公钥]
+     ```
+3. **用新KSK签名ZSK**：
+   - 用新KSK私钥签署ZSK的DNSKEY记录，生成新RRSIG。
+4. **更新父区域DS记录**：
+   - 生成新KSK的DS记录（包含KSK公钥的SHA-256哈希）。
+   - 通过注册商上传新DS记录到父区域（如`.com`）。
+   - 示例DS记录：
+     ```text
+     example.com. IN DS [新KSK密钥标签] 13 2 [SHA-256哈希]
+     ```
+   - 可使用CDS/CDNSKEY记录自动化上传：
+     ```text
+     example.com. IN CDS [密钥标签] 13 2 [SHA-256哈希]
+     ```
+5. **等待TTL传播**：
+   - 等待父区域DS记录的TTL（通常1-2天）和信任链传播。
+   - 确保解析器缓存新DS记录。
+6. **移除旧KSK**：
+   - 从DNSKEY记录中删除旧KSK及其RRSIG。
+7. **验证**：
+   - 使用DNSViz或`dig`确认信任链完整，解析正常。
+
+#### 特点：
+- **需父区域协调**：DS记录更新需通过注册商或TLD管理机构。
+- **时间**：需父子区域TTL传播，可能需3-5天。
+- **频率**：推荐每年或更长（如根区KSK每5-10年）。
+
+### 4. **根区密钥轮换**
+- **根区KSK**：
+  - 由ICANN/IANA管理，公钥为全球信任锚。
+  - 使用ECDSA P-256算法，2018年首次轮换（下一轮换预计2026-2028年）。
+  - 通过**密钥签名仪式**更新，涉及受信任社区代表（TCRs），在高安全设施进行。
+- **根区ZSK**：
+  - 由VeriSign管理，每季度轮换，签署根区文件。
+- **信任锚更新**：
+  - 解析器需更新根KSK（手动或通过RFC 5011自动化）。
+  - 示例（Unbound）：
+    ```text
+    auto-trust-anchor-file: "root.key"
+    ```
+- **影响**：根KSK轮换需全球协调，确保所有解析器更新信任锚。
+
+### 5. **紧急密钥轮换**
+- **触发场景**：
+  - 私钥泄露、算法漏洞（如SHA-1被破解）、安全威胁。
+- **ZSK紧急轮换**：
+  - 立即生成新ZSK，签署区域，替换旧ZSK。
+  - 通知解析器加速缓存刷新（缩短TTL）。
+- **KSK紧急轮换**：
+  - 生成新KSK，签署ZSK，快速更新父区域DS记录。
+  - 需紧急协调注册商，可能导致短暂解析中断。
+- **注意**：
+  - 需备份旧密钥以便恢复。
+  - 使用HSM（硬件安全模块）降低泄露风险。
+
+### 6. **技术细节**
+- **加密算法**：
+  - 推荐**ECDSA P-256**（算法ID 13）：高效、签名小。
+  - **RSA-2048/4096**：仍支持，但签名较大，性能较低。
+- **签名有效期**：
+  - RRSIG有效期通常30天，需在轮换前重新签名。
+  - 示例RRSIG：
+    ```text
+    www.example.com. IN RRSIG A 13 3 86400 [过期时间] [开始时间] [密钥标签] example.com. [签名]
+    ```
+- **TTL管理**：
+  - DNSKEY和DS记录的TTL影响轮换时间，需等待缓存更新。
+  - 推荐TTL：1-2天，平衡性能与传播速度。
+- **自动化工具**：
+  - **OpenDNSSEC**：自动生成、轮换和签名。
+  - **PowerDNS**：支持DNSSEC自动化。
+  - **Cloudflare**：一键DNSSEC，自动管理ZSK/KSK和DS更新。
+
+### 7. **挑战与风险**
+- **信任链中断**：
+  - KSK轮换未同步DS记录，导致验证失败。
+  - 旧ZSK/KSK移除过早，解析器缓存未更新。
+- **签名过期**：
+  - RRSIG过期未重新签名，导致解析错误。
+- **复杂性**：
+  - 手动轮换需技术知识，易出错。
+  - KSK轮换需协调父区域，耗时较长。
+- **兼容性**：
+  - 部分旧解析器不支持新算法（如ECDSA），需确保兼容。
+
+### 8. **防止域名劫持的作用**
+- **ZSK轮换**：定期更新记录签名，防止攻击者利用旧签名伪造数据。
+- **KSK轮换**：确保信任链安全，阻止伪造权威服务器。
+- **信任链完整性**：通过DS记录和签名验证，防止DNS劫持或缓存投毒。
+
+### 9. **最佳实践**
+- **自动化轮换**：
+  - 使用OpenDNSSEC、PowerDNS或Cloudflare自动化ZSK/KSK管理。
+  - 启用CDS/CDNSKEY记录，简化DS更新。
+- **安全存储**：
+  - 私钥存储在HSM（如YubiHSM），防止泄露。
+  - 备份密钥，加密存储在离线介质。
+- **定期验证**：
+  - 使用DNSViz（dnsviz.net）或VeriSign DNSSEC Analyzer检查轮换后信任链。
+  - 示例：
+    ```bash
+    dig example.com DNSKEY +dnssec
+    ```
+- **缩短TTL**：
+  - 轮换前降低DNSKEY/DS记录TTL，加速缓存更新。
+- **监控**：
+  - 设置告警，监控签名有效期和解析错误。
+  - 工具：Zabbix、Cloudflare Radar。
+- **选择支持DNSSEC的提供商**：
+  - 注册商：Cloudflare Registrar、Namecheap。
+  - DNS提供商：Cloudflare、Route 53、DNSPod。
+
+### 10. **实施示例**
+- **ZSK轮换（手动，BIND）**：
+  ```bash
+  dnssec-keygen -a ECDSAP256SHA256 -n ZONE example.com  # 新ZSK
+  dnssec-signzone -o example.com example.com.db  # 重新签名
+  ```
+  等待TTL后移除旧ZSK。
+- **KSK轮换（Cloudflare）**：
+  1. 在Cloudflare控制面板生成新KSK。
+  2. 自动生成CDS记录，通知注册商更新DS。
+  3. 验证新DS生效后移除旧KSK。
+- **验证**：
+  ```bash
+  dig www.example.com A +dnssec  # 检查AD标志
+  ```
+
+### 11. **根区轮换现状（2025）**
+- **根ZSK**：VeriSign每季度轮换，自动分发到根服务器。
+- **根KSK**：ICANN管理，2018年轮换，预计2026-2028年再次轮换。
+- **仪式**：每季度密钥签名仪式，公开透明，记录存档。
+
+### 总结
+DNSSEC密钥轮换通过定期更新ZSK和KSK维护DNS安全，ZSK轮换较简单，KSK轮换需协调父区域DS记录。自动化工具、HSM存储和TTL管理是关键，需定期验证信任链以防解析失败。结合DNSSEC验证，密钥轮换有效防止域名劫持。如需具体轮换配置（如某域名的ZSK/KSK设置或工具使用），提供细节，我可进一步指导！

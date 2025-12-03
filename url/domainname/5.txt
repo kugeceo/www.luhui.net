@@ -1,0 +1,107 @@
+如何通过编程的方式查询网站的根域名？
+
+鲁虺/撰稿
+
+通过编程方式查询网站的根域名（即顶级域名，TLD），核心是解析域名的层级结构并提取最右侧的公共后缀部分。以下是几种主流编程语言的实现方法：
+
+### Python 实现
+使用 `tldextract` 库（专门处理域名解析，能识别各种复杂后缀）：
+
+
+
+
+domain_parser.py
+
+
+# 安装依赖：pip install tldextract
+
+import tldextract
+
+def get_root_domain(url):
+    # 提取域名信息
+    extracted = tldextract.extract(url)
+    # 组合二级域名和顶级域名（即注册域名）
+    registered_domain = extracted.registered_domain
+    # 提取顶级域名（根域名）
+    root_domain = extracted.suffix
+    return registered_domain, root_domain
+
+# 测试示例
+test_urls = [
+    "https://www.baidu.com",
+    "http://blog.csdn.net",
+    "https://www.zhihu.com/question/12345",
+    "https://news.sina.com.cn/",
+    "https://www.northwestern.edu",
+    "https://www.ox.ac.uk"
+]
+
+for url in test_urls:
+    registered, root = get_root_domain(url)
+    print(f"URL: {url}")
+    print(f"  注册域名: {registered}")
+    print(f"  根域名(顶级域名): {root}\n")
+
+
+
+### JavaScript 实现
+使用 `psl` 库（Public Suffix List 公共后缀列表的实现）：
+
+domainParser.js
+
+// 安装依赖：npm install psl
+
+const psl = require('psl');
+
+function getRootDomain(url) {
+    try {
+        // 解析URL获取主机名
+        const urlObj = new URL(url);
+        const hostname = urlObj.hostname;
+        
+        // 解析域名结构
+        const parsed = psl.parse(hostname);
+        
+        return {
+            registeredDomain: parsed.domain,
+            rootDomain: parsed.tld  // 顶级域名（根域名）
+        };
+    } catch (error) {
+        console.error('解析错误:', error);
+        return null;
+    }
+}
+
+// 测试示例
+const testUrls = [
+    "https://www.baidu.com",
+    "http://blog.csdn.net",
+    "https://www.zhihu.com/question/12345",
+    "https://news.sina.com.cn/",
+    "https://www.northwestern.edu",
+    "https://www.ox.ac.uk"
+];
+
+testUrls.forEach(url => {
+    const result = getRootDomain(url);
+    console.log(`URL: ${url}`);
+    console.log(`  注册域名: ${result.registeredDomain}`);
+    console.log(`  根域名(顶级域名): ${result.rootDomain}\n`);
+});
+
+
+
+### 实现原理说明
+1. **核心依赖**：这些实现都基于 **公共后缀列表（Public Suffix List）**，该列表包含了所有被认可的顶级域名（如 `.com`、`.org`、`.co.uk` 等），能正确处理复杂的国家/地区特定后缀。
+
+2. **解析步骤**：
+   - 从URL中提取主机名（去除协议、路径等部分）
+   - 解析主机名的层级结构
+   - 识别并提取顶级域名（根域名）
+
+3. **优势**：
+   - 能处理特殊情况（如 `.co.uk`、`.com.cn` 等多级顶级域名）
+   - 自动更新支持新出现的顶级域名
+   - 无需手动维护域名规则库
+
+如果需要在浏览器环境中使用JavaScript版本，可以通过CDN引入psl库，或者使用简化版的正则表达式实现（但正则方式对复杂后缀的识别准确性较低）。
