@@ -1,0 +1,12 @@
+代碼審查
+
+
+鲁虺/撰稿
+
+
+代碼審查（粵拼：doi6 maa5 sam2 caa4；英文：code review）係專業軟件開發上嘅一樣工作：喺呢啲工作上，啲人寫好個程式嘅源碼之後通常會搵人睇吓段碼，當中負責睇段碼嘅人係冇份寫段碼嘅；呢樣嘢就係代碼審查。
+
+寫程式架生好多時會有啲功能，幫手做代碼審查嘅工作，例如有唔少常犯錯誤都係電腦程式可以輕易噉探測到嘅，所以有啲寫程式架生會內置埋「自動噉檢查吓啲碼，睇吓啲碼有冇呢啲常犯錯誤」嘅功能
+
+ Baum, Tobias; Liskin, Olga; Niklas, Kai; Schneider, Kurt (2016). "A Faceted Classification Scheme for Change-Based Industrial Code Review Processes". 2016 IEEE International Conference on Software Quality, Reliability and Security (QRS). pp. 74-85.
+ Kolawa, Adam; Huizinga, Dorota (2007). Automated Defect Prevention: Best Practices in Software Management. Wiley-IEEE Computer Society Press.

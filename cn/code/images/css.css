@@ -1,0 +1,57 @@
+TABLE {
+	FONT-SIZE: 12px; COLOR: #333333; LINE-HEIGHT: 150%; FONT-FAMILY: "Verdana", "宋体"
+}
+TR {
+	FONT-SIZE: 12px; COLOR: #333333; LINE-HEIGHT: 150%; FONT-FAMILY: "Verdana", "宋体"
+}
+TD {
+	FONT-SIZE: 12px; COLOR: #333333; LINE-HEIGHT: 150%; FONT-FAMILY: "Verdana", "宋体"
+}
+FORM {
+	FONT-SIZE: 12px; COLOR: #333333; LINE-HEIGHT: 150%; FONT-FAMILY: "Verdana", "宋体"
+}
+A:link {
+	COLOR: #000066; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #0033cc; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000066; TEXT-DECORATION: none
+}
+.formstyle {
+	BORDER-RIGHT: #a8aab9 1px solid; BORDER-TOP: #585a67 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #585a67 1px solid; BORDER-BOTTOM: #a8aab9 1px solid; FONT-FAMILY: "Tahoma", "宋体"; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff
+}
+.buttonmain {
+	BORDER-RIGHT: #7b9ebd 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #7b9ebd 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cecfde); BORDER-LEFT: #7b9ebd 1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #7b9ebd 1px solid
+}
+.buttongreen {
+	BORDER-RIGHT: #7b9ebd 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #7b9ebd 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cecfde); BORDER-LEFT: #7b9ebd 1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #7b9ebd 1px solid
+}
+INPUT {
+	BORDER-TOP-WIDTH: 1px; PADDING-RIGHT: 1px; PADDING-LEFT: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: #cccccc; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #cccccc; PADDING-BOTTOM: 1px; BORDER-TOP-COLOR: #cccccc; PADDING-TOP: 1px; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #cccccc
+}
+A.mf:link {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+A.mf:active {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+A.mf:visited {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+A.mf:hover {
+	FONT-WEIGHT: bolder; COLOR: #ff9900; TEXT-DECORATION: none
+}
+.Content {
+	FONT-SIZE: 10.5pt; LINE-HEIGHT: 160%
+}
+.Article_title {
+	FONT-SIZE: 17pt; LINE-HEIGHT: 160%
+}
+.Article_Content {
+	FONT-SIZE: 10.5pt; LINE-HEIGHT: 160%
+}
+.Font_s {
+	FONT-SIZE: 12px; LINE-HEIGHT: 120%; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif, "??"
+}

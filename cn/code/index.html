@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh">
+<base href="../../wap/">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<meta name="author" content="viggo" />
+	<title>鲁虺软件源码资源网 http://soft.luhui.net 鲁虺软件源码数据教程官方下载站，鲁虺软件资源搜索引擎群,快速找到免费商业软件、PC、Mac®、Android™、iOS、优秀开源软件、实用App Store、有趣、绿色的软件,APP应用,手机应用,系统软件搜索下载,资源搜索Asp源码资源,.NET源码,PHP源码,JSP源码,FLASH源码,书籍教程,其他资源,搜索免费资源,软件下载,程序开发,网站制作,手机应用,webapp,电脑教程,免费海量软件高速下载,全球最好网真互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网</title>
+	<link href="http://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="http://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<meta name="keywords"
+	  content="鲁虺系统软件,Windows电脑操作系统,鲁虺应用软件资源导航,鲁虺软件搜索导航,Mac OS鲁虺软件链接,App Store鲁虺软件下载,luhuiAPP应用,PC、Mac®、Android™、iOS、iPhone、iPad 和iPod touch、优秀开源软件、实用App Store搜索鲁虺软件,发现者鲁虺,科学,探索,未解之谜,UFO,宇宙,天文,黑洞,流星,文明,恐龙,考古,自然,环保,奥秘,地理,科幻文学,科学图片,彗星,太空,地球文章, AI资讯, AI敏锐度, AI新思维, AI实时热点, AI学习, AI绘画, 机器学习, 自然语言处理, AI工具导航, AI工具菜单, 机器学习工具, AI辅助工具, aimappro">
+	<meta name="description"
+	  content="鲁虺应用软件资源搜索导航提拱海量免费软件系统安全下载,软件是一系列按照特定顺序组织的电脑数据和指令,是各种移动或非移动智能电子设备中的非有形部分。电脑或移动设备中的有形部分称为硬件,由电脑或手机或其它物联网设备的外壳及各零件及电路所组成。电脑或手机或其它物联网设备软件需有硬件才能运作,反之亦然,软件和硬件都无法在不互相配合的情形下进行实际的运作。 一般来说,计算机软件划分为编程语言、系统软件、应用软件和介于这两者之间的中间件。">
+	<meta property="og:title"
+	content="鲁虺鲁虺软件,资源探索更新,鲁虺软件源码数据 - 敏锐洞察行业动态，深度挖掘新思维">
+	<meta property="og:description"
+	content="鲁虺鲁虺软件,资源探索更新,鲁虺软件源码数据 保持敏锐的行业洞察，深度挖掘并探索新的思维模式。带你走进AI的世界，轻松掌握AI的最新动态，提升你的AI技能。">
+	<meta property="og:image"	content="./assets/images/AiMapProOg.jpg">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="http://www.luhui.net">
+	<meta property="og:site_name" content="鲁虺鲁虺软件,资源探索更新,鲁虺软件源码数据">
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="鲁虺鲁虺软件,资源探索更新,鲁虺软件源码数据 - 敏锐洞察行业动态，深度挖掘新思维">
+	<meta name="twitter:description"
+	content="鲁虺鲁虺软件,资源探索更新,鲁虺软件源码数据 保持敏锐的行业洞察，深度挖掘并探索新的思维模式。带你走进AI的世界，轻松掌握AI的最新动态，提升你的AI技能。">
+	<meta name="twitter:image" content="./assets/images/AiMapProOg.jpg">
+	<link rel="shortcut icon" href="./assets/images/favicon.png">
+	<link rel="stylesheet" href="./assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="./assets/css/bootstrap.css">
+	<link rel="stylesheet" href="./assets/css/article.css">
+	<link rel="stylesheet" id="theme-css" href="./assets/css/xenon-core.css">
+	<link rel="stylesheet" href="./assets/css/xenon-components.css">
+	<link rel="stylesheet" href="./assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="./assets/css/nav.css">
+	<script src="./assets/js/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body class="page-body">
+	<!-- skin-white -->
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed" id="sidebar-top" style="height: 60px">
+<div class="sidebar-menu-inner">
+	<header class="logo-env">
+		<!-- logo -->
+		<div class="logo">
+<a href=".././cn/code/index.html" class="logo-expanded">
+	<img src=".././cn/code/images/logo.gif" width="100%" alt="" />
+</a>
+<a href=".././cn/code/index.html" class="logo-collapsed">
+	<img src=".././cn/code/images/logo.gif" width="40" alt="" />
+</a>
+		</div>
+		<button class="menu-toggle" style="border: none; background-color: transparent;">
+		    <i class="fas fa-bars"></i>
+		</button>	
+	</header>
+	<ul id="main-menu" class="main-menu">
+		<li>
+<a href="cultural.html">
+	<i class="linecons-desktop"></i>
+	<span class="tooltip-blue">文化传媒</span>
+</a>
+		</li>
+		<li>
+<a  href="neuralnetwork.html">
+	<i class="linecons-search"></i>
+	<span class="tooltip-blue">神经网络</span>
+</a>
+		</li>
+		<li>
+<a href="artificialemotions.html">
+	<i class="linecons-photo"></i>
+	<span class="tooltip-blue">人工情感</span>
+</a>
+		</li>
+		<li>
+<a href="designIntelligence.html">
+	<i class="linecons-tag"></i>
+	<span class="tooltip-blue">设计智造</span>
+</a>
+		</li>
+		<li class="active">
+<a href="/cn/code/">
+	<i class="linecons-doc"></i>
+	<span class="tooltip-blue">鲁虺源码</span>
+</a>
+		</li>
+		<li>
+<a href="lifeservices.html">
+	<i class="linecons-calendar"></i>
+	<span class="tooltip-blue">生活服务</span>
+</a>
+		</li>
+		<li>
+<a href="searchengines.html">
+	<i class="linecons-params"></i>
+	<span class="tooltip-blue">搜索引擎</span>
+</a>
+		</li>
+		<li>
+<a href="about.html">
+	<i class="linecons-user"></i>
+	<span class="tooltip-blue">关于我们</span>
+</a>
+		</li>
+	</ul>
+		</div>
+	</div>
+	
+	<div class="sidebar-wrapper">
+		<div id="sidebar">
+<div class="sidebar-header">
+	<button class="close"><i class="fas fa-times"></i></button>
+</div>
+<ul id="main-menu" class="main-menu">
+	<li>
+		<a href="cultural.html">
+<i class="linecons-desktop"></i>
+<span class="tooltip-blue">文化传媒</span>
+		</a>
+	</li>
+	<li>
+		<a  href="neuralnetwork.html">
+<i class="linecons-search"></i>
+<span class="tooltip-blue">神经网络</span>
+		</a>
+	</li>
+	<li>
+		<a href="artificialemotions.html">
+<i class="linecons-photo"></i>
+<span class="tooltip-blue">人工情感</span>
+		</a>
+	</li>
+	<li>
+		<a href="designIntelligence.html">
+<i class="linecons-tag"></i>
+<span class="tooltip-blue">设计智造</span>
+		</a>
+	</li>
+	<li class="active">
+		<a href="/cn/code">
+<i class="linecons-doc"></i>
+<span class="tooltip-blue">鲁虺源码</span>
+		</a>
+	</li>
+	<li>
+		<a href="lifeservices.html">
+<i class="linecons-calendar"></i>
+<span class="tooltip-blue">生活服务</span>
+		</a>
+	</li>
+	<li>
+		<a href="searchengines.html">
+<i class="linecons-params"></i>
+<span class="tooltip-blue">搜索引擎</span>
+		</a>
+	</li>
+	<li>
+		<a href="about.html">
+<i class="linecons-user"></i>
+<span class="tooltip-blue">关于我们</span>
+		</a>
+	</li>
+</ul>
+		</div>
+	</div>
+		<div class="main-content">
+<script src="/js/header.js#/search/js/link.js"></script>
+
+<div id="main-contents">
+	<div class="topbar">
+	
+		<div class="slideshow-hi-wrapper">
+		        <i class="fa fa-search"></i>
+		        <input type="text" id="search-input" placeholder="搜索">
+		</div>
+<!-- 公告轮动 -->
+		<div id="announcement-container"></div>
+	</div>
+	<!-- 推荐
+
+	<div id="rss-feeds"></div>
+
+	<div class="sk-folding-cube" id="loading">
+	  <div class="sk-cube1 sk-cube"></div>
+	  <div class="sk-cube2 sk-cube"></div>
+	  <div class="sk-cube4 sk-cube"></div>
+	  <div class="sk-cube3 sk-cube"></div>
+	</div> -->
+
+
+<h3 title="鲁虺网络社区文化资源" class="text-gray">🧭鲁虺网络<a title="社区文化专题" target="_top" href="/cn/club/whzt.htm">社区文化</a>资源</h3>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+ </tr>	
+
+	<h4 id="category-title">所有资源</h4>
+	<div class="category-buttons-container">
+	  <button class="category-button" data-label="整站数据">整站数据</button>
+	  <button class="category-button" data-label="psd">PSD素材</button>
+	  <button class="category-button" data-label="ai">AI稿</button>
+	  <button class="category-button" data-label="cdr">cdr文件</button>
+	  <button class="category-button" data-label="源码合集">源码合集</button>
+	  <button class="category-button" data-label="Java">Java源碼</button>
+	  <button class="category-button" data-label="apk">安卓app</button>
+	  <button class="category-button" data-label="苹果ios">苹果ios</button>
+	  <button class="category-button" data-label="小程序">小程序</button>
+	  <button class="category-button" data-label="HTML模板">HTML模板</button>
+	  <button class="category-button" data-label="HTML5模板">HTML5模板</button>
+	  	  <button class="category-button" data-label="php">PHP源碼</button>
+	  <button class="category-button" data-label="DM电子杂志">DM电子杂志</button>
+	  	  <button class="category-button" data-label="网页游戏">网页游戏</button>
+	  <button class="category-button" data-label="电子商务">电子商务</button>
+	  <button class="category-button" data-label="视频剪辑">视频剪辑</button>
+	  <button class="category-button" data-label="录音剪辑">录音剪辑</button>
+	  <button class="category-button" data-label="文案">商业文案</button>
+	  <button class="category-button" data-label="语言翻译">语言翻译</button>
+	  <button class="category-button" data-label="wordpress">wordpress专题</button>
+	  <button class="category-button" data-label="ecshop">ecshop专题</button>
+	  <button class="category-button" data-label="Discuz">Disucuz专题</button>
+	  <button class="category-button" data-label="pbootcms">pbootcms专题</button>
+	  <button class="category-button" data-label="EmpireCMS">EmpireCMS帝国</button>
+	  <button class="category-button" data-label="dedecms">dedecms织梦</button>
+	  <button class="category-button" data-label="织梦">织梦dedecms</button>
+	  <button class="category-button" data-label="phpwind">phpwind专题</button>
+	  <button class="category-button" data-label="ThinkPHP">ThinkPHP专题</button>
+	  <button class="category-button" data-label="phpcms">phpcms专题</button>
+	  <button class="category-button" data-label="shopex">shopex专题</button>
+	  <button class="category-button" data-label="sdcms">PHP源碼</button>
+	  <button class="category-button" data-label="jsp">JSP源碼</button>
+	  <button class="category-button" data-label=".NET">.NET源碼</button>
+	  <button class="category-button" data-label="CSS">CSS源碼</button>
+	  <button class="category-button" data-label="CGI">CGI源碼</button>
+	  <button class="category-button" data-label="HR">HR人才招聘</button>
+	  <button class="category-button" data-label="CRM">CRM客户管理</button>
+	  <button class="category-button" data-label="ERP">ERP仓储管理</button>
+	  <button class="category-button" data-label="SEO">SEO搜索链接</button>
+	  <button class="category-button" data-label="GOV">GOV电子政务</button>
+	  <button class="category-button" data-label="shop">shop网店商城</button>
+	  <button class="category-button" data-label="IMG">IMG图像管理</button>
+	  <button class="category-button" data-label="VOD">VOD影音娱乐</button>
+	  <button class="category-button" data-label="OA">OA网络办公</button>
+	  <button class="category-button" data-label="game">game游戏源码</button>
+	  <button class="category-button" data-label="CMS">CMS建站系统</button>
+	  <button class="category-button" data-label="img">img图形图像</button>
+	  <button class="category-button" data-label="down">down上传下载</button>
+	  <button class="category-button" data-label="EMAIL">EMAIL电子邮件</button>
+	  <button class="category-button" data-label="aspcms">aspcms源碼</button>
+	  <button class="category-button" data-label="JavaScript">JavaScript源碼</button>
+	  <button class="category-button" data-label="Flash">Flash源碼</button>
+	  <button class="category-button" data-label="Objective-C">Objective-C源碼</button>
+	  <button class="category-button" data-label="Delphi">Delphi源碼</button>
+	  <button class="category-button" data-label="Dockerfile">PHP源碼</button>
+	  <button class="category-button" data-label="CFML">PHP源碼</button>
+	  <button class="category-button" data-label="Groovy">PHP源碼</button>
+	  <button class="category-button" data-label="Ajax">PHP源碼</button>
+	  <button class="category-button" data-label="bat">bat批处理文件</button>
+	  <button class="category-button" data-label="Python">Python源碼</button>
+	  <button class="category-button" data-label="VB">VB源碼</button>
+	  <button class="category-button" data-label="C语言">C语言</button>
+	  <button class="category-button" data-label="ruby">ruby源碼</button>
+	  <button class="category-button" data-label="易语言">易语言</button>
+	  <button class="category-button" data-label="go">go语言</button>
+	  <button class="category-button" data-label="算法">机器算法</button>
+	  <button class="category-button" data-label="模型">模型</button>
+	  <button class="category-button" data-label="黑客">黑客防线</button>
+	</div>	
+	
+
+
+<div class="searchtopbar">
+<div class="searchslideshow-hi-wrapper"> 
+<!--此方法可以自动获取调用网址来源-->
+<script>var yreflocation_html=document.location.href;</script><script>var url="<iframe allowTransparency=true border=0 align=center vspace=0  hspace=0 name=searchbar marginwidth=0 marginheight=0 framespacing=0 frameborder=0 scrolling=no width=100% height=60";url+='  src="/search/code46840.htm?url='+escape(yreflocation_html)+'"></iframe>';document.write(url);</script>
+</div>
+</div>
+
+	
+	<div id="recommendations-container" class="row">
+	    <!-- 推荐卡片会在这里动态生成 -->
+	</div>
+	
+	
+	<nav style="margin-top: 30px;">
+	  <div class="d-flex justify-content-center d-none d-xl-flex">
+	        <div class="d-flex align-items-center pagination-container w-100">
+	            <div class="d-flex justify-content-center align-items-center w-100">
+	                <div>
+	                    <span id="page-info" class="mx-2"></span>
+	                </div>
+	                <div class="mx-2">
+	                    <input type="text" id="page-input" class="form-control form-control-sm text-center" autocomplete="off">
+	                </div>
+	                <div class="d-flex align-items-center">
+	                    <button id="first-page-button" class="btn btn-primary btn-sm">首页</button>
+	                    <ul id="pagination" class="pagination justify-content-center">
+	                        <!-- 分页按钮将在这里动态生成 -->
+	                    </ul>
+	                    <button id="last-page-button" class="btn btn-primary btn-sm">尾页</button>
+	                </div>
+	
+	            </div>
+	        </div>
+	    </div>
+	</nav>
+	
+	
+	
+	
+	<div id="mobile-pagination" class="d-flex align-items-center justify-content-center d-block d-xl-none">
+	    <button id="mobile-prev-page-button" class="btn btn-primary btn-sm">上一页</button>
+	    <input type="text" id="mobile-page-info" class="form-control form-control-sm text-center" autocomplete="off">
+	    <button id="mobile-next-page-button" class="btn btn-primary btn-sm">下一页</button>
+	</div>
+
+	
+	<div class="content-wrapper">
+		<main id="content"></main>
+	</div>
+
+	
+	
+	
+	
+
+
+<script type="text/javascript">
+ad4all_url="/cn/Netchain";//虺客链[酷站]
+document.writeln('<div id="ShowAD" style="position:absolute; z-index: 100;"> ');
+document.writeln('<div style="width:100%;height:18px;font-size:14px;font-weight:bold;text-align:right;CURSOR: hand;" onclick="closead();">关闭&nbsp;</div>');
+document.writeln('  <iframe scrolling="no" style="width:100%;height:500px;" frameborder="0" src="'+ad4all_url+'"></iframe>');
+document.writeln('</div>');
+
+var bodyfrm = ( document.compatMode.toLowerCase()=="css1compat" ) ? document.documentElement : document.body;
+var adst = document.getElementById("ShowAD").style;
+	adst.top = ( bodyfrm.clientHeight - 218 ) + "px";
+	adst.left = ( bodyfrm.clientWidth - 778 ) + "px";
+function moveR() {
+	adst.top = ( bodyfrm.scrollTop + bodyfrm.clientHeight - 500 ) + "px";
+	adst.left = ( bodyfrm.scrollLeft + bodyfrm.clientWidth - 778 ) + "px";
+}
+setInterval("moveR();", 80);
+
+function closead()
+{
+	adst.display='none';
+}
+</script>
+
+
+
+
+
+<br />
+
+	<div class="footer-inner">
+<p align="center"> Copyright&nbsp;  &#169; 2004-01-11&nbsp;<a href="http://luhui.net" title="鲁虺文化网" target="_top">luhui.net</a>&nbsp;all rights reserved.</p>	
+		<div id="back-to-top-btn" style="display:none;">
+		    <i class="fas fa-angle-double-up" style="font-size: 25px;"></i>
+		</div>
+
+
+		<div class="footer-inner">
+		    <div id="back-to-top-btn" style="display:none;">
+		        <i class="fas fa-angle-double-up" style="font-size: 25px;"></i>
+		    </div>
+		
+		    <div id="share-switcher-btn">
+		        <i class="fa-brands fa-weixin"></i>
+		    </div>
+		
+		    <div id="share-popup" class="share-popup">
+		        <div class="share-popup-content">
+		            <img id="qrcode" src="./assets/images/flags/weixin.png" alt="二维码" />
+		        </div>
+		        <div class="copy-btn-container">
+		            <button id="copy-btn" class="share-popup-copy-btn">扫码入群</button>
+		        </div>
+		    </div>
+		</div>
+
+		
+		<div id="color-switcher-btn">
+		    <i class="sun-icon fas fa-sun"></i>
+		    <i class="moon-icon fas fa-moon"></i>
+		</div>
+		
+		<div id="language-switcher-btn">
+<i class="fas fa-language"></i>
+		</div>
+
+	</div>
+</div>
+		</div>
+	</div>
+
+	<script src="./assets/js/ultimateevolution.js"></script>
+	<script src="./assets/js/news.js"></script>
+    <script src="/js/tongji.js"></script>
+	<script>
+		document.addEventListener('contextmenu', function(event) {
+		  event.preventDefault();
+		});
+	</script>
+	<script src="./assets/js/lozad.js"></script>
+	<script src="./assets/js/color.js"></script>
+</body>
+</html>
