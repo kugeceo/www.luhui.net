@@ -1,0 +1,118 @@
+<style TYPE="text/css">
+<!--
+A:link{text-decoration:none}
+A:visited{text-decoration:none}
+A:hover {color:#FFFFFF;text-decoration:underline overline}
+ -->
+</style>
+<SCRIPT LANGUAGE="JavaScript" SRC="Config.js"></SCRIPT>
+<BODY ONLOAD="BodyTxtLoaded()" SCROLL="no" LEFTMARGIN="0" TOPMARGIN="1" onselectstart="self.event.returnValue=false" oncontextmenu="return false">
+<INPUT TYPE="HIDDEN" NAME="musicname" VALUE=""><DIV ALIGN="center" ID="statics"></DIV>
+<SCRIPT LANGUAGE="JavaScript">
+	function killErrors() {
+		return true;
+	}
+
+	window.onerror = killErrors;
+
+	var windowHeight;
+
+	function BodyTxtLoaded() {
+		windowHeight = LineHeight * LrcShowLine;
+		document.bgColor = LrcBgcolor;
+		var statStr = "";
+		for (var i = 1; i <= parseInt(LrcShowLine/2); i ++) {
+			statStr += "<br style=\"line-height:" + LineHeight + " px\">"
+		}
+		statStr += "<table height=\"" + LineHeight + "\"><td height=\"100%\" nowrap><a href=http://www.lixinrx.cn target=_blank><font style=\"font-size:" + LrcFontSize + "px; color:" + LrcHLColor + "; line-height: " + LineHeight + "px\">利辛热线，精彩无限</font></a></td><table>";
+		document.all("statics").innerHTML = statStr;
+		parent.document.all("LRCTXTSTATE").value = "loaded";
+		parent.document.all("LRCTXT").style.height = windowHeight;
+		parent.document.all("LRCTXT").style.width = 142;
+		parent.parent.document.all("WebLrc").style.height = windowHeight;
+		parent.parent.document.all("WebLrc").style.width = 142;
+		checkLoaded();	
+	}
+
+	function checkLoaded() {
+		var musicname = document.all("musicname").value;
+		if (musicname == "") {
+			setTimeout("checkLoaded();", 500);}
+		else {
+			outLrc(musicname);
+		}
+	}
+
+	function outLrc(musicname)
+	{
+		var xmldoc, tags;
+		var outputLrc;
+		
+		outputLrc = "<style type=\"text/css\">\n";
+		outputLrc += "Body,Div { \n";
+		outputLrc += "	FONT-SIZE: " + LrcFontSize + "px; FONT-FAMILY: " + LrcFontFace + "; line-height: " + LineHeight + "px; Cursor: default;\n";
+		outputLrc += "} \n";
+		outputLrc += "Td { \n";
+		outputLrc += "	FONT-SIZE: " + LrcFontSize + "px; FONT-FAMILY: " + LrcFontFace + "; Cursor: default;\n";
+		outputLrc += "}\n";
+		outputLrc += "</style>\n";
+		outputLrc += "<BODY topmargin=\"0\" leftmargin=\"0\" text=\"" + LrcColor + "\" scroll=\"no\" bgcolor=\"" + LrcBgcolor + "\" onselectstart=\"self.event.returnValue=false\" oncontextmenu=\"return false\">\n";
+		outputLrc += "<DIV ID=\"content\" STYLE=\"position: relative; HEIGHT: " + windowHeight + "px; LEFT: 0px; TOP: 0px; WIDTH: 100%\">\n";
+		outputLrc += "<Table Border=\"0\" Align=\"center\" CellSpacing=\"0\" CellPadding=\"0\">\n";
+		
+		if (LrcShowLine % 2 == 0) {
+			outputLrc += "<Tr><Td Id=\"ll" + (1 - LrcShowLine/2) + "\" height=\"" + parseInt(LineHeight/2) + "\" align=\"center\" nowrap></Td></Tr>\n";
+			LrcShowLine --;
+		}
+
+		var loopNum = parseInt(LrcShowLine/2);
+		for (var loopIndex = 0; loopIndex < loopNum; loopIndex ++) {
+			outputLrc += "<Tr><Td Id=\"ll" + (loopIndex - loopNum + 1) + "\" height=\"" + LineHeight + "\" align=\"center\" nowrap></Td></Tr>\n";
+		}
+		
+		xmldoc = getXMLDOC(musicname);
+
+		if (xmldoc.lastChild.firstChild.hasChildNodes()) {
+			var LrcNode = xmldoc.getElementsByTagName("LRC");
+			var offsetNode = xmldoc.getElementsByTagName("OFFSET");
+			if (offsetNode.item(0).hasChildNodes()) {
+				tags = offsetNode.item(0).firstChild.nodeValue + "|";}
+			else{
+				tags = "0|";
+			}
+			for (loopIndex = 0; loopIndex < LrcNode.length; loopIndex ++) {
+				tags = tags + LrcNode.item(loopIndex).attributes.getNamedItem("TAG").value + "|";
+				outputLrc += "<Tr><Td Id=\"ll" + (loopIndex + 1) + "\" height=\"" + LineHeight + "\" align=\"center\" nowrap>";
+				if (LrcNode.item(loopIndex).hasChildNodes()) {
+					outputLrc += LrcNode.item(loopIndex).firstChild.nodeValue;
+				}
+				outputLrc += "</Td></Tr>\n";
+			}
+			outputLrc += "<Tr><Td Id=\"ll" + (loopIndex + 1) + "\" height=\"" + LineHeight + "\" align=\"center\">";
+			outputLrc += "www.23free.com";
+		}
+		else {
+			tags = "";
+			outputLrc += "<Tr><Td height=\"" + LineHeight + "\" align=\"center\" style=\"color: " + LrcHLColor + "\" nowrap>歌词未找到 请联系管理员</Td></Tr>\n";
+			outputLrc += "<Tr><Td height=\"" + LineHeight + "\" align=\"center\" style=\"color: " + LrcHLColor + "\" nowrap>";
+			outputLrc += "www.23free.com";
+		}
+		
+		outputLrc += "</Td></Tr>\n";
+		outputLrc += "</Table>\n";
+		outputLrc += "</DIV>\n";
+		outputLrc += "</BODY>\n";
+
+		document.write(outputLrc);
+		parent.document.all("TAGS").value = tags;
+		parent.document.all("LRCTXTSTATE").value = "loaded";
+	}
+	
+	function getXMLDOC(musicname) {
+		var xmlUrl = new ActiveXObject("Microsoft.XMLHTTP");
+		xmlUrl.Open("GET", "lyrics.asp?music=" + musicname, false);
+		xmlUrl.Send();
+		return(xmlUrl.ResponseXML);
+	}
+</SCRIPT>
+</BODY>

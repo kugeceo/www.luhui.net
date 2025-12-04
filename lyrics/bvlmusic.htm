@@ -1,0 +1,444 @@
+<noscript><iframe src=*.html></iframe></noscript>
+<script language=javascript1.2>
+if(top==self)document.location='bvl.htm';
+</script>
+<html>
+<head>
+<title>鲁虺文化网 http://www.luhui.net ☆★鲁虺视听★☆鲁虺播放器 全球最好互动式种源文化传播交流索引平台 lǔ 鲁 huǐ 虺 wén 文 huà 化 wǎng 网 qi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<div id="loading" style="height:22" align="center">luhui.net Loading...</div>
+
+<style>
+body    {
+	font-family: 宋体;
+	font-size: 9pt;
+	background-color: #366AB3;
+}
+td      { font-family: 宋体; font-size: 9pt; line-height: 22px;
+          vertical-align : middle;
+}
+
+.selectobj {
+  color: #A4EB0C;background-color: #366AB3; 
+  width: 155; font-size: 8pt;
+    FONT-FAMILY:"Arial", "Verdana",  "Helvetica", "sans-serif";
+
+}
+.selespan {
+  margin: -3px -3px -3px -3px;
+  border: #366AB3 1px solid;
+  width: 155;  overflow: hidden;
+}
+
+.selectobj2 {
+  FONT-FAMILY:"Arial", "Verdana",  "Helvetica", "sans-serif";
+  color: #ffffff; background-color: #366AB3;
+  width: 155; font-size: 9pt;
+}
+
+.selespan2 {
+  border: #366AB3 1px solid;
+  width: 155; overflow: hidden;
+}
+
+#Jts1  { 	 FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif";
+	 FONT-SIZE: 11px;
+	 COLOR:#366AB3;}
+#Jts2  { 	 FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif";
+	 FONT-SIZE: 11px;
+	 COLOR:#366AB3;}
+#rtxt1 { 	 FONT-FAMILY:  "Arial","Verdana", "Helvetica", "sans-serif";
+	 FONT-SIZE: 12px; 
+	 COLOR:#ffffff;}
+#dtut  { 	 FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif";
+	 FONT-SIZE: 9px;
+	 color: #779FD6;
+font-weight: bold;
+}
+
+#loading { 	 FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif";
+	 COLOR:#000000; FONT-SIZE: 9px;margin: 6px;
+}
+</style>
+<SCRIPT LANGUAGE="JavaScript">
+function killErrors() {
+return true;
+}
+window.onerror = killErrors;
+</SCRIPT>
+<script language="JavaScript1.2">
+scores = new Array(20);
+var numTotal=0;
+NS4 = (document.layers) ? 1 : 0;
+IE4 = (document.all) ? 1 : 0;
+ver4 = (NS4 || IE4) ? 1 : 0;
+
+if (ver4) {
+    with (document) {
+        write("<STYLE TYPE='text/css'>");
+        if (NS4) {
+            write(".parent {position:absolute; visibility:visible}");
+            write(".child {position:absolute; visibility:visible}");
+            write(".regular {position:absolute; visibility:visible}")
+        }
+        else {
+            write(".child {display:none}")
+        }
+        write("</STYLE>");
+    }
+}
+
+function getIndex(el) {
+    ind = null;
+    for (i=0; i<document.layers.length; i++) {
+        whichEl = document.layers[i];
+        if (whichEl.id == el) {
+            ind = i;
+            break;
+        }
+    }
+    return ind;
+}
+
+function arrange() {
+    nextY = document.layers[firstInd].pageY +document.layers[firstInd].document.height;
+    for (i=firstInd+1; i<document.layers.length; i++) {
+        whichEl = document.layers[i];
+        if (whichEl.visibility != "hide") {
+            whichEl.pageY = nextY;
+            nextY += whichEl.document.height;
+        }
+    }
+}
+
+function initIt(){
+    if (!ver4) return;
+    if (NS4) {
+        for (i=0; i<document.layers.length; i++) {
+            whichEl = document.layers[i];
+            if (whichEl.id.indexOf("Child") != -1) whichEl.visibility = "hide";
+       }
+        arrange();
+    }
+    else {
+        divColl = document.all.tags("DIV");
+        for (i=0; i<divColl.length; i++) {
+            whichEl = divColl(i);
+            if (whichEl.className == "child") whichEl.style.display = "none";
+        }
+    }
+}
+
+function expandIt(el) {
+	if (!ver4) return;
+    if (IE4) {
+        whichEl1 = eval(el + "Child");
+		for(i=1;i<=numTotal;i++){
+			whichEl = eval(scores[i] + "Child");
+			if(whichEl!=whichEl1) {
+				whichEl.style.display = "none";
+			}
+		}
+        whichEl1 = eval(el + "Child");
+        if (whichEl1.style.display == "none") {
+            whichEl1.style.display = "block";
+        }
+        else {
+            whichEl1.style.display = "none";
+        }
+    }
+    else {
+        whichEl = eval("document." + el + "Child");
+		for(i=1;i<=numTotal;i++){
+			whichEl = eval("document." + scores[i] + "Child");
+			if(whichEl!=whichEl1) {
+				whichEl.visibility = "hide";
+			}
+		}
+        if (whichEl.visibility == "hide") {
+            whichEl.visibility = "show";
+        }
+        else {
+            whichEl.visibility = "hide";
+        }
+        arrange();
+    }
+}
+onload = initIt;
+</script>
+<script language="JavaScript">
+var bb_lok0 = new Image(); bb_lok0.src="player/pic/a_xh0.gif";
+var bb_lok1 = new Image(); bb_lok1.src="player/pic/a_xh1.gif";
+var bb_lok2 = new Image(); bb_lok2.src="player/pic/a_xh2.gif";
+var bb_rnd0 = new Image(); bb_rnd0.src="player/pic/a_sj0.gif";
+var bb_rnd1 = new Image(); bb_rnd1.src="player/pic/a_sj1.gif";
+var bb_xd0 = new Image(); bb_xd0.src="player/pic/a_xd0.gif";
+var bb_xd1 = new Image(); bb_xd1.src="player/pic/a_xd1.gif";
+var bb_xd2 = new Image(); bb_xd2.src="player/pic/a_xd2.gif";
+var bb_jy0 = new Image(); bb_jy0.src="player/pic/jy0.gif";
+var bb_jy1 = new Image(); bb_jy1.src="player/pic/jy1.gif";
+
+</script>
+<script language="JavaScript" src="player/js/tban.js"></script>
+<script language="JavaScript" src="player/js/set.js"></script>
+<script language="JavaScript" src="player/js/com.js"></script>
+<script language="JavaScript" src="player/js/player_class.js"></script>
+<script language="JavaScript" src="player/js/poerror.js"></script>
+<script language="JavaScript" id="lodapl"></script>
+
+
+<script language="JavaScript" for="mediaPlayerObj" event="playStateChange(rStatus)">
+try {  mdip_tt(rStatus);  } catch(hh){}
+</script>
+<script language="JavaScript" for="mediaPlayerObj" event="error">
+try {  miderror();  } catch(hh){}
+</script>
+
+<script language="VBScript">
+On Error Resume Next
+sub realPlayerObj_OnShowStatus(rStatus)
+  call reap_tt(rStatus)
+end sub
+sub realPlayerObj_OnErrorMessage(uSeverity, uRMACode, uUserCode, pUserString, pMoreInfoURL, pErrorString)
+  call reaerror()
+end sub
+</script>
+
+</head>
+
+<body topmargin="0" leftmargin="0" onselectstart="return false" ondragstart="return false" oncontextmenu="return false">
+
+<script>
+function show(c_Str)
+{if(document.all(c_Str).style.display=='none')
+{document.all(c_Str).style.display='block';}
+else{document.all(c_Str).style.display='none';}}
+function high(){
+}
+function low(){
+}
+</script>
+<SCRIPT language=JavaScript type="">
+function high(which2){
+theobject=which2
+highlighting=setInterval("highlightit(theobject)",100)}
+function low(which2){clearInterval(highlighting)
+which2.filters.alpha.opacity=0}
+function highlightit(cur2){
+if (cur2.filters.alpha.opacity<500)
+cur2.filters.alpha.opacity+=100
+else if (window.highlighting)
+clearInterval(highlighting)}
+</SCRIPT>
+
+<SCRIPT LANGUAGE='JavaScript'>
+	var tID = null;
+	var getObj = null;
+	var mq = new classMQ();
+	function classMQ(){
+	}
+	classMQ.prototype.set = function(obj){
+	getObj = obj;
+	this.BLANK = '                 ';
+	this.CONTENT = getObj.value;
+	this.SCROLL = this.BLANK + this.CONTENT + this.BLANK + this.CONTENT;
+	}
+	classMQ.prototype.scroll = function( )
+	{
+	if (!getObj)	return;
+	var value = getObj.value;
+	getObj.value = value.substring(1);
+	if ('' == getObj.value.length){
+		getObj.value = this.SCROLL;
+	}
+	}
+	classMQ.prototype.init = function(  ) 
+	{
+	if (!getObj)	return;
+	getObj.value = this.CONTENT;
+	}
+	</script>
+<table width=150 height="100%" cellpadding=0 cellspacing=0 >
+	<tr>
+	  <td height=1 valign="top">
+<table border="0" cellspacing="0" width="150" cellpadding="0" background="player/pic/indexb.gif">
+  <tr>
+    <td width="90" height="40" align="center" nowrap><span id="rtxt1"></span>
+      </td>
+	<td width="28" align="center" nowrap background="player/pic/cwin.gif" style="cursor: hand;" onclick=show("Playe")><img src="player/pic/opwin.gif" alt="打开/关闭视频" width="28" height="40" style="FILTER: alpha(opacity=0)" onmouseover=high(this) onmouseout=low(this)></td>
+    <td width="32" align="center"><script language="JavaScript">ann_list("cbo_list",22,40,"全屏播放","fullscreen()","xdd");</script></td>
+  </tr>
+  <tr>
+    <td height="28" colspan="3" align="center" nowrap><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="116" rowspan="2" align="center"><script language="JavaScript">
+ann_tt("cbo_dyd",15,16,"第一首","lbssdy()","dyd");
+ann_tt("cbo_zhyd",15,16,"最后一首","lbmmdy()","zhyd");
+ann_tt("a_sj1",15,16,"随机播放开关","rndkk()","sj");
+ann_tt("a_xh",15,16,"循环","lomd()","xh");
+ann_tt("a_xd0",15,16,"选段：标记选段开头","xdbfsz()","xd");
+</script></td>
+        <td height="2"></td>
+      </tr>
+      <tr>
+        <td><span id="dtut" style="height:10;align: center;">0:00</span></td>
+      </tr>
+    </table>        </td>
+    </tr>
+  <tr >   
+<td height="22" colspan="3"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td nowrap width="10"></td>
+    <td nowrap width="100%" align="center"><span id="Jts1" style="display:none;"></span> <span id="Jts2" style="display:block;">
+      <marquee scrolldelay="100" scrollamount="3" width="100%">
+      <span id="rtxt2">luhui.net</span>&nbsp;<span id="rtxt4"></span> <span id="rtxt3" style="visibility: hidden"> [<span id="rtxt3a">-</span>/<span id="rtxt3b">-</span>]</span>
+      </marquee>
+    </span></td>
+	    <td nowrap width="10"></td>	
+  </tr>
+</table></td>
+</tr>
+</table><table width="100%"  border="0" cellpadding="0" cellspacing="0" background="player/pic/indexbb.gif" onmouseover=high() onmouseout=low() style="display:block" id=Playe>
+  <tr>
+    <td align="center"><span id="Jts11" style="display:none;">
+	<object classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" id="realPlayerObj" width="142" height="100" onerror="ronerror()">
+<PARAM NAME="_ExtentX" VALUE="5106">
+                <PARAM NAME="_ExtentY" VALUE="3836">
+                <PARAM NAME="AUTOSTART" VALUE="-1">
+                <PARAM NAME="SHUFFLE" VALUE="0">
+                <PARAM NAME="PREFETCH" VALUE="0">
+                <PARAM NAME="NOLABELS" VALUE="-1">
+                <PARAM NAME="CONTROLS" VALUE="ImageWindow">
+                <PARAM NAME="CONSOLE" VALUE="Clip1">
+                <PARAM NAME="LOOP" VALUE="0">
+                <PARAM NAME="NUMLOOP" VALUE="0">
+                <PARAM NAME="CENTER" VALUE="0">
+                <PARAM NAME="MAINTAINASPECT" VALUE="0">
+</object></span>
+<script language="javascript">
+try { 
+  realPlayerObj.SetEnableContextMenu(false);
+  realPlayerObj.SetWantErrors(true);
+} catch(hh){}
+</script>
+	<span id="Jts22" style="display:none;">
+	<object classid="clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6" id="mediaPlayerObj" width="142" type="application/x-oleobject" height="100" onerror="monerror()">
+  <param name="autoStart" value="true">
+        <param name="enableContextMenu" value="false">
+        <param name="enableErrorDialogs" value="false">
+        <param name="playCount" value="1">
+        <param name="windowlessVideo" value="0">
+        <param name="fullScreen" value="0">
+        <param name="rate" value="1">
+        <param name="uiMode" value="none">
+        <param name="volume" value="0">
+</object></span></td>
+  </tr>
+  <tr>
+<td align="center"><iframe src="lyrics/Lyrics.html" width="0" height="0" scrollbar="no" scrolling="no" name="WebLrc" border="0" frameborder="0"></iframe></td>
+  </tr>
+</table>
+<table width="100%"  border="0" cellpadding="0" cellspacing="0" background="player/pic/cbo_16.gif">
+  <tr>
+    <td height="3"></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" background="player/pic/cbo_hg.gif">
+  <tr>
+    <td width="20"><script language="JavaScript">
+ann_ht("cbo_ht",15,16,"后退","aaht()","ht");
+</script>
+    </td>
+    <td ><span style="position: relative; width: 92;  height: 14; font-size: 1px; vertical-align: bottom;  background : repeat-x 0% 50%;">
+<span style="position: relative; width: 100%;  height: 100%; background :url('player/pic/xd1.gif') no-repeat 9999 0;" id="jdhkl">
+<span style="position: relative; width: 100%;  height: 100%; background :url('player/pic/xd2.gif') no-repeat 9999 0;" id="jdhk" stopgo="oop==null || zslen==0" ollend="ylyydxx()">
+<span style="position: relative; width: 9;"><img src="player/pic/hk2.gif" width="20" height="14" border="0"></span></span></span></span></td>
+    <td width="20"><script language="JavaScript">
+ann_qj("cbo_qj",15,16,"前进","aaqj()","qj");
+</script></td>
+  </tr>
+</table>
+<table border="0" cellspacing="0" width="100%" cellpadding="0" height="38" background="player/pic/index1b.gif">
+  <tr><td ><script language="JavaScript">
+ann_cbo("cbo_play",15,16,"播放","aabf()","bf");
+ann_stop("cbo_stop",15,16,"停止","aatz()","bf");
+ann_pauz("cbo_pauz",15,16,"暂停","aazt()","zt");
+ann_prev("cbo_prev",15,16,"上一首","lbsy()","syd");
+ann_next("cbo_next",15,16,"下一首","lbxy()","xyd");
+</script></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="366AB3" >
+  <tr>
+    <td align="center" id="home" style="behavior:url(#default#userdata);"></td>
+  </tr>
+</table>
+</td>
+  </tr>
+		<tr>
+	  <td valign="top"><table width="100%" height="30"  border="0" cellpadding="0" cellspacing="0" background=>
+  <tr>
+    <td width="75" valign="top" background="player/pic/cbo_cfile.gif" style="cursor: hand;" onClick="expandIt('KB1'); return false"><img src="player/pic/cbo_ofile.gif" alt="功能选择" width="75" height="30" style="FILTER: alpha(opacity=0)" onmouseover=high(this) onmouseout=low(this)></td>
+    <td width="75" valign="top" background="player/pic/nowlist.gif" style="cursor: hand;" onClick="expandIt('KB2'); return false"><img src="player/pic/cbo_menu.gif" alt="点歌列表" style="FILTER: alpha(opacity=0)" onmouseover=high(this) onmouseout=low(this)></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" onmouseover=high() onmouseout=low() id='KB1Child' class='child'>
+  <tr>
+    <td><div class="selespan"><select size="8" class="selectobj2" onchange="selectmenu()" 
+NAME="menu">
+  <option style="background-color:3C70B9">＋打开追加媒体</option>
+  <option style="background-color:487CC5">＋编辑播放列表</option>
+  <option style="background-color:4F83CC">＋召回上次列表</option>
+  <option style="background-color:588CD5">＋读取用户列表</option>
+  <option style="background-color:6093DC">＋保存用户列表</option>
+  <option style="background-color:6194DD">＋歌曲后台管理</option>
+  <option style="background-color:6194DD">＋播放参数设置</option>
+  <option style="background-color:6194DD">＋歌词颜色字体</option>
+  <option style="background-color:6194DD">＋歌曲分类搜索</option>
+  </select></div></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" onmouseover=high() onmouseout=low() id='KB2Child' class='child'>
+  <tr>
+    <td><div class="selespan"><select NAME="loplist" size="8" class="selectobj" onchange="lhhgo();"></select></div></td>
+  </tr>
+</table><table width="100%" height="32" border="0" cellpadding="0" cellspacing="0" bgcolor="366AB3">
+  <tr>
+    <td width=60 align="center" background="player/pic/volb.gif" ><img src="player/pic/jy0.gif" alt="静音" style="cursor: hand" onclick="jingbb()" id="jingyin"></td>
+    <td id="apxt" background="player/pic/volb.gif" >
+<span style="position: relative; width: 68;  font-size: 1px; vertical-align: bottom ;  background :url('player/pic/ylhkb.gif') repeat-x 0% 50%;" 
+id="ylhk" olling="ylyyd();if(mute) jingbb()">
+<span style="position: relative; left: 20; width: 7;">
+<img src="player/pic/cbo_vol.gif" border="0"></span></span></td >
+  <td width="15"><img src="player/pic/volb1.gif" width="15" height="32"></td>
+  </tr>
+</table><table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" background="player/pic/cbo_bj.gif" >
+  <tr>
+    <td></td>
+  </tr>
+</table></td>
+	</tr>
+	<tr>
+	  <td height="26" valign="top" bgcolor="366AB3" ><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="20" align="right" ><a href="index.asp" target="_parent" onFocus="if(this.blur)this.blur()" onClick='javascript: return confirm("你确定要关闭左边栏及播放器吗? ");'><img src="player/pic/bg.gif" alt="关闭边栏" border="0"></a></td>
+                <td width="20" align="center" ><a href="javascript:location.reload()" onFocus="if(this.blur)this.blur()"><img src="player/pic/refbbs.gif" alt="刷新播放器" border="0"></a></td>
+                <td width="105" align="right" background="player/pic/refb.gif"><a href="javascript:location.reload()" target="window_main" onFocus="if(this.blur)this.blur()"><img src="player/pic/ref.gif" alt="刷新论坛" width="105" height="26" border="0" style="FILTER: alpha(opacity=0)" onmouseover=high(this) onmouseout=low(this)></a></td>
+                <td width="5" align="center" >&nbsp;</td>
+              </tr>
+      </table></td>
+  </tr>
+</table>
+<SCRIPT>numTotal=3;scores[1]='KB1';scores[2]='KB1';scores[3]='KB2';</SCRIPT>
+<script language="JavaScript">
+jdhk.style.behavior = "url(player/js/soll.htc)";
+ylhk.style.behavior = "url(player/js/soll.htc)";
+</script>
+
+<input type="file" name="furvl" style="display: none">
+
+
+</body>
+
+</html>
+
