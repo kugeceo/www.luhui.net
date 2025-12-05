@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title> Loading... </title>
+
+<style>
+input, select { font-family: 宋体; font-size: 9pt; }    
+select { background-color:#1b3c7c;  color: #ffffff; }    
+input { color: #333333; border: 1px solid #1b3c7c; background-color: #f5f5f5;  line-height: 15px;}                 
+</style>
+<script language="JavaScript" src="js/listjs.js"></script>
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td valign=top>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td><img src="pic/list/l10.gif" width="12" height="12"></td><td background="pic/list/l01.gif"></td></tr>
+<tr><td background="pic/list/l05.gif"></td>
+<td><select size="15" name="list" multiple style="width: 200" border="0" ondblclick="jj_v()" oncontextmenu="jj_x()" onchange="dpname()"></select></td></tr>
+<tr><td><img src="pic/list/l08.gif" width="12" height="12"></td><td background="pic/list/l04.gif"></td></tr>
+</table>
+</td>
+<td valign=top>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td><img src="pic/list/l11.gif" width="104" height="11"></td></tr>
+<tr><td><img src="pic/list/l02.gif" width="104" height="70"></td></tr>
+<tr><td background="pic/list/l06.gif" height="142">
+<table border="0" cellspacing="3" cellpadding="0">
+<tr>
+  <td colspan="2"><input type="text" size="13" name="vna" onkeypress="if(event.keyCode==13) ren();"></td>
+</tr>
+<tr>
+  <td><input type="button" value="添 加" style="width: 43" onclick="openaddfile()"></td>
+  <td><input type="button" value="改 名" style="width: 43" onclick="ren()"></td>
+</tr>
+<tr>
+  <td><input type="button" value="上 移" style="width: 43" onclick="aalbsy()"></td>
+  <td><input type="button" value="下 移" style="width: 43" onclick="aalbxy()"></td>
+</tr>
+<tr>
+  <td><input type="button" value="剪 切" style="width: 43" onclick="jj_x()"></td>
+  <td><input type="button" value="复 制" style="width: 43" onclick="jj_c()"></td>
+</tr>
+<tr>
+  <td><input type="button" value="粘 贴" style="width: 43" onclick="jj_v()"></td>
+  <td><input type="button" value="删 除" style="width: 43" onclick="aasc()"></td>
+</tr>
+<tr>
+  <td><input type="button" value="确 定" style="width: 43" onclick="ok()"></td>
+  <td><input type="button" value="取 消" style="width: 43" onclick="window.close()"></td>
+</tr>
+</table>
+</td></tr>
+<tr><td><img src="pic/list/l09.gif" width="104" height="17"></td></tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>

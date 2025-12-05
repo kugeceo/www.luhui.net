@@ -1,0 +1,74 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title> Loading..... </title>
+
+<style>
+input, td    { font-family: 宋体; font-size: 9pt; }
+td    { COLOR: #ffffff }
+input { COLOR: #333333; border: 1px solid #1B3C7C; background-color: #f5f5f5; height: 16 }   
+
+.selectobj {
+  margin: -2px -3px -4px -3px;
+  color: #333333; background-color: #f5f5f5;
+  width: 150; font-size: 9pt;
+}
+.selediv {
+  border: #1B3C7C 1px solid;
+  width: 130; height: 16; overflow: hidden;
+}
+.titset {
+ COLOR: #ffffff }
+
+fieldset  {
+  border: 1px solid #eeeeee; padding: 12; margin: 0 10
+}
+
+</style>
+<script language="JavaScript" src="js/set.js"></script>
+<script language="JavaScript" src="js/url.js"></script>
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td background="pic/url/1.gif" width="14" height="13"></td>
+  <td background="pic/url/2.gif" width="300" height="13"></td>
+  <td background="pic/url/3.gif" width="14" height="13"></td>
+</tr>
+<tr>
+  <td background="pic/url/4.gif" width="14" height="120"></td>
+  <td bgcolor="#385488" width="300" height="120">
+    <fieldset><legend class=titset>请输入(选择)媒体地址：</legend>
+<span>文件地址：</span><input type="text" size="20" name="url" value="" maxlength="2047"> <input type="button" value="本地媒体" onclick="liulan()" style="width: 55"><br>
+<span>媒体名称：</span><input type="text" size="20" name="vname" value="" maxlength="50">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td width="60">控件选择：</td>
+    <td><div class="selediv"><select size="1" name="objp" class="selectobj">
+    <option selected>让播放系统自动判断</option>
+    <option>使用Media Player 控件</option>
+    <option>使用Real Player 控件</option>
+    </select></div></td>
+  </tr>
+</table></fieldset>
+<p align="center">
+    <input type="checkbox" name="sdwin" style="width: 16" id="fp1"> <label for="fp1">锁定本窗口</label>&nbsp; <input type="button" name="butt1" value="打 开" onclick="ok(true)" style="width: 55">&nbsp;
+    <input type="button" name="butt2" value="追 加" onclick="ok(false)" style="width: 55">&nbsp;
+    <input type="button" name="butt3" value="关 闭" onclick="window.close()" style="width: 55"></p>
+  </td>
+  <td background="pic/url/6.gif" width="14" height="120"></td>
+</tr>
+<tr>
+  <td background="pic/url/7.gif" width="14" height="13"></td>
+  <td background="pic/url/8.gif" width="300" height="13"></td>
+  <td background="pic/url/9.gif" width="14" height="13"></td>
+</tr>
+</table>
+
+<input type="file" name="furvl" style="display: none" size="2">
+
+</body>
+</html>

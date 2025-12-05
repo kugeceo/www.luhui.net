@@ -1,0 +1,169 @@
+<html>
+<head>
+<title> Loading..... </title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<style>
+body, td , input     { font-family: 宋体; font-size: 9pt;
+}
+
+A { TEXT-DECORATION: none }
+A:link { COLOR: #ffffff; }
+A:visited { COLOR: #ffffff; }
+A:active { COLOR: #99CCFF; }
+A:hover { COLOR: #99CCFF; POSITION: relative; TOP: 1px; }
+
+A.menubar:hover { border-bottom: 1px dotted #ffffff;}
+
+#bbo  { color: #ffff99;
+scrollbar-face-color:#3F5C92; 
+scrollbar-track-color:#3F5C92; 
+scrollbar-arrow-color:#B8C3E0; 
+scrollbar-highlight-color:#B8C3E0; 
+scrollbar-shadow-color:#B8C3E0; 
+scrollbar-3dlight-color:#3F5C92; 
+scrollbar-darkshadow-color:#3F5C92;
+}
+
+body { color: #18376E;}
+#hpg  { color: #FFCC66;}
+
+
+.ltz { position:relative; FILTER: dropshadow(color=#ffffff,offx=1,offy=1,positive=1);}
+
+input.ip1 {
+  color: #5D5B8F; background-color: #E4E5EE;
+  border: #18376E 1px solid;height: 16
+}
+input.ip2 {
+  color: #5D5B8F; background-color: #E4E5EE;
+  border: #18376E 1px solid; height: 16
+}
+
+.selectobj {
+  margin: -2px -3px -4px -3px;
+  color: #5D5B8F; background-color: #E4E5EE;
+  width: 60; font-size: 9pt;
+}
+.selediv {
+  border: #18376E 1px solid;
+  width: 35; height: 16; overflow: hidden;
+}
+
+.selectobj2 {
+  margin: -2px -3px -4px -3px;
+  color: #5D5B8F; background-color: #E4E5EE;
+  width: 100; font-size: 9pt;
+}
+.selediv2 {
+  border: #18376E 1px solid;
+  width: 54; height: 16; overflow: hidden;
+}
+
+</style>
+<script language="javascript">
+//////////////=== 预载初始时未显示的图片 ===///////////////
+var bbj_1 = new Image(); bbj_1.src="pic/tt/tt10.gif";
+var bbj_2 = new Image(); bbj_2.src="pic/tt/tt12.gif";
+</script>
+<script language="JavaScript" src="js/fu.js"></script>
+<script language="JavaScript" src="js/ltban.js"></script>
+<script language="JavaScript" src="js/data.js"></script>
+</head>
+
+<body topmargin="0" leftmargin="0" onselectstart="return false" ondragstart="return false" oncontextmenu="return false">
+
+<table border="0" cellspacing="0" width="370" height="415" id="ttrr" cellpadding="0">
+  <tr>
+<td height="52">
+
+<table border="0" cellspacing="0" width="100%" cellpadding="0">
+<tr>
+<td width="20"><img src="pic/tt/tt01.gif" width="20" height="52"></td>
+<td width="315" background="pic/tt/tt02.gif"><span class=ltz style="">按钮功能说明：</span><span id=ansmzj class=ltz style="">暂无对应按钮操作！！</span>
+
+</td>
+<td width="66"><img src="pic/tt/tt03.gif" width="66" height="52"></td>
+</tr>
+</table>
+
+</td>
+  </tr>
+
+  <tr>
+    <td>
+
+<table border="0" cellspacing="0" width="100%" height="302" cellpadding="0">
+<tr>
+<td width="20" background="pic/tt/tt07.gif"></td>
+<td width="285" background="pic/tt/tt08.gif">
+
+<table id="hpg" border="0" cellspacing="0" cellpadding="0" valign="bottom">
+  <tr>
+    <td><span style="">搜索:</span><input type="text" size="14" name="sstxt" class="ip1" onkeypress="if(event.keyCode==13) zpoj(sstxt.value);"><span style="">在</span></td>
+    <td>
+<div class="selediv2"><select size="1" name="types" class="selectobj2"></select></div>
+    </td>
+    <td><input type="button" value="搜索" class="ip2" onclick="zpoj(sstxt.value)"></td>
+  </tr>
+</table>
+
+
+<div id="bbo" style="overflow:auto; width: 100%; height: 255">
+</div>
+
+
+<table id="hpg" border="0" cellspacing="0" cellpadding="0" valign="bottom">
+  <tr>
+    <td width="90">
+<span id="ppgg1"></span>/<span id="ppgg2"></span><span style="">页</span> 
+<font face="Webdings"><a href="#" onclick="javascript:void(page(1))">9</a><a href="#" onclick="javascript:void(page(pgd-1))">7</a><a href="#" onclick="javascript:void(page(pgd+1))">8</a><a href="#" onclick="javascript:void(page(pagemx))">:</a></font>
+    </td>
+    <td width="40">
+<div class="selediv"><select size="1" name="hgo" class="selectobj" onchange="page(hgo.selectedIndex+1)"></select></div>
+    </td>
+    <td><span style="">分类:</span></td>
+    <td>
+<div class="selediv2"><select size="1" name="typez" class="selectobj2" onchange="gfebl();"></select></div>
+    </td>
+  </tr>
+</table>
+</td>
+
+<td width="66" background="pic/tt/tt09.gif" valign="middle" align="left">
+<table border="0">
+
+<script>
+listniu("播","播放所选","播放您在选单中所选择的歌曲！！","golist(1,true)","01");
+listniu("追","追加列表","把所选歌曲添加到播放列表中！！","golist(1,false)","02");
+listniu("全","全部播放","播放整个选单中的全部歌曲！！","golist(2,true)","03");
+listniu("反","反向选择","选中和未选中歌曲相互调换！！","fxxz()","04");
+listniu("清","全部清除","去除您在选单中所选的所有歌曲！！","qbqc()","05");
+</script>
+
+</table>
+</td>
+</tr>
+</table>
+
+</td>
+  </tr>
+
+  <tr>
+    <td height="61">
+
+<table border="0" cellspacing="0" width="100%" cellpadding="0">
+<tr>
+<td width=38><img src="pic/tt/tt04.gif" width=38 height=61></td>
+<td width=120 background="pic/tt/tt05.gif"><img src="pic/tt/tt14.gif" width="80" height="57" alt="关闭窗口" onclick="window.close()" style="cursor: hand"onmouseover="gann_r(this)" onmouseout="gann_c(this)" onmousedown="gann_x(this)" onmouseup="gann_r(this)">
+
+</td>
+<td width=212><img src="pic/tt/tt06.gif" width=212 height=61></td>
+</tr>
+</table>
+
+</td>
+  </tr>
+</table>
+</body>
+</html>
