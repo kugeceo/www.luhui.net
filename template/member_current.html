@@ -1,0 +1,234 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>用户中心 - 我的风格 - Sma.so神马网址导航</title>
+<base target="_blank" />
+<link href="style.css" rel="stylesheet" type="text/css">
+<link href="styles.css" rel="stylesheet" type="text/css" id="my_style">
+<style type="text/css">
+<!--
+h5.list_title { margin:0; margin-bottom:10px; height:28px; line-height:28px; border-bottom:1px #D8D8D8 solid; clear:both; }
+h5.list_title a { height:26px; font-weight:normal; display:inline-block !important; display:inline; zoom:1; padding:0 6px; text-align:center; text-decoration:none; background-color:#FFFFFF; }
+h5.list_title a.list_title_in { font-weight:bold; height:28px; border:1px #D8D8D8 solid; border-bottom:none; }
+.note { margin-bottom:10px; padding:5px 10px; border:1px #EEEEEE solid; font-size:12px; overflow:hidden; clear:both; }
+
+
+#area_http_url { max-height:300px; overflow:hidden; overflow-y:auto; }
+-->
+</style>
+<script type="text/javascript" language="javascript" src="main.js"></script>
+<script type="text/javascript" language="javaScript" src="current.js"></script>
+<script type="text/javascript" language="javaScript">
+<!--
+if(par==null || parent==self){
+  location.href='member.php';
+}
+-->
+</script>
+</head>
+<body style="background-color:transparent; background-image:none;">
+
+<div class="i1">&nbsp;</div>
+<div class="i2">&nbsp;</div>
+<div class="i3">&nbsp;</div>
+<div id="nav">
+  <div id="nav_mingz"><a href="member_current.php" target="_self">用户控制台</a> / 我的风格</div>
+  <div id="nav_session">
+    欢迎您！<b>访客</b>。您可以 <a href="login_current.php" class="redword" target="_self">登陆帐号</a> | <a href="reg_current.php" class="redword" target="_self">注册</a>    | <a href="member.php?get=style" title="展开" target="_parent"><img src="y.gif" class="close" /></a> <a href="about:blank" title="关闭" onclick="parClose()" target="_self"><img src="x.gif" class="close" /></a> </div>
+</div>
+<div id="body"><div id="body_p">
+  <table width="100%" border="0" cellspacing="10" cellpadding="0" class="menu">
+    <tr valign="top">
+      <td class="menu_left"><ul><li><a id="bar-file" href="?get=file" target="_self">我的帐户</a></li><li><a id="bar-funds" href="?get=funds" target="_self">我的收入</a></li><li><a id="bar-style" href="?get=style" target="_self">我的风格</a></li><li><a id="bar-collection" href="?get=collection" target="_self">自定义网址</a></li><li><a id="bar-memory_website" href="?get=memory_website" target="_self">我的浏览记录</a></li><li><a id="bar-memory_search" href="?get=memory_search" target="_self">我的搜索记录</a></li><li><a id="bar-mingz" href="?get=mingz" target="_self">我的引擎设置</a></li><li><a id="bar-notepad" href="?get=notepad" target="_self">记事本</a></li><li><a id="bar-search_site" href="?get=search_site" target="_self">站内搜索</a></li></ul>      </td>
+      <td class="menu_right"><style type="text/css">
+<!--
+#ad_table { background-color:#D8D8D8; margin-bottom:10px; }
+#ad_table th { background-color:#EEEEEE; text-align:center; }
+#ad_table th, #ad_table td { padding:5px 10px; font-size:12px; line-height:normal; word-wrap:break-word; word-break:break-all; }
+#ad_table td { background-color:#FFFFFF; text-align:center; font-size:14px; }
+.s_noset_bg { background:#CCC; }
+-->
+</style>
+
+<style type="text/css">
+<!--
+#nowStyleThumb { background-color:#FFF; background-image:url(loading2.gif); background-position:50% 50%; background-repeat:no-repeat; }
+a.cssIs { display:inline-block !important; display:inline; zoom:1; text-align:center; color:#333333; text-align:center; text-decoration:none; font-size:12px; border:1px #D8D8D8 solid; background-color:#F4F9FF; border-radius:6px; -moz-border-radius:6px; -webkit-border-radius:6px; padding:0 5px; }
+a.cssIs:hover { border:1px #B9D7FC solid; background-color:#F4F9FF; }
+.styleIs { width:120px; height:81px; font-size:12px; padding:1px; border:3px #EFEFEF solid; display:inline-block !important; display:inline; zoom:1; position:relative; }
+.styleIs:hover { border-color:#FFFF99; }
+#styleIs { border:3px #FF9933 solid; }
+.styleTile { width:120px; height:16px; line-height: normal; overflow:hidden; /*display:none;*/ position:absolute; top:65px; left:1px; text-align:center; background-color:#000000; color:#FFFFFF; font-size:12px;
+filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); -moz-opacity:0.5; -khtml-opacity:0.5; opacity:0.5; }
+-->
+</style>
+<div style="display:none"><img src="loading2.gif" /></div>
+<script>
+
+function tryStyle(t){
+  if(t==$('nowStyleThumb').name){
+    alert('当前已是此风格！')
+    return;
+  }
+  if(t=='default/1'){
+    alert('已恢复系统默认风格')
+    document.cookie='myStyle=; path=/;';
+    $('nowStyleThumb').name='default/1';
+    $('nowStyleThumb').style.backgroundImage='none';
+    $('nowStyleThumb').innerHTML='<span class="grayword">还未设置呢</span>';
+  } else {
+    setCookie('myStyle', t, 365);
+    $('nowStyleThumb').name=t;
+    $('nowStyleThumb').style.backgroundImage='url(loading2.gif)';
+    $('nowStyleThumb').innerHTML='<span class="styleIs"><img src="http://sma.so/writable/css/'+t+'/thumb.jpg" /><br /><div class="styleTile">'+$('styleTile_'+t+'').innerHTML+'</div></span>';
+  }
+
+  if(parent){
+    if(parent!=self){
+      if(parent.document.getElementById('my_style')!=null){
+        parent.document.getElementById('my_style').href='http://sma.so/writable/css/'+t+'/style.css';
+      }
+    }
+  }
+  if(document.getElementById('my_style')!=null){
+    document.getElementById('my_style').href='http://sma.so/writable/css/'+t+'/style.css';
+  }
+  
+}
+
+</script>
+
+<form action="member.php?post=style" method="post" target="_self">
+<div id="area_http_url">
+
+<table border="0" cellspacing="1" cellpadding="0" id="ad_table">
+  <tr>
+    <th>系统默认风格</th>
+    <th>当前所选样式</th>
+  </tr>
+<tr>
+    <td width="50%"><a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='default/1';tryStyle('default/1');return false;}catch(e){}" title="点击恢复默认风格"><img src="http://sma.so/writable/css/default/1/thumb.jpg" /><br />
+<div class="styleTile">基本风格/左边栏</div></a></td>
+    <td width="50%" id="nowStyleThumb" name="default/2"><span class="styleIs"><img src="http://sma.so/writable/css/default/2/thumb.jpg" /><br />
+<div class="styleTile">基本风格/护眼</div></span></td>
+</tr>
+</table>
+    <h5 class="list_title"><a class="list_title_in">总计3种风格系列、31款样式</a></h5>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+ 
+ <tr><td width="123" valign="top"><a class="cssIs" href="?get=style&style=default" target="_self">基本
+（5）</a></td><td>
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='default/1';tryStyle('default/1');return false;}catch(e){}"><img src="http://sma.so/writable/css/default/1/thumb.jpg" /><div id="styleTile_default/1" class="styleTile">左边栏</div></a>
+
+<a id="styleIs" class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='default/2';tryStyle('default/2');return false;}catch(e){}"><img src="http://sma.so/writable/css/default/2/thumb.jpg" /><div id="styleTile_default/2" class="styleTile">护眼</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='default/3';tryStyle('default/3');return false;}catch(e){}"><img src="http://sma.so/writable/css/default/3/thumb.jpg" /><div id="styleTile_default/3" class="styleTile">右边栏</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='default/4';tryStyle('default/4');return false;}catch(e){}"><img src="http://sma.so/writable/css/default/4/thumb.jpg" /><div id="styleTile_default/4" class="styleTile">宽屏左边栏</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='default/5';tryStyle('default/5');return false;}catch(e){}"><img src="http://sma.so/writable/css/default/5/thumb.jpg" /><div id="styleTile_default/5" class="styleTile">宽屏二左边栏</div></a>
+
+</tr>
+
+ <tr><td width="123" valign="top"><a class="cssIs" href="?get=style&style=jieri" target="_self">节日
+（24）</a></td><td>
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0101';tryStyle('jieri/0101');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0101/thumb.jpg" /><div id="styleTile_jieri/0101" class="styleTile">元旦</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0102';tryStyle('jieri/0102');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0102/thumb.jpg" /><div id="styleTile_jieri/0102" class="styleTile">?春节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0115';tryStyle('jieri/0115');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0115/thumb.jpg" /><div id="styleTile_jieri/0115" class="styleTile">元霄节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0202';tryStyle('jieri/0202');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0202/thumb.jpg" /><div id="styleTile_jieri/0202" class="styleTile">?二月二</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0214';tryStyle('jieri/0214');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0214/thumb.jpg" /><div id="styleTile_jieri/0214" class="styleTile">?情人节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0308';tryStyle('jieri/0308');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0308/thumb.jpg" /><div id="styleTile_jieri/0308" class="styleTile">三八妇女节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0315';tryStyle('jieri/0315');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0315/thumb.jpg" /><div id="styleTile_jieri/0315" class="styleTile">3.15</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0405';tryStyle('jieri/0405');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0405/thumb.jpg" /><div id="styleTile_jieri/0405" class="styleTile">清明节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0501';tryStyle('jieri/0501');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0501/thumb.jpg" /><div id="styleTile_jieri/0501" class="styleTile">五一劳动节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0504';tryStyle('jieri/0504');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0504/thumb.jpg" /><div id="styleTile_jieri/0504" class="styleTile">五四青年节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0505';tryStyle('jieri/0505');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0505/thumb.jpg" /><div id="styleTile_jieri/0505" class="styleTile">端午节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0601';tryStyle('jieri/0601');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0601/thumb.jpg" /><div id="styleTile_jieri/0601" class="styleTile">六一儿童节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0701';tryStyle('jieri/0701');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0701/thumb.jpg" /><div id="styleTile_jieri/0701" class="styleTile">七一建党节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0707';tryStyle('jieri/0707');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0707/thumb.jpg" /><div id="styleTile_jieri/0707" class="styleTile">?七夕情人节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0801';tryStyle('jieri/0801');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0801/thumb.jpg" /><div id="styleTile_jieri/0801" class="styleTile">八一建军节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0815';tryStyle('jieri/0815');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0815/thumb.jpg" /><div id="styleTile_jieri/0815" class="styleTile">中秋节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0909';tryStyle('jieri/0909');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0909/thumb.jpg" /><div id="styleTile_jieri/0909" class="styleTile">重阳节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/0910';tryStyle('jieri/0910');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/0910/thumb.jpg" /><div id="styleTile_jieri/0910" class="styleTile">教师节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/1001';tryStyle('jieri/1001');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/1001/thumb.jpg" /><div id="styleTile_jieri/1001" class="styleTile">十一国庆节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/1027';tryStyle('jieri/1027');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/1027/thumb.jpg" /><div id="styleTile_jieri/1027" class="styleTile">感恩节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/1213';tryStyle('jieri/1213');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/1213/thumb.jpg" /><div id="styleTile_jieri/1213" class="styleTile">国家公祭日</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/1225';tryStyle('jieri/1225');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/1225/thumb.jpg" /><div id="styleTile_jieri/1225" class="styleTile">圣诞节</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/8888';tryStyle('jieri/8888');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/8888/thumb.jpg" /><div id="styleTile_jieri/8888" class="styleTile">?芒果66闹猴年</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='jieri/8889';tryStyle('jieri/8889');return false;}catch(e){}"><img src="http://sma.so/writable/css/jieri/8889/thumb.jpg" /><div id="styleTile_jieri/8889" class="styleTile">?夜</div></a>
+
+</tr>
+
+ <tr><td width="123" valign="top"><a class="cssIs" href="?get=style&style=other" target="_self">其它模仿风格
+（2）</a></td><td>
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='other/0';tryStyle('other/0');return false;}catch(e){}"><img src="http://sma.so/writable/css/other/0/thumb.jpg" /><div id="styleTile_other/0" class="styleTile">QQ导航风格</div></a>
+
+<a class="styleIs" href="javascript:void(0)" onclick="try{if($('styleIs')!=null){$('styleIs').id='';}this.id='styleIs';$('cssfile').value='other/1';tryStyle('other/1');return false;}catch(e){}"><img src="http://sma.so/writable/css/other/1/thumb.jpg" /><div id="styleTile_other/1" class="styleTile">淘店铺风格</div></a>
+
+</tr>
+
+</table>
+
+<input type="hidden" name="cssfile" id="cssfile" value="default/2" />
+</div>
+<!--center style="clear:both;"><button name="submit" type="submit">保存</button></center-->
+</form>
+<script>
+function ctrH(){
+  var par=$('area_http_url');
+  if(par!=null){
+    if(par.offsetHeight > 320){
+      par.style.height='320px';
+    }
+  }
+}
+
+if (document.all) {
+  window.attachEvent("onload", ctrH);//对于IE
+} else {
+  window.addEventListener("load", ctrH, false);//对于FireFox
+}
+
+</script>
+
+
+
+
+
+
+
+
+<script> try { if ($("bar_id_") != null) { $("bar_id_").id = ""; } $("bar-style").parentNode.id = "bar_id_"; } catch (err) {} </script>      </td>
+    </tr>
+  </table>
+</div></div>
+<div class="i3">&nbsp;</div>
+<div class="i2">&nbsp;</div>
+<div class="i1">&nbsp;</div>
+</body>
+</html>

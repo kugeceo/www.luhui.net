@@ -1,0 +1,4 @@
+
+var stratSearchHot=new Array();
+stratSearchHot['wangye']='<p><span style="font-size: 14px;"><span style="color: rgb(255, 255, 255);"><span style="background-color: rgb(0, 0, 0);"><span style="color: rgb(238, 238, 238);">提示:搜索时在<span style="background-color: rgb(224, 102, 102);">关键词后</span>加上<span style="background-color: rgb(224, 102, 102);">+</span>即可直达<span style="background-color: rgb(224, 102, 102);">目标网页</span>，例：<span style="background-color: rgb(224, 102, 102);">百度+</span>；或者<span style="background-color: rgb(224, 102, 102);">连续按回车键</span> <a href="http://www.luhui.net:90/直达网址">详细说明</a> </span></p>';
+stratSearchHot['qiye']='<a href="http://www.luhui.net:90/spider.php?Category=shop&q=%E8%BE%93%E5%85%A5%E4%BC%81%E4%B8%9A%E5%90%8D%E3%80%81%E6%B3%A8%E5%86%8C%E5%8F%B7%E3%80%81%E6%B3%95%E5%AE%9A%E4%BB%A3%E8%A1%A8%E4%BA%BA">输入企业名、注册号、法定代表人</a>';
