@@ -1,0 +1,481 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE> 鲁虺文化网 http://www.luhui.net  版权声明 </TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<STYLE type=text/css>A {
+	TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #cc0000
+}
+A:link {
+	COLOR: #733c29
+}
+A:visited {
+	COLOR: #733c29
+}
+BODY {
+	SCROLLBAR-FACE-COLOR: #f7fef6; FONT-SIZE: 9pt; BACKGROUND: url('pic/bg.gif'); SCROLLBAR-HIGHLIGHT-COLOR: #003366; SCROLLBAR-SHADOW-COLOR: #003366; COLOR: #733c29; SCROLLBAR-3DLIGHT-COLOR: #f7fef6; SCROLLBAR-ARROW-COLOR: #ff0000; SCROLLBAR-TRACK-COLOR: #f7fef6; FONT-FAMILY: 宋体; SCROLLBAR-DARKSHADOW-COLOR: #cdcbe2; TEXT-DECORATION: none
+}
+TD {
+	FONT-SIZE: 9pt; COLOR: #733c29; LINE-HEIGHT: 150%; FONT-FAMILY: 宋体
+}
+INPUT {
+	BORDER-RIGHT: #733c29 1px solid; BORDER-TOP: #733c29 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #733c29 1px solid; COLOR: #733c29; BORDER-BOTTOM: #733c29 1px solid; HEIGHT: 18px; BACKGROUND-COLOR: #f7e7d6
+}
+BUTTON {
+	FONT-SIZE: 9pt; HEIGHT: 20px
+}
+SELECT {
+	FONT-SIZE: 9pt; HEIGHT: 20px
+}
+.border {
+	border:1px solid #733c29; background:url('pic/mainbg.jpg'); 
+}
+.border2 {
+	BACKGROUND: url('pic/mainbg.jpg'); BORDER-BOTTOM: 1px solid #733c29 
+}
+.title_txt {
+	BACKGROUND: url('pic/topBar_bg_20.gif'); 
+}
+.title {
+	BACKGROUND: url('pic/title.gif'); HEIGHT: 31px
+}
+.tdbg {
+	BACKGROUND: url('pic/mainbg.jpg'); LINE-HEIGHT: 150%
+}
+.txt_css {
+	BACKGROUND: url('pic/9/mainbg.jpg'); 
+}
+.title_lefttxt {
+	FILTER: Glow(Color=#ffffff, Strength=5)
+}
+.title_left {
+	BACKGROUND: url('pic/title_left.gif'); HEIGHT: 26px
+}
+.tdbg_left {
+	BACKGROUND: url('pic/mainbg.jpg'); 
+}
+.title_left2 {
+	BACKGROUND: url('pic/mainbg.jpg'); 
+}
+.tdbg_left2 {
+	BACKGROUND: url('pic/tdbg_left2.gif'); HEIGHT: 13px
+}
+.tdbg_leftall {
+	BORDER-RIGHT: 1px solid #733c29; BACKGROUND: url('pic/mainbg.jpg'); BORDER-LEFT: 1px solid #733c29 
+}
+.title_maintxt {
+	FILTER: DropShadow(Color=#ffffff, OffX=1, OffY=1, Positive=1)
+}
+.title_main {
+	BACKGROUND: url('pic/title_main.gif'); HEIGHT: 31px
+}
+.tdbg_main {
+	BACKGROUND: url('pic/tdbg_main2.GIF'); LINE-HEIGHT: 100%
+}
+.title_main2 {
+	BACKGROUND: url('pic/maintop.gif'); HEIGHT: 202px
+}
+.tdbg_main2 {
+	BACKGROUND: url('pic/tdbg_main3.GIF'); HEIGHT: 27px
+}
+.tdbg_mainall {
+	BACKGROUND: url('pic/kt01-p1.GIF'); 
+}
+.title_righttxt {
+	FILTER: Glow(Color=#ffffff, Strength=5)
+}
+.title_right {
+	BACKGROUND: url('pic/title_right.gif'); HEIGHT: 26px
+}
+.tdbg_right {
+	BACKGROUND: url('pic/mainbg.jpg'); 
+}
+.title_right2 {
+	BACKGROUND: #ffffff
+}
+.tdbg_right2 {
+	
+}
+.tdbg_rightall {
+	BORDER-RIGHT: 1px solid #733c29; BACKGROUND: url('pic/mainbg.jpg'); BORDER-LEFT: 1px solid #733c29 
+}
+.topborder {
+	BORDER-RIGHT: #733c29 1px solid; BACKGROUND: #ffffff; BORDER-LEFT: #733c29 1px solid; WIDTH: 760px; BORDER-BOTTOM: #733c29 1px solid
+}
+.nav_top {
+	BACKGROUND-IMAGE: url('pic/nav_top.gif'); HEIGHT: 23px
+}
+.nav_main {
+	BACKGROUND: #ffffff
+}
+.nav_bottom {
+	BACKGROUND-IMAGE: url('pic/nav_bottom.gif')
+}
+.nav_menu {
+	BACKGROUND: url('pic/nav_menu.gif'); 
+}
+.menu {
+	BORDER-RIGHT: 1px; BORDER-TOP: 1px; BACKGROUND: #733c29; BORDER-LEFT: 1px; WIDTH: 97%; BORDER-BOTTOM: 1px
+}
+TD.MenuBody {
+	BACKGROUND: #f7e7d6
+}
+</STYLE>
+<STYLE type=text/css>#item {
+	LEFT: 0px; VISIBILITY: hidden; POSITION: absolute
+}
+</STYLE>
+	<SCRIPT language=JavaScript>
+<!-- 
+var isNS=(document.layers);
+var _all=(isNS)? '' : 'all.' ;
+var _style=(isNS)? '' : '.style' ;
+var _visible=(isNS)? 'show' : 'visible';
+var w_x, w_y, item, okscroll=false, godown;
+function init(){
+item=eval('document.'+_all+'item'+_style);
+getwindowsize();
+item.visibility=_visible;
+scrollpage();
+}
+function getwindowsize()  //定义图标按钮所在层的可见区域大小
+{
+w_x=(isNS)? window.innerWidth-5 : document.body.clientWidth;
+w_y=(isNS)? window.innerHeight : document.body.clientHeight;
+(isNS)? item.clip.width=42: item.width=42;
+(isNS)? item.clip.height=20 : item.height=20;
+moveitem();
+}
+function resizeNS() {
+setTimeout('document.location.reload()',400);
+}
+function moveitem() //固定图标按钮
+{
+if (isNS) {
+item.moveTo((pageXOffset+w_x-70),(w_y+pageYOffset-50))
+}else{
+item.pixelLeft=document.body.scrollLeft+w_x-70;
+item.pixelTop=w_y+document.body.scrollTop-50;
+   }
+}
+window.onload=init;
+(isNS) ? window.onresize=resizeNS : window.onresize=getwindowsize ;
+function scrollpage() //页面移动
+{
+status = '';
+if (okscroll) {
+if (godown) {
+(isNS)? window.scrollBy(0,1) : window.scrollBy(0,1) ;
+} else {
+(isNS)? window.scrollBy(0,-1) : window.scrollBy(0,-1) ;
+   }
+}
+moveitem();
+setTimeout('scrollpage()', 100);
+}
+-->
+        </SCRIPT>
+
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY  leftMargin=0 topMargin=0 onselectstart='return false'>
+<DIV id=item><A onmouseover="okscroll=true; godown=false" 
+onmouseout=okscroll=false href="javascript:void(0)">
+  <IMG 
+src="http://www.5ibooks.com/pic/button_up.gif" border=0 width="10" height="18"></A> <BR><A 
+onmouseover="okscroll=true; godown=true" onmouseout=okscroll=false 
+href="javascript:void(0)">
+  <IMG src="http://www.5ibooks.com/pic/button_down.gif" border=0></A> 
+</DIV>
+
+<TABLE class=topborder cellSpacing=0 cellPadding=0 width=760 align=center 
+border=0>
+  <TBODY>
+  <TR class=nav_top>
+    <TD vAlign=top>&nbsp; </TD></TR>
+  <TR bgColor=#ffffff>
+    <TD height=60>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" align=center>
+        <TBODY>
+        <TR>
+          <TD>
+            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="800" id="AutoNumber1" align="center" background="1002877D.gif">
+              <tr>
+                <td width="77" height="24" style="font-size: 12px;padding-left:15px">
+                  <p><font color="#00FF00"><u><a href="http://www.luhuicko.xilubbs.com" style="color: #00FFFF">版权声明</a></u></font></td>
+                <td width="723" style="font-size: 12px">　</td>
+              </tr>
+            </table>
+            <table class="h" cellSpacing="0" cellPadding="0" width="799" align="center" border="0">
+<iframe frameborder=0 height=180 marginheight=0 marginwidth=0 scrolling=no src="/cn/pop//luhuicaidan.htm" width=800></iframe>
+              <tbody>
+                <tr>
+                  <td height="2" width="797"></td>
+                </tr>
+                <tr>
+                  <td bgColor="#336633" height="1" width="797">　</td>
+                </tr>
+              </tbody>
+            </table>
+            <div align="center">
+              <table class="a" width="799" border="1" style="border-collapse: collapse" bordercolor="#C0C0C0" cellpadding="0" cellspacing="0">
+                <tbody>
+                  <tr>
+                    <td width="799" bordercolor="#FFFFFF">
+<iframe frameborder=0 height=90 marginheight=0 marginwidth=0 scrolling=no src="/cn/pop/pop_02.htm" width=800></iframe>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </TD></TR>
+        </TBODY></TABLE></TD></TR>
+  </TBODY></TABLE>
+<TABLE class=border cellSpacing=0 cellPadding=0 width=806 align=center 
+bgColor=#ffffff border=0>
+  <TBODY>
+  <TR class=txt_css vAlign=center>
+    <TD width=15>&nbsp;<IMG src="arrow2.gif"> 
+    </TD>
+    <TD width=481><span style="font-size: 9pt">
+    您现在的位置:</span>
+      <a href="http://www.luhui.mycool.net"><font color="#CC0000">首页</font></a> <span style="font-size: 9pt">&gt;&gt; 
+      </span>&nbsp;阅读：<font color="#CC0000">《鲁虺文化网版权声明》</font></TD>                                  
+    <TD align=right width=310>今天是：                                  
+      <SCRIPT language=JavaScript type=text/JavaScript>                                  
+var day="";                                  
+var month="";                                  
+var ampm="";                                  
+var ampmhour="";                                  
+var myweekday="";                                  
+var year="";                                  
+mydate=new Date();                                  
+myweekday=mydate.getDay();                                  
+mymonth=mydate.getMonth()+1;                                  
+myday= mydate.getDate();                                  
+myyear= mydate.getYear();                                  
+year=(myyear > 200) ? myyear : 1900 + myyear;                                  
+if(myweekday == 0)                                  
+weekday=" 星期日 ";                                  
+else if(myweekday == 1)                                  
+weekday=" 星期一 ";                                  
+else if(myweekday == 2)                                  
+weekday=" 星期二 ";                                  
+else if(myweekday == 3)                                  
+weekday=" 星期三 ";                                  
+else if(myweekday == 4)                                  
+weekday=" 星期四 ";                                  
+else if(myweekday == 5)                                  
+weekday=" 星期五 ";                                  
+else if(myweekday == 6)                                  
+weekday=" 星期六 ";                                  
+document.write(year+"年"+mymonth+"月"+myday+"日 "+weekday);                                  
+    </SCRIPT>                                  
+ </TD></TR></TBODY></TABLE>                                  
+<div align="center">                                  
+  <center>                                  
+<TABLE cellSpacing=0 cellPadding=0 width=806 border=0 background="pic/9/mainbg.jpg" style="border-collapse: collapse" bordercolor="#111111">                                  
+  <TBODY>                                  
+  <TR>                                  
+    <TD vAlign=top align=middle height=13 width="804">                                  
+      <TABLE cellSpacing=0 cellPadding=0 width=802 align=center border=0>                                  
+        <TBODY>                                  
+        <TR>                                  
+          <TD class=tdbg_left2                                   
+height=13 style="background-image: url('http://www.5ibooks.com/pic/mainbg.jpg')" width="800">                                  
+          大家好，如果大家是包月上网的我给大家推荐几个边看书边赚钱的东东，钱不多但用的好网费赚回还是没有问题的,我是天天都开的，钱收的最多的是<a target="_blank" href="http://www.spedia.net/cgi-bin/tz.cgi?run=show_svc&fl=8&vid=3631958"><font color="#FF0000">spedia</font></a>,3个月收了90美金                                    
+          ，不过<a target="_blank" href="http://www.spedia.net/cgi-bin/tz.cgi?run=show_svc&fl=8&vid=3631958"><font color="#FF0000">spedia</font></a>的制度越来越严，赚钱也越来越少。                                     
+                                               
+          这是我上网时的<a target="_blank" href="ads/eg.htm"><font color="#FF0000" size="2">情景</font></a>，苦是苦点但怎么说也有了经济来源:</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>                                    
+  </center>                                    
+</div>                                    
+<div align="center">                      
+  <center>                                   
+<TABLE class=border2 cellSpacing=0 cellPadding=0                                    
+border=0 width="777">                                   
+  <TBODY>                                   
+  <TR>                                   
+    <TD vAlign=top width="813">                                   
+        </center>                       
+    <IMG                                    
+                  src="http://www.5ibooks.com/pic/arrow1.gif" align=middle width="11" height="14">                     
+    一.<a target="_blank" href="http://www.cashsurfers.com/signup.asp?referrer=lockening"><font size="3">cashsurfers</font></a>(<a target="_blank" href="ads/CASHSURFERSchinese.htm">中文注册界面</a>）                    
+    二.<a target="_blank" href="http://www.cashfiesta.com/php/join.php?ref=lockening"><FONT                                    
+                                color=#ff0000 size="3">Cashfiesta</FONT></a>（<a target="_blank" href="ads/Cashfiesta.htm">中文帮助</a>）                    
+    三.<a target="_blank" href="http://www.spedia.net/cgi-bin/tz.cgi?run=show_svc&fl=8&vid=3631958"><font color="#FF0000" size="3">spedia</font></a>(<a target="_blank" href="ads/SPEDIA.htm">中文帮助</a>）                    
+    四.<a target="_blank" href="http://greenhorse.com/join_now.ghc?r=18596038"><font color="#FF0000" size="3">greenhorse</font></a><font size="2">（</font>广告很细<img border="0" src="http://www.5ibooks.com/pic/new.gif" width="28" height="11">）                                  
+      </TD></TR>                                  
+  <tr>                    
+                <TD vAlign=top width="813">                     <TABLE cellSpacing=0 cellPadding=5 width="815"                                    
+                        align=center border=0>                                   
+                          <TBODY>                                   
+                          <tr>                   
+                            <TD width="802"> <b><font size="3"> 阅读选项:<SCRIPT language=JavaScript>                                 
+<!--                                 
+                                 
+function SymError()                                 
+{                                 
+  return true;                                 
+}                                 
+                                 
+window.onerror = SymError;                                 
+                                 
+//-->                                 
+                </SCRIPT>                                 
+                                 
+              </font></b>                                    
+                                    
+                  <SCRIPT language=JavaScript>                                    
+<!--                                    
+document.write("文字&nbsp;<select name=selcolor onchange=setFontColor(this.value)><option value=#000000 selected>黑色</option><option value=#FF0000>红色</option><option value=#FFFFFF>白色</option><option value=#555555>灰色</option><option value=#00FF00>绿色</option><option value=#0000FF>蓝色</option><option value=#00cccc>青色</option><option value=#ffff00>黄色</option></select>背景&nbsp;<select name=select onchange=setBgColor(this.value)><option value=#FFFFFF selected>白色</option><option value=#FFCCFF>粉红</option><option value=#CCCCCC>灰色</option><option value=#CCFFCC>绿色</option><option value=#99CCFF>蓝色</option><option value=#000000>黑色</option><option value=#CCFFFF>青色</option><option value=#FFCCCC>棕色</option></select>字号&nbsp;<select name=selsize onchange=setFontSize(this.value)><option value=9pt selected>9 pt</option><option value=10pt>10 pt</option><option value=12pt>12 pt</option><option value=14pt>14 pt</option><option value=16pt>16 pt</option><option value=18pt>18 pt</option></select>");                                    
+//-->                                    
+                </SCRIPT>                                    
+                                                    
+                  <SCRIPT language=JavaScript>                                    
+	  <!--                                    
+function showad(){document.write(strad);}                                    
+function showct(){document.write(strct);}                                    
+function setBgColor(color){window.setcolor.bgColor=color;}                                    
+function setFontSize(size){window.setcolor.style.fontSize=size;}                                    
+function setFontColor(color){window.setcolor.style.color=color;}                                    
+//--></SCRIPT>                                    
+ <SCRIPT language=JavaScript>                                    
+var currentpos,timer;                                    
+                                    
+function initialize()                                    
+{                                    
+timer=setInterval("scrollwindow()",120);                                    
+}                                    
+function sc(){                                    
+clearInterval(timer);                                    
+}                                    
+function scrollwindow()                                    
+{                                    
+currentpos=document.body.scrollTop;                                    
+window.scroll(0,++currentpos);                                    
+if (currentpos != document.body.scrollTop)                                    
+sc();                                    
+}                                    
+document.onmousedown=sc                                    
+document.ondblclick=initialize                                    
+            </SCRIPT>                                    
+                                    
+                            </TD>                    
+                          </tr>                    
+                          <tr>                    
+            <td id=setcolor> <p align="center"><font size="4"><strong>《<font color="#FF0000">鲁虺文化网版权声明</font>》</strong></font><p style="text-indent: 4">［                                     
+            作者：鲁虺&nbsp; 文章录入：<a target="_blank" href="http://search.tencent.com/cgi-bin/friend/user_show_info?ln=63625244">鲁虺</a>                                   
+            录入时间：2001-05-20 00:00:00］ 《鲁虺文化网版权声明》&nbsp;<br>                      
+              <br>                      
+              <br>
+              　　鲁虺国际网络上刊载的所有内容，包括但不限于文字、图片、声音、录像、图表、标志、标识、版面设计、专栏目录与名称、内容分类标准以及为注册用户提供的任何或所有信息，均受《中华人民共和国著作权法》、《中华人民共和国商标法》、《中华人民共和国专利法》及适用之国际公约中有关著作权、商标权、专利权及／或其它财产所有权法律的保护，为鲁虺梦功坊及／或相关权利人专属所有或持有。<br>
+              　　使用者将鲁虺文化网络提供的内容与服务用于非商业用途、非盈利、非广告目的而纯作个人消费时，应遵守著作权法以及其他相关法律的规定，不得侵犯鲁虺文化网络及／或相关权利人的权利。<br>
+              　　使用者将鲁虺文化网络提供的内容与服务用于商业、盈利、广告性目的时，需征得鲁虺梦功坊及／或相关权利人的书面特别授权，注明作者及文章出处"鲁虺文化网"，并按有关国际公约和中华人民共和国法律的有关规定向相关权利人支付版税。<br>
+              　　未经鲁虺文化网络的明确书面特别授权，任何人不得变更、发行、播送、转载、复制、重制、改动、散布、镜像、展示或利用鲁虺文化网的局部或全部的内容或服务或在非鲁虺文化网所属的服务器上作镜像，否则以侵权论，依法追究法律责任。<br>
+              　　鲁虺文化网负责管理鲁虺梦功坊所有国际互联网及其相关事务，未经鲁虺文化网的明确书面特别授权，任何人不得以任何形式在国际互联网上变更、发行、播送、转载、复制、重制、改动、散布、镜像、展示鲁虺梦功坊的文化资源和捕捉视频资源而形成的图象，否则将视作侵权，依法追究法律责任。<br>
+              <br>
+              &nbsp;<br>                      
+              &nbsp;</p>                  
+</td>                                  
+                          </tr>                  
+                          </TBODY></TABLE></TD>                
+  </tr>                
+        <TR class=tdbg_leftall align=right>                               
+          <TD align="center" width="813">             
+          <!--ulink广告代码-->                                
+<iframe frameborder=0 height=90 marginheight=0 marginwidth=0 scrolling=no src="/cn/pop/pop_03.htm" width=800></iframe>                            
+<!--ulink广告代码-->                                         
+<!--ulink代码-->                                 
+<script language=javascript src=http://ulinkjs.tom.com/tom_773_auto.js></script>                               
+<!--ulink代码-->     </TD></TR></TBODY></TABLE>                   
+  </div>                   
+                                        
+<TABLE cellSpacing=0 cellPadding=0 width=797 align=center border=0>                                  
+<iframe frameborder=0 height=80 marginheight=0 marginwidth=0 scrolling=no src="/cn/Self-servicechain/logo.htm" width=800></iframe>                            
+<iframe frameborder=0 height=300 marginheight=0 marginwidth=0 scrolling=no src="/cn/Netchain/" width=800></iframe>                            
+  </TABLE>                                  
+                                        
+<TABLE cellSpacing=0 cellPadding=0 width=797 align=center border=0>                                  
+  <TBODY>                                  
+  <TR>                                  
+    <TD vAlign=top align=middle height=13 width="796">                                  
+      <TABLE cellSpacing=0 cellPadding=0 width=800 align=center border=0>                                  
+        <TBODY>                                  
+        <TR>                                  
+          <TD class=tdbg_left2                                   
+height=13 width="798" align="center"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>                                  
+<TABLE class=border cellSpacing=0 cellPadding=0 width=801 align=center                                   
+bgColor=#ffffff border=0>                                  
+  <TBODY>                                  
+  <TR class=title align=middle height=22>                                  
+    <TD width="800" align="center"><font size="2">特别声名:未经鲁虺文化网络的明确书面特别授权，任何人不得利用鲁虺文化网的局部或全部的内容或服务或在非鲁虺文化网所属的服务器上作镜像，否则以侵权论，依法追究法律责任。为了维护您和我们的权益请仔细阅读<a href="luhuishengming.htm" target="_blank"><font color="#FF0000">《鲁虺文化网版权声明》</font></a>注意事项后再确认服务。</font></TD></TR>                                 
+  <TR class=tdbg vAlign=bottom align=middle height=20>                                 
+    <TD width="797" background="it_01.gif" align="center">                             
+      <p align="center"><font size="4" face="华文彩云" color="#339933">鲁虺原创梦功坊激情奉献</font></p>                             
+    </TD></TR></TBODY></TABLE>                                 
+<DIV id=win0                                  
+style="z-index: 25; right: 8; width: 129; position: absolute; top: 215; height: 154; left: 682">                                 
+                                 
+                                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#E0E0E0" width="100%" id="AutoNumber4" height="126" >                                 
+                                  <tr>                                 
+                                    <td width="100%" bordercolor="#E0E0E0" height="25" align="center">                                  
+                                    <FONT color=red>↓</FONT><font size="3" color="#339933"><b>鲁虺推荐</b></font><FONT color=red>↓</FONT></td>                                
+                                  </tr>                                
+                                  <tr>  
+                                    <td width="100%" bordercolor="#E0E0E0" height="25" align="center">                                 
+                                    <FONT color=red>【 </FONT><a style="text-decoration: none" target="_blank" href="http://www.luhuimovie.sy165.com"><font color="#FF0000" size="4"><b>鲁虺影院</b></font></a><font color="#FF0000" size="4"><b><a style="text-decoration: none">    
+                                    </a></b></font><FONT color=red>】</FONT></td>                                 
+                                  </tr>   
+                                  <tr>   
+                                    <td width="100%" bordercolor="#E0E0E0" height="21">                                  
+                                    <p align="center">                                 
+                                    <FONT color=red>【 </FONT><a style="CURSOR: hand" onclick="javascript:window.open ('/cn//Works/bookmark/luhuiread.asp', 'newwindow', 'height=430, width=500, top=120, left=120, toolbar=no, menubar=no, scrollbars=no,resizable=no,location=no, status=no')"><b><font size="4">鲁虺电台</font></b></a><b><font size="4"><a style="cursor: hand">    
+                                    </a></font></b><FONT color=red>】</FONT></td>                                
+                                  </tr>   
+                                  <tr>   
+                                    <td width="100%" bordercolor="#E0E0E0" height="21">                                  
+                                    <p align="center"><FONT color=red>【 </FONT><A target="_blank" title="鲁氏网络虺客文化传媒太阳系地球村最酷免费站鲁虺文化网综合站---导航" href="/index.htm" style="text-decoration: none"><b><font color="#FF0000" size="4">网站导航</font></b></a><b><font color="#FF0000" size="4"><a style="text-decoration: none">    
+                                    </a></font></b><FONT color=red>】</FONT>                                
+                                    </td>                                
+                                  </tr>   
+                                  <tr>                                
+                                    <td width="100%" bordercolor="#E0E0E0" height="80">                                 
+                                    <p align="center">                                
+</td>                                
+                                  </tr>                                
+                           </table>                                
+<!-- 打开新窗口代码 -->                                
+ <SCRIPT language=JavaScript>                                  
+<!--                                  
+function MM_openBrWindow(theURL,winName,features) {                                  
+window.open(theURL,winName,features);                                  
+}                                  
+-->                                  
+                                   </SCRIPT>                                
+ <!-- 打开新窗口代码 -->                                
+ <!-- 鼠标控制 -->                                
+ <script>                                  
+                                  
+function click() {                                  
+if (event.button==2) {window.external.addFavorite('http://www.luhui.net','鲁虺文化网综合站') }}                                  
+document.onmousedown=click                                  
+                                   </script>                                 
+ <!-- 鼠标控制 -->                                
+                           </DIV>                                
+<SCRIPT language=JavaScript>                                
+  IE4=(document.all)?1:0                                
+  if (IE4)                                
+    setInterval('keepIE("win0",10,10)',1)                                
+  function keepIE(theName,theWantTop,theWantRight)                                
+   {                                
+    theRealTop=parseInt(document.body.scrollTop)                                
+    theTrueTop=theWantTop+theRealTop                                
+    document.all[theName].style.top=theTrueTop                                
+    theRealRight=parseInt(document.body.scrollRight)                                
+    theTrueRight=theWantRight+theRealRight                                
+    document.all[theName].style.Right=theTrueRight                                
+   }                                
+      </SCRIPT>                                
+                         
+    </BODY></HTML>                                
